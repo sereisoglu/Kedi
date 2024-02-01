@@ -15,15 +15,15 @@ final class SignInViewModel: ObservableObject {
         case password
     }
     
-    private var cancellableSet = Set<AnyCancellable>()
-    
     private let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
+    
+    private var cancellableSet = Set<AnyCancellable>()
+    private var focusedField: SignInViewModel.Field?
     
     @Published private var isEmailValid = false
     @Published private var isEmailFocusedAtLeastOnce = false
     @Published private var isPasswordValid = false
     @Published private var isPasswordFocusedAtLeastOnce = false
-    private var focusedField: SignInViewModel.Field?
     
     @Published var email = ""
     @Published var password = ""
@@ -73,7 +73,12 @@ final class SignInViewModel: ObservableObject {
         }
     }
     
-    func signIn() {
-        
+    func signIn() async {
+        do {
+            let data = try await APIService.shared.request(type: RCSignInModel.self, endpoint: .login(email: email, password: password))
+            print(data)
+        } catch {
+            print(error)
+        }
     }
 }

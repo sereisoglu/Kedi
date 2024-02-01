@@ -12,6 +12,12 @@
 		4AB720602B6BAC8E001E2C76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AB7205F2B6BAC8E001E2C76 /* Assets.xcassets */; };
 		4AB720642B6BAC8E001E2C76 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AB720632B6BAC8E001E2C76 /* Preview Assets.xcassets */; };
 		4AB7206D2B6BDC36001E2C76 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7206C2B6BDC36001E2C76 /* SignInViewModel.swift */; };
+		4AB720712B6BF497001E2C76 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720702B6BF497001E2C76 /* APIService.swift */; };
+		4AB720742B6BF4A9001E2C76 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720732B6BF4A9001E2C76 /* Endpoint.swift */; };
+		4AB720772B6C1202001E2C76 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4AB720762B6C1202001E2C76 /* Alamofire */; };
+		4AB7207B2B6C17A0001E2C76 /* RCSignInModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7207A2B6C17A0001E2C76 /* RCSignInModel.swift */; };
+		4AB7207D2B6C17A9001E2C76 /* RCErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7207C2B6C17A9001E2C76 /* RCErrorModel.swift */; };
+		4AB7207F2B6C17B3001E2C76 /* RCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7207E2B6C17B3001E2C76 /* RCError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +28,11 @@
 		4AB720612B6BAC8E001E2C76 /* Kedi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kedi.entitlements; sourceTree = "<group>"; };
 		4AB720632B6BAC8E001E2C76 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4AB7206C2B6BDC36001E2C76 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		4AB720702B6BF497001E2C76 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		4AB720732B6BF4A9001E2C76 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		4AB7207A2B6C17A0001E2C76 /* RCSignInModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCSignInModel.swift; sourceTree = "<group>"; };
+		4AB7207C2B6C17A9001E2C76 /* RCErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCErrorModel.swift; sourceTree = "<group>"; };
+		4AB7207E2B6C17B3001E2C76 /* RCError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AB720772B6C1202001E2C76 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +66,7 @@
 		4AB7205A2B6BAC8D001E2C76 /* Kedi */ = {
 			isa = PBXGroup;
 			children = (
+				4AB7206E2B6BF477001E2C76 /* Network */,
 				4AB7205B2B6BAC8D001E2C76 /* KediApp.swift */,
 				4AB7206A2B6BDC1E001E2C76 /* Modules */,
 				4AB7205F2B6BAC8E001E2C76 /* Assets.xcassets */,
@@ -88,6 +101,26 @@
 			path = SignIn;
 			sourceTree = "<group>";
 		};
+		4AB7206E2B6BF477001E2C76 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				4AB720782B6C1791001E2C76 /* Models */,
+				4AB720702B6BF497001E2C76 /* APIService.swift */,
+				4AB720732B6BF4A9001E2C76 /* Endpoint.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		4AB720782B6C1791001E2C76 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4AB7207A2B6C17A0001E2C76 /* RCSignInModel.swift */,
+				4AB7207C2B6C17A9001E2C76 /* RCErrorModel.swift */,
+				4AB7207E2B6C17B3001E2C76 /* RCError.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -104,6 +137,9 @@
 			dependencies = (
 			);
 			name = Kedi;
+			packageProductDependencies = (
+				4AB720762B6C1202001E2C76 /* Alamofire */,
+			);
 			productName = Kedi;
 			productReference = 4AB720582B6BAC8D001E2C76 /* Kedi.app */;
 			productType = "com.apple.product-type.application";
@@ -132,6 +168,9 @@
 				Base,
 			);
 			mainGroup = 4AB7204F2B6BAC8D001E2C76;
+			packageReferences = (
+				4AB720752B6C1202001E2C76 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 4AB720592B6BAC8D001E2C76 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -160,7 +199,12 @@
 			files = (
 				4AB7205E2B6BAC8D001E2C76 /* SignInView.swift in Sources */,
 				4AB7205C2B6BAC8D001E2C76 /* KediApp.swift in Sources */,
+				4AB720712B6BF497001E2C76 /* APIService.swift in Sources */,
 				4AB7206D2B6BDC36001E2C76 /* SignInViewModel.swift in Sources */,
+				4AB7207D2B6C17A9001E2C76 /* RCErrorModel.swift in Sources */,
+				4AB7207B2B6C17A0001E2C76 /* RCSignInModel.swift in Sources */,
+				4AB720742B6BF4A9001E2C76 /* Endpoint.swift in Sources */,
+				4AB7207F2B6C17B3001E2C76 /* RCError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +423,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4AB720752B6C1202001E2C76 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4AB720762B6C1202001E2C76 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4AB720752B6C1202001E2C76 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4AB720502B6BAC8D001E2C76 /* Project object */;
 }

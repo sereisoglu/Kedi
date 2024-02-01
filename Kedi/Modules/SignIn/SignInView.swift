@@ -44,7 +44,9 @@ struct SignInView: View {
                 
                 Section {
                     Button {
-                        viewModel.signIn()
+                        Task {
+                            await viewModel.signIn()
+                        }
                     } label: {
                         Text("Sign In")
                             .frame(maxWidth: .infinity)
