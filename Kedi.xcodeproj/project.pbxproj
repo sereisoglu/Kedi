@@ -8,18 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		4AB7205C2B6BAC8D001E2C76 /* KediApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7205B2B6BAC8D001E2C76 /* KediApp.swift */; };
-		4AB7205E2B6BAC8D001E2C76 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7205D2B6BAC8D001E2C76 /* ContentView.swift */; };
+		4AB7205E2B6BAC8D001E2C76 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7205D2B6BAC8D001E2C76 /* SignInView.swift */; };
 		4AB720602B6BAC8E001E2C76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AB7205F2B6BAC8E001E2C76 /* Assets.xcassets */; };
 		4AB720642B6BAC8E001E2C76 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AB720632B6BAC8E001E2C76 /* Preview Assets.xcassets */; };
+		4AB7206D2B6BDC36001E2C76 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7206C2B6BDC36001E2C76 /* SignInViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4AB720582B6BAC8D001E2C76 /* Kedi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kedi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AB7205B2B6BAC8D001E2C76 /* KediApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KediApp.swift; sourceTree = "<group>"; };
-		4AB7205D2B6BAC8D001E2C76 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4AB7205D2B6BAC8D001E2C76 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		4AB7205F2B6BAC8E001E2C76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4AB720612B6BAC8E001E2C76 /* Kedi.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kedi.entitlements; sourceTree = "<group>"; };
 		4AB720632B6BAC8E001E2C76 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4AB7206C2B6BDC36001E2C76 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				4AB7205B2B6BAC8D001E2C76 /* KediApp.swift */,
-				4AB7205D2B6BAC8D001E2C76 /* ContentView.swift */,
+				4AB7206A2B6BDC1E001E2C76 /* Modules */,
 				4AB7205F2B6BAC8E001E2C76 /* Assets.xcassets */,
 				4AB720612B6BAC8E001E2C76 /* Kedi.entitlements */,
 				4AB720622B6BAC8E001E2C76 /* Preview Content */,
@@ -67,6 +69,23 @@
 				4AB720632B6BAC8E001E2C76 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4AB7206A2B6BDC1E001E2C76 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				4AB7206B2B6BDC27001E2C76 /* SignIn */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		4AB7206B2B6BDC27001E2C76 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				4AB7205D2B6BAC8D001E2C76 /* SignInView.swift */,
+				4AB7206C2B6BDC36001E2C76 /* SignInViewModel.swift */,
+			);
+			path = SignIn;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,8 +158,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AB7205E2B6BAC8D001E2C76 /* ContentView.swift in Sources */,
+				4AB7205E2B6BAC8D001E2C76 /* SignInView.swift in Sources */,
 				4AB7205C2B6BAC8D001E2C76 /* KediApp.swift in Sources */,
+				4AB7206D2B6BDC36001E2C76 /* SignInViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,10 +304,10 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sereisoglu.konsensus.Kedi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -322,10 +342,10 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sereisoglu.konsensus.Kedi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
