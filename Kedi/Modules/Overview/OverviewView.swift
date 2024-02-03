@@ -54,8 +54,13 @@ struct OverviewView: View {
                         spacing: 12
                     ) {
                         ForEach(items, id: \.self) { item in
-                            makeItemView(item: item)
-                                .aspectRatio(1, contentMode: .fit)
+                            if let chartType = item.type.chartType {
+                                makeItemView(item: item, chartValues: viewModel.chartValues?[chartType])
+                                    .aspectRatio(1, contentMode: .fit)
+                            } else {
+                                makeItemView(item: item)
+                                    .aspectRatio(1, contentMode: .fit)
+                            }
                         }
                     }
                     .padding(.init(top: 0, leading: 20, bottom: 20, trailing: 20))
@@ -67,30 +72,43 @@ struct OverviewView: View {
     }
     
     private func makeItemView(
-        item: OverviewItem
+        item: OverviewItem,
+        chartValues: [LineAndAreaMarkChartValue]? = nil
     ) -> some View {
-        VStack(alignment: .leading) {
-            Label(item.name.uppercased(), systemImage: item.icon)
-                .font(.subheadline)
-                .fontWeight(.medium)
-                .foregroundStyle(.secondary)
-                .labelStyle(SpacingLabelStyle(spacing: 2))
-            
-            Text(item.value)
-                .font(.title)
-                .fontWeight(.semibold)
-                .foregroundStyle(.primary)
-            
-            if let note = item.note {
-                Text(note)
-                    .font(.footnote)
+        ZStack {
+            VStack(alignment: .leading) {
+                Label(item.name.uppercased(), systemImage: item.icon)
+                    .font(.subheadline)
+                    .fontWeight(.medium)
                     .foregroundStyle(.secondary)
+                    .labelStyle(SpacingLabelStyle(spacing: 2))
+                
+                Text(item.value)
+                    .font(.title)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.primary)
+                
+                if let note = item.note {
+                    Text(note)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+                
+                Spacer()
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
             
-            Spacer()
+            if let chartValues {
+                VStack {
+                    Spacer()
+                        .frame(height: 60)
+                    
+                    LineAndAreaMarkChartView(values: chartValues)
+                        .foregroundColor(.blue)
+                }
+            }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding()
         .background(Color.secondarySystemGroupedBackground)
         .clipShape(
             RoundedRectangle(cornerRadius: 20, style: .continuous)

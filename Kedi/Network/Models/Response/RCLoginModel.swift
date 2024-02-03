@@ -18,6 +18,6 @@ struct RCLoginModel: Decodable {
         case authenticationToken = "authentication_token"
         case authenticationTokenExpiration = "authentication_token_expiration"
         case distinctId = "distinct_id"
-        case email = "email"
+        case email
     }
 }

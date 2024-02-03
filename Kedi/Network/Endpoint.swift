@@ -11,7 +11,9 @@ import Alamofire
 enum Endpoint {
     
     case login(email: String, password: String)
+    case me
     case overview
+    case charts(type: RCChartType, resolution: RCChartResolution, startDate: String)
 }
 
 extension Endpoint {
@@ -30,7 +32,9 @@ extension Endpoint {
     var path: String {
         switch self {
         case .login: "developers/login"
+        case .me: "developers/me"
         case .overview: "developers/me/overview"
+        case .charts(let type, _, _): "developers/me/charts_v2/\(type.rawValue)"
         }
     }
     
@@ -52,6 +56,12 @@ extension Endpoint {
             return [
                 "sandbox_mode": false
             ]
+        case .charts(_, let resolution, let startDate):
+            return [
+                "resolution": resolution.rawValue,
+                "start_date": startDate
+            ]
+        default: return nil
         }
     }
     

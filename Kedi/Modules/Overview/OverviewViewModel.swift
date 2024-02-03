@@ -21,24 +21,25 @@ final class OverviewViewModel: ObservableObject {
     @Published var state: State = .loading
     
     @Published var items = [OverviewItem]()
+    @Published var chartValues: [RCChartType: [LineAndAreaMarkChartValue]]?
     
+    @MainActor
     init() {
         Task {
-            await fetchOverview { [weak self] error in
-                guard let self else {
-                    return
+            await withDiscardingTaskGroup { group in
+                group.addTask { [weak self] in
+                    await self?.fetchOverview()
                 }
-                if let error {
-                    state = .error(error)
-                } else {
-                    state = .data
+                
+                group.addTask { [weak self] in
+                    await self?.fetchCharts()
                 }
             }
         }
     }
     
     @MainActor
-    private func fetchOverview(completion: ((Error?) -> Void)? = nil) async {
+    private func fetchOverview() async {
         do {
             let data = try await apiService.request(
                 type: RCOverviewModel.self,
@@ -46,15 +47,51 @@ final class OverviewViewModel: ObservableObject {
             )
             items = [
                 .init(type: .mrr, value: "\(data?.mrr?.formatted(.currency(code: "USD")) ?? "")"),
-                .init(type: .subsciptions, value: "\(data?.activeSubscribersCount ?? 0)"),
-                .init(type: .trials, value: "\(data?.activeTrialsCount ?? 0)"),
+                .init(type: .subsciptions, value: "\(data?.activeSubscribersCount?.formatted() ?? "")"),
+                .init(type: .trials, value: "\(data?.activeTrialsCount?.formatted() ?? "")"),
                 .init(type: .revenue, value: "\(data?.revenue?.formatted(.currency(code: "USD")) ?? "")"),
-                .init(type: .users, value: "\(data?.activeUsersCount ?? 0)"),
-                .init(type: .installs, value: "\(data?.installsCount ?? 0)")
+                .init(type: .users, value: "\(data?.activeUsersCount?.formatted() ?? "")"),
+                .init(type: .installs, value: "\(data?.installsCount?.formatted() ?? "")")
             ]
-            completion?(nil)
+            state = .data
         } catch {
-            completion?(error)
+            state = .error(error)
+        }
+    }
+    
+    @MainActor
+    private func fetchCharts() async {
+        do {
+            chartValues = try await fetchAllCharts()
+        } catch {
+            print(error)
+        }
+    }
+    
+    private func fetchAllCharts() async throws -> [RCChartType: [LineAndAreaMarkChartValue]]? {
+        try await withThrowingTaskGroup(of: RCChartModel?.self) { group in
+            RCChartType.allCases.forEach { type in
+                group.addTask { [weak self] in
+                    try await self?.apiService.request(
+                        type: RCChartModel.self,
+                        endpoint: .charts(type: type, resolution: .month, startDate: "2020-01-01")
+                    )
+                }
+            }
+            
+            var chartValues = [RCChartType: [LineAndAreaMarkChartValue]]()
+            for try await chart in group {
+                if let type = chart?.type,
+                   let values = chart?.values {
+                    switch type {
+                    case .revenue:
+                        chartValues[type] = values.map { .init(date: Date(timeIntervalSince1970: $0[safe: 0] ?? 0), value: $0[safe: 3] ?? 0) }
+                    default:
+                        chartValues[type] = values.map { .init(date: Date(timeIntervalSince1970: $0[safe: 0] ?? 0), value: $0[safe: 1] ?? 0) }
+                    }
+                }
+            }
+            return chartValues
         }
     }
 }

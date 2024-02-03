@@ -49,6 +49,17 @@ struct OverviewItem: Hashable {
             case .installs: "Last 28 days"
             }
         }
+        
+        var chartType: RCChartType? {
+            switch self {
+            case .mrr: .mrr
+            case .subsciptions: .actives
+            case .trials: .trials
+            case .revenue: .revenue
+            case .users: nil
+            case .installs: nil
+            }
+        }
     }
     
     var icon: String { type.icon }
@@ -65,11 +76,11 @@ extension OverviewItem {
         let data = RCOverviewModel.stub
         return [
             .init(type: .mrr, value: "\(data.mrr?.formatted(.currency(code: "USD")) ?? "")"),
-            .init(type: .subsciptions, value: "\(data.activeSubscribersCount ?? 0)"),
-            .init(type: .trials, value: "\(data.activeTrialsCount ?? 0)"),
+            .init(type: .subsciptions, value: "\(data.activeSubscribersCount?.formatted() ?? "")"),
+            .init(type: .trials, value: "\(data.activeTrialsCount?.formatted() ?? "")"),
             .init(type: .revenue, value: "\(data.revenue?.formatted(.currency(code: "USD")) ?? "")"),
-            .init(type: .users, value: "\(data.activeUsersCount ?? 0)"),
-            .init(type: .installs, value: "\(data.installsCount ?? 0)")
+            .init(type: .users, value: "\(data.activeUsersCount?.formatted() ?? "")"),
+            .init(type: .installs, value: "\(data.installsCount?.formatted() ?? "")")
         ]
     }()
 }

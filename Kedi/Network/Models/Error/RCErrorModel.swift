@@ -14,3 +14,4 @@ struct RCErrorModel: Decodable {
 }
 
 // {"code":7002,"message":"Invalid e-mail or password."}
+// { "code": 7224, "message": "Invalid authorization token." }
