@@ -17,7 +17,7 @@ enum Endpoint {
 extension Endpoint {
     
     static let BASE_URL = "https://api.revenuecat.com"
-    static var BEARER_TOKEN: String?
+    static var AUTH_TOKEN: String?
     
     var urlString: String {
         "\(Self.BASE_URL)/\(version)/\(path)"
@@ -67,8 +67,8 @@ extension Endpoint {
             .init(name: "X-Requested-With", value: "XMLHttpRequest")
         ]
         
-        if let bearerToken = Self.BEARER_TOKEN {
-            headers.append(.authorization(bearerToken: bearerToken))
+        if let authToken = Self.AUTH_TOKEN {
+            headers.append(.authorization(bearerToken: authToken))
         }
         
         return .init(headers)

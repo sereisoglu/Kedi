@@ -12,3 +12,5 @@ struct RCErrorModel: Decodable {
     var code: Int?
     var message: String?
 }
+
+// {"code":7002,"message":"Invalid e-mail or password."}

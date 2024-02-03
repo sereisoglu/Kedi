@@ -14,6 +14,10 @@ final class APIService {
     
     private init() {}
     
+    func setAuthToken(_ token: String?) {
+        Endpoint.AUTH_TOKEN = token
+    }
+    
     func request<Success: Decodable>(
         type: Success.Type,
         endpoint: Endpoint

@@ -14,7 +14,7 @@ struct SignInView: View {
     @FocusState private var focusedField: SignInViewModel.Field?
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section {
                     TextField("Email", text: $viewModel.email)
@@ -43,10 +43,8 @@ struct SignInView: View {
                 }
                 
                 Section {
-                    Button {
-                        Task {
-                            await viewModel.signIn()
-                        }
+                    AsyncButton {
+                        await viewModel.handleSignInButton()
                     } label: {
                         Text("Sign In")
                             .frame(maxWidth: .infinity)
@@ -65,6 +63,13 @@ struct SignInView: View {
             .scrollDismissesKeyboard(.interactively)
             .onChange(of: focusedField) { oldValue, newValue in
                 viewModel.onFocusedFieldChange(field: focusedField)
+            }
+            .alert(isPresented: $viewModel.showingAlert) {
+                Alert(
+                    title: Text("Sign In Error"),
+                    message: Text(viewModel.alertMessage ?? "An error has occurred."),
+                    dismissButton: .default(Text("OK!"))
+                )
             }
         }
     }

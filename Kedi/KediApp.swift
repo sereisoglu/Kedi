@@ -11,7 +11,8 @@ import SwiftUI
 struct KediApp: App {
     var body: some Scene {
         WindowGroup {
-            SignInView()
+            RootView()
+                .environmentObject(AuthManager.shared)
         }
     }
 }
