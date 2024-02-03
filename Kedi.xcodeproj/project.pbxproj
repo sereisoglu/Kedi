@@ -23,7 +23,7 @@
 		4AB720872B6C56E7001E2C76 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720862B6C56E7001E2C76 /* RootView.swift */; };
 		4AB720892B6C5826001E2C76 /* RCOverviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720882B6C5826001E2C76 /* RCOverviewModel.swift */; };
 		4AB7208C2B6C642D001E2C76 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7208B2B6C642D001E2C76 /* Color+Extension.swift */; };
-		4AB7208F2B6C6842001E2C76 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7208E2B6C6842001E2C76 /* TabBarView.swift */; };
+		4AB7208F2B6C6842001E2C76 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7208E2B6C6842001E2C76 /* MainView.swift */; };
 		4AB720922B6C6893001E2C76 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720912B6C6893001E2C76 /* SettingsView.swift */; };
 		4AB7209F2B6C74FE001E2C76 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4AB7209E2B6C74FE001E2C76 /* KeychainSwift */; };
 		4AB720A22B6C7925001E2C76 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720A12B6C7925001E2C76 /* KeychainManager.swift */; };
@@ -33,6 +33,9 @@
 		4AB720AB2B6DB4D2001E2C76 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720AA2B6DB4D2001E2C76 /* SettingsViewModel.swift */; };
 		4AB720AE2B6DB698001E2C76 /* OverviewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720AD2B6DB698001E2C76 /* OverviewItem.swift */; };
 		4AB720B22B6DC9AB001E2C76 /* SpacingLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720B12B6DC9AB001E2C76 /* SpacingLabelStyle.swift */; };
+		4AB720B62B6E3E16001E2C76 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720B52B6E3E16001E2C76 /* SidebarView.swift */; };
+		4AB720B82B6E3E1D001E2C76 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720B72B6E3E1D001E2C76 /* TabBarView.swift */; };
+		4AB720BA2B6E4183001E2C76 /* NavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720B92B6E4183001E2C76 /* NavigationItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +56,7 @@
 		4AB720862B6C56E7001E2C76 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		4AB720882B6C5826001E2C76 /* RCOverviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCOverviewModel.swift; sourceTree = "<group>"; };
 		4AB7208B2B6C642D001E2C76 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
-		4AB7208E2B6C6842001E2C76 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		4AB7208E2B6C6842001E2C76 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		4AB720912B6C6893001E2C76 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4AB720A12B6C7925001E2C76 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		4AB720A32B6DA77C001E2C76 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -62,6 +65,9 @@
 		4AB720AA2B6DB4D2001E2C76 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		4AB720AD2B6DB698001E2C76 /* OverviewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewItem.swift; sourceTree = "<group>"; };
 		4AB720B12B6DC9AB001E2C76 /* SpacingLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacingLabelStyle.swift; sourceTree = "<group>"; };
+		4AB720B52B6E3E16001E2C76 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		4AB720B72B6E3E1D001E2C76 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		4AB720B92B6E4183001E2C76 /* NavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,8 +127,8 @@
 			isa = PBXGroup;
 			children = (
 				4AB720852B6C56DE001E2C76 /* Root */,
+				4AB7208D2B6C682C001E2C76 /* Main */,
 				4AB7206B2B6BDC27001E2C76 /* SignIn */,
-				4AB7208D2B6C682C001E2C76 /* TabBar */,
 				4AB720802B6C4FDA001E2C76 /* Overview */,
 				4AB720902B6C6888001E2C76 /* Settings */,
 			);
@@ -184,12 +190,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		4AB7208D2B6C682C001E2C76 /* TabBar */ = {
+		4AB7208D2B6C682C001E2C76 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				4AB7208E2B6C6842001E2C76 /* TabBarView.swift */,
+				4AB720B32B6E3D0E001E2C76 /* TabBar */,
+				4AB720B42B6E3D98001E2C76 /* Sidebar */,
+				4AB7208E2B6C6842001E2C76 /* MainView.swift */,
+				4AB720B92B6E4183001E2C76 /* NavigationItem.swift */,
 			);
-			path = TabBar;
+			path = Main;
 			sourceTree = "<group>";
 		};
 		4AB720902B6C6888001E2C76 /* Settings */ = {
@@ -243,6 +252,22 @@
 				4AB720AD2B6DB698001E2C76 /* OverviewItem.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		4AB720B32B6E3D0E001E2C76 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				4AB720B72B6E3E1D001E2C76 /* TabBarView.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		4AB720B42B6E3D98001E2C76 /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				4AB720B52B6E3E16001E2C76 /* SidebarView.swift */,
+			);
+			path = Sidebar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,12 +352,14 @@
 				4AB720A42B6DA77C001E2C76 /* AuthManager.swift in Sources */,
 				4AB7205E2B6BAC8D001E2C76 /* SignInView.swift in Sources */,
 				4AB7205C2B6BAC8D001E2C76 /* KediApp.swift in Sources */,
-				4AB7208F2B6C6842001E2C76 /* TabBarView.swift in Sources */,
+				4AB7208F2B6C6842001E2C76 /* MainView.swift in Sources */,
 				4AB720712B6BF497001E2C76 /* APIService.swift in Sources */,
 				4AB720842B6C4FF3001E2C76 /* OverviewView.swift in Sources */,
 				4AB720A22B6C7925001E2C76 /* KeychainManager.swift in Sources */,
 				4AB7206D2B6BDC36001E2C76 /* SignInViewModel.swift in Sources */,
 				4AB7207D2B6C17A9001E2C76 /* RCErrorModel.swift in Sources */,
+				4AB720B82B6E3E1D001E2C76 /* TabBarView.swift in Sources */,
+				4AB720BA2B6E4183001E2C76 /* NavigationItem.swift in Sources */,
 				4AB720B22B6DC9AB001E2C76 /* SpacingLabelStyle.swift in Sources */,
 				4AB7207B2B6C17A0001E2C76 /* RCLoginModel.swift in Sources */,
 				4AB720872B6C56E7001E2C76 /* RootView.swift in Sources */,
@@ -342,6 +369,7 @@
 				4AB720AB2B6DB4D2001E2C76 /* SettingsViewModel.swift in Sources */,
 				4AB7207F2B6C17B3001E2C76 /* RCError.swift in Sources */,
 				4AB720822B6C4FEA001E2C76 /* OverviewViewModel.swift in Sources */,
+				4AB720B62B6E3E16001E2C76 /* SidebarView.swift in Sources */,
 				4AB720A92B6DB3A0001E2C76 /* AsyncButton.swift in Sources */,
 				4AB7208C2B6C642D001E2C76 /* Color+Extension.swift in Sources */,
 				4AB720AE2B6DB698001E2C76 /* OverviewItem.swift in Sources */,

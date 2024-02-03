@@ -28,14 +28,21 @@ struct OverviewView: View {
                     .background(Color.systemGroupedBackground)
                 
             case .empty:
-                ContentUnavailableView("No Data", systemImage: "xmark.circle")
-                    .navigationTitle("Overview")
-                    .background(Color.systemGroupedBackground)
+                ContentUnavailableView(
+                    "No Data",
+                    systemImage: "xmark.circle"
+                )
+                .navigationTitle("Overview")
+                .background(Color.systemGroupedBackground)
                 
             case .error(let error):
-                ContentUnavailableView("Error", systemImage: "exclamationmark.triangle", description: Text(error.localizedDescription))
-                    .navigationTitle("Overview")
-                    .background(Color.systemGroupedBackground)
+                ContentUnavailableView(
+                    "Error",
+                    systemImage: "exclamationmark.triangle",
+                    description: Text(error.localizedDescription)
+                )
+                .navigationTitle("Overview")
+                .background(Color.systemGroupedBackground)
                 
             case .data:
                 ScrollView {

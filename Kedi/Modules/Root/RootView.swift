@@ -13,7 +13,7 @@ struct RootView: View {
     
     var body: some View {
         if authManager.isSignedIn {
-            TabBarView()
+            MainView()
         } else {
             SignInView()
         }

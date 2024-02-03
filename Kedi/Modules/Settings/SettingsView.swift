@@ -12,7 +12,7 @@ struct SettingsView: View {
     @StateObject private var viewModel = SettingsViewModel()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 AsyncButton {
                     viewModel.handleSignOutButton()

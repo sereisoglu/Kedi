@@ -1,0 +1,45 @@
+//
+//  SidebarView.swift
+//  Kedi
+//
+//  Created by Saffet Emin Reisoğlu on 2/3/24.
+//
+
+import SwiftUI
+
+struct SidebarView: View {
+    
+    @State private var selection: NavigationItem? = .overview
+    
+    var body: some View {
+        NavigationSplitView {
+            List(selection: $selection) {
+                makeSideItem(item: .overview)
+                
+                makeSideItem(item: .settings)
+            }
+            .navigationTitle("Kedi")
+        } detail: {
+            switch selection {
+            case .overview:
+                OverviewView()
+            case .settings:
+                SettingsView()
+            case .none:
+                Text("")
+            }
+        }
+    }
+    
+    private func makeSideItem(
+        item: NavigationItem
+    ) -> some View {
+        NavigationLink(value: item) {
+            Label(item.title, systemImage: item.getIcon(isSelected: item == selection))
+        }
+    }
+}
+
+#Preview {
+    SidebarView()
+}
