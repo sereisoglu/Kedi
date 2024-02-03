@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct KediApp: App {
+    
     var body: some Scene {
         WindowGroup {
             RootView()
