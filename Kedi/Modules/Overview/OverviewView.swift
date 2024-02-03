@@ -9,6 +9,8 @@ import SwiftUI
 
 struct OverviewView: View {
     
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    
     @StateObject private var viewModel = OverviewViewModel()
     
     private var items: [OverviewItem] {
@@ -37,21 +39,19 @@ struct OverviewView: View {
                 
             case .data:
                 ScrollView {
-                    GeometryReader { geometry in
-                        LazyVGrid(
-                            columns: .init(
-                                repeating: .init(.flexible(), spacing: 12),
-                                count: 2
-                            ),
-                            spacing: 12
-                        ) {
-                            ForEach(items, id: \.self) { item in
-                                makeItemView(item: item)
-                                    .frame(height: abs((geometry.size.width / 2) - 50))
-                            }
+                    LazyVGrid(
+                        columns: .init(
+                            repeating: .init(.flexible(), spacing: 12),
+                            count: horizontalSizeClass == .compact ? 2 : 3
+                        ),
+                        spacing: 12
+                    ) {
+                        ForEach(items, id: \.self) { item in
+                            makeItemView(item: item)
+                                .aspectRatio(1, contentMode: .fit)
                         }
-                        .padding(20)
                     }
+                    .padding(.init(top: 0, leading: 20, bottom: 20, trailing: 20))
                 }
                 .navigationTitle("Overview")
                 .background(Color.systemGroupedBackground)
@@ -67,7 +67,7 @@ struct OverviewView: View {
                 .font(.callout)
                 .fontWeight(.medium)
                 .foregroundStyle(.secondary)
-                
+            
             Text(item.value)
                 .font(.title)
                 .fontWeight(.semibold)

@@ -24,18 +24,21 @@ final class OverviewViewModel: ObservableObject {
     
     init() {
         Task {
-            await fetchOverview { [weak self] success in
-                if success {
-                    self?.state = .data
+            await fetchOverview { [weak self] error in
+                guard let self else {
+                    return
+                }
+                if let error {
+                    state = .error(error)
                 } else {
-                    self?.state = .empty
+                    state = .data
                 }
             }
         }
     }
     
     @MainActor
-    private func fetchOverview(completion: ((Bool) -> Void)? = nil) async {
+    private func fetchOverview(completion: ((Error?) -> Void)? = nil) async {
         do {
             let data = try await apiService.request(
                 type: RCOverviewModel.self,
@@ -49,9 +52,9 @@ final class OverviewViewModel: ObservableObject {
                 .init(name: "Users", value: "\(data?.activeUsersCount ?? 0)"),
                 .init(name: "Installs", value: "\(data?.installsCount ?? 0)")
             ]
-            completion?(true)
+            completion?(nil)
         } catch {
-            completion?(false)
+            completion?(error)
         }
     }
 }
