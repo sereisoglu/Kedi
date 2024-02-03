@@ -21,7 +21,7 @@ final class OverviewViewModel: ObservableObject {
     @Published var state: State = .loading
     
     @Published var items = [OverviewItem]()
-    @Published var chartValues: [RCChartType: [LineAndAreaMarkChartValue]]?
+    @Published var chartValues = [RCChartName: [LineAndAreaMarkChartValue]]()
     
     @MainActor
     init() {
@@ -57,41 +57,61 @@ final class OverviewViewModel: ObservableObject {
         } catch {
             state = .error(error)
         }
+        
+//        items = OverviewItem.stub
+//        state = .data
     }
     
     @MainActor
     private func fetchCharts() async {
-        do {
-            chartValues = try await fetchAllCharts()
-        } catch {
-            print(error)
+        let charts = await fetchAllCharts()
+        let chartsByName = charts.keyBy(\.name)
+        
+        chartValues = charts.reduce([RCChartName: [LineAndAreaMarkChartValue]](), { partialResult, chart in
+            var partialResult = partialResult
+            if let name = chart.name,
+               let index = OverviewItemType(chartName: name)?.chartIndex,
+               let values = chart.values {
+                partialResult[name] = values.map { .init(
+                    date: .init(timeIntervalSince1970: $0[safe: 0] ?? 0),
+                    value: $0[safe: index] ?? 0
+                ) }
+            }
+            return partialResult
+        })
+        
+        if let value = chartValues[.arr]?.last?.value {
+            items.append(.init(type: .arr, value: value.formatted(.currency(code: "USD"))))
+        }
+        
+        if let value = chartsByName[.revenue]?.summary?["total"]?["Total Revenue"] {
+            items.append(.init(type: .revenueAllTime, value: value.formatted(.currency(code: "USD"))))
         }
     }
     
-    private func fetchAllCharts() async throws -> [RCChartType: [LineAndAreaMarkChartValue]]? {
-        try await withThrowingTaskGroup(of: RCChartModel?.self) { group in
-            RCChartType.allCases.forEach { type in
+    private func fetchAllCharts() async -> [RCChartModel] {
+        await withTaskGroup(of: RCChartModel?.self) { group in
+            RCChartName.allCases.forEach { name in
                 group.addTask { [weak self] in
-                    try await self?.apiService.request(
-                        type: RCChartModel.self,
-                        endpoint: .charts(type: type, resolution: .month, startDate: "2020-01-01")
-                    )
-                }
-            }
-            
-            var chartValues = [RCChartType: [LineAndAreaMarkChartValue]]()
-            for try await chart in group {
-                if let type = chart?.type,
-                   let values = chart?.values {
-                    switch type {
-                    case .revenue:
-                        chartValues[type] = values.map { .init(date: Date(timeIntervalSince1970: $0[safe: 0] ?? 0), value: $0[safe: 3] ?? 0) }
-                    default:
-                        chartValues[type] = values.map { .init(date: Date(timeIntervalSince1970: $0[safe: 0] ?? 0), value: $0[safe: 1] ?? 0) }
+                    do {
+                        return try await self?.apiService.request(
+                            type: RCChartModel.self,
+                            endpoint: .charts(name: name, resolution: .month, startDate: "2020-01-11")
+                        )
+                    } catch {
+                        print(error)
+                        return nil
                     }
                 }
             }
-            return chartValues
+            
+            var charts = [RCChartModel]()
+            for await chart in group {
+                if let chart {
+                    charts.append(chart)
+                }
+            }
+            return charts
         }
     }
 }

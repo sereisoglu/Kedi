@@ -7,66 +7,14 @@
 
 import Foundation
 
-struct OverviewItem: Hashable {
+struct OverviewItem: Identifiable, Hashable {
     
-    enum `Type` {
-        case mrr
-        case subsciptions
-        case trials
-        case revenue
-        case users
-        case installs
-        
-        var icon: String {
-            switch self {
-            case .mrr: "dollarsign.arrow.circlepath"
-            case .subsciptions: "repeat"
-            case .trials: "clock"
-            case .revenue: "dollarsign"
-            case .users: "person.2"
-            case .installs: "iphone"
-            }
-        }
-        
-        var name: String {
-            switch self {
-            case .mrr: "MRR"
-            case .subsciptions: "Subsciptions"
-            case .trials: "Trials"
-            case .revenue: "Revenue"
-            case .users: "Users"
-            case .installs: "Installs"
-            }
-        }
-        
-        var note: String? {
-            switch self {
-            case .mrr: nil
-            case .subsciptions: nil
-            case .trials: nil
-            case .revenue: "Last 28 days"
-            case .users: "Last 28 days"
-            case .installs: "Last 28 days"
-            }
-        }
-        
-        var chartType: RCChartType? {
-            switch self {
-            case .mrr: .mrr
-            case .subsciptions: .actives
-            case .trials: .trials
-            case .revenue: .revenue
-            case .users: nil
-            case .installs: nil
-            }
-        }
-    }
-    
+    let id = UUID()
     var icon: String { type.icon }
     var name: String { type.name }
     var note: String? { type.note }
     
-    var type: `Type`
+    var type: OverviewItemType
     var value: String
 }
 
@@ -74,13 +22,17 @@ extension OverviewItem {
     
     static let stub: [Self] = {
         let data = RCOverviewModel.stub
+        let arr: Double = 5234.342
+        let revenueAllTime: Double = 999999.9999
         return [
             .init(type: .mrr, value: "\(data.mrr?.formatted(.currency(code: "USD")) ?? "")"),
             .init(type: .subsciptions, value: "\(data.activeSubscribersCount?.formatted() ?? "")"),
             .init(type: .trials, value: "\(data.activeTrialsCount?.formatted() ?? "")"),
             .init(type: .revenue, value: "\(data.revenue?.formatted(.currency(code: "USD")) ?? "")"),
             .init(type: .users, value: "\(data.activeUsersCount?.formatted() ?? "")"),
-            .init(type: .installs, value: "\(data.installsCount?.formatted() ?? "")")
+            .init(type: .installs, value: "\(data.installsCount?.formatted() ?? "")"),
+            .init(type: .arr, value: "\(arr.formatted(.currency(code: "USD")))"),
+            .init(type: .revenueAllTime, value: "\(revenueAllTime.formatted(.currency(code: "USD")))")
         ]
     }()
 }

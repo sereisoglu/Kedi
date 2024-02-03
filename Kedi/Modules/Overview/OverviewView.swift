@@ -54,8 +54,8 @@ struct OverviewView: View {
                         spacing: 12
                     ) {
                         ForEach(items, id: \.self) { item in
-                            if let chartType = item.type.chartType {
-                                makeItemView(item: item, chartValues: viewModel.chartValues?[chartType])
+                            if let chartName = item.type.chartName {
+                                makeItemView(item: item, chartValues: viewModel.chartValues[chartName])
                                     .aspectRatio(1, contentMode: .fit)
                             } else {
                                 makeItemView(item: item)
@@ -82,11 +82,15 @@ struct OverviewView: View {
                     .fontWeight(.medium)
                     .foregroundStyle(.secondary)
                     .labelStyle(SpacingLabelStyle(spacing: 2))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
                 
                 Text(item.value)
                     .font(.title)
                     .fontWeight(.semibold)
                     .foregroundStyle(.primary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
                 
                 if let note = item.note {
                     Text(note)

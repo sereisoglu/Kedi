@@ -13,7 +13,7 @@ enum Endpoint {
     case login(email: String, password: String)
     case me
     case overview
-    case charts(type: RCChartType, resolution: RCChartResolution, startDate: String)
+    case charts(name: RCChartName, resolution: RCChartResolution, startDate: String)
 }
 
 extension Endpoint {
@@ -34,7 +34,7 @@ extension Endpoint {
         case .login: "developers/login"
         case .me: "developers/me"
         case .overview: "developers/me/overview"
-        case .charts(let type, _, _): "developers/me/charts_v2/\(type.rawValue)"
+        case .charts(let name, _, _): "developers/me/charts_v2/\(name.rawValue)"
         }
     }
     
