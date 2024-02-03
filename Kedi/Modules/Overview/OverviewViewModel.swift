@@ -45,12 +45,12 @@ final class OverviewViewModel: ObservableObject {
                 endpoint: .overview
             )
             items = [
-                .init(name: "MRR", value: "\(data?.mrr?.formatted(.currency(code: "USD")) ?? "")"),
-                .init(name: "Subsciptions", value: "\(data?.activeSubscribersCount ?? 0)"),
-                .init(name: "Trials", value: "\(data?.activeTrialsCount ?? 0)"),
-                .init(name: "Revenue", value: "\(data?.revenue?.formatted(.currency(code: "USD")) ?? "")"),
-                .init(name: "Users", value: "\(data?.activeUsersCount ?? 0)"),
-                .init(name: "Installs", value: "\(data?.installsCount ?? 0)")
+                .init(type: .mrr, value: "\(data?.mrr?.formatted(.currency(code: "USD")) ?? "")"),
+                .init(type: .subsciptions, value: "\(data?.activeSubscribersCount ?? 0)"),
+                .init(type: .trials, value: "\(data?.activeTrialsCount ?? 0)"),
+                .init(type: .revenue, value: "\(data?.revenue?.formatted(.currency(code: "USD")) ?? "")"),
+                .init(type: .users, value: "\(data?.activeUsersCount ?? 0)"),
+                .init(type: .installs, value: "\(data?.installsCount ?? 0)")
             ]
             completion?(nil)
         } catch {

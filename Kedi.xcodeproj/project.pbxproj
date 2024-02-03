@@ -32,6 +32,7 @@
 		4AB720A92B6DB3A0001E2C76 /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720A82B6DB3A0001E2C76 /* AsyncButton.swift */; };
 		4AB720AB2B6DB4D2001E2C76 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720AA2B6DB4D2001E2C76 /* SettingsViewModel.swift */; };
 		4AB720AE2B6DB698001E2C76 /* OverviewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720AD2B6DB698001E2C76 /* OverviewItem.swift */; };
+		4AB720B22B6DC9AB001E2C76 /* SpacingLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720B12B6DC9AB001E2C76 /* SpacingLabelStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		4AB720A82B6DB3A0001E2C76 /* AsyncButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
 		4AB720AA2B6DB4D2001E2C76 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		4AB720AD2B6DB698001E2C76 /* OverviewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewItem.swift; sourceTree = "<group>"; };
+		4AB720B12B6DC9AB001E2C76 /* SpacingLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacingLabelStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				4AB720A82B6DB3A0001E2C76 /* AsyncButton.swift */,
+				4AB720B12B6DC9AB001E2C76 /* SpacingLabelStyle.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				4AB720A22B6C7925001E2C76 /* KeychainManager.swift in Sources */,
 				4AB7206D2B6BDC36001E2C76 /* SignInViewModel.swift in Sources */,
 				4AB7207D2B6C17A9001E2C76 /* RCErrorModel.swift in Sources */,
+				4AB720B22B6DC9AB001E2C76 /* SpacingLabelStyle.swift in Sources */,
 				4AB7207B2B6C17A0001E2C76 /* RCLoginModel.swift in Sources */,
 				4AB720872B6C56E7001E2C76 /* RootView.swift in Sources */,
 				4AB720742B6BF4A9001E2C76 /* Endpoint.swift in Sources */,

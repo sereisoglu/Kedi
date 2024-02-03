@@ -63,10 +63,11 @@ struct OverviewView: View {
         item: OverviewItem
     ) -> some View {
         VStack(alignment: .leading) {
-            Text(item.name.uppercased())
-                .font(.callout)
+            Label(item.name.uppercased(), systemImage: item.icon)
+                .font(.subheadline)
                 .fontWeight(.medium)
                 .foregroundStyle(.secondary)
+                .labelStyle(SpacingLabelStyle(spacing: 2))
             
             Text(item.value)
                 .font(.title)
@@ -83,7 +84,7 @@ struct OverviewView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
-        .background(Color.systemBackground)
+        .background(Color.secondarySystemGroupedBackground)
         .clipShape(
             RoundedRectangle(cornerRadius: 20, style: .continuous)
         )
