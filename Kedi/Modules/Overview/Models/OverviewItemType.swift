@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum OverviewItemType {
+enum OverviewItemType: CaseIterable {
     
     case mrr
     case subsciptions
@@ -17,6 +17,9 @@ enum OverviewItemType {
     case installs
     case arr
     case revenueAllTime
+    case proceeds
+    case proceedsAllTime
+    case newUsers
     
     var icon: String {
         switch self {
@@ -28,6 +31,9 @@ enum OverviewItemType {
         case .installs: "iphone"
         case .arr: "dollarsign.arrow.circlepath"
         case .revenueAllTime: "dollarsign"
+        case .proceeds: "dollarsign"
+        case .proceedsAllTime: "dollarsign"
+        case .newUsers: "person.2"
         }
     }
     
@@ -41,6 +47,9 @@ enum OverviewItemType {
         case .installs: "Installs"
         case .arr: "ARR"
         case .revenueAllTime: "Revenue"
+        case .proceeds: "Proceeds"
+        case .proceedsAllTime: "Proceeds"
+        case .newUsers: "New Users"
         }
     }
     
@@ -54,6 +63,9 @@ enum OverviewItemType {
         case .installs: "Last 28 days"
         case .arr: nil
         case .revenueAllTime: "All-time"
+        case .proceeds: "This month"
+        case .proceedsAllTime: "All-time"
+        case .newUsers: "This month"
         }
     }
     
@@ -67,6 +79,9 @@ enum OverviewItemType {
         case .installs: nil
         case .arr: .arr
         case .revenueAllTime: .revenue
+        case .proceeds: .revenue
+        case .proceedsAllTime: .revenue
+        case .newUsers: .conversionToPaying
         }
     }
     
@@ -80,43 +95,9 @@ enum OverviewItemType {
         case .installs: nil
         case .arr: 1
         case .revenueAllTime: 3
-        }
-    }
-    
-    init?(chartName: RCChartName) {
-        switch chartName {
-        case .actives:
-            self = .subsciptions
-        case .activesMovement:
-            return nil
-        case .arr:
-            self = .arr
-        case .churn:
-            return nil
-        case .conversionToPaying:
-            return nil
-        case .initialConversion:
-            return nil
-        case .ltvPerCustomer:
-            return nil
-        case .ltvPerPayingCustomer:
-            return nil
-        case .mrr:
-            self = .mrr
-        case .mrrMovement:
-            return nil
-        case .refundRate:
-            return nil
-        case .revenue:
-            self = .revenue
-        case .subscriptionRetention:
-            return nil
-        case .trialConversion:
-            return nil
-        case .trials:
-            self = .trials
-        case .trialsMovement:
-            return nil
+        case .proceeds: 6
+        case .proceedsAllTime: 6
+        case .newUsers: 1
         }
     }
 }

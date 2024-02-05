@@ -21,7 +21,7 @@ final class OverviewViewModel: ObservableObject {
     @Published var state: State = .loading
     
     @Published var items = [OverviewItem]()
-    @Published var chartValues = [RCChartName: [LineAndAreaMarkChartValue]]()
+    @Published var chartValues = [OverviewItemType: [LineAndAreaMarkChartValue]]()
     
     @MainActor
     init() {
@@ -67,18 +67,21 @@ final class OverviewViewModel: ObservableObject {
         let charts = await fetchAllCharts()
         let chartsByName = charts.keyBy(\.name)
         
-        chartValues = charts.reduce([RCChartName: [LineAndAreaMarkChartValue]](), { partialResult, chart in
-            var partialResult = partialResult
-            if let name = chart.name,
-               let index = OverviewItemType(chartName: name)?.chartIndex,
-               let values = chart.values {
-                partialResult[name] = values.map { .init(
-                    date: .init(timeIntervalSince1970: $0[safe: 0] ?? 0),
-                    value: $0[safe: index] ?? 0
-                ) }
+        chartValues = OverviewItemType.allCases.reduce(
+            [OverviewItemType: [LineAndAreaMarkChartValue]](),
+            { partialResult, itemType in
+                var partialResult = partialResult
+                if let chartName = itemType.chartName,
+                   let chartIndex = itemType.chartIndex,
+                   let values = chartsByName[chartName]?.values {
+                    partialResult[itemType] = values.map { .init(
+                        date: .init(timeIntervalSince1970: $0[safe: 0] ?? 0),
+                        value: $0[safe: chartIndex] ?? 0
+                    ) }
+                }
+                return partialResult
             }
-            return partialResult
-        })
+        )
         
         if let value = chartValues[.arr]?.last?.value {
             items.append(.init(type: .arr, value: value.formatted(.currency(code: "USD"))))
@@ -86,6 +89,18 @@ final class OverviewViewModel: ObservableObject {
         
         if let value = chartsByName[.revenue]?.summary?["total"]?["Total Revenue"] {
             items.append(.init(type: .revenueAllTime, value: value.formatted(.currency(code: "USD"))))
+        }
+        
+        if let value = chartValues[.proceeds]?.last?.value {
+            items.append(.init(type: .proceeds, value: value.formatted(.currency(code: "USD"))))
+        }
+        
+        if let value = chartsByName[.revenue]?.summary?["total"]?["Proceeds"] {
+            items.append(.init(type: .proceedsAllTime, value: value.formatted(.currency(code: "USD"))))
+        }
+        
+        if let value = chartsByName[.conversionToPaying]?.values?.last?[safe: 1] {
+            items.append(.init(type: .newUsers, value: value.formatted()))
         }
     }
     
@@ -96,7 +111,7 @@ final class OverviewViewModel: ObservableObject {
                     do {
                         return try await self?.apiService.request(
                             type: RCChartModel.self,
-                            endpoint: .charts(name: name, resolution: .month, startDate: "2020-01-11")
+                            endpoint: .charts(name: name, resolution: .month, startDate: "2021-07-15")
                         )
                     } catch {
                         print(error)

@@ -54,13 +54,8 @@ struct OverviewView: View {
                         spacing: 12
                     ) {
                         ForEach(items, id: \.self) { item in
-                            if let chartName = item.type.chartName {
-                                makeItemView(item: item, chartValues: viewModel.chartValues[chartName])
-                                    .aspectRatio(1, contentMode: .fit)
-                            } else {
-                                makeItemView(item: item)
-                                    .aspectRatio(1, contentMode: .fit)
-                            }
+                            makeItemView(item: item, chartValues: viewModel.chartValues[item.type])
+                                .aspectRatio(1, contentMode: .fit)
                         }
                     }
                     .padding(.init(top: 0, leading: 20, bottom: 20, trailing: 20))
