@@ -19,6 +19,12 @@ struct TabBarView: View {
                     makeTabItem(item: .overview)
                 }
             
+            TransactionsView()
+                .tag(NavigationItem.transactions)
+                .tabItem {
+                    makeTabItem(item: .transactions)
+                }
+            
             SettingsView()
                 .tag(NavigationItem.settings)
                 .tabItem {

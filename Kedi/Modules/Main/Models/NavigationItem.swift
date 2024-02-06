@@ -10,6 +10,7 @@ import Foundation
 enum NavigationItem: Identifiable, Hashable {
     
     case overview
+    case transactions
     case settings
     
     var id: UUID {
@@ -19,6 +20,7 @@ enum NavigationItem: Identifiable, Hashable {
     var icon: String {
         switch self {
         case .overview: "rectangle.grid.2x2"
+        case .transactions: "creditcard"
         case .settings: "gearshape"
         }
     }
@@ -26,6 +28,7 @@ enum NavigationItem: Identifiable, Hashable {
     var selectedIcon: String {
         switch self {
         case .overview: "rectangle.grid.2x2.fill"
+        case .transactions: "creditcard.fill"
         case .settings: "gearshape.fill"
         }
     }
@@ -33,6 +36,7 @@ enum NavigationItem: Identifiable, Hashable {
     var title: String {
         switch self {
         case .overview: "Overview"
+        case .transactions: "Transactions"
         case .settings: "Settings"
         }
     }

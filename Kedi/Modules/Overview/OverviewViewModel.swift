@@ -23,7 +23,6 @@ final class OverviewViewModel: ObservableObject {
     @Published var items = [OverviewItem]()
     @Published var chartValues = [OverviewItemType: [LineAndAreaMarkChartValue]]()
     
-    @MainActor
     init() {
         Task {
             await withDiscardingTaskGroup { group in

@@ -14,6 +14,7 @@ enum Endpoint {
     case me
     case overview
     case charts(name: RCChartName, resolution: RCChartResolution, startDate: String)
+    case transactions
 }
 
 extension Endpoint {
@@ -35,6 +36,7 @@ extension Endpoint {
         case .me: "developers/me"
         case .overview: "developers/me/overview"
         case .charts(let name, _, _): "developers/me/charts_v2/\(name.rawValue)"
+        case .transactions: "developers/me/transactions"
         }
     }
     
@@ -60,6 +62,11 @@ extension Endpoint {
             return [
                 "resolution": resolution.rawValue,
                 "start_date": startDate
+            ]
+        case .transactions:
+            return [
+                "sandbox_mode": false,
+                "limit": 100
             ]
         default: return nil
         }

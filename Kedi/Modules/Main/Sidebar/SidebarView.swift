@@ -16,6 +16,8 @@ struct SidebarView: View {
             List(selection: $selection) {
                 makeSideItem(item: .overview)
                 
+                makeSideItem(item: .transactions)
+                
                 makeSideItem(item: .settings)
             }
             .navigationTitle("Kedi")
@@ -23,6 +25,8 @@ struct SidebarView: View {
             switch selection {
             case .overview:
                 OverviewView()
+            case .transactions:
+                TransactionsView()
             case .settings:
                 SettingsView()
             case .none:
