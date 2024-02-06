@@ -38,7 +38,7 @@ enum RCChartDocumentationLink: String, Decodable {
     case mrrMovement = "monthly-recurring-revenue-movement-chart"
     case refundRate = "refund-rate-chart"
     case revenue = "revenue-chart"
-    case subscriptionRetention = "subscription-retention-chart"
+//    case subscriptionRetention = "subscription-retention-chart"
     case trialConversion = "trial-conversion-chart"
     case trials = "active-trials-chart"
     case trialsMovement = "active-trials-movement-chart"
@@ -57,7 +57,7 @@ enum RCChartDocumentationLink: String, Decodable {
         case .mrrMovement: .mrrMovement
         case .refundRate: .refundRate
         case .revenue: .revenue
-        case .subscriptionRetention: .subscriptionRetention
+//        case .subscriptionRetention: .subscriptionRetention
         case .trialConversion: .trialConversion
         case .trials: .trials
         case .trialsMovement: .trialsMovement

@@ -21,7 +21,7 @@ enum RCChartName: String, CaseIterable {
     case mrrMovement = "mrr_movement"
     case refundRate = "refund_rate"
     case revenue
-    case subscriptionRetention = "subscription_retention"
+//    case subscriptionRetention = "subscription_retention"
     case trialConversion = "trial_conversion"
     case trials
     case trialsMovement = "trials_movement"
