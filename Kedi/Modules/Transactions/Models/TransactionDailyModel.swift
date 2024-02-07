@@ -1,5 +1,5 @@
 //
-//  TransactionModel.swift
+//  TransactionDailyModel.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/5/24.
@@ -24,8 +24,10 @@ struct TransactionDailyModel: Identifiable, Hashable {
 struct TransactionModel: Identifiable, Hashable {
     
     let id = UUID()
+    let appId: String
+    let subscriberId: String
+    
     var type: TransactionType
-    var color: Color
     var price: Double
     var store: TransactionStore?
     var appIconUrl: String?
@@ -33,36 +35,24 @@ struct TransactionModel: Identifiable, Hashable {
     var productIdentifier: String
     var countryFlag: String
     var country: String
-    var date: Date?
-    
-    var dateText: Text {
-        if let date {
-            if date.isToday {
-                Text(date, format: .relative(presentation: .named))
-            } else {
-                Text(date.formatted(date: .omitted, time: .standard))
-            }
-        } else {
-            Text("Unknown")
-        }
-    }
+    var date: String
     
     init(data: RCTransactionModel) {
+        appId = data.app?.id ?? ""
+        subscriberId = data.subscriberId ?? ""
+        
         if data.wasRefunded ?? false {
             type = .refund
-            color = .red
         } else if data.isRenewal ?? false {
             type = .renewal
-            color = .green
         } else if data.isTrialPeriod ?? false {
             type = .trial
-            color = .orange
         } else if data.isTrialConversion ?? false {
             type = .conversion
-            color = .blue
+        } else if data.expiresDate != nil {
+            type = .initialPurchase
         } else {
-            type = .purchase
-            color = .blue
+            type = .oneTimePurchase
         }
         
         price = data.revenue ?? 0
@@ -79,17 +69,26 @@ struct TransactionModel: Identifiable, Hashable {
         
         productIdentifier = data.productIdentifier ?? ""
         
-        countryFlag = data.subscriberCountryCode?.flag ?? ""
+        countryFlag = data.subscriberCountryCode?.countryFlag ?? ""
         
-        country = Locale.current.localizedString(forRegionCode: data.subscriberCountryCode ?? "") ?? ""
+        country = data.subscriberCountryCode?.countryName ?? ""
         
-        date = DateFormatter.iso8601WithoutMilliseconds.date(from: data.purchaseDate ?? "")
+        if let date = DateFormatter.iso8601WithoutMilliseconds.date(from: data.purchaseDate ?? "") {
+            if date.isToday || date.isFuture {
+                self.date = date.relativeFormat(to: .full)
+            } else  {
+                self.date = date.formatted(date: .omitted, time: .standard)
+            }
+        } else {
+            self.date = "Unknown"
+        }
     }
 }
 
 enum TransactionType {
     
-    case purchase
+    case initialPurchase
+    case oneTimePurchase
     case renewal
     case trial
     case conversion
@@ -97,11 +96,23 @@ enum TransactionType {
     
     var text: String {
         switch self {
-        case .purchase: "Purchase"
+        case .initialPurchase: "Initial Purchase"
+        case .oneTimePurchase: "One-Time Purchase"
         case .renewal: "Renewal"
         case .trial: "Trial"
         case .conversion: "Conversion"
         case .refund: "Refund"
+        }
+    }
+    
+    var color: Color {
+        switch self {
+        case .initialPurchase: .blue
+        case .oneTimePurchase: .purple
+        case .renewal: .green
+        case .trial: .orange
+        case .conversion: .blue
+        case .refund: .red
         }
     }
 }

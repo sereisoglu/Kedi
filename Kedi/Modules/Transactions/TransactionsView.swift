@@ -17,9 +17,9 @@ struct TransactionsView: View {
                 ForEach(viewModel.transactions) { dailyTransactions in
                     Section {
                         ForEach(dailyTransactions.transactions) { transaction in
-                            //                        NavigationLink(value: result) {
-                            TransactionListView(transaction: transaction)
-                            //                        }
+                            NavigationLink(value: transaction) {
+                                TransactionListView(transaction: transaction)
+                            }
                         }
                     } header: {
                         HStack {
@@ -33,6 +33,9 @@ struct TransactionsView: View {
                 }
             }
             .navigationTitle("Transactions")
+            .navigationDestination(for: TransactionModel.self) { transaction in
+                TransactionDetailView(viewModel: .init(appId: transaction.appId, subscriberId: transaction.subscriberId))
+            }
         }
     }
 }

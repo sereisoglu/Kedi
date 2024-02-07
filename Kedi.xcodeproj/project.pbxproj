@@ -47,11 +47,21 @@
 		4AB720E52B70C8D3001E2C76 /* TransactionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720E42B70C8D3001E2C76 /* TransactionsViewModel.swift */; };
 		4AB720E92B70C8EC001E2C76 /* TransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720E82B70C8EC001E2C76 /* TransactionsView.swift */; };
 		4AB720ED2B70CA2D001E2C76 /* RCTransactionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720EC2B70CA2D001E2C76 /* RCTransactionsModel.swift */; };
-		4AB720EF2B70D8AA001E2C76 /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720EE2B70D8AA001E2C76 /* TransactionModel.swift */; };
+		4AB720EF2B70D8AA001E2C76 /* TransactionDailyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720EE2B70D8AA001E2C76 /* TransactionDailyModel.swift */; };
 		4AB720F12B70E399001E2C76 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720F02B70E399001E2C76 /* String+Extension.swift */; };
 		4AB720F52B70FB84001E2C76 /* TransactionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720F42B70FB84001E2C76 /* TransactionListView.swift */; };
 		4AB720F82B70FBF1001E2C76 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720F72B70FBF1001E2C76 /* Date+Extension.swift */; };
 		4AB720FC2B712CE4001E2C76 /* CacheAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720FB2B712CE4001E2C76 /* CacheAsyncImage.swift */; };
+		4AB721022B722DFF001E2C76 /* TransactionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721012B722DFF001E2C76 /* TransactionDetailViewModel.swift */; };
+		4AB721042B722E07001E2C76 /* TransactionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721032B722E07001E2C76 /* TransactionDetailView.swift */; };
+		4AB721062B72371E001E2C76 /* RCTransactionDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721052B72371E001E2C76 /* RCTransactionDetailModel.swift */; };
+		4AB721092B726C62001E2C76 /* TransactionDetailInfoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721082B726C62001E2C76 /* TransactionDetailInfoItem.swift */; };
+		4AB7210B2B72B8A6001E2C76 /* TransactionDetailHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7210A2B72B8A6001E2C76 /* TransactionDetailHistoryItem.swift */; };
+		4AB721102B72B966001E2C76 /* TransactionDetailHistoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7210F2B72B966001E2C76 /* TransactionDetailHistoryListView.swift */; };
+		4AB721122B72B970001E2C76 /* TransactionDetailInfoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721112B72B970001E2C76 /* TransactionDetailInfoListView.swift */; };
+		4AB721142B72C368001E2C76 /* RelativeDateTimeFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721132B72C368001E2C76 /* RelativeDateTimeFormatter+Extension.swift */; };
+		4AB721162B72DD8B001E2C76 /* TransactionDetailEntitlementItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721152B72DD8B001E2C76 /* TransactionDetailEntitlementItem.swift */; };
+		4AB7211A2B736FEC001E2C76 /* TransactionDetailEntitlementListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721192B736FEC001E2C76 /* TransactionDetailEntitlementListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,11 +105,21 @@
 		4AB720E42B70C8D3001E2C76 /* TransactionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewModel.swift; sourceTree = "<group>"; };
 		4AB720E82B70C8EC001E2C76 /* TransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsView.swift; sourceTree = "<group>"; };
 		4AB720EC2B70CA2D001E2C76 /* RCTransactionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTransactionsModel.swift; sourceTree = "<group>"; };
-		4AB720EE2B70D8AA001E2C76 /* TransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
+		4AB720EE2B70D8AA001E2C76 /* TransactionDailyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDailyModel.swift; sourceTree = "<group>"; };
 		4AB720F02B70E399001E2C76 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		4AB720F42B70FB84001E2C76 /* TransactionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListView.swift; sourceTree = "<group>"; };
 		4AB720F72B70FBF1001E2C76 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		4AB720FB2B712CE4001E2C76 /* CacheAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheAsyncImage.swift; sourceTree = "<group>"; };
+		4AB721012B722DFF001E2C76 /* TransactionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewModel.swift; sourceTree = "<group>"; };
+		4AB721032B722E07001E2C76 /* TransactionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailView.swift; sourceTree = "<group>"; };
+		4AB721052B72371E001E2C76 /* RCTransactionDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTransactionDetailModel.swift; sourceTree = "<group>"; };
+		4AB721082B726C62001E2C76 /* TransactionDetailInfoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailInfoItem.swift; sourceTree = "<group>"; };
+		4AB7210A2B72B8A6001E2C76 /* TransactionDetailHistoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailHistoryItem.swift; sourceTree = "<group>"; };
+		4AB7210F2B72B966001E2C76 /* TransactionDetailHistoryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailHistoryListView.swift; sourceTree = "<group>"; };
+		4AB721112B72B970001E2C76 /* TransactionDetailInfoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailInfoListView.swift; sourceTree = "<group>"; };
+		4AB721132B72C368001E2C76 /* RelativeDateTimeFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RelativeDateTimeFormatter+Extension.swift"; sourceTree = "<group>"; };
+		4AB721152B72DD8B001E2C76 /* TransactionDetailEntitlementItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailEntitlementItem.swift; sourceTree = "<group>"; };
+		4AB721192B736FEC001E2C76 /* TransactionDetailEntitlementListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailEntitlementListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +183,7 @@
 				4AB7208D2B6C682C001E2C76 /* Main */,
 				4AB720802B6C4FDA001E2C76 /* Overview */,
 				4AB720E32B70C8BA001E2C76 /* Transactions */,
+				4AB721002B722DF1001E2C76 /* TransactionDetail */,
 				4AB720902B6C6888001E2C76 /* Settings */,
 			);
 			path = Modules;
@@ -218,12 +239,13 @@
 		4AB7208A2B6C6422001E2C76 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				4AB720F72B70FBF1001E2C76 /* Date+Extension.swift */,
 				4AB7208B2B6C642D001E2C76 /* Color+Extension.swift */,
 				4AB720A52B6DAC81001E2C76 /* DateFormatter+Extension.swift */,
+				4AB721132B72C368001E2C76 /* RelativeDateTimeFormatter+Extension.swift */,
 				4AB720C12B6E4DFD001E2C76 /* Collection+Extension.swift */,
 				4AB720CB2B6EAECD001E2C76 /* Array+Extension.swift */,
 				4AB720F02B70E399001E2C76 /* String+Extension.swift */,
-				4AB720F72B70FBF1001E2C76 /* Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -264,6 +286,7 @@
 				4AB720C92B6E6341001E2C76 /* RCMeModel.swift */,
 				4AB720882B6C5826001E2C76 /* RCOverviewModel.swift */,
 				4AB720EC2B70CA2D001E2C76 /* RCTransactionsModel.swift */,
+				4AB721052B72371E001E2C76 /* RCTransactionDetailModel.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -326,8 +349,8 @@
 		4AB720E32B70C8BA001E2C76 /* Transactions */ = {
 			isa = PBXGroup;
 			children = (
-				4AB720F32B70FB79001E2C76 /* Views */,
 				4AB720F22B70FB74001E2C76 /* Models */,
+				4AB720F32B70FB79001E2C76 /* Views */,
 				4AB720E82B70C8EC001E2C76 /* TransactionsView.swift */,
 				4AB720E42B70C8D3001E2C76 /* TransactionsViewModel.swift */,
 			);
@@ -345,7 +368,7 @@
 		4AB720F22B70FB74001E2C76 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4AB720EE2B70D8AA001E2C76 /* TransactionModel.swift */,
+				4AB720EE2B70D8AA001E2C76 /* TransactionDailyModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -354,6 +377,37 @@
 			isa = PBXGroup;
 			children = (
 				4AB720F42B70FB84001E2C76 /* TransactionListView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4AB721002B722DF1001E2C76 /* TransactionDetail */ = {
+			isa = PBXGroup;
+			children = (
+				4AB721072B726C5A001E2C76 /* Models */,
+				4AB7210C2B72B926001E2C76 /* Views */,
+				4AB721032B722E07001E2C76 /* TransactionDetailView.swift */,
+				4AB721012B722DFF001E2C76 /* TransactionDetailViewModel.swift */,
+			);
+			path = TransactionDetail;
+			sourceTree = "<group>";
+		};
+		4AB721072B726C5A001E2C76 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4AB721082B726C62001E2C76 /* TransactionDetailInfoItem.swift */,
+				4AB7210A2B72B8A6001E2C76 /* TransactionDetailHistoryItem.swift */,
+				4AB721152B72DD8B001E2C76 /* TransactionDetailEntitlementItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4AB7210C2B72B926001E2C76 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4AB721112B72B970001E2C76 /* TransactionDetailInfoListView.swift */,
+				4AB7210F2B72B966001E2C76 /* TransactionDetailHistoryListView.swift */,
+				4AB721192B736FEC001E2C76 /* TransactionDetailEntitlementListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -446,32 +500,42 @@
 				4AB7208F2B6C6842001E2C76 /* MainView.swift in Sources */,
 				4AB720E52B70C8D3001E2C76 /* TransactionsViewModel.swift in Sources */,
 				4AB720712B6BF497001E2C76 /* APIService.swift in Sources */,
+				4AB721122B72B970001E2C76 /* TransactionDetailInfoListView.swift in Sources */,
 				4AB720CA2B6E6341001E2C76 /* RCMeModel.swift in Sources */,
 				4AB720842B6C4FF3001E2C76 /* OverviewView.swift in Sources */,
-				4AB720EF2B70D8AA001E2C76 /* TransactionModel.swift in Sources */,
+				4AB720EF2B70D8AA001E2C76 /* TransactionDailyModel.swift in Sources */,
 				4AB720A22B6C7925001E2C76 /* KeychainManager.swift in Sources */,
 				4AB7206D2B6BDC36001E2C76 /* SignInViewModel.swift in Sources */,
 				4AB7207D2B6C17A9001E2C76 /* RCErrorModel.swift in Sources */,
+				4AB721022B722DFF001E2C76 /* TransactionDetailViewModel.swift in Sources */,
+				4AB721042B722E07001E2C76 /* TransactionDetailView.swift in Sources */,
 				4AB720B82B6E3E1D001E2C76 /* TabBarView.swift in Sources */,
 				4AB720BA2B6E4183001E2C76 /* NavigationItem.swift in Sources */,
 				4AB720B22B6DC9AB001E2C76 /* SpacingLabelStyle.swift in Sources */,
 				4AB7207B2B6C17A0001E2C76 /* RCLoginModel.swift in Sources */,
 				4AB720872B6C56E7001E2C76 /* RootView.swift in Sources */,
+				4AB721162B72DD8B001E2C76 /* TransactionDetailEntitlementItem.swift in Sources */,
 				4AB720F52B70FB84001E2C76 /* TransactionListView.swift in Sources */,
 				4AB720742B6BF4A9001E2C76 /* Endpoint.swift in Sources */,
 				4AB720E92B70C8EC001E2C76 /* TransactionsView.swift in Sources */,
+				4AB7211A2B736FEC001E2C76 /* TransactionDetailEntitlementListView.swift in Sources */,
 				4AB720F12B70E399001E2C76 /* String+Extension.swift in Sources */,
+				4AB7210B2B72B8A6001E2C76 /* TransactionDetailHistoryItem.swift in Sources */,
+				4AB721102B72B966001E2C76 /* TransactionDetailHistoryListView.swift in Sources */,
 				4AB720892B6C5826001E2C76 /* RCOverviewModel.swift in Sources */,
+				4AB721062B72371E001E2C76 /* RCTransactionDetailModel.swift in Sources */,
 				4AB720A62B6DAC81001E2C76 /* DateFormatter+Extension.swift in Sources */,
 				4AB720ED2B70CA2D001E2C76 /* RCTransactionsModel.swift in Sources */,
 				4AB720C42B6E6156001E2C76 /* LineAndAreaMarkChartView.swift in Sources */,
 				4AB720AB2B6DB4D2001E2C76 /* SettingsViewModel.swift in Sources */,
 				4AB720CC2B6EAECD001E2C76 /* Array+Extension.swift in Sources */,
 				4AB7207F2B6C17B3001E2C76 /* RCError.swift in Sources */,
+				4AB721142B72C368001E2C76 /* RelativeDateTimeFormatter+Extension.swift in Sources */,
 				4AB720BD2B6E49D2001E2C76 /* RCChartName.swift in Sources */,
 				4AB720822B6C4FEA001E2C76 /* OverviewViewModel.swift in Sources */,
 				4AB720B62B6E3E16001E2C76 /* SidebarView.swift in Sources */,
 				4AB720A92B6DB3A0001E2C76 /* AsyncButton.swift in Sources */,
+				4AB721092B726C62001E2C76 /* TransactionDetailInfoItem.swift in Sources */,
 				4AB720CE2B6EB36C001E2C76 /* OverviewItemType.swift in Sources */,
 				4AB720C02B6E4A62001E2C76 /* RCChartModel.swift in Sources */,
 				4AB7208C2B6C642D001E2C76 /* Color+Extension.swift in Sources */,

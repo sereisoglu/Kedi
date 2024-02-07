@@ -27,11 +27,19 @@ extension Date {
     func format(dateFormatter: DateFormatter) -> String {
         dateFormatter.string(from: self)
     }
+    
+    func relativeFormat(to relativeDateFormatter: RelativeDateTimeFormatter) -> String {
+        relativeDateFormatter.localizedString(for: self, relativeTo: Date.now)
+    }
 }
 
 extension Date {
     
     var isToday: Bool {
         calendar.isDateInToday(self)
+    }
+    
+    var isFuture: Bool {
+        self > Date.now
     }
 }

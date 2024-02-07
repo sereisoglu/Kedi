@@ -15,6 +15,7 @@ enum Endpoint {
     case overview
     case charts(name: RCChartName, resolution: RCChartResolution, startDate: String)
     case transactions
+    case transactionDetail(appId: String, subscriberId: String)
 }
 
 extension Endpoint {
@@ -32,11 +33,18 @@ extension Endpoint {
     
     var path: String {
         switch self {
-        case .login: "developers/login"
-        case .me: "developers/me"
-        case .overview: "developers/me/overview"
-        case .charts(let name, _, _): "developers/me/charts_v2/\(name.rawValue)"
-        case .transactions: "developers/me/transactions"
+        case .login: 
+            return "developers/login"
+        case .me: 
+            return "developers/me"
+        case .overview:
+            return "developers/me/overview"
+        case .charts(let name, _, _):
+            return "developers/me/charts_v2/\(name.rawValue)"
+        case .transactions:
+            return "developers/me/transactions"
+        case .transactionDetail(let appId, let subscriberId):
+            return "developers/me/apps/\(appId)/subscribers/\(subscriberId)"
         }
     }
     
@@ -66,7 +74,12 @@ extension Endpoint {
         case .transactions:
             return [
                 "sandbox_mode": false,
+                "end_date": "2024-02-08",
                 "limit": 100
+            ]
+        case .transactionDetail:
+            return [
+                "sandbox_mode": false
             ]
         default: return nil
         }

@@ -7,15 +7,33 @@
 
 import Foundation
 
-// https://stackoverflow.com/a/60413173/9212388
 extension String {
     
-    var flag: String {
+    // https://stackoverflow.com/a/60413173/9212388
+    var countryFlag: String {
         self
             .unicodeScalars
             .map { 127397 + $0.value }
             .compactMap(UnicodeScalar.init)
             .map(String.init)
             .joined()
+    }
+    
+    var countryName: String? {
+        Locale.current.localizedString(forRegionCode: self)
+    }
+    
+    var countryFlagAndName: String {
+        "\(countryFlag) \(countryName ?? "Unknown")"
+    }
+}
+
+extension String {
+    
+    func relativeDate(from dateFormatter: DateFormatter, to relativeDateFormatter: RelativeDateTimeFormatter) -> String? {
+        guard let date = dateFormatter.date(from: self) else {
+            return nil
+        }
+        return relativeDateFormatter.localizedString(for: date, relativeTo: Date.now)
     }
 }

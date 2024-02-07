@@ -28,13 +28,13 @@ struct TransactionListView: View {
                 
                 Text(transaction.type.text)
                     .font(.system(.body, weight: .semibold))
-                    .foregroundStyle(transaction.color)
+                    .foregroundStyle(transaction.type.color)
                 
                 Spacer()
                 
                 Text(transaction.price.formatted(.currency(code: "USD")))
                     .font(.system(.body, weight: .semibold))
-                    .foregroundStyle(transaction.color)
+                    .foregroundStyle(transaction.type.color)
             }
             
             HStack(alignment: .center, spacing: 6) {
@@ -81,7 +81,7 @@ struct TransactionListView: View {
                 
                 Spacer()
                 
-                transaction.dateText
+                Text(transaction.date)
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             }
