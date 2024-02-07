@@ -1,5 +1,5 @@
 //
-//  TransactionDetailInfoListView.swift
+//  TransactionDetailInfoItemView.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/6/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TransactionDetailInfoListView: View {
+struct TransactionDetailInfoItemView: View {
     
     let item: TransactionDetailInfoItem
     
@@ -43,5 +43,5 @@ struct TransactionDetailInfoListView: View {
 }
 
 #Preview {
-    TransactionDetailInfoListView(item: .init(key: "", value: ""))
+    TransactionDetailInfoItemView(item: .init(key: "", value: ""))
 }

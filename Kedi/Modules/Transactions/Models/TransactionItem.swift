@@ -1,5 +1,5 @@
 //
-//  TransactionDailyModel.swift
+//  TransactionItem.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/5/24.
@@ -7,21 +7,21 @@
 
 import SwiftUI
 
-struct TransactionDailyModel: Identifiable, Hashable {
+struct TransactionSection: Identifiable, Hashable {
     
     let id = UUID()
     var date: Date
-    var transactions: [TransactionModel]
+    var transactions: [TransactionItem]
     var revenue: Double
     
-    init(date: Date, transactions: [TransactionModel]) {
+    init(date: Date, transactions: [TransactionItem]) {
         self.date = date
         self.transactions = transactions
         self.revenue = transactions.map(\.price).reduce(0, +)
     }
 }
 
-struct TransactionModel: Identifiable, Hashable {
+struct TransactionItem: Identifiable, Hashable {
     
     let id = UUID()
     let appId: String

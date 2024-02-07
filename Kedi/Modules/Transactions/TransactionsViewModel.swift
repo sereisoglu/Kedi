@@ -11,7 +11,7 @@ final class TransactionsViewModel: ObservableObject {
     
     private let apiService = APIService.shared
     
-    @Published var transactions = [TransactionDailyModel]()
+    @Published var transactions = [TransactionSection]()
     
     init() {
         Task {
@@ -28,7 +28,7 @@ final class TransactionsViewModel: ObservableObject {
             )
             
             let groupedTransactions = Dictionary(grouping: data?.transactions ?? []) { transaction in
-                return DateFormatter.iso8601WithoutMilliseconds.date(from: transaction.purchaseDate ?? "")?.withoutTime
+                DateFormatter.iso8601WithoutMilliseconds.date(from: transaction.purchaseDate ?? "")?.withoutTime
             }
             
             transactions = groupedTransactions

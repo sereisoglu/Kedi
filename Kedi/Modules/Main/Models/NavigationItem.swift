@@ -19,16 +19,16 @@ enum NavigationItem: Identifiable, Hashable {
     
     var icon: String {
         switch self {
-        case .overview: "rectangle.grid.2x2"
-        case .transactions: "creditcard"
+        case .overview: "square.grid.2x2"
+        case .transactions: "banknote"
         case .settings: "gearshape"
         }
     }
     
     var selectedIcon: String {
         switch self {
-        case .overview: "rectangle.grid.2x2.fill"
-        case .transactions: "creditcard.fill"
+        case .overview: "square.grid.2x2.fill"
+        case .transactions: "banknote.fill"
         case .settings: "gearshape.fill"
         }
     }

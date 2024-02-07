@@ -9,18 +9,11 @@ import Foundation
 
 final class OverviewViewModel: ObservableObject {
     
-    enum State {
-        case loading
-        case empty
-        case error(Error)
-        case data
-    }
-    
     private let apiService = APIService.shared
     
-    @Published var state: State = .loading
+    @Published var state: UIState = .loading
     
-    @Published var items = [OverviewItem]()
+    @Published var items: [OverviewItem] = .stub
     @Published var chartValues = [OverviewItemType: [LineAndAreaMarkChartValue]]()
     
     init() {
@@ -54,11 +47,9 @@ final class OverviewViewModel: ObservableObject {
             ]
             state = .data
         } catch {
+            items = []
             state = .error(error)
         }
-        
-//        items = OverviewItem.stub
-//        state = .data
     }
     
     @MainActor

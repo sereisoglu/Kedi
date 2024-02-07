@@ -16,7 +16,7 @@ struct TransactionDetailView: View {
             if let items = viewModel.detailItems {
                 Section {
                     ForEach(items) { item in
-                        TransactionDetailInfoListView(item: item)
+                        TransactionDetailInfoItemView(item: item)
                     }
                 } header: {
                     Text("Details")
@@ -26,7 +26,7 @@ struct TransactionDetailView: View {
             if let items = viewModel.entitlementItems {
                 Section {
                     ForEach(items) { item in
-                        TransactionDetailEntitlementListView(item: item)
+                        TransactionDetailEntitlementItemView(item: item)
                     }
                 } header: {
                     Text("Entitlements")
@@ -36,7 +36,7 @@ struct TransactionDetailView: View {
             if let items = viewModel.attributeItems {
                 Section {
                     ForEach(items) { item in
-                        TransactionDetailInfoListView(item: item)
+                        TransactionDetailInfoItemView(item: item)
                     }
                 } header: {
                     Text("Attributes")
@@ -46,7 +46,7 @@ struct TransactionDetailView: View {
             if let items = viewModel.historyItems {
                 Section {
                     ForEach(items) { item in
-                        TransactionDetailHistoryListView(item: item)
+                        TransactionDetailHistoryItemView(item: item)
                     }
                 } header: {
                     Text("History")

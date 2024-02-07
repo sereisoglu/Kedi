@@ -1,5 +1,5 @@
 //
-//  TransactionDetailEntitlementListView.swift
+//  TransactionDetailEntitlementItemView.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/7/24.
@@ -7,15 +7,14 @@
 
 import SwiftUI
 
-struct TransactionDetailEntitlementListView: View {
+struct TransactionDetailEntitlementItemView: View {
     
     let item: TransactionDetailEntitlementItem
     
     var body: some View {
-        HStack(alignment: .center, spacing: 6) {
+        HStack(alignment: .center, spacing: 10) {
             Text(item.type.status)
-                .font(.body)
-                .frame(width: 22, height: 22)
+                .font(.footnote)
             
             VStack(alignment: .leading, spacing: 3) {
                 Text("\(item.entitlementIdentifier) (\(item.productIdentifier))")
@@ -31,5 +30,5 @@ struct TransactionDetailEntitlementListView: View {
 }
 
 #Preview {
-    TransactionDetailEntitlementListView(item: .init(data: .init()))
+    TransactionDetailEntitlementItemView(item: .init(data: .init()))
 }

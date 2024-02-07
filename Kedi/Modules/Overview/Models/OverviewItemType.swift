@@ -26,13 +26,13 @@ enum OverviewItemType: CaseIterable {
         case .mrr: "dollarsign.arrow.circlepath"
         case .subsciptions: "repeat"
         case .trials: "clock"
-        case .revenue: "dollarsign"
+        case .revenue: "dollarsign.circle"
         case .users: "person.2"
         case .installs: "iphone"
         case .arr: "dollarsign.arrow.circlepath"
-        case .revenueAllTime: "dollarsign"
-        case .proceeds: "dollarsign"
-        case .proceedsAllTime: "dollarsign"
+        case .revenueAllTime: "dollarsign.circle"
+        case .proceeds: "dollarsign.circle"
+        case .proceedsAllTime: "dollarsign.circle"
         case .newUsers: "person.2"
         }
     }

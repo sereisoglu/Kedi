@@ -16,19 +16,24 @@ enum Endpoint {
     case charts(name: RCChartName, resolution: RCChartResolution, startDate: String)
     case transactions
     case transactionDetail(appId: String, subscriberId: String)
+    case transactionDetailActivity(appId: String, subscriberId: String)
 }
 
 extension Endpoint {
     
-    static let BASE_URL = "https://api.revenuecat.com"
     static var AUTH_TOKEN: String?
     
     var urlString: String {
-        "\(Self.BASE_URL)/\(version)/\(path)"
+        "\(baseUrl)/\(path)"
     }
     
-    var version: String {
-        "v1"
+    var baseUrl: String {
+        switch self {
+        case .transactionDetailActivity: 
+            return "https://api.revenuecat.com/internal/v1"
+        default:
+            return "https://api.revenuecat.com/v1"
+        }
     }
     
     var path: String {
@@ -45,6 +50,8 @@ extension Endpoint {
             return "developers/me/transactions"
         case .transactionDetail(let appId, let subscriberId):
             return "developers/me/apps/\(appId)/subscribers/\(subscriberId)"
+        case .transactionDetailActivity(let appId, let subscriberId):
+            return "developers/me/apps/\(appId)/subscribers/\(subscriberId)/activity"
         }
     }
     
@@ -78,6 +85,10 @@ extension Endpoint {
                 "limit": 100
             ]
         case .transactionDetail:
+            return [
+                "sandbox_mode": false
+            ]
+        case .transactionDetailActivity:
             return [
                 "sandbox_mode": false
             ]

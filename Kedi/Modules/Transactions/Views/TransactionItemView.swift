@@ -1,5 +1,5 @@
 //
-//  TransactionListView.swift
+//  TransactionItemView.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/5/24.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct TransactionListView: View {
+struct TransactionItemView: View {
     
-    var transaction: TransactionModel
+    let transaction: TransactionItem
     
     var body: some View {
         VStack(alignment: .leading, spacing: 3) {
-            HStack(alignment: .center, spacing: 6) {
+            HStack(alignment: .center, spacing: 10) {
                 if let imageName = transaction.store?.imageName {
                     Image(imageName)
                         .resizable()
@@ -37,7 +37,7 @@ struct TransactionListView: View {
                     .foregroundStyle(transaction.type.color)
             }
             
-            HStack(alignment: .center, spacing: 6) {
+            HStack(alignment: .center, spacing: 10) {
                 if let appIconUrl = transaction.appIconUrl,
                    let url = URL(string: appIconUrl) {
                     CacheAsyncImage(url: url) { image in
@@ -70,7 +70,7 @@ struct TransactionListView: View {
                     .foregroundStyle(.secondary)
             }
             
-            HStack(alignment: .center, spacing: 6) {
+            HStack(alignment: .center, spacing: 10) {
                 Text(transaction.countryFlag)
                     .font(.body)
                     .frame(width: 22, height: 22)
@@ -87,11 +87,11 @@ struct TransactionListView: View {
             }
         }
         .alignmentGuide(.listRowSeparatorLeading) { viewDimensions in
-            viewDimensions[.listRowSeparatorLeading] + 22 + 6
+            viewDimensions[.listRowSeparatorLeading] + 22 + 10
         }
     }
 }
 
 #Preview {
-    TransactionListView(transaction: .init(data: .init()))
+    TransactionItemView(transaction: .init(data: .init()))
 }
