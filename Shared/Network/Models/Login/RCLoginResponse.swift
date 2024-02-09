@@ -1,5 +1,5 @@
 //
-//  RCLoginModel.swift
+//  RCLoginResponse.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/1/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RCLoginModel: Decodable {
+struct RCLoginResponse: Decodable {
     
     var authenticationToken: String?
     var authenticationTokenExpiration: String?

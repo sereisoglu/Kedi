@@ -1,5 +1,5 @@
 //
-//  RCTransactionDetailModel.swift
+//  RCTransactionDetailResponse.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/6/24.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct RCTransactionDetailModel: Decodable {
+struct RCTransactionDetailResponse: Decodable {
     
-    var app: RCTransactionAppModel?
+    var app: RCTransactionApp?
     var createdAt: String?
     var dollarsSpent: Double?
-    var history: [RCSubscriberHistoryModel]?
+    var history: [RCSubscriberHistory]?
     var lastSeen: String?
     var lastSeenAppVersion: String?
     var lastSeenCountry: String?
@@ -20,8 +20,8 @@ struct RCTransactionDetailModel: Decodable {
     var lastSeenPlatform: String?
     var lastSeenPlatformVersion: String?
     var lastSeenSDKVersion: String?
-    var subscriberAttributes: [RCSubscriberAttributeModel]?
-    var subscriptionStatuses: [RCSubscriptionStatusModel]?
+    var subscriberAttributes: [RCSubscriberAttribute]?
+    var subscriptionStatuses: [RCSubscriptionStatus]?
     
     enum CodingKeys: String, CodingKey {
         case subscriber
@@ -51,10 +51,10 @@ struct RCTransactionDetailModel: Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let subscriberContainer = try container.nestedContainer(keyedBy: SubscriberCodingKeys.self, forKey: .subscriber)
         
-        app = try subscriberContainer.decodeIfPresent(RCTransactionAppModel.self, forKey: .app)
+        app = try subscriberContainer.decodeIfPresent(RCTransactionApp.self, forKey: .app)
         createdAt = try subscriberContainer.decodeIfPresent(String.self, forKey: .createdAt)
         dollarsSpent = try subscriberContainer.decodeIfPresent(Double.self, forKey: .dollarsSpent)
-        history = try subscriberContainer.decodeIfPresent([RCSubscriberHistoryModel].self, forKey: .history)
+        history = try subscriberContainer.decodeIfPresent([RCSubscriberHistory].self, forKey: .history)
         lastSeen = try subscriberContainer.decodeIfPresent(String.self, forKey: .lastSeen)
         lastSeenAppVersion = try subscriberContainer.decodeIfPresent(String.self, forKey: .lastSeenAppVersion)
         lastSeenCountry = try subscriberContainer.decodeIfPresent(String.self, forKey: .lastSeenCountry)
@@ -62,14 +62,14 @@ struct RCTransactionDetailModel: Decodable {
         lastSeenPlatform = try subscriberContainer.decodeIfPresent(String.self, forKey: .lastSeenPlatform)
         lastSeenPlatformVersion = try subscriberContainer.decodeIfPresent(String.self, forKey: .lastSeenPlatformVersion)
         lastSeenSDKVersion = try subscriberContainer.decodeIfPresent(String.self, forKey: .lastSeenSDKVersion)
-        subscriberAttributes = try subscriberContainer.decodeIfPresent([RCSubscriberAttributeModel].self, forKey: .subscriberAttributes)
+        subscriberAttributes = try subscriberContainer.decodeIfPresent([RCSubscriberAttribute].self, forKey: .subscriberAttributes)
         
         let subscriptionStatusContainer = try subscriberContainer.nestedContainer(keyedBy: SubscriptionStatusCodingKeys.self, forKey: .subscriptionStatus)
-        subscriptionStatuses = try subscriptionStatusContainer.decodeIfPresent([RCSubscriptionStatusModel].self, forKey: .live)
+        subscriptionStatuses = try subscriptionStatusContainer.decodeIfPresent([RCSubscriptionStatus].self, forKey: .live)
     }
 }
 
-struct RCSubscriberHistoryModel: Decodable {
+struct RCSubscriberHistory: Decodable {
     
     var at: String?
     var event: String?
@@ -90,7 +90,7 @@ struct RCSubscriberHistoryModel: Decodable {
     }
 }
 
-struct RCSubscriberAttributeModel: Decodable {
+struct RCSubscriberAttribute: Decodable {
     
     var key: String?
     var value: String?
@@ -113,7 +113,7 @@ struct RCSubscriberAttributeModel: Decodable {
     }
 }
 
-struct RCSubscriptionStatusModel: Decodable {
+struct RCSubscriptionStatus: Decodable {
     
     var billingIssuesDetectedAt: String?
     var cancellationDate: String?
@@ -169,7 +169,7 @@ struct RCSubscriptionStatusModel: Decodable {
         billingIssuesDetectedAt = try container.decodeIfPresent(String.self, forKey: .billingIssuesDetectedAt)
         cancellationDate = try container.decodeIfPresent(String.self, forKey: .cancellationDate)
         
-        let entitlements = try container.decodeIfPresent([RCSubscriptionStatusEntitlementModel].self, forKey: .entitlements)
+        let entitlements = try container.decodeIfPresent([RCSubscriptionStatusEntitlement].self, forKey: .entitlements)
         entitlementIdentifier = entitlements?.first?.identifier
         
         expiresDate = try container.decodeIfPresent(String.self, forKey: .expiresDate)
@@ -182,7 +182,7 @@ struct RCSubscriptionStatusModel: Decodable {
     }
 }
 
-struct RCSubscriptionStatusEntitlementModel: Decodable {
+struct RCSubscriptionStatusEntitlement: Decodable {
     
     var identifier: String?
 }

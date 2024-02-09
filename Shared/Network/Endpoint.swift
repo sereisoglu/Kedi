@@ -10,11 +10,11 @@ import Alamofire
 
 enum Endpoint {
     
-    case login(email: String, password: String)
+    case login(RCLoginRequest)
     case me
     case overview
-    case charts(name: RCChartName, resolution: RCChartResolution, startDate: String)
-    case transactions
+    case charts(RCChartRequest)
+    case transactions(RCTransactionsRequest)
     case transactionDetail(appId: String, subscriberId: String)
     case transactionDetailActivity(appId: String, subscriberId: String)
 }
@@ -29,7 +29,7 @@ extension Endpoint {
     
     var baseUrl: String {
         switch self {
-        case .transactionDetailActivity: 
+        case .transactionDetailActivity:
             return "https://api.revenuecat.com/internal/v1"
         default:
             return "https://api.revenuecat.com/v1"
@@ -38,14 +38,14 @@ extension Endpoint {
     
     var path: String {
         switch self {
-        case .login: 
+        case .login:
             return "developers/login"
-        case .me: 
+        case .me:
             return "developers/me"
         case .overview:
             return "developers/me/overview"
-        case .charts(let name, _, _):
-            return "developers/me/charts_v2/\(name.rawValue)"
+        case .charts(let request):
+            return "developers/me/charts_v2/\(request.name.rawValue)"
         case .transactions:
             return "developers/me/transactions"
         case .transactionDetail(let appId, let subscriberId):
@@ -64,26 +64,16 @@ extension Endpoint {
     
     var parameters: Parameters? {
         switch self {
-        case .login(let email, let password):
-            return [
-                "email": email,
-                "password": password
-            ]
+        case .login(let request):
+            return request.dict
         case .overview:
             return [
                 "sandbox_mode": false
             ]
-        case .charts(_, let resolution, let startDate):
-            return [
-                "resolution": resolution.rawValue,
-                "start_date": startDate
-            ]
-        case .transactions:
-            return [
-                "sandbox_mode": false,
-                "end_date": "2024-02-08",
-                "limit": 100
-            ]
+        case .charts(let request):
+            return request.dict
+        case .transactions(let request):
+            return request.dict
         case .transactionDetail:
             return [
                 "sandbox_mode": false
@@ -92,7 +82,8 @@ extension Endpoint {
             return [
                 "sandbox_mode": false
             ]
-        default: return nil
+        default:
+            return nil
         }
     }
     
@@ -108,8 +99,13 @@ extension Endpoint {
             .init(name: "X-Requested-With", value: "XMLHttpRequest")
         ]
         
-        if let authToken = Self.AUTH_TOKEN {
-            headers.append(.authorization(bearerToken: authToken))
+        switch self {
+        case .login:
+            break
+        default:
+            if let authToken = Self.AUTH_TOKEN {
+                headers.append(.authorization(bearerToken: authToken))
+            }
         }
         
         return .init(headers)

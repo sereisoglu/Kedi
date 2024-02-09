@@ -34,46 +34,47 @@ final class APIService {
             dataRequest.response { result in
                 if let error = result.error {
                     print("Request Error:", endpoint.urlString, error)
-                    continuation.resume(throwing: RCError.internal(error))
+                    continuation.resume(throwing: RCError.internal(.error(error)))
                     return
                 }
                 
                 guard let response = result.response else {
                     print("Request Error:", endpoint.urlString, "Nil Response")
-                    continuation.resume(throwing: RCError.nilResponse)
+                    continuation.resume(throwing: RCError.internal(.nilResponse))
                     return
                 }
                 
-                guard (200 ..< 300) ~= response.statusCode else {
+                switch response.statusCode {
+                case 200 ..< 300:
+                    if let data = result.data {
+                        do {
+                            print("Request Success:", endpoint.urlString)
+    //                        print("Request Success:", endpoint.urlString, String(data: data, encoding: .utf8) ?? "")
+                            let decodedData = try JSONDecoder().decode(Success?.self, from: data)
+                            continuation.resume(returning: decodedData)
+                        } catch {
+                            print("Request Error:", endpoint.urlString, error)
+                            continuation.resume(throwing: RCError.internal(.decodeSuccess(Success.self, error)))
+                        }
+                    } else {
+                        print("Request Success:", endpoint.urlString, "nil")
+                        continuation.resume(returning: nil)
+                    }
+                    
+                default:
                     if let data = result.data {
                         do {
                             print("Request Error:", endpoint.urlString, String(decoding: data, as: UTF8.self))
-                            let decodedData = try JSONDecoder().decode(RCErrorModel.self, from: data)
-                            continuation.resume(throwing: RCError.service(decodedData))
+                            let decodedData = try JSONDecoder().decode(RCErrorResponse.self, from: data)
+                            continuation.resume(throwing: RCError(error: decodedData))
                         } catch {
                             print("Request Error:", endpoint.urlString, error)
-                            continuation.resume(throwing: RCError.decodeFailure(error))
+                            continuation.resume(throwing: RCError.internal(.decodeFailure(error)))
                         }
                     } else {
                         print("Request Error:", endpoint.urlString, "Nil Error")
-                        continuation.resume(throwing: RCError.nilData)
+                        continuation.resume(throwing: RCError.internal(.nilError))
                     }
-                    return
-                }
-                
-                if let data = result.data {
-                    do {
-                        print("Request Success:", endpoint.urlString)
-//                        print("Request Success:", endpoint.urlString, String(data: data, encoding: .utf8) ?? "")
-                        let decodedData = try JSONDecoder().decode(Success?.self, from: data)
-                        continuation.resume(returning: decodedData)
-                    } catch {
-                        print("Request Error:", endpoint.urlString, error)
-                        continuation.resume(throwing: RCError.decodeSuccess(Success.self, error))
-                    }
-                } else {
-                    print("Request Success:", endpoint.urlString, "nil")
-                    continuation.resume(returning: nil)
                 }
             }
         }

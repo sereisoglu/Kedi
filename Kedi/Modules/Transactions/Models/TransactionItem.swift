@@ -37,7 +37,7 @@ struct TransactionItem: Identifiable, Hashable {
     var country: String
     var date: String
     
-    init(data: RCTransactionModel) {
+    init(data: RCTransaction) {
         appId = data.app?.id ?? ""
         subscriberId = data.subscriberId ?? ""
         

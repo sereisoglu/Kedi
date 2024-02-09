@@ -15,7 +15,7 @@ struct TransactionDetailEntitlementItem: Identifiable, Hashable {
     var productIdentifier: String
     var description: String
     
-    init(data: RCSubscriptionStatusModel) {
+    init(data: RCSubscriptionStatus) {
         if let refundedAt = data.refundedAt,
            let date = DateFormatter.iso8601WithoutMilliseconds.date(from: refundedAt) {
             type = .refunded

@@ -34,7 +34,7 @@ final class OverviewViewModel: ObservableObject {
     private func fetchOverview() async {
         do {
             let data = try await apiService.request(
-                type: RCOverviewModel.self,
+                type: RCOverviewResponse.self,
                 endpoint: .overview
             )
             items = [
@@ -94,15 +94,15 @@ final class OverviewViewModel: ObservableObject {
         }
     }
     
-    private func fetchAllCharts() async -> [RCChartModel] {
-        await withTaskGroup(of: RCChartModel?.self) { group in
+    private func fetchAllCharts() async -> [RCChartResponse] {
+        await withTaskGroup(of: RCChartResponse?.self) { group in
             RCChartName.allCases.forEach { name in
                 group.addTask { [weak self] in
                     do {
                         return try await self?.apiService.request(
-                            type: RCChartModel.self,
-                            endpoint: .charts(name: name, resolution: .month, startDate: "2021-07-15")
-                        )
+                            type: RCChartResponse.self,
+                            endpoint: .charts(.init(name: name, resolution: .month, startDate: "2021-07-15"))
+                        ) //.charts(name: name, resolution: .month, startDate: "2021-07-15")
                     } catch {
                         print(error)
                         return nil
@@ -110,7 +110,7 @@ final class OverviewViewModel: ObservableObject {
                 }
             }
             
-            var charts = [RCChartModel]()
+            var charts = [RCChartResponse]()
             for await chart in group {
                 if let chart {
                     charts.append(chart)

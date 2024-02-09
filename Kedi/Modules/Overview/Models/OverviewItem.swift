@@ -21,7 +21,7 @@ struct OverviewItem: Identifiable, Hashable {
 extension Array where Element == OverviewItem {
     
     static let stub: Self = {
-        let data = RCOverviewModel.stub
+        let data = RCOverviewResponse.stub
         let arr: Double = 5234.342
         let revenueAllTime: Double = 999999.9999
         return [

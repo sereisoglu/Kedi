@@ -13,7 +13,7 @@ struct TransactionDetailHistoryItem: Identifiable, Hashable {
     var type: TransactionDetailHistoryType
     var date: String
     
-    init(data: RCSubscriberHistoryModel) {
+    init(data: RCSubscriberHistory) {
         let price = (data.priceInPurchasedCurrency ?? 0) != 0 ? (data.priceInPurchasedCurrency ?? 0) : (data.priceInUsd ?? 0)
         let currency = (data.priceInPurchasedCurrency ?? 0) != 0 ? (data.currency ?? "USD") : "USD"
         

@@ -1,13 +1,26 @@
 //
-//  RCChartName.swift
+//  RCChartRequest.swift
 //  Kedi
 //
-//  Created by Saffet Emin Reisoğlu on 2/3/24.
+//  Created by Saffet Emin Reisoğlu on 2/9/24.
 //
 
 import Foundation
 
-enum RCChartName: String, CaseIterable {
+struct RCChartRequest: Encodable {
+    
+    let name: RCChartName
+    let resolution: RCChartResolution
+    var startDate: String? = nil
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case resolution
+        case startDate = "start_date"
+    }
+}
+
+enum RCChartName: String, CaseIterable, Encodable {
     
     case actives
     case activesMovement = "actives_movement"
@@ -25,4 +38,13 @@ enum RCChartName: String, CaseIterable {
     case trialConversion = "trial_conversion"
     case trials
     case trialsMovement = "trials_movement"
+}
+
+enum RCChartResolution: Int, Encodable {
+    
+    case day
+    case week
+    case month
+    case quarter
+    case year
 }

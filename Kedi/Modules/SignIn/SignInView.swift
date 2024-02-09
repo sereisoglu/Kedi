@@ -28,7 +28,7 @@ struct SignInView: View {
                             .foregroundStyle(Color.red)
                     }
                 }
-                .listSectionSpacing(0)
+                .listSectionSpacing(.compact)
                 
                 Section {
                     SecureField("Password", text: $viewModel.password)
@@ -39,6 +39,22 @@ struct SignInView: View {
                     if let passwordPrompt = viewModel.passwordPrompt {
                         Text(passwordPrompt)
                             .foregroundStyle(Color.red)
+                    }
+                }
+                .listSectionSpacing(viewModel.is2FARequired ? .compact : .default)
+                
+                if viewModel.is2FARequired {
+                    Section {
+                        TextField("2FA Code", text: $viewModel.code2FA)
+                            .focused($focusedField, equals: .code2FA)
+                            .keyboardType(.default)
+                    } header: {
+                        Text("2FA Code")
+                    } footer: {
+                        if let code2FAPrompt = viewModel.code2FAPrompt {
+                            Text(code2FAPrompt)
+                                .foregroundStyle(Color.red)
+                        }
                     }
                 }
                 

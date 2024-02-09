@@ -1,5 +1,5 @@
 //
-//  RCChartModel.swift
+//  RCChartResponse.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/3/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RCChartModel: Decodable {
+struct RCChartResponse: Decodable {
     
     var name: RCChartName? { documentationLink?.name }
     

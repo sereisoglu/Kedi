@@ -23,8 +23,8 @@ final class TransactionsViewModel: ObservableObject {
     private func fetchTransactions() async {
         do {
             let data = try await apiService.request(
-                type: RCTransactionsModel.self,
-                endpoint: .transactions
+                type: RCTransactionsResponse.self,
+                endpoint: .transactions(.init())
             )
             
             let groupedTransactions = Dictionary(grouping: data?.transactions ?? []) { transaction in

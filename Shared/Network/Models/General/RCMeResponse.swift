@@ -1,5 +1,5 @@
 //
-//  RCMeModel.swift
+//  RCMeResponse.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/3/24.
@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct RCMeModel: Decodable {
+struct RCMeResponse: Decodable {
     
     var distinctId: String?
     var email: String?
     var name: String?
     var firstTransactionAt: String?
     var currentPlan: String?
-    var billingInfo: RCMeBillingInfoModel?
+    var billingInfo: RCMeBillingInfo?
     
     enum CodingKeys: String, CodingKey {
         case distinctId = "distinct_id"
@@ -26,7 +26,7 @@ struct RCMeModel: Decodable {
     }
 }
 
-struct RCMeBillingInfoModel: Decodable {
+struct RCMeBillingInfo: Decodable {
     
     var currentMtr: Int?
     var trailing30dayMtr: Int?

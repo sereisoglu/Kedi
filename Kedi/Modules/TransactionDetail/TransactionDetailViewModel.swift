@@ -33,7 +33,7 @@ final class TransactionDetailViewModel: ObservableObject {
     private func fetchDetail() async {
         do {
             let data = try await apiService.request(
-                type: RCTransactionDetailModel.self,
+                type: RCTransactionDetailResponse.self,
                 endpoint: .transactionDetail(appId: appId, subscriberId: subscriberId)
             )
             
@@ -44,7 +44,7 @@ final class TransactionDetailViewModel: ObservableObject {
     }
     
     @MainActor
-    private func set(data: RCTransactionDetailModel?) {
+    private func set(data: RCTransactionDetailResponse?) {
         guard let data else {
             return
         }

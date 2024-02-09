@@ -15,13 +15,13 @@
 		4AB720712B6BF497001E2C76 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720702B6BF497001E2C76 /* APIService.swift */; };
 		4AB720742B6BF4A9001E2C76 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720732B6BF4A9001E2C76 /* Endpoint.swift */; };
 		4AB720772B6C1202001E2C76 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4AB720762B6C1202001E2C76 /* Alamofire */; };
-		4AB7207B2B6C17A0001E2C76 /* RCLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7207A2B6C17A0001E2C76 /* RCLoginModel.swift */; };
-		4AB7207D2B6C17A9001E2C76 /* RCErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7207C2B6C17A9001E2C76 /* RCErrorModel.swift */; };
+		4AB7207B2B6C17A0001E2C76 /* RCLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7207A2B6C17A0001E2C76 /* RCLoginResponse.swift */; };
+		4AB7207D2B6C17A9001E2C76 /* RCErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7207C2B6C17A9001E2C76 /* RCErrorResponse.swift */; };
 		4AB7207F2B6C17B3001E2C76 /* RCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7207E2B6C17B3001E2C76 /* RCError.swift */; };
 		4AB720822B6C4FEA001E2C76 /* OverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720812B6C4FEA001E2C76 /* OverviewViewModel.swift */; };
 		4AB720842B6C4FF3001E2C76 /* OverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720832B6C4FF3001E2C76 /* OverviewView.swift */; };
 		4AB720872B6C56E7001E2C76 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720862B6C56E7001E2C76 /* RootView.swift */; };
-		4AB720892B6C5826001E2C76 /* RCOverviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720882B6C5826001E2C76 /* RCOverviewModel.swift */; };
+		4AB720892B6C5826001E2C76 /* RCOverviewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720882B6C5826001E2C76 /* RCOverviewResponse.swift */; };
 		4AB7208C2B6C642D001E2C76 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7208B2B6C642D001E2C76 /* Color+Extension.swift */; };
 		4AB7208F2B6C6842001E2C76 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7208E2B6C6842001E2C76 /* MainView.swift */; };
 		4AB720922B6C6893001E2C76 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720912B6C6893001E2C76 /* SettingsView.swift */; };
@@ -36,17 +36,15 @@
 		4AB720B62B6E3E16001E2C76 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720B52B6E3E16001E2C76 /* SidebarView.swift */; };
 		4AB720B82B6E3E1D001E2C76 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720B72B6E3E1D001E2C76 /* TabBarView.swift */; };
 		4AB720BA2B6E4183001E2C76 /* NavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720B92B6E4183001E2C76 /* NavigationItem.swift */; };
-		4AB720BD2B6E49D2001E2C76 /* RCChartName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720BC2B6E49D2001E2C76 /* RCChartName.swift */; };
-		4AB720C02B6E4A62001E2C76 /* RCChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720BF2B6E4A62001E2C76 /* RCChartModel.swift */; };
+		4AB720C02B6E4A62001E2C76 /* RCChartResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720BF2B6E4A62001E2C76 /* RCChartResponse.swift */; };
 		4AB720C22B6E4DFD001E2C76 /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720C12B6E4DFD001E2C76 /* Collection+Extension.swift */; };
 		4AB720C42B6E6156001E2C76 /* LineAndAreaMarkChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720C32B6E6156001E2C76 /* LineAndAreaMarkChartView.swift */; };
-		4AB720C62B6E625D001E2C76 /* RCChartResolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720C52B6E625D001E2C76 /* RCChartResolution.swift */; };
-		4AB720CA2B6E6341001E2C76 /* RCMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720C92B6E6341001E2C76 /* RCMeModel.swift */; };
+		4AB720CA2B6E6341001E2C76 /* RCMeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720C92B6E6341001E2C76 /* RCMeResponse.swift */; };
 		4AB720CC2B6EAECD001E2C76 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720CB2B6EAECD001E2C76 /* Array+Extension.swift */; };
 		4AB720CE2B6EB36C001E2C76 /* OverviewItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720CD2B6EB36C001E2C76 /* OverviewItemType.swift */; };
 		4AB720E52B70C8D3001E2C76 /* TransactionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720E42B70C8D3001E2C76 /* TransactionsViewModel.swift */; };
 		4AB720E92B70C8EC001E2C76 /* TransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720E82B70C8EC001E2C76 /* TransactionsView.swift */; };
-		4AB720ED2B70CA2D001E2C76 /* RCTransactionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720EC2B70CA2D001E2C76 /* RCTransactionsModel.swift */; };
+		4AB720ED2B70CA2D001E2C76 /* RCTransactionsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720EC2B70CA2D001E2C76 /* RCTransactionsResponse.swift */; };
 		4AB720EF2B70D8AA001E2C76 /* TransactionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720EE2B70D8AA001E2C76 /* TransactionItem.swift */; };
 		4AB720F12B70E399001E2C76 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720F02B70E399001E2C76 /* String+Extension.swift */; };
 		4AB720F52B70FB84001E2C76 /* TransactionItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720F42B70FB84001E2C76 /* TransactionItemView.swift */; };
@@ -54,7 +52,7 @@
 		4AB720FC2B712CE4001E2C76 /* CacheAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720FB2B712CE4001E2C76 /* CacheAsyncImage.swift */; };
 		4AB721022B722DFF001E2C76 /* TransactionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721012B722DFF001E2C76 /* TransactionDetailViewModel.swift */; };
 		4AB721042B722E07001E2C76 /* TransactionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721032B722E07001E2C76 /* TransactionDetailView.swift */; };
-		4AB721062B72371E001E2C76 /* RCTransactionDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721052B72371E001E2C76 /* RCTransactionDetailModel.swift */; };
+		4AB721062B72371E001E2C76 /* RCTransactionDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721052B72371E001E2C76 /* RCTransactionDetailResponse.swift */; };
 		4AB721092B726C62001E2C76 /* TransactionDetailInfoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721082B726C62001E2C76 /* TransactionDetailInfoItem.swift */; };
 		4AB7210B2B72B8A6001E2C76 /* TransactionDetailHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7210A2B72B8A6001E2C76 /* TransactionDetailHistoryItem.swift */; };
 		4AB721102B72B966001E2C76 /* TransactionDetailHistoryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7210F2B72B966001E2C76 /* TransactionDetailHistoryItemView.swift */; };
@@ -62,7 +60,7 @@
 		4AB721142B72C368001E2C76 /* RelativeDateTimeFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721132B72C368001E2C76 /* RelativeDateTimeFormatter+Extension.swift */; };
 		4AB721162B72DD8B001E2C76 /* TransactionDetailEntitlementItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721152B72DD8B001E2C76 /* TransactionDetailEntitlementItem.swift */; };
 		4AB7211A2B736FEC001E2C76 /* TransactionDetailEntitlementItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721192B736FEC001E2C76 /* TransactionDetailEntitlementItemView.swift */; };
-		4AB7211C2B73751F001E2C76 /* RCTransactionDetailActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7211B2B73751F001E2C76 /* RCTransactionDetailActivityModel.swift */; };
+		4AB7211C2B73751F001E2C76 /* RCTransactionDetailActivityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7211B2B73751F001E2C76 /* RCTransactionDetailActivityResponse.swift */; };
 		4AB7211F2B7378EF001E2C76 /* UIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7211E2B7378EF001E2C76 /* UIState.swift */; };
 		4AB721222B73881B001E2C76 /* OverviewItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721212B73881B001E2C76 /* OverviewItemView.swift */; };
 		4AB7212A2B738BA0001E2C76 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB721292B738BA0001E2C76 /* WidgetKit.framework */; };
@@ -81,11 +79,9 @@
 		4AB7214E2B739C2D001E2C76 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4AB7214D2B739C2D001E2C76 /* KeychainSwift */; };
 		4AB7214F2B739C36001E2C76 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720A12B6C7925001E2C76 /* KeychainManager.swift */; };
 		4AB721502B739C36001E2C76 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720A32B6DA77C001E2C76 /* AuthManager.swift */; };
-		4AB721512B739C6D001E2C76 /* RCChartResolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720C52B6E625D001E2C76 /* RCChartResolution.swift */; };
-		4AB721522B739C6D001E2C76 /* RCChartName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720BC2B6E49D2001E2C76 /* RCChartName.swift */; };
-		4AB721532B739C6D001E2C76 /* RCChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720BF2B6E4A62001E2C76 /* RCChartModel.swift */; };
+		4AB721532B739C6D001E2C76 /* RCChartResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720BF2B6E4A62001E2C76 /* RCChartResponse.swift */; };
 		4AB721542B739D30001E2C76 /* RCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7207E2B6C17B3001E2C76 /* RCError.swift */; };
-		4AB721552B739D34001E2C76 /* RCErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7207C2B6C17A9001E2C76 /* RCErrorModel.swift */; };
+		4AB721552B739D34001E2C76 /* RCErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7207C2B6C17A9001E2C76 /* RCErrorResponse.swift */; };
 		4AB721562B739D74001E2C76 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720A52B6DAC81001E2C76 /* DateFormatter+Extension.swift */; };
 		4AB721582B73A1C2001E2C76 /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720C12B6E4DFD001E2C76 /* Collection+Extension.swift */; };
 		4AB721592B73A944001E2C76 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7208B2B6C642D001E2C76 /* Color+Extension.swift */; };
@@ -93,6 +89,14 @@
 		4AB721602B756ED5001E2C76 /* DailyGraphWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7215F2B756ED5001E2C76 /* DailyGraphWidgetView.swift */; };
 		4AB721622B756F24001E2C76 /* DailyGraphWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721612B756F24001E2C76 /* DailyGraphWidgetProvider.swift */; };
 		4AB721642B756F75001E2C76 /* DailyGraphWidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721632B756F75001E2C76 /* DailyGraphWidgetEntry.swift */; };
+		4AB7216E2B7619D7001E2C76 /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7216D2B7619D7001E2C76 /* Encodable+Extension.swift */; };
+		4AB7216F2B7619E6001E2C76 /* Encodable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7216D2B7619D7001E2C76 /* Encodable+Extension.swift */; };
+		4ADF09D42B761CD1002318B2 /* RCLoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADF09D32B761CD1002318B2 /* RCLoginRequest.swift */; };
+		4ADF09D52B761CD6002318B2 /* RCLoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADF09D32B761CD1002318B2 /* RCLoginRequest.swift */; };
+		4ADF09D72B761CED002318B2 /* RCChartRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADF09D62B761CED002318B2 /* RCChartRequest.swift */; };
+		4ADF09D82B761CED002318B2 /* RCChartRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADF09D62B761CED002318B2 /* RCChartRequest.swift */; };
+		4ADF09DB2B761D88002318B2 /* RCTransactionsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADF09DA2B761D88002318B2 /* RCTransactionsRequest.swift */; };
+		4ADF09DC2B761D88002318B2 /* RCTransactionsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADF09DA2B761D88002318B2 /* RCTransactionsRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,13 +133,13 @@
 		4AB7206C2B6BDC36001E2C76 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		4AB720702B6BF497001E2C76 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		4AB720732B6BF4A9001E2C76 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
-		4AB7207A2B6C17A0001E2C76 /* RCLoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCLoginModel.swift; sourceTree = "<group>"; };
-		4AB7207C2B6C17A9001E2C76 /* RCErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCErrorModel.swift; sourceTree = "<group>"; };
+		4AB7207A2B6C17A0001E2C76 /* RCLoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCLoginResponse.swift; sourceTree = "<group>"; };
+		4AB7207C2B6C17A9001E2C76 /* RCErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCErrorResponse.swift; sourceTree = "<group>"; };
 		4AB7207E2B6C17B3001E2C76 /* RCError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCError.swift; sourceTree = "<group>"; };
 		4AB720812B6C4FEA001E2C76 /* OverviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewModel.swift; sourceTree = "<group>"; };
 		4AB720832B6C4FF3001E2C76 /* OverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewView.swift; sourceTree = "<group>"; };
 		4AB720862B6C56E7001E2C76 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		4AB720882B6C5826001E2C76 /* RCOverviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCOverviewModel.swift; sourceTree = "<group>"; };
+		4AB720882B6C5826001E2C76 /* RCOverviewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCOverviewResponse.swift; sourceTree = "<group>"; };
 		4AB7208B2B6C642D001E2C76 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		4AB7208E2B6C6842001E2C76 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		4AB720912B6C6893001E2C76 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -149,17 +153,15 @@
 		4AB720B52B6E3E16001E2C76 /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		4AB720B72B6E3E1D001E2C76 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		4AB720B92B6E4183001E2C76 /* NavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationItem.swift; sourceTree = "<group>"; };
-		4AB720BC2B6E49D2001E2C76 /* RCChartName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCChartName.swift; sourceTree = "<group>"; };
-		4AB720BF2B6E4A62001E2C76 /* RCChartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCChartModel.swift; sourceTree = "<group>"; };
+		4AB720BF2B6E4A62001E2C76 /* RCChartResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCChartResponse.swift; sourceTree = "<group>"; };
 		4AB720C12B6E4DFD001E2C76 /* Collection+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+Extension.swift"; sourceTree = "<group>"; };
 		4AB720C32B6E6156001E2C76 /* LineAndAreaMarkChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineAndAreaMarkChartView.swift; sourceTree = "<group>"; };
-		4AB720C52B6E625D001E2C76 /* RCChartResolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCChartResolution.swift; sourceTree = "<group>"; };
-		4AB720C92B6E6341001E2C76 /* RCMeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCMeModel.swift; sourceTree = "<group>"; };
+		4AB720C92B6E6341001E2C76 /* RCMeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCMeResponse.swift; sourceTree = "<group>"; };
 		4AB720CB2B6EAECD001E2C76 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		4AB720CD2B6EB36C001E2C76 /* OverviewItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewItemType.swift; sourceTree = "<group>"; };
 		4AB720E42B70C8D3001E2C76 /* TransactionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewModel.swift; sourceTree = "<group>"; };
 		4AB720E82B70C8EC001E2C76 /* TransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsView.swift; sourceTree = "<group>"; };
-		4AB720EC2B70CA2D001E2C76 /* RCTransactionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTransactionsModel.swift; sourceTree = "<group>"; };
+		4AB720EC2B70CA2D001E2C76 /* RCTransactionsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTransactionsResponse.swift; sourceTree = "<group>"; };
 		4AB720EE2B70D8AA001E2C76 /* TransactionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionItem.swift; sourceTree = "<group>"; };
 		4AB720F02B70E399001E2C76 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		4AB720F42B70FB84001E2C76 /* TransactionItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionItemView.swift; sourceTree = "<group>"; };
@@ -167,7 +169,7 @@
 		4AB720FB2B712CE4001E2C76 /* CacheAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheAsyncImage.swift; sourceTree = "<group>"; };
 		4AB721012B722DFF001E2C76 /* TransactionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewModel.swift; sourceTree = "<group>"; };
 		4AB721032B722E07001E2C76 /* TransactionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailView.swift; sourceTree = "<group>"; };
-		4AB721052B72371E001E2C76 /* RCTransactionDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTransactionDetailModel.swift; sourceTree = "<group>"; };
+		4AB721052B72371E001E2C76 /* RCTransactionDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTransactionDetailResponse.swift; sourceTree = "<group>"; };
 		4AB721082B726C62001E2C76 /* TransactionDetailInfoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailInfoItem.swift; sourceTree = "<group>"; };
 		4AB7210A2B72B8A6001E2C76 /* TransactionDetailHistoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailHistoryItem.swift; sourceTree = "<group>"; };
 		4AB7210F2B72B966001E2C76 /* TransactionDetailHistoryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailHistoryItemView.swift; sourceTree = "<group>"; };
@@ -175,7 +177,7 @@
 		4AB721132B72C368001E2C76 /* RelativeDateTimeFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RelativeDateTimeFormatter+Extension.swift"; sourceTree = "<group>"; };
 		4AB721152B72DD8B001E2C76 /* TransactionDetailEntitlementItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailEntitlementItem.swift; sourceTree = "<group>"; };
 		4AB721192B736FEC001E2C76 /* TransactionDetailEntitlementItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailEntitlementItemView.swift; sourceTree = "<group>"; };
-		4AB7211B2B73751F001E2C76 /* RCTransactionDetailActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTransactionDetailActivityModel.swift; sourceTree = "<group>"; };
+		4AB7211B2B73751F001E2C76 /* RCTransactionDetailActivityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTransactionDetailActivityResponse.swift; sourceTree = "<group>"; };
 		4AB7211E2B7378EF001E2C76 /* UIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIState.swift; sourceTree = "<group>"; };
 		4AB721212B73881B001E2C76 /* OverviewItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewItemView.swift; sourceTree = "<group>"; };
 		4AB721272B738BA0001E2C76 /* WidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +194,10 @@
 		4AB7215F2B756ED5001E2C76 /* DailyGraphWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyGraphWidgetView.swift; sourceTree = "<group>"; };
 		4AB721612B756F24001E2C76 /* DailyGraphWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyGraphWidgetProvider.swift; sourceTree = "<group>"; };
 		4AB721632B756F75001E2C76 /* DailyGraphWidgetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyGraphWidgetEntry.swift; sourceTree = "<group>"; };
+		4AB7216D2B7619D7001E2C76 /* Encodable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Extension.swift"; sourceTree = "<group>"; };
+		4ADF09D32B761CD1002318B2 /* RCLoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCLoginRequest.swift; sourceTree = "<group>"; };
+		4ADF09D62B761CED002318B2 /* RCChartRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCChartRequest.swift; sourceTree = "<group>"; };
+		4ADF09DA2B761D88002318B2 /* RCTransactionsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTransactionsRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,7 +304,9 @@
 			isa = PBXGroup;
 			children = (
 				4AB7209C2B6C71AD001E2C76 /* General */,
+				4ADF09D22B761CA5002318B2 /* Login */,
 				4AB720BB2B6E49C7001E2C76 /* Charts */,
+				4ADF09D92B761D63002318B2 /* Transactions */,
 				4AB7209B2B6C719B001E2C76 /* Error */,
 			);
 			path = Models;
@@ -333,6 +341,7 @@
 				4AB720C12B6E4DFD001E2C76 /* Collection+Extension.swift */,
 				4AB720CB2B6EAECD001E2C76 /* Array+Extension.swift */,
 				4AB720F02B70E399001E2C76 /* String+Extension.swift */,
+				4AB7216D2B7619D7001E2C76 /* Encodable+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -361,7 +370,7 @@
 			isa = PBXGroup;
 			children = (
 				4AB7207E2B6C17B3001E2C76 /* RCError.swift */,
-				4AB7207C2B6C17A9001E2C76 /* RCErrorModel.swift */,
+				4AB7207C2B6C17A9001E2C76 /* RCErrorResponse.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -369,12 +378,10 @@
 		4AB7209C2B6C71AD001E2C76 /* General */ = {
 			isa = PBXGroup;
 			children = (
-				4AB7207A2B6C17A0001E2C76 /* RCLoginModel.swift */,
-				4AB720C92B6E6341001E2C76 /* RCMeModel.swift */,
-				4AB720882B6C5826001E2C76 /* RCOverviewModel.swift */,
-				4AB720EC2B70CA2D001E2C76 /* RCTransactionsModel.swift */,
-				4AB721052B72371E001E2C76 /* RCTransactionDetailModel.swift */,
-				4AB7211B2B73751F001E2C76 /* RCTransactionDetailActivityModel.swift */,
+				4AB720C92B6E6341001E2C76 /* RCMeResponse.swift */,
+				4AB720882B6C5826001E2C76 /* RCOverviewResponse.swift */,
+				4AB721052B72371E001E2C76 /* RCTransactionDetailResponse.swift */,
+				4AB7211B2B73751F001E2C76 /* RCTransactionDetailActivityResponse.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -427,9 +434,8 @@
 		4AB720BB2B6E49C7001E2C76 /* Charts */ = {
 			isa = PBXGroup;
 			children = (
-				4AB720BC2B6E49D2001E2C76 /* RCChartName.swift */,
-				4AB720C52B6E625D001E2C76 /* RCChartResolution.swift */,
-				4AB720BF2B6E4A62001E2C76 /* RCChartModel.swift */,
+				4ADF09D62B761CED002318B2 /* RCChartRequest.swift */,
+				4AB720BF2B6E4A62001E2C76 /* RCChartResponse.swift */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -576,6 +582,24 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		4ADF09D22B761CA5002318B2 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				4ADF09D32B761CD1002318B2 /* RCLoginRequest.swift */,
+				4AB7207A2B6C17A0001E2C76 /* RCLoginResponse.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		4ADF09D92B761D63002318B2 /* Transactions */ = {
+			isa = PBXGroup;
+			children = (
+				4ADF09DA2B761D88002318B2 /* RCTransactionsRequest.swift */,
+				4AB720EC2B70CA2D001E2C76 /* RCTransactionsResponse.swift */,
+			);
+			path = Transactions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -692,7 +716,7 @@
 				4AB720922B6C6893001E2C76 /* SettingsView.swift in Sources */,
 				4AB720C22B6E4DFD001E2C76 /* Collection+Extension.swift in Sources */,
 				4AB720A42B6DA77C001E2C76 /* AuthManager.swift in Sources */,
-				4AB720C62B6E625D001E2C76 /* RCChartResolution.swift in Sources */,
+				4AB7216E2B7619D7001E2C76 /* Encodable+Extension.swift in Sources */,
 				4AB7205E2B6BAC8D001E2C76 /* SignInView.swift in Sources */,
 				4AB720F82B70FBF1001E2C76 /* Date+Extension.swift in Sources */,
 				4AB721222B73881B001E2C76 /* OverviewItemView.swift in Sources */,
@@ -702,44 +726,46 @@
 				4AB720E52B70C8D3001E2C76 /* TransactionsViewModel.swift in Sources */,
 				4AB720712B6BF497001E2C76 /* APIService.swift in Sources */,
 				4AB721122B72B970001E2C76 /* TransactionDetailInfoItemView.swift in Sources */,
-				4AB720CA2B6E6341001E2C76 /* RCMeModel.swift in Sources */,
+				4AB720CA2B6E6341001E2C76 /* RCMeResponse.swift in Sources */,
 				4AB720842B6C4FF3001E2C76 /* OverviewView.swift in Sources */,
 				4AB720EF2B70D8AA001E2C76 /* TransactionItem.swift in Sources */,
 				4AB720A22B6C7925001E2C76 /* KeychainManager.swift in Sources */,
 				4AB7206D2B6BDC36001E2C76 /* SignInViewModel.swift in Sources */,
-				4AB7207D2B6C17A9001E2C76 /* RCErrorModel.swift in Sources */,
+				4AB7207D2B6C17A9001E2C76 /* RCErrorResponse.swift in Sources */,
 				4AB721022B722DFF001E2C76 /* TransactionDetailViewModel.swift in Sources */,
 				4AB721042B722E07001E2C76 /* TransactionDetailView.swift in Sources */,
 				4AB720B82B6E3E1D001E2C76 /* TabBarView.swift in Sources */,
 				4AB720BA2B6E4183001E2C76 /* NavigationItem.swift in Sources */,
 				4AB720B22B6DC9AB001E2C76 /* SpacingLabelStyle.swift in Sources */,
-				4AB7207B2B6C17A0001E2C76 /* RCLoginModel.swift in Sources */,
+				4AB7207B2B6C17A0001E2C76 /* RCLoginResponse.swift in Sources */,
 				4AB720872B6C56E7001E2C76 /* RootView.swift in Sources */,
 				4AB721162B72DD8B001E2C76 /* TransactionDetailEntitlementItem.swift in Sources */,
-				4AB7211C2B73751F001E2C76 /* RCTransactionDetailActivityModel.swift in Sources */,
+				4AB7211C2B73751F001E2C76 /* RCTransactionDetailActivityResponse.swift in Sources */,
 				4AB720F52B70FB84001E2C76 /* TransactionItemView.swift in Sources */,
+				4ADF09DB2B761D88002318B2 /* RCTransactionsRequest.swift in Sources */,
+				4ADF09D42B761CD1002318B2 /* RCLoginRequest.swift in Sources */,
 				4AB720742B6BF4A9001E2C76 /* Endpoint.swift in Sources */,
 				4AB720E92B70C8EC001E2C76 /* TransactionsView.swift in Sources */,
 				4AB7211A2B736FEC001E2C76 /* TransactionDetailEntitlementItemView.swift in Sources */,
 				4AB720F12B70E399001E2C76 /* String+Extension.swift in Sources */,
+				4ADF09D72B761CED002318B2 /* RCChartRequest.swift in Sources */,
 				4AB7210B2B72B8A6001E2C76 /* TransactionDetailHistoryItem.swift in Sources */,
 				4AB721102B72B966001E2C76 /* TransactionDetailHistoryItemView.swift in Sources */,
-				4AB720892B6C5826001E2C76 /* RCOverviewModel.swift in Sources */,
-				4AB721062B72371E001E2C76 /* RCTransactionDetailModel.swift in Sources */,
+				4AB720892B6C5826001E2C76 /* RCOverviewResponse.swift in Sources */,
+				4AB721062B72371E001E2C76 /* RCTransactionDetailResponse.swift in Sources */,
 				4AB720A62B6DAC81001E2C76 /* DateFormatter+Extension.swift in Sources */,
-				4AB720ED2B70CA2D001E2C76 /* RCTransactionsModel.swift in Sources */,
+				4AB720ED2B70CA2D001E2C76 /* RCTransactionsResponse.swift in Sources */,
 				4AB720C42B6E6156001E2C76 /* LineAndAreaMarkChartView.swift in Sources */,
 				4AB720AB2B6DB4D2001E2C76 /* SettingsViewModel.swift in Sources */,
 				4AB720CC2B6EAECD001E2C76 /* Array+Extension.swift in Sources */,
 				4AB7207F2B6C17B3001E2C76 /* RCError.swift in Sources */,
 				4AB721142B72C368001E2C76 /* RelativeDateTimeFormatter+Extension.swift in Sources */,
-				4AB720BD2B6E49D2001E2C76 /* RCChartName.swift in Sources */,
 				4AB720822B6C4FEA001E2C76 /* OverviewViewModel.swift in Sources */,
 				4AB720B62B6E3E16001E2C76 /* SidebarView.swift in Sources */,
 				4AB720A92B6DB3A0001E2C76 /* AsyncButton.swift in Sources */,
 				4AB721092B726C62001E2C76 /* TransactionDetailInfoItem.swift in Sources */,
 				4AB720CE2B6EB36C001E2C76 /* OverviewItemType.swift in Sources */,
-				4AB720C02B6E4A62001E2C76 /* RCChartModel.swift in Sources */,
+				4AB720C02B6E4A62001E2C76 /* RCChartResponse.swift in Sources */,
 				4AB7208C2B6C642D001E2C76 /* Color+Extension.swift in Sources */,
 				4AB720FC2B712CE4001E2C76 /* CacheAsyncImage.swift in Sources */,
 				4AB720AE2B6DB698001E2C76 /* OverviewItem.swift in Sources */,
@@ -750,9 +776,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4ADF09D82B761CED002318B2 /* RCChartRequest.swift in Sources */,
 				4AB721482B739BAB001E2C76 /* RectangleMarkGraphValue.swift in Sources */,
+				4AB7216F2B7619E6001E2C76 /* Encodable+Extension.swift in Sources */,
 				4AB7214A2B739C21001E2C76 /* Endpoint.swift in Sources */,
-				4AB721522B739C6D001E2C76 /* RCChartName.swift in Sources */,
 				4AB7212F2B738BA0001E2C76 /* WidgetsBundle.swift in Sources */,
 				4AB721402B739AA5001E2C76 /* Date+Extension.swift in Sources */,
 				4AB721452B739B3A001E2C76 /* Array+Extension.swift in Sources */,
@@ -763,13 +790,14 @@
 				4AB721492B739C21001E2C76 /* APIService.swift in Sources */,
 				4AB721502B739C36001E2C76 /* AuthManager.swift in Sources */,
 				4AB721642B756F75001E2C76 /* DailyGraphWidgetEntry.swift in Sources */,
-				4AB721512B739C6D001E2C76 /* RCChartResolution.swift in Sources */,
+				4ADF09D52B761CD6002318B2 /* RCLoginRequest.swift in Sources */,
 				4AB721542B739D30001E2C76 /* RCError.swift in Sources */,
 				4AB7215E2B756E9C001E2C76 /* DailyGraphWidget.swift in Sources */,
-				4AB721532B739C6D001E2C76 /* RCChartModel.swift in Sources */,
+				4AB721532B739C6D001E2C76 /* RCChartResponse.swift in Sources */,
 				4AB721602B756ED5001E2C76 /* DailyGraphWidgetView.swift in Sources */,
-				4AB721552B739D34001E2C76 /* RCErrorModel.swift in Sources */,
+				4AB721552B739D34001E2C76 /* RCErrorResponse.swift in Sources */,
 				4AB721562B739D74001E2C76 /* DateFormatter+Extension.swift in Sources */,
+				4ADF09DC2B761D88002318B2 /* RCTransactionsRequest.swift in Sources */,
 				4AB721462B739BAB001E2C76 /* RectangleMarkGraphView.swift in Sources */,
 				4AB7214F2B739C36001E2C76 /* KeychainManager.swift in Sources */,
 			);

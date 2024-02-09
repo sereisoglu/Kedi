@@ -1,5 +1,5 @@
 //
-//  RCOverviewModel.swift
+//  RCOverviewResponse.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/2/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RCOverviewModel: Decodable {
+struct RCOverviewResponse: Decodable {
     
     var activeSubscribersCount: Int?
     var activeTrialsCount: Int?
@@ -26,7 +26,7 @@ struct RCOverviewModel: Decodable {
     }
 }
 
-extension RCOverviewModel {
+extension RCOverviewResponse {
 
     static let stub: Self = {
         let string = #"""

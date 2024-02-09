@@ -83,8 +83,8 @@ struct DailyGraphWidgetProvider: TimelineProvider {
     private func fetchData() async -> [RectangleMarkGraphValue] {
         do {
             let data = try await APIService.shared.request(
-                type: RCChartModel.self,
-                endpoint: .charts(name: .revenue, resolution: .day, startDate: "2021-07-15")
+                type: RCChartResponse.self,
+                endpoint: .charts(.init(name: .revenue, resolution: .day, startDate: "2021-07-15"))// .charts(name: .revenue, resolution: .day, startDate: "2021-07-15")
             )
             
             return data?.values?.map {

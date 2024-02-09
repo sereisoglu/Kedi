@@ -1,5 +1,5 @@
 //
-//  RCTransactionDetailActivityModel.swift
+//  RCTransactionDetailActivityResponse.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/7/24.

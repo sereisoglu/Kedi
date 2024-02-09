@@ -1,5 +1,5 @@
 //
-//  RCTransactionsModel.swift
+//  RCTransactionsResponse.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/5/24.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct RCTransactionsModel: Decodable {
+struct RCTransactionsResponse: Decodable {
     
     var firstPurchaseMs: Int?
     var lastPurchaseMs: Int?
-    var transactions: [RCTransactionModel]?
+    var transactions: [RCTransaction]?
     
     enum CodingKeys: String, CodingKey {
         case firstPurchaseMs = "first_purchase_ms"
@@ -20,9 +20,9 @@ struct RCTransactionsModel: Decodable {
     }
 }
 
-struct RCTransactionModel: Decodable {
+struct RCTransaction: Decodable {
     
-    var app: RCTransactionAppModel?
+    var app: RCTransactionApp?
     var expiresDate: String?
     var isInIntroductoryPricePeriod: Bool?
     var isRenewal: Bool?
@@ -59,7 +59,7 @@ struct RCTransactionModel: Decodable {
     }
 }
 
-struct RCTransactionAppModel: Decodable {
+struct RCTransactionApp: Decodable {
     
     var bundleId: String?
     var id: String?
