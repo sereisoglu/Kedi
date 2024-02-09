@@ -24,12 +24,15 @@ final class AuthManager: ObservableObject {
     }
     
     func getAuthToken() -> String? {
-        let token = KeychainManager.shared.get(.rcAuthToken)
-        let tokenExpiresAt = Int(KeychainManager.shared.get(.rcAuthTokenExpiresAt) ?? "") ?? 0
+        guard let token = KeychainManager.shared.get(.rcAuthToken),
+              let tokenExpiresAt = Int(KeychainManager.shared.get(.rcAuthTokenExpiresAt) ?? "") else {
+            return nil
+        }
         
         let isExpired = Int(Date().timeIntervalSince1970) > tokenExpiresAt
         
         if isExpired {
+            print("TOKEN EXPIRED:", tokenExpiresAt)
             signOut()
             return nil
         } else {

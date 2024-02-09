@@ -61,3 +61,8 @@ extension Color {
 //    static let systemTeal = Color(UIColor.systemTeal)
 //    static let systemIndigo = Color(UIColor.systemIndigo)
 }
+
+extension Color {
+    
+    static let accentColor = Color(UIColor(named: "AccentColor") ?? .clear)
+}

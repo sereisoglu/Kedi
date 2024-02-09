@@ -15,7 +15,11 @@ final class KeychainManager {
         case rcAuthTokenExpiresAt
     }
     
-    private let keychain = KeychainSwift()
+    private let keychain: KeychainSwift = {
+        let keychain = KeychainSwift()
+        keychain.accessGroup = "group.com.sereisoglu.kedi"
+        return keychain
+    }()
     
     static let shared = KeychainManager()
     

@@ -65,7 +65,59 @@
 		4AB7211C2B73751F001E2C76 /* RCTransactionDetailActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7211B2B73751F001E2C76 /* RCTransactionDetailActivityModel.swift */; };
 		4AB7211F2B7378EF001E2C76 /* UIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7211E2B7378EF001E2C76 /* UIState.swift */; };
 		4AB721222B73881B001E2C76 /* OverviewItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721212B73881B001E2C76 /* OverviewItemView.swift */; };
+		4AB7212A2B738BA0001E2C76 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB721292B738BA0001E2C76 /* WidgetKit.framework */; };
+		4AB7212C2B738BA0001E2C76 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB7212B2B738BA0001E2C76 /* SwiftUI.framework */; };
+		4AB7212F2B738BA0001E2C76 /* WidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7212E2B738BA0001E2C76 /* WidgetsBundle.swift */; };
+		4AB721332B738BA1001E2C76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AB721322B738BA1001E2C76 /* Assets.xcassets */; };
+		4AB721372B738BA1001E2C76 /* WidgetExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4AB721272B738BA0001E2C76 /* WidgetExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4AB721402B739AA5001E2C76 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720F72B70FBF1001E2C76 /* Date+Extension.swift */; };
+		4AB721452B739B3A001E2C76 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720CB2B6EAECD001E2C76 /* Array+Extension.swift */; };
+		4AB721462B739BAB001E2C76 /* RectangleMarkGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7213E2B739A8A001E2C76 /* RectangleMarkGraphView.swift */; };
+		4AB721472B739BAB001E2C76 /* InsettableRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721432B739AFD001E2C76 /* InsettableRectangle.swift */; };
+		4AB721482B739BAB001E2C76 /* RectangleMarkGraphValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721412B739AEC001E2C76 /* RectangleMarkGraphValue.swift */; };
+		4AB721492B739C21001E2C76 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720702B6BF497001E2C76 /* APIService.swift */; };
+		4AB7214A2B739C21001E2C76 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720732B6BF4A9001E2C76 /* Endpoint.swift */; };
+		4AB7214C2B739C2D001E2C76 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4AB7214B2B739C2D001E2C76 /* Alamofire */; };
+		4AB7214E2B739C2D001E2C76 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4AB7214D2B739C2D001E2C76 /* KeychainSwift */; };
+		4AB7214F2B739C36001E2C76 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720A12B6C7925001E2C76 /* KeychainManager.swift */; };
+		4AB721502B739C36001E2C76 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720A32B6DA77C001E2C76 /* AuthManager.swift */; };
+		4AB721512B739C6D001E2C76 /* RCChartResolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720C52B6E625D001E2C76 /* RCChartResolution.swift */; };
+		4AB721522B739C6D001E2C76 /* RCChartName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720BC2B6E49D2001E2C76 /* RCChartName.swift */; };
+		4AB721532B739C6D001E2C76 /* RCChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720BF2B6E4A62001E2C76 /* RCChartModel.swift */; };
+		4AB721542B739D30001E2C76 /* RCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7207E2B6C17B3001E2C76 /* RCError.swift */; };
+		4AB721552B739D34001E2C76 /* RCErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7207C2B6C17A9001E2C76 /* RCErrorModel.swift */; };
+		4AB721562B739D74001E2C76 /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720A52B6DAC81001E2C76 /* DateFormatter+Extension.swift */; };
+		4AB721582B73A1C2001E2C76 /* Collection+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720C12B6E4DFD001E2C76 /* Collection+Extension.swift */; };
+		4AB721592B73A944001E2C76 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7208B2B6C642D001E2C76 /* Color+Extension.swift */; };
+		4AB7215E2B756E9C001E2C76 /* DailyGraphWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7215C2B756E97001E2C76 /* DailyGraphWidget.swift */; };
+		4AB721602B756ED5001E2C76 /* DailyGraphWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7215F2B756ED5001E2C76 /* DailyGraphWidgetView.swift */; };
+		4AB721622B756F24001E2C76 /* DailyGraphWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721612B756F24001E2C76 /* DailyGraphWidgetProvider.swift */; };
+		4AB721642B756F75001E2C76 /* DailyGraphWidgetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721632B756F75001E2C76 /* DailyGraphWidgetEntry.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4AB721352B738BA1001E2C76 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4AB720502B6BAC8D001E2C76 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4AB721262B738BA0001E2C76;
+			remoteInfo = WidgetExtensionExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4AB7213B2B738BA1001E2C76 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4AB721372B738BA1001E2C76 /* WidgetExtensionExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4AB720582B6BAC8D001E2C76 /* Kedi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kedi.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +178,20 @@
 		4AB7211B2B73751F001E2C76 /* RCTransactionDetailActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTransactionDetailActivityModel.swift; sourceTree = "<group>"; };
 		4AB7211E2B7378EF001E2C76 /* UIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIState.swift; sourceTree = "<group>"; };
 		4AB721212B73881B001E2C76 /* OverviewItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewItemView.swift; sourceTree = "<group>"; };
+		4AB721272B738BA0001E2C76 /* WidgetExtensionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtensionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AB721292B738BA0001E2C76 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		4AB7212B2B738BA0001E2C76 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		4AB7212E2B738BA0001E2C76 /* WidgetsBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetsBundle.swift; sourceTree = "<group>"; };
+		4AB721322B738BA1001E2C76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4AB721342B738BA1001E2C76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4AB7213E2B739A8A001E2C76 /* RectangleMarkGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleMarkGraphView.swift; sourceTree = "<group>"; };
+		4AB721412B739AEC001E2C76 /* RectangleMarkGraphValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleMarkGraphValue.swift; sourceTree = "<group>"; };
+		4AB721432B739AFD001E2C76 /* InsettableRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsettableRectangle.swift; sourceTree = "<group>"; };
+		4AB721572B739F4B001E2C76 /* WidgetExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetExtensionExtension.entitlements; sourceTree = "<group>"; };
+		4AB7215C2B756E97001E2C76 /* DailyGraphWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyGraphWidget.swift; sourceTree = "<group>"; };
+		4AB7215F2B756ED5001E2C76 /* DailyGraphWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyGraphWidgetView.swift; sourceTree = "<group>"; };
+		4AB721612B756F24001E2C76 /* DailyGraphWidgetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyGraphWidgetProvider.swift; sourceTree = "<group>"; };
+		4AB721632B756F75001E2C76 /* DailyGraphWidgetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyGraphWidgetEntry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,13 +204,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4AB721242B738BA0001E2C76 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AB7214C2B739C2D001E2C76 /* Alamofire in Frameworks */,
+				4AB7212C2B738BA0001E2C76 /* SwiftUI.framework in Frameworks */,
+				4AB7214E2B739C2D001E2C76 /* KeychainSwift in Frameworks */,
+				4AB7212A2B738BA0001E2C76 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		4AB7204F2B6BAC8D001E2C76 = {
 			isa = PBXGroup;
 			children = (
+				4AB721572B739F4B001E2C76 /* WidgetExtensionExtension.entitlements */,
+				4AB7213C2B738D03001E2C76 /* Shared */,
 				4AB7205A2B6BAC8D001E2C76 /* Kedi */,
+				4AB7212D2B738BA0001E2C76 /* WidgetExtension */,
+				4AB721282B738BA0001E2C76 /* Frameworks */,
 				4AB720592B6BAC8D001E2C76 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -153,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				4AB720582B6BAC8D001E2C76 /* Kedi.app */,
+				4AB721272B738BA0001E2C76 /* WidgetExtensionExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,11 +243,8 @@
 			isa = PBXGroup;
 			children = (
 				4AB7205B2B6BAC8D001E2C76 /* KediApp.swift */,
-				4AB7206E2B6BF477001E2C76 /* Network */,
 				4AB7206A2B6BDC1E001E2C76 /* Modules */,
 				4AB720A72B6DB396001E2C76 /* Components */,
-				4AB720A02B6C791A001E2C76 /* Managers */,
-				4AB7208A2B6C6422001E2C76 /* Extensions */,
 				4AB7205F2B6BAC8E001E2C76 /* Assets.xcassets */,
 				4AB720612B6BAC8E001E2C76 /* Kedi.entitlements */,
 				4AB720622B6BAC8E001E2C76 /* Preview Content */,
@@ -437,6 +516,66 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		4AB721282B738BA0001E2C76 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4AB721292B738BA0001E2C76 /* WidgetKit.framework */,
+				4AB7212B2B738BA0001E2C76 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4AB7212D2B738BA0001E2C76 /* WidgetExtension */ = {
+			isa = PBXGroup;
+			children = (
+				4AB7215B2B756E37001E2C76 /* Views */,
+				4AB7215A2B756E2B001E2C76 /* Widgets */,
+				4AB7212E2B738BA0001E2C76 /* WidgetsBundle.swift */,
+				4AB721322B738BA1001E2C76 /* Assets.xcassets */,
+				4AB721342B738BA1001E2C76 /* Info.plist */,
+			);
+			path = WidgetExtension;
+			sourceTree = "<group>";
+		};
+		4AB7213C2B738D03001E2C76 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				4AB7206E2B6BF477001E2C76 /* Network */,
+				4AB720A02B6C791A001E2C76 /* Managers */,
+				4AB7208A2B6C6422001E2C76 /* Extensions */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		4AB7213D2B738D85001E2C76 /* RectangleMarkGraph */ = {
+			isa = PBXGroup;
+			children = (
+				4AB7213E2B739A8A001E2C76 /* RectangleMarkGraphView.swift */,
+				4AB721412B739AEC001E2C76 /* RectangleMarkGraphValue.swift */,
+				4AB721432B739AFD001E2C76 /* InsettableRectangle.swift */,
+			);
+			path = RectangleMarkGraph;
+			sourceTree = "<group>";
+		};
+		4AB7215A2B756E2B001E2C76 /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				4AB7215C2B756E97001E2C76 /* DailyGraphWidget.swift */,
+				4AB7215F2B756ED5001E2C76 /* DailyGraphWidgetView.swift */,
+				4AB721612B756F24001E2C76 /* DailyGraphWidgetProvider.swift */,
+				4AB721632B756F75001E2C76 /* DailyGraphWidgetEntry.swift */,
+			);
+			path = Widgets;
+			sourceTree = "<group>";
+		};
+		4AB7215B2B756E37001E2C76 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4AB7213D2B738D85001E2C76 /* RectangleMarkGraph */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -447,10 +586,12 @@
 				4AB720542B6BAC8D001E2C76 /* Sources */,
 				4AB720552B6BAC8D001E2C76 /* Frameworks */,
 				4AB720562B6BAC8D001E2C76 /* Resources */,
+				4AB7213B2B738BA1001E2C76 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4AB721362B738BA1001E2C76 /* PBXTargetDependency */,
 			);
 			name = Kedi;
 			packageProductDependencies = (
@@ -460,6 +601,27 @@
 			productName = Kedi;
 			productReference = 4AB720582B6BAC8D001E2C76 /* Kedi.app */;
 			productType = "com.apple.product-type.application";
+		};
+		4AB721262B738BA0001E2C76 /* WidgetExtensionExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4AB721382B738BA1001E2C76 /* Build configuration list for PBXNativeTarget "WidgetExtensionExtension" */;
+			buildPhases = (
+				4AB721232B738BA0001E2C76 /* Sources */,
+				4AB721242B738BA0001E2C76 /* Frameworks */,
+				4AB721252B738BA0001E2C76 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WidgetExtensionExtension;
+			packageProductDependencies = (
+				4AB7214B2B739C2D001E2C76 /* Alamofire */,
+				4AB7214D2B739C2D001E2C76 /* KeychainSwift */,
+			);
+			productName = WidgetExtensionExtension;
+			productReference = 4AB721272B738BA0001E2C76 /* WidgetExtensionExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -472,6 +634,9 @@
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					4AB720572B6BAC8D001E2C76 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+					4AB721262B738BA0001E2C76 = {
 						CreatedOnToolsVersion = 15.2;
 					};
 				};
@@ -494,6 +659,7 @@
 			projectRoot = "";
 			targets = (
 				4AB720572B6BAC8D001E2C76 /* Kedi */,
+				4AB721262B738BA0001E2C76 /* WidgetExtensionExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -505,6 +671,14 @@
 			files = (
 				4AB720642B6BAC8E001E2C76 /* Preview Assets.xcassets in Resources */,
 				4AB720602B6BAC8E001E2C76 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4AB721252B738BA0001E2C76 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AB721332B738BA1001E2C76 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,7 +746,44 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4AB721232B738BA0001E2C76 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4AB721482B739BAB001E2C76 /* RectangleMarkGraphValue.swift in Sources */,
+				4AB7214A2B739C21001E2C76 /* Endpoint.swift in Sources */,
+				4AB721522B739C6D001E2C76 /* RCChartName.swift in Sources */,
+				4AB7212F2B738BA0001E2C76 /* WidgetsBundle.swift in Sources */,
+				4AB721402B739AA5001E2C76 /* Date+Extension.swift in Sources */,
+				4AB721452B739B3A001E2C76 /* Array+Extension.swift in Sources */,
+				4AB721622B756F24001E2C76 /* DailyGraphWidgetProvider.swift in Sources */,
+				4AB721582B73A1C2001E2C76 /* Collection+Extension.swift in Sources */,
+				4AB721472B739BAB001E2C76 /* InsettableRectangle.swift in Sources */,
+				4AB721592B73A944001E2C76 /* Color+Extension.swift in Sources */,
+				4AB721492B739C21001E2C76 /* APIService.swift in Sources */,
+				4AB721502B739C36001E2C76 /* AuthManager.swift in Sources */,
+				4AB721642B756F75001E2C76 /* DailyGraphWidgetEntry.swift in Sources */,
+				4AB721512B739C6D001E2C76 /* RCChartResolution.swift in Sources */,
+				4AB721542B739D30001E2C76 /* RCError.swift in Sources */,
+				4AB7215E2B756E9C001E2C76 /* DailyGraphWidget.swift in Sources */,
+				4AB721532B739C6D001E2C76 /* RCChartModel.swift in Sources */,
+				4AB721602B756ED5001E2C76 /* DailyGraphWidgetView.swift in Sources */,
+				4AB721552B739D34001E2C76 /* RCErrorModel.swift in Sources */,
+				4AB721562B739D74001E2C76 /* DateFormatter+Extension.swift in Sources */,
+				4AB721462B739BAB001E2C76 /* RectangleMarkGraphView.swift in Sources */,
+				4AB7214F2B739C36001E2C76 /* KeychainManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4AB721362B738BA1001E2C76 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4AB721262B738BA0001E2C76 /* WidgetExtensionExtension */;
+			targetProxy = 4AB721352B738BA1001E2C76 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4AB720652B6BAC8E001E2C76 /* Debug */ = {
@@ -692,6 +903,7 @@
 		4AB720682B6BAC8E001E2C76 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Kedi/Kedi.entitlements;
@@ -734,6 +946,7 @@
 		4AB720692B6BAC8E001E2C76 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Kedi/Kedi.entitlements;
@@ -773,6 +986,67 @@
 			};
 			name = Release;
 		};
+		4AB721392B738BA1001E2C76 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = WidgetExtensionExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4K634X2CUP;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WidgetExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sereisoglu.Kedi.WidgetExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4AB7213A2B738BA1001E2C76 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = WidgetExtensionExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4K634X2CUP;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WidgetExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WidgetExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sereisoglu.Kedi.WidgetExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -790,6 +1064,15 @@
 			buildConfigurations = (
 				4AB720682B6BAC8E001E2C76 /* Debug */,
 				4AB720692B6BAC8E001E2C76 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4AB721382B738BA1001E2C76 /* Build configuration list for PBXNativeTarget "WidgetExtensionExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4AB721392B738BA1001E2C76 /* Debug */,
+				4AB7213A2B738BA1001E2C76 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -822,6 +1105,16 @@
 			productName = Alamofire;
 		};
 		4AB7209E2B6C74FE001E2C76 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4AB7209D2B6C74FE001E2C76 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		4AB7214B2B739C2D001E2C76 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4AB720752B6C1202001E2C76 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		4AB7214D2B739C2D001E2C76 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4AB7209D2B6C74FE001E2C76 /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;

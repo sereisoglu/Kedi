@@ -7,8 +7,6 @@
 
 import Foundation
 
-typealias RCChartValue = [Double]
-
 struct RCChartModel: Decodable {
     
     var name: RCChartName? { documentationLink?.name }
@@ -23,6 +21,8 @@ struct RCChartModel: Decodable {
         case summary
     }
 }
+
+typealias RCChartValue = [Double]
 
 enum RCChartDocumentationLink: String, Decodable {
     
