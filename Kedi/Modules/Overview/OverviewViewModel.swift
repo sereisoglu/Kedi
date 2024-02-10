@@ -18,14 +18,18 @@ final class OverviewViewModel: ObservableObject {
     
     init() {
         Task {
-            await withDiscardingTaskGroup { group in
-                group.addTask { [weak self] in
-                    await self?.fetchOverview()
-                }
-                
-                group.addTask { [weak self] in
-                    await self?.fetchCharts()
-                }
+            await fetchAll()
+        }
+    }
+    
+    private func fetchAll() async {
+        await withDiscardingTaskGroup { group in
+            group.addTask { [weak self] in
+                await self?.fetchOverview()
+            }
+            
+            group.addTask { [weak self] in
+                await self?.fetchCharts()
             }
         }
     }
@@ -118,5 +122,9 @@ final class OverviewViewModel: ObservableObject {
             }
             return charts
         }
+    }
+    
+    func refresh() async {
+        await fetchAll()
     }
 }

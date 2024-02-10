@@ -36,6 +36,9 @@ struct TransactionsView: View {
             .navigationDestination(for: TransactionItem.self) { transaction in
                 TransactionDetailView(viewModel: .init(appId: transaction.appId, subscriberId: transaction.subscriberId))
             }
+            .refreshable {
+                await viewModel.refresh()
+            }
         }
     }
 }

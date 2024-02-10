@@ -43,4 +43,8 @@ final class TransactionsViewModel: ObservableObject {
             print(error)
         }
     }
+    
+    func refresh() async {
+        await fetchTransactions()
+    }
 }
