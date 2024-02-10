@@ -16,9 +16,6 @@ struct TransactionsView: View {
             getBody()
                 .navigationTitle("Transactions")
                 .background(Color.systemGroupedBackground)
-                .navigationDestination(for: TransactionItem.self) { transaction in
-                    TransactionDetailView(viewModel: .init(appId: transaction.appId, subscriberId: transaction.subscriberId))
-                }
                 .refreshable {
                     await viewModel.refresh()
                 }
@@ -59,7 +56,6 @@ struct TransactionsView: View {
                                 .multilineTextAlignment(.trailing)
                         }
                     }
-                    .redacted(reason: viewModel.state == .loading ? .placeholder : [])
                 }
                 
                 if viewModel.state == .data {
@@ -95,6 +91,10 @@ struct TransactionsView: View {
                     }
                 }
             }
+            .navigationDestination(for: TransactionItem.self) { transaction in
+                TransactionDetailView(viewModel: .init(appId: transaction.appId, subscriberId: transaction.subscriberId))
+            }
+            .redacted(reason: viewModel.state == .loading ? .placeholder : [])
             .disabled(viewModel.state == .loading)
         }
     }

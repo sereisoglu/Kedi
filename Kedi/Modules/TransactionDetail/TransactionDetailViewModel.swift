@@ -11,45 +11,59 @@ final class TransactionDetailViewModel: ObservableObject {
     
     private let apiService = APIService.shared
     
+    @Published private(set) var state: GeneralState = .loading
+    
+    @Published private(set) var navigationTitle: String = ""
+    @Published private(set) var detailItems: [TransactionDetailInfoItem]?
+    @Published private(set) var entitlementItems: [TransactionDetailEntitlementItem]?
+    @Published private(set) var attributeItems: [TransactionDetailInfoItem]?
+    @Published private(set) var historyItems: [TransactionDetailHistoryItem]?
+    
     let appId: String
     let subscriberId: String
-    
-    @Published var navigationTitle: String = ""
-    
-    @Published var detailItems: [TransactionDetailInfoItem]?
-    @Published var entitlementItems: [TransactionDetailEntitlementItem]?
-    @Published var attributeItems: [TransactionDetailInfoItem]?
-    @Published var historyItems: [TransactionDetailHistoryItem]?
     
     init(appId: String, subscriberId: String) {
         self.appId = appId
         self.subscriberId = subscriberId
+        
+        set(detailData: .stub, activityData: nil)
+        navigationTitle = ""
         
         Task {
             await fetchDetail()
         }
     }
     
+    @MainActor
     private func fetchDetail() async {
         do {
-            let data = try await apiService.request(
+            let detailData = try await apiService.request(
                 type: RCTransactionDetailResponse.self,
                 endpoint: .transactionDetail(appId: appId, subscriberId: subscriberId)
             )
             
-            await set(data: data)
+            let activityData = try await apiService.request(
+                type: RCTransactionDetailActivityResponse.self,
+                endpoint: .transactionDetailActivity(appId: appId, subscriberId: subscriberId)
+            )
+            
+            set(detailData: detailData, activityData: activityData)
+            
+            state = .data
         } catch {
-            print(error)
+            state = .error(error)
         }
     }
     
-    @MainActor
-    private func set(data: RCTransactionDetailResponse?) {
-        guard let data else {
+    private func set(
+        detailData: RCTransactionDetailResponse?,
+        activityData: RCTransactionDetailActivityResponse?
+    ) {
+        guard let detailData else {
             return
         }
         
-        navigationTitle = data.subscriberAttributes?.first(where: { $0.key == "$displayName" })?.value ?? subscriberId
+        navigationTitle = detailData.subscriberAttributes?.first(where: { $0.key == "$displayName" })?.value ?? subscriberId
         
         detailItems = [
             .init(
@@ -59,42 +73,46 @@ final class TransactionDetailViewModel: ObservableObject {
             ),
             .init(
                 key: "Total Spend",
-                value: data.dollarsSpent?.formatted(.currency(code: "USD")) ?? "n/a"
+                value: detailData.dollarsSpent?.formatted(.currency(code: "USD")) ?? "n/a"
             ),
             .init(
                 key: "Last Seen",
-                value: data.lastSeen?.relativeDate(from: .iso8601WithoutMilliseconds, to: .full) ?? "n/a"
+                value: detailData.lastSeen?.relativeDate(from: .iso8601WithoutMilliseconds, to: .full) ?? "n/a"
             ),
             .init(
                 key: "Created",
-                value: data.createdAt?.relativeDate(from: .iso8601WithoutMilliseconds, to: .full) ?? "n/a"
+                value: detailData.createdAt?.relativeDate(from: .iso8601WithoutMilliseconds, to: .full) ?? "n/a"
             ),
             .init(
                 key: "Country",
-                value: "\(data.lastSeenCountry?.countryFlagAndName ?? "n/a") (\(data.lastSeenLocale ?? "n/a"))"
+                value: "\(detailData.lastSeenCountry?.countryFlagAndName ?? "n/a") (\(detailData.lastSeenLocale ?? "n/a"))"
             ),
             .init(
                 key: "App",
-                value: "\(data.app?.name ?? "n/a") (\(data.lastSeenAppVersion ?? "n/a"))"
+                value: "\(detailData.app?.name ?? "n/a") (\(detailData.lastSeenAppVersion ?? "n/a"))"
             ),
             .init(
                 key: "Platform",
-                value: "\(data.lastSeenPlatform ?? "n/a") (\(data.lastSeenPlatformVersion ?? "n/a"))"
+                value: "\(detailData.lastSeenPlatform ?? "n/a") (\(detailData.lastSeenPlatformVersion ?? "n/a"))"
             ),
             .init(
                 key: "SDK Version",
-                value: data.lastSeenSDKVersion ?? "n/a"
+                value: detailData.lastSeenSDKVersion ?? "n/a"
             )
         ]
         
-        entitlementItems = data.subscriptionStatuses?.map { .init(data: $0) }
+        entitlementItems = detailData.subscriptionStatuses?.map { .init(data: $0) }
         
-        attributeItems = data.subscriberAttributes?.map { .init(
+        attributeItems = detailData.subscriberAttributes?.map { .init(
             key: $0.key ?? "n/a",
             value: $0.value ?? "n/a",
             copyable: true
         ) } ?? []
         
-        historyItems = data.history?.reversed().map { .init(data: $0) }
+        let detailHistoryItems = detailData.history?.compactMap { TransactionDetailHistoryItem(data: $0) } ?? []
+        let activityHistoryItems = activityData?.events?.map { TransactionDetailHistoryItem(data: $0, appUserId: activityData?.appUserId ?? "") } ?? []
+        let allHistoryItems = (detailHistoryItems + activityHistoryItems)
+            .sorted(by: { ($0.timestamp ?? 0) > ($1.timestamp ?? 0) })
+        historyItems = allHistoryItems
     }
 }

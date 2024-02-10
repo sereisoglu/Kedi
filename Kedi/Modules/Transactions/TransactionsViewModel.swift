@@ -31,7 +31,7 @@ final class TransactionsViewModel: ObservableObject {
             let data = try await apiService.request(
                 type: RCTransactionsResponse.self,
                 endpoint: .transactions(.init(
-                    limit: 10,
+                    limit: 100,
                     endDate: Date(byAdding: .day, value: 7).format(to: .yyy_MM_dd)
                 ))
             )
@@ -58,11 +58,10 @@ final class TransactionsViewModel: ObservableObject {
         
         Task {
             do {
-                try await Task.sleep(nanoseconds: 1_000_000_000)
                 let data = try await apiService.request(
                     type: RCTransactionsResponse.self,
                     endpoint: .transactions(.init(
-                        limit: 10,
+                        limit: 100,
                         startFrom: startFrom
                     ))
                 )

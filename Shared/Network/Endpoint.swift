@@ -30,28 +30,28 @@ extension Endpoint {
     var baseUrl: String {
         switch self {
         case .transactionDetailActivity:
-            return "https://api.revenuecat.com/internal/v1"
+            return "https://api.revenuecat.com/internal/v1/developers"
         default:
-            return "https://api.revenuecat.com/v1"
+            return "https://api.revenuecat.com/v1/developers"
         }
     }
     
     var path: String {
         switch self {
         case .login:
-            return "developers/login"
+            return "/login"
         case .me:
-            return "developers/me"
+            return "/me"
         case .overview:
-            return "developers/me/overview"
+            return "/me/overview"
         case .charts(let request):
-            return "developers/me/charts_v2/\(request.name.rawValue)"
+            return "/me/charts_v2/\(request.name.rawValue)"
         case .transactions:
-            return "developers/me/transactions"
+            return "/me/transactions"
         case .transactionDetail(let appId, let subscriberId):
-            return "developers/me/apps/\(appId)/subscribers/\(subscriberId)"
+            return "/me/apps/\(appId)/subscribers/\(subscriberId)"
         case .transactionDetailActivity(let appId, let subscriberId):
-            return "developers/me/apps/\(appId)/subscribers/\(subscriberId)/activity"
+            return "/me/apps/\(appId)/subscribers/\(subscriberId)/activity"
         }
     }
     

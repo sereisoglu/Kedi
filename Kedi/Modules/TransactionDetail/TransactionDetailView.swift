@@ -12,49 +12,74 @@ struct TransactionDetailView: View {
     @StateObject var viewModel: TransactionDetailViewModel
     
     var body: some View {
-        List {
-            if let items = viewModel.detailItems {
-                Section {
-                    ForEach(items) { item in
-                        TransactionDetailInfoItemView(item: item)
-                    }
-                } header: {
-                    Text("Details")
-                }
-            }
+        getBody()
+            .navigationTitle(viewModel.navigationTitle)
+            .background(Color.systemGroupedBackground)
+            .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    @ViewBuilder
+    private func getBody() -> some View {
+        switch viewModel.state {
+        case .empty:
+            ContentUnavailableView(
+                "No Data",
+                systemImage: "xmark.circle"
+            )
             
-            if let items = viewModel.entitlementItems {
-                Section {
-                    ForEach(items) { item in
-                        TransactionDetailEntitlementItemView(item: item)
-                    }
-                } header: {
-                    Text("Entitlements")
-                }
-            }
+        case .error(let error):
+            ContentUnavailableView(
+                "Error",
+                systemImage: "exclamationmark.triangle",
+                description: Text(error.localizedDescription)
+            )
             
-            if let items = viewModel.attributeItems {
-                Section {
-                    ForEach(items) { item in
-                        TransactionDetailInfoItemView(item: item)
+        case .loading,
+                .data:
+            List {
+                if let items = viewModel.detailItems {
+                    Section {
+                        ForEach(items) { item in
+                            TransactionDetailInfoItemView(item: item)
+                        }
+                    } header: {
+                        Text("Details")
                     }
-                } header: {
-                    Text("Attributes")
+                }
+                
+                if let items = viewModel.entitlementItems {
+                    Section {
+                        ForEach(items) { item in
+                            TransactionDetailEntitlementItemView(item: item)
+                        }
+                    } header: {
+                        Text("Entitlements")
+                    }
+                }
+                
+                if let items = viewModel.attributeItems {
+                    Section {
+                        ForEach(items) { item in
+                            TransactionDetailInfoItemView(item: item)
+                        }
+                    } header: {
+                        Text("Attributes")
+                    }
+                }
+                
+                if let items = viewModel.historyItems {
+                    Section {
+                        ForEach(items) { item in
+                            TransactionDetailHistoryItemView(item: item)
+                        }
+                    } header: {
+                        Text("History")
+                    }
                 }
             }
-            
-            if let items = viewModel.historyItems {
-                Section {
-                    ForEach(items) { item in
-                        TransactionDetailHistoryItemView(item: item)
-                    }
-                } header: {
-                    Text("History")
-                }
-            }
+            .redacted(reason: viewModel.state == .loading ? .placeholder : [])
+            .disabled(viewModel.state == .loading)
         }
-        .navigationTitle(viewModel.navigationTitle)
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

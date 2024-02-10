@@ -55,10 +55,10 @@ struct OverviewView: View {
                             .aspectRatio(1, contentMode: .fit)
                     }
                 }
-                .redacted(reason: viewModel.state == .loading ? .placeholder : [])
                 .padding(.horizontal)
                 .padding(.bottom)
             }
+            .redacted(reason: viewModel.state == .loading ? .placeholder : [])
             .disabled(viewModel.state == .loading)
         }
     }

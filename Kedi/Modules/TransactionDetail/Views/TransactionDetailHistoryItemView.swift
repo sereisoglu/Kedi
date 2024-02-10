@@ -24,39 +24,29 @@ struct TransactionDetailHistoryItemView: View {
                     
                     Spacer()
                     
-                    Text(item.date)
+                    Text(item.dateText)
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
             }
             
         case .subscriberAlias(let alias):
-            VStack(alignment: .leading, spacing: 3) {
-                Text(item.type.text)
-                    .font(.system(.body, weight: .semibold))
-                    .foregroundStyle(item.type.color)
-                
-                HStack(alignment: .center, spacing: 6) {
-                    Text(alias)
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                        .lineLimit(1)
-                    
-                    Spacer()
-                    
-                    Text(item.date)
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                        .layoutPriority(1)
-                }
-            }
+            descriptionView(item: item, description: alias)
             
-        case .cancellation(let price, let currency, let productIdentifier),
-                .initialPurchase(let price, let currency, let productIdentifier),
+        case .productChange(let productIdentifier):
+            descriptionView(item: item, description: productIdentifier)
+            
+        case .transfer(_, let id):
+            descriptionView(item: item, description: id)
+            
+        case .initialPurchase(let price, let currency, let productIdentifier),
                 .oneTimePurchase(let price, let currency, let productIdentifier),
                 .renewal(let price, let currency, let productIdentifier),
                 .trial(let price, let currency, let productIdentifier),
                 .conversion(let price, let currency, let productIdentifier),
+                .cancellation(let price, let currency, let productIdentifier),
+                .expiration(let price, let currency, let productIdentifier),
+                .billingIssue(let price, let currency, let productIdentifier),
                 .refund(let price, let currency, let productIdentifier):
             VStack(alignment: .leading, spacing: 3) {
                 HStack(alignment: .center, spacing: 6) {
@@ -71,22 +61,57 @@ struct TransactionDetailHistoryItemView: View {
                         .foregroundStyle(item.type.color)
                 }
                 
-                HStack(alignment: .center, spacing: 6) {
+                HStack(alignment: .bottom, spacing: 6) {
                     Text(productIdentifier)
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                     
                     Spacer()
                     
-                    Text(item.date)
+                    Text(item.dateText)
                         .font(.footnote)
                         .foregroundStyle(.secondary)
+                        .layoutPriority(1)
                 }
+                
+                if let offerCode = item.offerCode {
+                    HStack {
+                        Text("Offer Code: \(offerCode)")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                        
+                        Spacer()
+                    }
+                }
+            }
+        }
+    }
+    
+    private func descriptionView(
+        item: TransactionDetailHistoryItem,
+        description: String
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 3) {
+            Text(item.type.text)
+                .font(.system(.body, weight: .semibold))
+                .foregroundStyle(item.type.color)
+            
+            HStack(alignment: .bottom, spacing: 6) {
+                Text(description)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                
+                Spacer()
+                
+                Text(item.dateText)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .layoutPriority(1)
             }
         }
     }
 }
 
-#Preview {
-    TransactionDetailHistoryItemView(item: .init(data: .init()))
-}
+//#Preview {
+//    TransactionDetailHistoryItemView(item: )
+//}

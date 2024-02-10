@@ -186,3 +186,126 @@ struct RCSubscriptionStatusEntitlement: Decodable {
     
     var identifier: String?
 }
+
+extension RCTransactionDetailResponse {
+
+    static let stub: Self = {
+        let string = #"""
+        {
+            "subscriber": {
+                "aliases": [
+                    "aliase001"
+                ],
+                "app": {
+                    "bundle_id": "com.sereisoglu.kedi",
+                    "id": "app001",
+                    "name": "Kedi",
+                    "restore_behavior": "transfer"
+                },
+                "app_user_id": "$RCAnonymousID:anonymous001",
+                "attribution_fields": null,
+                "checkout_paywalls": [],
+                "created_at": "2024-02-01T00:00:00Z",
+                "dollars_spent": 99.99,
+                "has_only_family_share_transactions": false,
+                "history": [],
+                "last_seen": "2024-02-01T00:00:00Z",
+                "last_seen_alias": "aliase001",
+                "last_seen_app_version": "1.0",
+                "last_seen_country": "TR",
+                "last_seen_identified_alias": "aliase001",
+                "last_seen_locale": "en-US,en;q=0.9",
+                "last_seen_mobile_app": {
+                    "id": "app001",
+                    "name": "Kedi",
+                    "type": "app_store"
+                },
+                "last_seen_platform": "iOS",
+                "last_seen_platform_flavor": "native",
+                "last_seen_platform_version": "Version 17.2.1 (Build 21C66)",
+                "last_seen_sdk_version": "4.32.0",
+                "offering_override": null,
+                "offering_override_source": null,
+                "pay_paywalls": [],
+                "price_experiment": null,
+                "project": {
+                    "icon_url": "https://www.appatar.io/com.sereisoglu.kedi/small",
+                    "id": "app001",
+                    "name": "Kedi"
+                },
+                "promotional_transactions": [],
+                "restore_behavior": null,
+                "subscriber_attributes": [
+                    {
+                        "key": "$email",
+                        "value": {
+                            "updated_at_ms": 1707577551000,
+                            "value": "sereisoglu@gmail.com"
+                        }
+                    },
+                    {
+                        "key": "$apnsTokens",
+                        "value": {
+                            "updated_at_ms": 1707577551000,
+                            "value": "N9TT-9G0A-B7FQ-RANC-N9TT-9G0A-B7FQ-RANC-N9TT-9G0A-B7FQ-RANC-N9TT-9G0A-B7FQ-RANC"
+                        }
+                    },
+                    {
+                        "key": "$displayName",
+                        "value": {
+                            "updated_at_ms": 1707577551000,
+                            "value": "Saffet Emin Reisoğlu"
+                        }
+                    },
+                    {
+                        "key": "$attConsentStatus",
+                        "value": {
+                            "updated_at_ms": 1707577551000,
+                            "value": "notDetermined"
+                        }
+                    }
+                ],
+                "subscription_status": {
+                    "live": [
+                        {
+                            "billing_issues_detected_at": null,
+                            "cancellation_date": null,
+                            "entitlement_identifier": null,
+                            "entitlements": [
+                                {
+                                    "created_at": "2024-02-01T00:00:00Z",
+                                    "display_name": "Gain access to all features.",
+                                    "id": "ent001",
+                                    "identifier": "supporter",
+                                    "products": [
+                                        {
+                                            "created_at": "2024-02-01T00:00:00Z",
+                                            "id": "prod001",
+                                            "identifier": "kedi.supporter.monthly",
+                                            "store": "APP_STORE"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "expires_date": "2024-03-01T00:00:00Z",
+                            "is_auto_renewing": true,
+                            "is_trial": false,
+                            "product_identifier": "kedi.supporter.monthly",
+                            "purchase_date": "2024-02-01T00:00:00Z",
+                            "refunded_at": null,
+                            "store": "app_store",
+                            "unsubscribe_detected_at": null
+                        }
+                    ],
+                    "sandbox": []
+                }
+            }
+        }
+        """#
+
+        let data = Data(string.utf8)
+
+        return try! JSONDecoder().decode(Self.self, from: data)
+    }()
+}
+
