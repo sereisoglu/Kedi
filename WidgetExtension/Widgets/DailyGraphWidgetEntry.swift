@@ -12,6 +12,7 @@ struct DailyGraphWidgetEntry: TimelineEntry {
     
     let date: Date
     let items: [RectangleMarkGraphValue]
+    var error: RCError? = nil
 }
 
 extension DailyGraphWidgetEntry {
@@ -24,7 +25,7 @@ extension DailyGraphWidgetEntry {
         
         return .init(
             date: Date(),
-            items: dates.compactMap { .init(date: $0, count: Int.random(in: 0...10)) }
+            items: dates.compactMap { .init(date: $0, value: Double(Int.random(in: 0...10))) }
         )
     }
 }

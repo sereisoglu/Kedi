@@ -73,7 +73,7 @@ struct TransactionItem: Identifiable, Hashable {
         
         country = data.subscriberCountryCode?.countryName ?? ""
         
-        if let date = DateFormatter.iso8601WithoutMilliseconds.date(from: data.purchaseDate ?? "") {
+        if let date = data.purchaseDate?.format(to: .iso8601WithoutMilliseconds) {
             if date.isToday || date.isFuture {
                 self.date = date.relativeFormat(to: .full)
             } else  {

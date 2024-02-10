@@ -16,15 +16,15 @@ extension Date {
 
 extension Date {
     
-    var withoutTime: Date {
-        let comps = calendar.dateComponents([.year, .month, .day], from: self)
-        return calendar.date(from: comps) ?? self
+    init(byAdding component: Calendar.Component, value: Int, to date: Date = Date()) {
+        self.init()
+        self = calendar.date(byAdding: component, value: value, to: date) ?? date
     }
 }
 
 extension Date {
     
-    func format(dateFormatter: DateFormatter) -> String {
+    func format(to dateFormatter: DateFormatter) -> String {
         dateFormatter.string(from: self)
     }
     
@@ -42,57 +42,34 @@ extension Date {
     var isFuture: Bool {
         self > Date.now
     }
-}
-
-extension Date {
-    func nearestQuarterHourToTheFuture() -> Date {
-        let granularity = 900.0 // 60.0 * 15.0
-        
-        return Date(timeIntervalSinceReferenceDate: (self.timeIntervalSinceReferenceDate / granularity).rounded(.up) * granularity)
-    }
-}
-
-
-extension Date {
     
     var startOfWeek: Date {
         calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) ?? self
     }
+    
+    var withoutTime: Date {
+        let comps = calendar.dateComponents([.year, .month, .day], from: self)
+        return calendar.date(from: comps) ?? self
+    }
+    
+    // https://stackoverflow.com/a/65498893/9212388
+    var weekday: Int {
+        (calendar.component(.weekday, from: self) - calendar.firstWeekday + 7) % 7 + 1
+    }
+    
+    func nearestQuarterHourToTheFuture() -> Date {
+        let granularity = 900.0 // 60.0 * 15.0
+        return Date(timeIntervalSinceReferenceDate: (self.timeIntervalSinceReferenceDate / granularity).rounded(.up) * granularity)
+    }
 }
 
 extension Date {
-    
-    var getHourTo18: Date {
-        var comps = calendar.dateComponents([.year, .month, .day], from: self)
-        comps.timeZone = .current
-        comps.hour = 18
-        return calendar.date(from: comps) ?? self
-    }
     
     var getHourTo0: Date {
         var comps = calendar.dateComponents([.year, .month, .day], from: self)
         comps.timeZone = .current
         comps.hour = 0
         return calendar.date(from: comps) ?? self
-    }
-    
-    var calcHourTo18: Date {
-        if self >= getHourTo18 {
-            return .init(getHourTo18: 1)
-        } else {
-            return getHourTo18
-        }
-    }
-    
-    init(getHourTo18 addingDay: Int) {
-        self.init()
-        let date = calendar.date(byAdding: .day, value: addingDay, to: Date()) ?? Date()
-        self = date.getHourTo18
-    }
-    
-    init(byAdding component: Calendar.Component, value: Int, to date: Date = Date()) {
-        self.init()
-        self = calendar.date(byAdding: component, value: value, to: date) ?? date
     }
     
     static func generate(from: Date, to: Date = Date(), isFromIncluded: Bool = true, isToIncluded: Bool = true) -> [Date] {
@@ -119,29 +96,5 @@ extension Date {
         }
         
         return dates
-    }
-}
-
-extension Date {
-    
-    var year: Int {
-        calendar.component(.year, from: self)
-    }
-    
-    var month: Int {
-        calendar.component(.month, from: self)
-    }
-    
-    var weekOfYear: Int {
-        calendar.component(.weekOfYear, from: self)
-    }
-    
-    var hour: Int {
-        calendar.component(.hour, from: self)
-    }
-    
-    // https://stackoverflow.com/a/65498893/9212388
-    var weekday: Int {
-        (calendar.component(.weekday, from: self) - calendar.firstWeekday + 7) % 7 + 1
     }
 }

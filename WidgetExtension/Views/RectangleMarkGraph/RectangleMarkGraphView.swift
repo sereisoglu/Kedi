@@ -8,6 +8,7 @@
 import SwiftUI
 import Charts
 
+// https://github.com/jordibruin/Swift-Charts-Examples/blob/main/Swift%20Charts%20Examples/Charts/HeatMap/GitHubContributionsGraph.swift
 struct RectangleMarkGraphView: View {
     
     static let INSET: CGFloat = 2
@@ -20,12 +21,12 @@ struct RectangleMarkGraphView: View {
     init(values: [RectangleMarkGraphValue], weekCount: Int = 17) {
         dates = Self.getDates(weekCount: weekCount)
         data = values.keyBy(\.date)
-        median = values.compactMap { Double($0.count) }.median() ?? 0
+        median = values.compactMap { $0.value }.median() ?? 0
     }
     
     var body: some View {
         Chart(dates, id: \.self) { date in
-            let count = data[date]?.count
+            let value = data[date]?.value
             let relativeWeek = relativeWeek(from: dates.first ?? date, to: date)
             
             RectangleMark(
@@ -35,7 +36,7 @@ struct RectangleMarkGraphView: View {
                 yEnd: .value("yEnd", date.weekday)
             )
             .clipShape(InsettableRectangle(inset: Self.INSET, cornerRadius: Self.CORNER_RADIUS))
-            .foregroundStyle(getColor(date: date, count: count, median: median))
+            .foregroundStyle(getColor(date: date, value: value, median: median))
         }
         .chartYAxis(.hidden)
         .chartXAxis(.hidden)
@@ -55,16 +56,17 @@ struct RectangleMarkGraphView: View {
         return daysApart / 7
     }
     
-    private func getColor(date: Date, count: Int?, median: Double) -> Color {
+    private func getColor(date: Date, value: Double?, median: Double) -> Color {
         if date.isFuture {
             return .clear
         }
         
-        if (count ?? 0) == 0 {
+        guard let value,
+              value != 0 else {
             return .gray.opacity(0.25) // .quaternaryLabel
         }
         
-        var opacity = min(Double(count ?? 0) / (2 * median), 1)
+        var opacity = min(value / (2 * median), 1)
         opacity = ceil(opacity / 0.1) * 0.1
         return .accentColor.opacity(opacity)
     }

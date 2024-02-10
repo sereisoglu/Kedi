@@ -20,6 +20,7 @@ struct DailyGraphWidget: Widget {
         .configurationDisplayName("Daily Graph")
         .description("Shows an overview of recent transactions.")
         .supportedFamilies([.systemSmall, .systemMedium])
+        .contentMarginsDisabled()
     }
 }
 

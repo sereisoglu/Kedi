@@ -23,7 +23,7 @@ struct TransactionsView: View {
                         }
                     } header: {
                         HStack {
-                            Text(dailyTransactions.date.format(dateFormatter: .EEE_MMM_d_yyyy))
+                            Text(dailyTransactions.date.format(to: .EEE_MMM_d_yyyy))
                             
                             Spacer()
                             

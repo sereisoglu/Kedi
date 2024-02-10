@@ -30,6 +30,10 @@ extension String {
 
 extension String {
     
+    func format(to dateFormatter: DateFormatter) -> Date? {
+        dateFormatter.date(from: self)
+    }
+    
     func relativeDate(from dateFormatter: DateFormatter, to relativeDateFormatter: RelativeDateTimeFormatter) -> String? {
         guard let date = dateFormatter.date(from: self) else {
             return nil

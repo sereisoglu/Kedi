@@ -64,7 +64,7 @@ struct TransactionDetailHistoryItem: Identifiable, Hashable {
             type = .unknown
         }
         
-        if let date = DateFormatter.iso8601WithoutMilliseconds.date(from: data.at ?? "") {
+        if let date = data.at?.format(to: .iso8601WithoutMilliseconds) {
             if date.isToday {
                 self.date = date.relativeFormat(to: .full)
             } else  {

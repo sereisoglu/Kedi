@@ -22,4 +22,11 @@ extension DateFormatter {
         formatter.dateFormat = "EEE, MMM d, yyyy"
         return formatter
     }()
+    
+    static let yyy_MM_dd: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
 }

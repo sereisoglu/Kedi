@@ -72,7 +72,7 @@
 		4AB721452B739B3A001E2C76 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720CB2B6EAECD001E2C76 /* Array+Extension.swift */; };
 		4AB721462B739BAB001E2C76 /* RectangleMarkGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7213E2B739A8A001E2C76 /* RectangleMarkGraphView.swift */; };
 		4AB721472B739BAB001E2C76 /* InsettableRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721432B739AFD001E2C76 /* InsettableRectangle.swift */; };
-		4AB721482B739BAB001E2C76 /* RectangleMarkGraphValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721412B739AEC001E2C76 /* RectangleMarkGraphValue.swift */; };
+		4AB721482B739BAB001E2C76 /* RectangleMarkGraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721412B739AEC001E2C76 /* RectangleMarkGraphModel.swift */; };
 		4AB721492B739C21001E2C76 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720702B6BF497001E2C76 /* APIService.swift */; };
 		4AB7214A2B739C21001E2C76 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720732B6BF4A9001E2C76 /* Endpoint.swift */; };
 		4AB7214C2B739C2D001E2C76 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4AB7214B2B739C2D001E2C76 /* Alamofire */; };
@@ -97,6 +97,11 @@
 		4ADF09D82B761CED002318B2 /* RCChartRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADF09D62B761CED002318B2 /* RCChartRequest.swift */; };
 		4ADF09DB2B761D88002318B2 /* RCTransactionsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADF09DA2B761D88002318B2 /* RCTransactionsRequest.swift */; };
 		4ADF09DC2B761D88002318B2 /* RCTransactionsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADF09DA2B761D88002318B2 /* RCTransactionsRequest.swift */; };
+		4ADF09E02B763CB7002318B2 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 4ADF09DF2B763CB7002318B2 /* Cache */; };
+		4ADF09E22B763CC2002318B2 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 4ADF09E12B763CC2002318B2 /* Cache */; };
+		4ADF09E42B763CCE002318B2 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADF09E32B763CCE002318B2 /* CacheManager.swift */; };
+		4ADF09E52B763CCE002318B2 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADF09E32B763CCE002318B2 /* CacheManager.swift */; };
+		4ADF09E62B7762F0002318B2 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720F02B70E399001E2C76 /* String+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,7 +192,7 @@
 		4AB721322B738BA1001E2C76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4AB721342B738BA1001E2C76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4AB7213E2B739A8A001E2C76 /* RectangleMarkGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleMarkGraphView.swift; sourceTree = "<group>"; };
-		4AB721412B739AEC001E2C76 /* RectangleMarkGraphValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleMarkGraphValue.swift; sourceTree = "<group>"; };
+		4AB721412B739AEC001E2C76 /* RectangleMarkGraphModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleMarkGraphModel.swift; sourceTree = "<group>"; };
 		4AB721432B739AFD001E2C76 /* InsettableRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsettableRectangle.swift; sourceTree = "<group>"; };
 		4AB721572B739F4B001E2C76 /* WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetExtension.entitlements; sourceTree = "<group>"; };
 		4AB7215C2B756E97001E2C76 /* DailyGraphWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyGraphWidget.swift; sourceTree = "<group>"; };
@@ -198,6 +203,7 @@
 		4ADF09D32B761CD1002318B2 /* RCLoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCLoginRequest.swift; sourceTree = "<group>"; };
 		4ADF09D62B761CED002318B2 /* RCChartRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCChartRequest.swift; sourceTree = "<group>"; };
 		4ADF09DA2B761D88002318B2 /* RCTransactionsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTransactionsRequest.swift; sourceTree = "<group>"; };
+		4ADF09E32B763CCE002318B2 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +211,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4ADF09E02B763CB7002318B2 /* Cache in Frameworks */,
 				4AB7209F2B6C74FE001E2C76 /* KeychainSwift in Frameworks */,
 				4AB720772B6C1202001E2C76 /* Alamofire in Frameworks */,
 			);
@@ -218,6 +225,7 @@
 				4AB7212C2B738BA0001E2C76 /* SwiftUI.framework in Frameworks */,
 				4AB7214E2B739C2D001E2C76 /* KeychainSwift in Frameworks */,
 				4AB7212A2B738BA0001E2C76 /* WidgetKit.framework in Frameworks */,
+				4ADF09E22B763CC2002318B2 /* Cache in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +398,7 @@
 			children = (
 				4AB720A32B6DA77C001E2C76 /* AuthManager.swift */,
 				4AB720A12B6C7925001E2C76 /* KeychainManager.swift */,
+				4ADF09E32B763CCE002318B2 /* CacheManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -557,7 +566,7 @@
 			isa = PBXGroup;
 			children = (
 				4AB7213E2B739A8A001E2C76 /* RectangleMarkGraphView.swift */,
-				4AB721412B739AEC001E2C76 /* RectangleMarkGraphValue.swift */,
+				4AB721412B739AEC001E2C76 /* RectangleMarkGraphModel.swift */,
 				4AB721432B739AFD001E2C76 /* InsettableRectangle.swift */,
 			);
 			path = RectangleMarkGraph;
@@ -621,6 +630,7 @@
 			packageProductDependencies = (
 				4AB720762B6C1202001E2C76 /* Alamofire */,
 				4AB7209E2B6C74FE001E2C76 /* KeychainSwift */,
+				4ADF09DF2B763CB7002318B2 /* Cache */,
 			);
 			productName = Kedi;
 			productReference = 4AB720582B6BAC8D001E2C76 /* Kedi.app */;
@@ -642,6 +652,7 @@
 			packageProductDependencies = (
 				4AB7214B2B739C2D001E2C76 /* Alamofire */,
 				4AB7214D2B739C2D001E2C76 /* KeychainSwift */,
+				4ADF09E12B763CC2002318B2 /* Cache */,
 			);
 			productName = WidgetExtensionExtension;
 			productReference = 4AB721272B738BA0001E2C76 /* WidgetExtension.appex */;
@@ -677,6 +688,7 @@
 			packageReferences = (
 				4AB720752B6C1202001E2C76 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				4AB7209D2B6C74FE001E2C76 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				4ADF09DE2B763CB7002318B2 /* XCRemoteSwiftPackageReference "Cache" */,
 			);
 			productRefGroup = 4AB720592B6BAC8D001E2C76 /* Products */;
 			projectDirPath = "";
@@ -726,6 +738,7 @@
 				4AB720E52B70C8D3001E2C76 /* TransactionsViewModel.swift in Sources */,
 				4AB720712B6BF497001E2C76 /* APIService.swift in Sources */,
 				4AB721122B72B970001E2C76 /* TransactionDetailInfoItemView.swift in Sources */,
+				4ADF09E42B763CCE002318B2 /* CacheManager.swift in Sources */,
 				4AB720CA2B6E6341001E2C76 /* RCMeResponse.swift in Sources */,
 				4AB720842B6C4FF3001E2C76 /* OverviewView.swift in Sources */,
 				4AB720EF2B70D8AA001E2C76 /* TransactionItem.swift in Sources */,
@@ -777,16 +790,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				4ADF09D82B761CED002318B2 /* RCChartRequest.swift in Sources */,
-				4AB721482B739BAB001E2C76 /* RectangleMarkGraphValue.swift in Sources */,
+				4AB721482B739BAB001E2C76 /* RectangleMarkGraphModel.swift in Sources */,
 				4AB7216F2B7619E6001E2C76 /* Encodable+Extension.swift in Sources */,
 				4AB7214A2B739C21001E2C76 /* Endpoint.swift in Sources */,
 				4AB7212F2B738BA0001E2C76 /* WidgetsBundle.swift in Sources */,
 				4AB721402B739AA5001E2C76 /* Date+Extension.swift in Sources */,
+				4ADF09E62B7762F0002318B2 /* String+Extension.swift in Sources */,
 				4AB721452B739B3A001E2C76 /* Array+Extension.swift in Sources */,
 				4AB721622B756F24001E2C76 /* DailyGraphWidgetProvider.swift in Sources */,
 				4AB721582B73A1C2001E2C76 /* Collection+Extension.swift in Sources */,
 				4AB721472B739BAB001E2C76 /* InsettableRectangle.swift in Sources */,
 				4AB721592B73A944001E2C76 /* Color+Extension.swift in Sources */,
+				4ADF09E52B763CCE002318B2 /* CacheManager.swift in Sources */,
 				4AB721492B739C21001E2C76 /* APIService.swift in Sources */,
 				4AB721502B739C36001E2C76 /* AuthManager.swift in Sources */,
 				4AB721642B756F75001E2C76 /* DailyGraphWidgetEntry.swift in Sources */,
@@ -1124,6 +1139,14 @@
 				minimumVersion = 21.0.0;
 			};
 		};
+		4ADF09DE2B763CB7002318B2 /* XCRemoteSwiftPackageReference "Cache" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hyperoslo/Cache.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1146,6 +1169,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4AB7209D2B6C74FE001E2C76 /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;
+		};
+		4ADF09DF2B763CB7002318B2 /* Cache */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4ADF09DE2B763CB7002318B2 /* XCRemoteSwiftPackageReference "Cache" */;
+			productName = Cache;
+		};
+		4ADF09E12B763CC2002318B2 /* Cache */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4ADF09DE2B763CB7002318B2 /* XCRemoteSwiftPackageReference "Cache" */;
+			productName = Cache;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

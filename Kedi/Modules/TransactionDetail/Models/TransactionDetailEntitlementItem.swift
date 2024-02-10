@@ -16,29 +16,23 @@ struct TransactionDetailEntitlementItem: Identifiable, Hashable {
     var description: String
     
     init(data: RCSubscriptionStatus) {
-        if let refundedAt = data.refundedAt,
-           let date = DateFormatter.iso8601WithoutMilliseconds.date(from: refundedAt) {
+        if let date = data.refundedAt?.format(to: .iso8601WithoutMilliseconds) {
             type = .refunded
             description = "Refunded on \(date.formatted(date: .abbreviated, time: .shortened))"
-        } else if let billingIssuesDetectedAt = data.billingIssuesDetectedAt,
-                  let date = DateFormatter.iso8601WithoutMilliseconds.date(from: billingIssuesDetectedAt) {
+        } else if let date = data.billingIssuesDetectedAt?.format(to: .iso8601WithoutMilliseconds) {
             type = .billingIssue
             description = "Billing issue detected on \(date.formatted(date: .abbreviated, time: .shortened))"
-        } else if let expiresDate = data.expiresDate,
-                  let date = DateFormatter.iso8601WithoutMilliseconds.date(from: expiresDate),
+        } else if let date = data.expiresDate?.format(to: .iso8601WithoutMilliseconds),
                   !date.isFuture {
             type = .expired
             description = "Subscription expired on \(date.formatted(date: .abbreviated, time: .shortened))"
-        } else if let unsubscribeDetectedAt = data.unsubscribeDetectedAt,
-                  let date = DateFormatter.iso8601WithoutMilliseconds.date(from: unsubscribeDetectedAt) {
+        } else if let date = data.unsubscribeDetectedAt?.format(to: .iso8601WithoutMilliseconds) {
             type = .unsubscribed
             description = "Unsubscribed on \(date.formatted(date: .abbreviated, time: .shortened))"
-        } else if let cancellationDate = data.cancellationDate,
-                  let date = DateFormatter.iso8601WithoutMilliseconds.date(from: cancellationDate) {
+        } else if let date = data.cancellationDate?.format(to: .iso8601WithoutMilliseconds) {
             type = .cancelled
             description = "Cancelled on \(date.formatted(date: .abbreviated, time: .shortened))"
-        } else if let expiresDate = data.expiresDate,
-                  let date = DateFormatter.iso8601WithoutMilliseconds.date(from: expiresDate) {
+        } else if let date = data.expiresDate?.format(to: .iso8601WithoutMilliseconds) {
             if data.isTrial ?? false {
                 type = .trial
             } else {
@@ -47,8 +41,7 @@ struct TransactionDetailEntitlementItem: Identifiable, Hashable {
             description = "Subscription expires on \(date.formatted(date: .abbreviated, time: .shortened))"
         } else {
             type = .oneTimePurchase
-            if let purchaseDate = data.purchaseDate,
-               let date = DateFormatter.iso8601WithoutMilliseconds.date(from: purchaseDate) {
+            if let date = data.purchaseDate?.format(to: .iso8601WithoutMilliseconds) {
                 description = "Purchased on \(date.formatted(date: .abbreviated, time: .shortened))"
             } else {
                 description = "n/a"

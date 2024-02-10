@@ -44,7 +44,7 @@ final class AuthManager: ObservableObject {
         token: String,
         tokenExpiration: String
     ) {
-        guard let date = DateFormatter.iso8601WithoutMilliseconds.date(from: tokenExpiration) else {
+        guard let date = tokenExpiration.format(to: .iso8601WithoutMilliseconds) else {
             return
         }
         

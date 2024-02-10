@@ -28,7 +28,7 @@ final class TransactionsViewModel: ObservableObject {
             )
             
             let groupedTransactions = Dictionary(grouping: data?.transactions ?? []) { transaction in
-                DateFormatter.iso8601WithoutMilliseconds.date(from: transaction.purchaseDate ?? "")?.withoutTime
+                transaction.purchaseDate?.format(to: .iso8601WithoutMilliseconds)?.withoutTime
             }
             
             transactions = groupedTransactions
