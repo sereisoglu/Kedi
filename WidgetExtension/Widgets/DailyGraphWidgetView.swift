@@ -28,7 +28,7 @@ struct DailyGraphWidgetView : View {
                 Text("Unsupported widget family!")
             }
             
-            if let message = entry.error?.message {
+            if let message = entry.error?.localizedDescription {
                 VStack {
                     Spacer()
                     Text(message)

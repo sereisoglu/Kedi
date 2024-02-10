@@ -61,7 +61,7 @@
 		4AB721162B72DD8B001E2C76 /* TransactionDetailEntitlementItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721152B72DD8B001E2C76 /* TransactionDetailEntitlementItem.swift */; };
 		4AB7211A2B736FEC001E2C76 /* TransactionDetailEntitlementItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721192B736FEC001E2C76 /* TransactionDetailEntitlementItemView.swift */; };
 		4AB7211C2B73751F001E2C76 /* RCTransactionDetailActivityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7211B2B73751F001E2C76 /* RCTransactionDetailActivityResponse.swift */; };
-		4AB7211F2B7378EF001E2C76 /* UIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7211E2B7378EF001E2C76 /* UIState.swift */; };
+		4AB7211F2B7378EF001E2C76 /* GeneralState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7211E2B7378EF001E2C76 /* GeneralState.swift */; };
 		4AB721222B73881B001E2C76 /* OverviewItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721212B73881B001E2C76 /* OverviewItemView.swift */; };
 		4AB7212A2B738BA0001E2C76 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB721292B738BA0001E2C76 /* WidgetKit.framework */; };
 		4AB7212C2B738BA0001E2C76 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB7212B2B738BA0001E2C76 /* SwiftUI.framework */; };
@@ -102,6 +102,9 @@
 		4ADF09E42B763CCE002318B2 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADF09E32B763CCE002318B2 /* CacheManager.swift */; };
 		4ADF09E52B763CCE002318B2 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADF09E32B763CCE002318B2 /* CacheManager.swift */; };
 		4ADF09E62B7762F0002318B2 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720F02B70E399001E2C76 /* String+Extension.swift */; };
+		4ADF09E82B7780D6002318B2 /* PaginationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADF09E72B7780D6002318B2 /* PaginationState.swift */; };
+		4ADF09E92B7780D6002318B2 /* PaginationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADF09E72B7780D6002318B2 /* PaginationState.swift */; };
+		4ADF09EB2B7783FB002318B2 /* EdgeInsets+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADF09EA2B7783FB002318B2 /* EdgeInsets+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,7 +186,7 @@
 		4AB721152B72DD8B001E2C76 /* TransactionDetailEntitlementItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailEntitlementItem.swift; sourceTree = "<group>"; };
 		4AB721192B736FEC001E2C76 /* TransactionDetailEntitlementItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailEntitlementItemView.swift; sourceTree = "<group>"; };
 		4AB7211B2B73751F001E2C76 /* RCTransactionDetailActivityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTransactionDetailActivityResponse.swift; sourceTree = "<group>"; };
-		4AB7211E2B7378EF001E2C76 /* UIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIState.swift; sourceTree = "<group>"; };
+		4AB7211E2B7378EF001E2C76 /* GeneralState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralState.swift; sourceTree = "<group>"; };
 		4AB721212B73881B001E2C76 /* OverviewItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewItemView.swift; sourceTree = "<group>"; };
 		4AB721272B738BA0001E2C76 /* WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AB721292B738BA0001E2C76 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -204,6 +207,8 @@
 		4ADF09D62B761CED002318B2 /* RCChartRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCChartRequest.swift; sourceTree = "<group>"; };
 		4ADF09DA2B761D88002318B2 /* RCTransactionsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTransactionsRequest.swift; sourceTree = "<group>"; };
 		4ADF09E32B763CCE002318B2 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
+		4ADF09E72B7780D6002318B2 /* PaginationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationState.swift; sourceTree = "<group>"; };
+		4ADF09EA2B7783FB002318B2 /* EdgeInsets+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EdgeInsets+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,6 +354,7 @@
 				4AB720CB2B6EAECD001E2C76 /* Array+Extension.swift */,
 				4AB720F02B70E399001E2C76 /* String+Extension.swift */,
 				4AB7216D2B7619D7001E2C76 /* Encodable+Extension.swift */,
+				4ADF09EA2B7783FB002318B2 /* EdgeInsets+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -387,8 +393,6 @@
 			children = (
 				4AB720C92B6E6341001E2C76 /* RCMeResponse.swift */,
 				4AB720882B6C5826001E2C76 /* RCOverviewResponse.swift */,
-				4AB721052B72371E001E2C76 /* RCTransactionDetailResponse.swift */,
-				4AB7211B2B73751F001E2C76 /* RCTransactionDetailActivityResponse.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -517,7 +521,8 @@
 		4AB7211D2B7378E5001E2C76 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				4AB7211E2B7378EF001E2C76 /* UIState.swift */,
+				4AB7211E2B7378EF001E2C76 /* GeneralState.swift */,
+				4ADF09E72B7780D6002318B2 /* PaginationState.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -605,6 +610,8 @@
 			children = (
 				4ADF09DA2B761D88002318B2 /* RCTransactionsRequest.swift */,
 				4AB720EC2B70CA2D001E2C76 /* RCTransactionsResponse.swift */,
+				4AB721052B72371E001E2C76 /* RCTransactionDetailResponse.swift */,
+				4AB7211B2B73751F001E2C76 /* RCTransactionDetailActivityResponse.swift */,
 			);
 			path = Transactions;
 			sourceTree = "<group>";
@@ -734,7 +741,7 @@
 				4AB721222B73881B001E2C76 /* OverviewItemView.swift in Sources */,
 				4AB7205C2B6BAC8D001E2C76 /* KediApp.swift in Sources */,
 				4AB7208F2B6C6842001E2C76 /* MainView.swift in Sources */,
-				4AB7211F2B7378EF001E2C76 /* UIState.swift in Sources */,
+				4AB7211F2B7378EF001E2C76 /* GeneralState.swift in Sources */,
 				4AB720E52B70C8D3001E2C76 /* TransactionsViewModel.swift in Sources */,
 				4AB720712B6BF497001E2C76 /* APIService.swift in Sources */,
 				4AB721122B72B970001E2C76 /* TransactionDetailInfoItemView.swift in Sources */,
@@ -749,6 +756,7 @@
 				4AB721042B722E07001E2C76 /* TransactionDetailView.swift in Sources */,
 				4AB720B82B6E3E1D001E2C76 /* TabBarView.swift in Sources */,
 				4AB720BA2B6E4183001E2C76 /* NavigationItem.swift in Sources */,
+				4ADF09EB2B7783FB002318B2 /* EdgeInsets+Extension.swift in Sources */,
 				4AB720B22B6DC9AB001E2C76 /* SpacingLabelStyle.swift in Sources */,
 				4AB7207B2B6C17A0001E2C76 /* RCLoginResponse.swift in Sources */,
 				4AB720872B6C56E7001E2C76 /* RootView.swift in Sources */,
@@ -782,6 +790,7 @@
 				4AB7208C2B6C642D001E2C76 /* Color+Extension.swift in Sources */,
 				4AB720FC2B712CE4001E2C76 /* CacheAsyncImage.swift in Sources */,
 				4AB720AE2B6DB698001E2C76 /* OverviewItem.swift in Sources */,
+				4ADF09E82B7780D6002318B2 /* PaginationState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -791,6 +800,7 @@
 			files = (
 				4ADF09D82B761CED002318B2 /* RCChartRequest.swift in Sources */,
 				4AB721482B739BAB001E2C76 /* RectangleMarkGraphModel.swift in Sources */,
+				4ADF09E92B7780D6002318B2 /* PaginationState.swift in Sources */,
 				4AB7216F2B7619E6001E2C76 /* Encodable+Extension.swift in Sources */,
 				4AB7214A2B739C21001E2C76 /* Endpoint.swift in Sources */,
 				4AB7212F2B738BA0001E2C76 /* WidgetsBundle.swift in Sources */,

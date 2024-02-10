@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum OverviewItemType: CaseIterable {
+enum OverviewItemType: String, CaseIterable {
     
     case mrr
     case subsciptions

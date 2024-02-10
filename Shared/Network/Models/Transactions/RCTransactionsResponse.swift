@@ -71,3 +71,197 @@ struct RCTransactionApp: Decodable {
         case name
     }
 }
+
+extension RCTransactionsResponse {
+
+    static let stub: Self = {
+        let string = #"""
+        {
+            "first_purchase_ms": 1707299898000,
+            "last_purchase_ms": 1704034951000,
+            "transactions": [
+                {
+                    "app": {
+                        "bundle_id": "com.sereisoglu.kedi",
+                        "id": "a001",
+                        "name": "Kedi"
+                    },
+                    "expires_date": "2024-03-07T09:00:00Z",
+                    "is_in_introductory_price_period": false,
+                    "is_renewal": false,
+                    "is_sandbox": false,
+                    "is_trial_conversion": false,
+                    "is_trial_period": false,
+                    "product_identifier": "kedi.supporter.monthly",
+                    "purchase_date": "2024-02-07T09:00:00Z",
+                    "revenue": 2.99,
+                    "store": "App Store",
+                    "store_transaction_identifier": "t001",
+                    "subscriber_country_code": "US",
+                    "subscriber_id": "s001",
+                    "subscriber_last_seen_platform": "iOS",
+                    "was_refunded": false
+                },
+                {
+                    "app": {
+                        "bundle_id": "com.sereisoglu.kedi",
+                        "id": "a001",
+                        "name": "Kedi"
+                    },
+                    "expires_date": null,
+                    "is_in_introductory_price_period": false,
+                    "is_renewal": false,
+                    "is_sandbox": false,
+                    "is_trial_conversion": false,
+                    "is_trial_period": false,
+                    "product_identifier": "kedi.supporter.monthly",
+                    "purchase_date": "2024-02-07T03:00:00Z",
+                    "revenue": 199.99,
+                    "store": "App Store",
+                    "store_transaction_identifier": "t002",
+                    "subscriber_country_code": "TR",
+                    "subscriber_id": "s002",
+                    "subscriber_last_seen_platform": "iOS",
+                    "was_refunded": false
+                },
+                {
+                    "app": {
+                        "bundle_id": "com.sereisoglu.kedi",
+                        "id": "a001",
+                        "name": "Kedi"
+                    },
+                    "expires_date": "2024-03-07T00:00:00Z",
+                    "is_in_introductory_price_period": false,
+                    "is_renewal": true,
+                    "is_sandbox": false,
+                    "is_trial_conversion": false,
+                    "is_trial_period": true,
+                    "product_identifier": "kedi.supporter.monthly",
+                    "purchase_date": "2024-02-07T00:00:00Z",
+                    "revenue": 1.99,
+                    "store": "Stripe",
+                    "store_transaction_identifier": "t003",
+                    "subscriber_country_code": "US",
+                    "subscriber_id": "s003",
+                    "subscriber_last_seen_platform": "iOS",
+                    "was_refunded": false
+                },
+                {
+                    "app": {
+                        "bundle_id": "com.sereisoglu.kedi",
+                        "id": "a001",
+                        "name": "Kedi"
+                    },
+                    "expires_date": "2024-02-07T20:00:00Z",
+                    "is_in_introductory_price_period": false,
+                    "is_renewal": true,
+                    "is_sandbox": false,
+                    "is_trial_conversion": false,
+                    "is_trial_period": false,
+                    "product_identifier": "kedi.supporter.monthly",
+                    "purchase_date": "2024-02-06T20:00:00Z",
+                    "revenue": 0.0,
+                    "store": "Play Store",
+                    "store_transaction_identifier": "t004",
+                    "subscriber_country_code": "FR",
+                    "subscriber_id": "s004",
+                    "subscriber_last_seen_platform": "iOS",
+                    "was_refunded": true
+                },
+                {
+                    "app": {
+                        "bundle_id": "com.sereisoglu.kedi",
+                        "id": "a001",
+                        "name": "Kedi"
+                    },
+                    "expires_date": "2025-02-06T18:00:00Z",
+                    "is_in_introductory_price_period": false,
+                    "is_renewal": true,
+                    "is_sandbox": false,
+                    "is_trial_conversion": false,
+                    "is_trial_period": false,
+                    "product_identifier": "kedi.supporter.monthly",
+                    "purchase_date": "2024-02-06T18:00:00Z",
+                    "revenue": 19.99,
+                    "store": "App Store",
+                    "store_transaction_identifier": "t005",
+                    "subscriber_country_code": "PT",
+                    "subscriber_id": "s005",
+                    "subscriber_last_seen_platform": "iOS",
+                    "was_refunded": false
+                },
+                {
+                    "app": {
+                        "bundle_id": "com.sereisoglu.kedi",
+                        "id": "a001",
+                        "name": "Kedi"
+                    },
+                    "expires_date": "2024-03-06T13:00:00Z",
+                    "is_in_introductory_price_period": false,
+                    "is_renewal": false,
+                    "is_sandbox": false,
+                    "is_trial_conversion": false,
+                    "is_trial_period": false,
+                    "product_identifier": "kedi.supporter.monthly",
+                    "purchase_date": "2024-02-06T13:00:00Z",
+                    "revenue": 2.99,
+                    "store": "App Store",
+                    "store_transaction_identifier": "t006",
+                    "subscriber_country_code": "PL",
+                    "subscriber_id": "s006",
+                    "subscriber_last_seen_platform": "iOS",
+                    "was_refunded": false
+                },
+                {
+                    "app": {
+                        "bundle_id": "com.sereisoglu.kedi",
+                        "id": "a001",
+                        "name": "Kedi"
+                    },
+                    "expires_date": "2025-02-05T17:00:00Z",
+                    "is_in_introductory_price_period": false,
+                    "is_renewal": true,
+                    "is_sandbox": false,
+                    "is_trial_conversion": false,
+                    "is_trial_period": false,
+                    "product_identifier": "kedi.supporter.monthly",
+                    "purchase_date": "2024-02-05T17:00:00Z",
+                    "revenue": 4.99,
+                    "store": "App Store",
+                    "store_transaction_identifier": "t007",
+                    "subscriber_country_code": "FR",
+                    "subscriber_id": "s007",
+                    "subscriber_last_seen_platform": "iOS",
+                    "was_refunded": false
+                },
+                {
+                    "app": {
+                        "bundle_id": "com.sereisoglu.kedi",
+                        "id": "a001",
+                        "name": "Kedi"
+                    },
+                    "expires_date": "2024-03-05T06:00:00Z",
+                    "is_in_introductory_price_period": false,
+                    "is_renewal": false,
+                    "is_sandbox": false,
+                    "is_trial_conversion": false,
+                    "is_trial_period": false,
+                    "product_identifier": "kedi.supporter.monthly",
+                    "purchase_date": "2024-02-05T06:00:00Z",
+                    "revenue": 2.99,
+                    "store": "App Store",
+                    "store_transaction_identifier": "t008",
+                    "subscriber_country_code": "US",
+                    "subscriber_id": "s008",
+                    "subscriber_last_seen_platform": "iOS",
+                    "was_refunded": false
+                }
+            ]
+        }
+        """#
+
+        let data = Data(string.utf8)
+
+        return try! JSONDecoder().decode(Self.self, from: data)
+    }()
+}

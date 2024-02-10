@@ -19,3 +19,4 @@ struct RCErrorResponse: Decodable {
 // { "code": 7008, "message": "One time password needed." }
 // { "code": 7632, "message": "invalid X-Requested-With header value" }
 // { "code": 7011, "message": "Invalid One time password." }
+// { "code": 7114, "message": "Too many requests." }

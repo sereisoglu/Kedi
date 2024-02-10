@@ -16,6 +16,7 @@ enum RCError: Error {
     case oneTimePasswordNeeded(RCErrorResponse)
     case invalidOneTimePassword(RCErrorResponse)
     case invalidXRequestedWithHeaderValue(RCErrorResponse)
+    case tooManyRequests(RCErrorResponse)
     case unknown(RCErrorResponse)
     
     init(error: RCErrorResponse) {
@@ -26,8 +27,28 @@ enum RCError: Error {
         case 7008: self = .oneTimePasswordNeeded(error)
         case 7011: self = .invalidOneTimePassword(error)
         case 7632: self = .invalidXRequestedWithHeaderValue(error)
+        case 7114: self = .tooManyRequests(error)
         case .none: fallthrough
         default: self = .unknown(error)
+        }
+    }
+}
+
+extension RCError: LocalizedError {
+    
+    var errorDescription: String? {
+        switch self {
+        case .internal(let internalError):
+            return internalError.localizedDescription
+        case .invalidEmailOrPassword(let error),
+                .invalidAuthorizationToken(let error),
+                .expiredAuthorizationToken(let error),
+                .oneTimePasswordNeeded(let error),
+                .invalidOneTimePassword(let error),
+                .invalidXRequestedWithHeaderValue(let error),
+                .tooManyRequests(let error),
+                .unknown(let error):
+            return error.message ?? "An unknown error has occurred."
         }
     }
 }
@@ -41,20 +62,20 @@ enum RCInternalError: Error {
     case decodeFailure(Error)
 }
 
-extension RCError {
+extension RCInternalError: LocalizedError {
     
-    var message: String {
+    var errorDescription: String? {
         switch self {
-        case .internal(let internalError):
-            return internalError.localizedDescription
-        case .invalidEmailOrPassword(let error),
-                .invalidAuthorizationToken(let error),
-                .expiredAuthorizationToken(let error),
-                .oneTimePasswordNeeded(let error),
-                .invalidOneTimePassword(let error),
-                .invalidXRequestedWithHeaderValue(let error),
-                .unknown(let error):
-            return error.message ?? "An unknown error has occurred."
+        case .error(let error):
+            return error.localizedDescription
+        case .nilResponse:
+            return "Nil Response!"
+        case .nilError:
+            return "Nil Error!"
+        case .decodeSuccess(_, let error):
+            return error.localizedDescription
+        case .decodeFailure(let error):
+            return error.localizedDescription
         }
     }
 }

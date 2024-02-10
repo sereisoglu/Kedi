@@ -1,5 +1,5 @@
 //
-//  UIState.swift
+//  GeneralState.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/7/24.
@@ -7,18 +7,19 @@
 
 import Foundation
 
-enum UIState: Equatable {
+enum GeneralState: Equatable {
+    
     case loading
     case empty
     case error(Error)
     case data
     
-    static func == (lhs: UIState, rhs: UIState) -> Bool {
+    static func == (lhs: GeneralState, rhs: GeneralState) -> Bool {
         switch (lhs, rhs) {
         case (.loading, .loading),
-                (.empty, .empty),
-                (.error, .error),
-                (.data, .data):
+            (.empty, .empty),
+            (.error, .error),
+            (.data, .data):
             return true
         default:
             return false

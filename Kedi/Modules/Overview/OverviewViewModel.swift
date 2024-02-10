@@ -11,10 +11,10 @@ final class OverviewViewModel: ObservableObject {
     
     private let apiService = APIService.shared
     
-    @Published var state: UIState = .loading
+    @Published private(set) var state: GeneralState = .loading
     
-    @Published var items: [OverviewItem] = .stub
-    @Published var chartValues = [OverviewItemType: [LineAndAreaMarkChartValue]]()
+    @Published private(set) var items: [OverviewItem] = .stub
+    @Published private(set) var chartValues = [OverviewItemType: [LineAndAreaMarkChartValue]]()
     
     init() {
         Task {
@@ -41,6 +41,7 @@ final class OverviewViewModel: ObservableObject {
                 type: RCOverviewResponse.self,
                 endpoint: .overview
             )
+            
             items = [
                 .init(type: .mrr, value: "\(data?.mrr?.formatted(.currency(code: "USD")) ?? "")"),
                 .init(type: .subsciptions, value: "\(data?.activeSubscribersCount?.formatted() ?? "")"),
@@ -49,6 +50,7 @@ final class OverviewViewModel: ObservableObject {
                 .init(type: .users, value: "\(data?.activeUsersCount?.formatted() ?? "")"),
                 .init(type: .installs, value: "\(data?.installsCount?.formatted() ?? "")")
             ]
+            
             state = .data
         } catch {
             items = []

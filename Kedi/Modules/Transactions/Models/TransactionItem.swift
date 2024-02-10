@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TransactionSection: Identifiable, Hashable {
     
-    let id = UUID()
+    var id: String { date.format(to: .iso8601WithoutMilliseconds) }
     var date: Date
     var transactions: [TransactionItem]
     var revenue: Double
@@ -23,7 +23,7 @@ struct TransactionSection: Identifiable, Hashable {
 
 struct TransactionItem: Identifiable, Hashable {
     
-    let id = UUID()
+    let id: String
     let appId: String
     let subscriberId: String
     
@@ -38,6 +38,7 @@ struct TransactionItem: Identifiable, Hashable {
     var date: String
     
     init(data: RCTransaction) {
+        id = data.storeTransactionIdentifier ?? UUID().uuidString
         appId = data.app?.id ?? ""
         subscriberId = data.subscriberId ?? ""
         
@@ -144,4 +145,22 @@ enum TransactionStore {
             return nil
         }
     }
+}
+
+extension Array where Element == TransactionSection {
+    
+    static let stub: Self = {
+        let groupedTransactions = Dictionary(grouping: RCTransactionsResponse.stub.transactions ?? []) { transaction in
+            transaction.purchaseDate?.format(to: .iso8601WithoutMilliseconds)?.withoutTime
+        }
+        
+        return groupedTransactions
+            .compactMap { date, transactions in
+                guard let date else {
+                    return nil
+                }
+                return .init(date: date, transactions: transactions.map { .init(data: $0) })
+            }
+            .sorted(by: { $0.date > $1.date })
+    }()
 }

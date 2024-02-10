@@ -30,7 +30,14 @@ extension RCOverviewResponse {
 
     static let stub: Self = {
         let string = #"""
-        {"active_subscribers_count":1140,"active_trials_count":24,"active_users_count":5194,"installs_count":7108,"mrr":1239.97116721938576,"revenue":9384.0915226693915}
+        {
+            "active_subscribers_count": 1140,
+            "active_trials_count": 24,
+            "active_users_count": 5194,
+            "installs_count": 7108,
+            "mrr": 1239.97116721938576,
+            "revenue": 9384.0915226693915
+        }
         """#
 
         let data = Data(string.utf8)

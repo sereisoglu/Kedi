@@ -11,7 +11,13 @@ final class TransactionsViewModel: ObservableObject {
     
     private let apiService = APIService.shared
     
-    @Published var transactions = [TransactionSection]()
+    private var transactions = [RCTransaction]()
+    private var startFrom: Int?
+    
+    @Published private(set) var state: GeneralState = .loading
+    @Published private(set) var paginationState: PaginationState = .idle
+    
+    @Published private(set) var transactionSections: [TransactionSection] = .stub
     
     init() {
         Task {
@@ -24,24 +30,72 @@ final class TransactionsViewModel: ObservableObject {
         do {
             let data = try await apiService.request(
                 type: RCTransactionsResponse.self,
-                endpoint: .transactions(.init())
+                endpoint: .transactions(.init(
+                    limit: 10,
+                    endDate: Date(byAdding: .day, value: 7).format(to: .yyy_MM_dd)
+                ))
             )
             
-            let groupedTransactions = Dictionary(grouping: data?.transactions ?? []) { transaction in
-                transaction.purchaseDate?.format(to: .iso8601WithoutMilliseconds)?.withoutTime
-            }
+            transactions = data?.transactions ?? []
+            startFrom = data?.lastPurchaseMs
             
-            transactions = groupedTransactions
-                .compactMap { date, transactions in
-                    guard let date else {
-                        return nil
-                    }
-                    return .init(date: date, transactions: transactions.map { .init(data: $0) })
-                }
-                .sorted(by: { $0.date > $1.date })
+            transactionSections = getSections(transactions: transactions)
+            
+            state = .data
         } catch {
-            print(error)
+            transactionSections = []
+            state = .error(error)
         }
+    }
+    
+    @MainActor
+    func fetchTransactionsForPagination() {
+        guard state == .data,
+              paginationState == .idle else {
+            return
+        }
+        paginationState = .paginating
+        
+        Task {
+            do {
+                try await Task.sleep(nanoseconds: 1_000_000_000)
+                let data = try await apiService.request(
+                    type: RCTransactionsResponse.self,
+                    endpoint: .transactions(.init(
+                        limit: 10,
+                        startFrom: startFrom
+                    ))
+                )
+
+                if data?.transactions?.isEmpty ?? true {
+                    paginationState = .done
+                } else {
+                    transactions += data?.transactions ?? []
+                    startFrom = data?.lastPurchaseMs
+
+                    transactionSections = getSections(transactions: transactions)
+
+                    paginationState = .idle
+                }
+            } catch {
+                paginationState = .error(error)
+            }
+        }
+    }
+    
+    private func getSections(transactions: [RCTransaction]) -> [TransactionSection] {
+        let groupedTransactions = Dictionary(grouping: transactions) { transaction in
+            transaction.purchaseDate?.format(to: .iso8601WithoutMilliseconds)?.withoutTime
+        }
+        
+        return groupedTransactions
+            .compactMap { date, transactions in
+                guard let date else {
+                    return nil
+                }
+                return .init(date: date, transactions: transactions.map { .init(data: $0) })
+            }
+            .sorted(by: { $0.date > $1.date })
     }
     
     func refresh() async {

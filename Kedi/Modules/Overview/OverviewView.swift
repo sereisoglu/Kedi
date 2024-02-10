@@ -59,6 +59,7 @@ struct OverviewView: View {
                 .padding(.horizontal)
                 .padding(.bottom)
             }
+            .disabled(viewModel.state == .loading)
         }
     }
 }

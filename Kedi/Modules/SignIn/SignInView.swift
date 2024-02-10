@@ -72,7 +72,7 @@ struct SignInView: View {
                     Text("Use your RevenueCat account credentials to access. Your RevenueCat account credentials are used to create access tokens.")
                         .padding()
                 }
-                .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                .listRowInsets(.zero)
                 .listRowBackground(Color.clear)
             }
             .navigationTitle("Sign In")

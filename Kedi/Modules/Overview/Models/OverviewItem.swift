@@ -9,7 +9,7 @@ import Foundation
 
 struct OverviewItem: Identifiable, Hashable {
     
-    let id = UUID()
+    var id: String { type.rawValue }
     var icon: String { type.icon }
     var name: String { type.name }
     var note: String? { type.note }

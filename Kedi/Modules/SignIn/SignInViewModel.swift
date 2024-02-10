@@ -20,9 +20,10 @@ final class SignInViewModel: ObservableObject {
     private let authManager = AuthManager.shared
     private let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
     
-    private var cancellableSet = Set<AnyCancellable>()
+    private var cancellableFields = Set<AnyCancellable>()
+    private var cancellableFormValid: AnyCancellable?
     private var focusedField: SignInViewModel.Field?
-    private var signInError: RCError?
+    private var signInError: Error?
     
     @Published private var isEmailValid = false
     @Published private var isEmailFocusedAtLeastOnce = false
@@ -34,8 +35,8 @@ final class SignInViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     @Published var code2FA = ""
-    @Published var is2FARequired = false
-    @Published var isFormValid = false
+    @Published private(set) var is2FARequired = false
+    @Published private(set) var isFormValid = false
     
     @Published var showingAlert = false
     
@@ -52,7 +53,7 @@ final class SignInViewModel: ObservableObject {
     }
     
     var alertMessage: String? {
-        signInError?.message
+        signInError?.localizedDescription
     }
     
     init() {
@@ -61,41 +62,39 @@ final class SignInViewModel: ObservableObject {
                 self.emailPredicate.evaluate(with: email)
             }
             .assign(to: \.isEmailValid, on: self)
-            .store(in: &cancellableSet)
+            .store(in: &cancellableFields)
         
         $password
             .map { password in
                 password.count >= 8
             }
             .assign(to: \.isPasswordValid, on: self)
-            .store(in: &cancellableSet)
+            .store(in: &cancellableFields)
         
         $code2FA
             .map { code2FA in
                 !code2FA.isEmpty
             }
             .assign(to: \.isCode2FAValid, on: self)
-            .store(in: &cancellableSet)
+            .store(in: &cancellableFields)
         
         setPublishers()
     }
     
     private func setPublishers() {
         if is2FARequired {
-            Publishers.CombineLatest3($isEmailValid, $isPasswordValid, $isCode2FAValid)
+            cancellableFormValid = Publishers.CombineLatest3($isEmailValid, $isPasswordValid, $isCode2FAValid)
                 .map { $0 && $1 && $2 }
                 .assign(to: \.isFormValid, on: self)
-                .store(in: &cancellableSet)
         } else {
-            Publishers.CombineLatest($isEmailValid, $isPasswordValid)
+            cancellableFormValid = Publishers.CombineLatest($isEmailValid, $isPasswordValid)
                 .map { $0 && $1 }
                 .assign(to: \.isFormValid, on: self)
-                .store(in: &cancellableSet)
         }
     }
     
     @MainActor
-    private func postSignIn(completion: ((Error?) -> Void)? = nil) async {
+    private func postSignIn() async throws {
         do {
             let request: RCLoginRequest
             if is2FARequired {
@@ -112,16 +111,14 @@ final class SignInViewModel: ObservableObject {
             if let token = data?.authenticationToken,
                let tokenExpiration = data?.authenticationTokenExpiration {
                 authManager.signIn(token: token, tokenExpiration: tokenExpiration)
-                
-                completion?(nil)
             } else {
-                completion?(RCError.internal(.nilResponse))
+                throw RCError.internal(.nilResponse)
             }
         } catch RCError.oneTimePasswordNeeded {
             is2FARequired = true
             setPublishers()
         } catch {
-            completion?(error)
+            throw error
         }
     }
 }
@@ -130,6 +127,7 @@ final class SignInViewModel: ObservableObject {
 
 extension SignInViewModel {
     
+    @MainActor
     func onFocusedFieldChange(field: Field?) {
         focusedField = field
         
@@ -145,15 +143,13 @@ extension SignInViewModel {
         }
     }
     
+    @MainActor
     func handleSignInButton() async {
-        await postSignIn { [weak self] error in
-            guard let self else {
-                return
-            }
-            if let error = error as? RCError {
-                signInError = error
-                showingAlert = true
-            }
+        do {
+            try await postSignIn()
+        } catch {
+            signInError = error
+            showingAlert = true
         }
     }
 }
