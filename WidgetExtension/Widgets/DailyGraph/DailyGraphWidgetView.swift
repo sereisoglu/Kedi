@@ -18,12 +18,12 @@ struct DailyGraphWidgetView : View {
             switch widgetFamily {
             case .systemSmall:
                 RectangleMarkGraphView(values: entry.items, weekCount: 7)
-                    .padding()
                     .clipShape(ContainerRelativeShape())
+                    .padding()
             case .systemMedium:
                 RectangleMarkGraphView(values: entry.items, weekCount: 17)
-                    .padding()
                     .clipShape(ContainerRelativeShape())
+                    .padding()
             default:
                 Text("Unsupported widget family!")
             }

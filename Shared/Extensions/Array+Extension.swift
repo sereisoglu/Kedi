@@ -33,3 +33,13 @@ extension Array where Element == Double {
         }
     }
 }
+
+// https://stackoverflow.com/a/38156873/9212388
+extension Array {
+    
+    func chunked(by chunkSize: Int) -> [[Element]] {
+        return stride(from: 0, to: self.count, by: chunkSize).map {
+            Array(self[$0..<Swift.min($0 + chunkSize, self.count)])
+        }
+    }
+}

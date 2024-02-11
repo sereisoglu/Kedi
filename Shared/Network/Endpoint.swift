@@ -39,19 +39,19 @@ extension Endpoint {
     var path: String {
         switch self {
         case .login:
-            return "/login"
+            return "login"
         case .me:
-            return "/me"
+            return "me"
         case .overview:
-            return "/me/overview"
+            return "me/overview"
         case .charts(let request):
-            return "/me/charts_v2/\(request.name.rawValue)"
+            return "me/charts_v2/\(request.name.rawValue)"
         case .transactions:
-            return "/me/transactions"
+            return "me/transactions"
         case .transactionDetail(let appId, let subscriberId):
-            return "/me/apps/\(appId)/subscribers/\(subscriberId)"
+            return "me/apps/\(appId)/subscribers/\(subscriberId)"
         case .transactionDetailActivity(let appId, let subscriberId):
-            return "/me/apps/\(appId)/subscribers/\(subscriberId)/activity"
+            return "me/apps/\(appId)/subscribers/\(subscriberId)/activity"
         }
     }
     

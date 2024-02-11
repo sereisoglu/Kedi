@@ -56,11 +56,6 @@ extension Date {
     var weekday: Int {
         (calendar.component(.weekday, from: self) - calendar.firstWeekday + 7) % 7 + 1
     }
-    
-    func nearestQuarterHourToTheFuture() -> Date {
-        let granularity = 900.0 // 60.0 * 15.0
-        return Date(timeIntervalSinceReferenceDate: (self.timeIntervalSinceReferenceDate / granularity).rounded(.up) * granularity)
-    }
 }
 
 extension Date {

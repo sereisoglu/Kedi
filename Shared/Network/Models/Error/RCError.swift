@@ -34,6 +34,19 @@ enum RCError: Error {
     }
 }
 
+extension RCError {
+    
+    var isAuthorizationError: Bool {
+        switch self {
+        case .invalidAuthorizationToken,
+                .expiredAuthorizationToken:
+            return true
+        default:
+            return false
+        }
+    }
+}
+
 extension RCError: LocalizedError {
     
     var errorDescription: String? {

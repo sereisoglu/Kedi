@@ -47,7 +47,7 @@ extension Color {
 //    
 //    // MARK: - Other Colors
 //    static let separator = Color(UIColor.separator)
-//    static let opaqueSeparator = Color(UIColor.opaqueSeparator)
+    static let opaqueSeparator = Color(UIColor.opaqueSeparator)
 //    static let link = Color(UIColor.link)
 //    
 //    // MARK: System Colors

@@ -12,8 +12,8 @@ struct DailyGraphWidgetProvider: TimelineProvider {
     
     typealias Entry = DailyGraphWidgetEntry
     
-    let authManager = AuthManager.shared
-    let apiManager = APIService.shared
+    private let authManager = AuthManager.shared
+    private let apiManager = APIService.shared
     
     func placeholder(in context: Context) -> Entry {
         .placeholder
@@ -28,9 +28,18 @@ struct DailyGraphWidgetProvider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         Task {
             await getEntry(context: context) { entry in
-                let policy: TimelineReloadPolicy = .after(Date().nearestQuarterHourToTheFuture())
-                let timeline = Timeline(entries: [entry], policy: policy)
-                completion(timeline)
+                let policy: TimelineReloadPolicy
+                if let error = entry.error {
+                    if error.isAuthorizationError {
+                        policy = .never
+                    } else {
+                        policy = .after(Date(byAdding: .minute, value: 1))
+                    }
+                } else {
+                    policy = .after(Date(byAdding: .minute, value: 15))
+                }
+                
+                completion(.init(entries: [entry], policy: policy))
             }
         }
     }
