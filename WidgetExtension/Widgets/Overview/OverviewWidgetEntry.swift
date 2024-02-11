@@ -20,13 +20,13 @@ struct OverviewWidgetEntry: TimelineEntry {
     var error: RCError?
 }
 
-struct OverviewItem: Hashable {
+struct OverviewItem: Hashable, Codable {
     
     var type: OverviewItemType
     var value: String
 }
 
-enum OverviewItemType: String, CaseIterable {
+enum OverviewItemType: String, CaseIterable, Codable {
     
     case mrr
     case subsciptions

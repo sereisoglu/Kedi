@@ -9,7 +9,7 @@ import Foundation
 
 typealias RectangleMarkGraphModel = [Date: RectangleMarkGraphValue]
 
-struct RectangleMarkGraphValue {
+struct RectangleMarkGraphValue: Hashable, Codable {
     
     var date: Date
     var value: Double

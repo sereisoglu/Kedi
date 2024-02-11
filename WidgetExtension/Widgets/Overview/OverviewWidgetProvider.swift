@@ -14,6 +14,7 @@ struct OverviewWidgetProvider: TimelineProvider {
     
     private let authManager = AuthManager.shared
     private let apiManager = APIService.shared
+    private let cacheManager = CacheManager.shared
     
     func placeholder(in context: Context) -> Entry {
         .placeholder
@@ -52,12 +53,21 @@ struct OverviewWidgetProvider: TimelineProvider {
         var err: RCError?
         do {
             items = try await fetchData()
+            cacheManager.setWithEncode(
+                key: "widgets/overview",
+                data: items,
+                expiry: .date(.init(byAdding: .day, value: 3))
+            )
         } catch {
             err = error as? RCError
+            items = cacheManager.getWithDecode(
+                key: "widgets/overview",
+                type: [OverviewItem].self
+            ) ?? []
         }
         
-        if err != nil,
-           context.isPreview {
+        if context.isPreview,
+           err != nil {
             completion(.placeholder)
         } else {
             completion(.init(date: Date(), items: items, error: err))
