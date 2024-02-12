@@ -15,7 +15,7 @@ struct OverviewView: View {
     
     var body: some View {
         NavigationStack {
-            getBody()
+            makeBody()
                 .navigationTitle("Overview")
                 .background(Color.systemGroupedBackground)
                 .refreshable {
@@ -25,7 +25,7 @@ struct OverviewView: View {
     }
     
     @ViewBuilder
-    private func getBody() -> some View {
+    private func makeBody() -> some View {
         switch viewModel.state {
         case .empty:
             ContentUnavailableView(
@@ -46,7 +46,7 @@ struct OverviewView: View {
                 LazyVGrid(
                     columns: .init(
                         repeating: .init(.flexible(), spacing: 12),
-                        count: horizontalSizeClass == .compact ? 2 : 3
+                        count: horizontalSizeClass == .compact ? 2 : 4
                     ),
                     spacing: 12
                 ) {

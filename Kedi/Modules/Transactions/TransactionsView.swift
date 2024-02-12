@@ -13,7 +13,7 @@ struct TransactionsView: View {
     
     var body: some View {
         NavigationStack {
-            getBody()
+            makeBody()
                 .navigationTitle("Transactions")
                 .background(Color.systemGroupedBackground)
                 .refreshable {
@@ -23,7 +23,7 @@ struct TransactionsView: View {
     }
     
     @ViewBuilder
-    private func getBody() -> some View {
+    private func makeBody() -> some View {
         switch viewModel.state {
         case .empty:
             ContentUnavailableView(

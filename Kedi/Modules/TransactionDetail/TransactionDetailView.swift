@@ -12,14 +12,14 @@ struct TransactionDetailView: View {
     @StateObject var viewModel: TransactionDetailViewModel
     
     var body: some View {
-        getBody()
+        makeBody()
             .navigationTitle(viewModel.navigationTitle)
             .background(Color.systemGroupedBackground)
             .navigationBarTitleDisplayMode(.inline)
     }
     
     @ViewBuilder
-    private func getBody() -> some View {
+    private func makeBody() -> some View {
         switch viewModel.state {
         case .empty:
             ContentUnavailableView(

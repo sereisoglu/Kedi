@@ -9,10 +9,10 @@ import SwiftUI
 
 struct RootView: View {
     
-    @EnvironmentObject var authManager: AuthManager
+    @EnvironmentObject var meManager: MeManager
     
     var body: some View {
-        if authManager.isSignedIn {
+        if meManager.isSignedIn {
             MainView()
         } else {
             SignInView()

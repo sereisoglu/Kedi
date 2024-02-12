@@ -10,7 +10,7 @@ import WidgetKit
 
 struct DailyGraphWidget: Widget {
     
-    let kind = "DailyGraphWidget"
+    let kind = WidgetKind.dailyGraph.rawValue
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: DailyGraphWidgetProvider()) { entry in

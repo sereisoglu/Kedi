@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OverviewWidgetView : View {
     
-    @Environment(\.widgetFamily) var widgetFamily
+    @Environment(\.widgetFamily) private var widgetFamily
     
     var entry: OverviewWidgetProvider.Entry
 
@@ -26,7 +26,7 @@ struct OverviewWidgetView : View {
                         
                         if index != 2 {
                             RoundedRectangle(cornerRadius: 1)
-                                .fill(Color.opaqueSeparator)
+                                .fill(Color.opaqueSeparator.opacity(0.5))
                                 .frame(height: 1)
                         }
                     }
@@ -47,11 +47,11 @@ struct OverviewWidgetView : View {
                             if index != 2 {
                                 HStack(spacing: 30) {
                                     RoundedRectangle(cornerRadius: 1)
-                                        .fill(Color.opaqueSeparator)
+                                        .fill(Color.opaqueSeparator.opacity(0.5))
                                         .frame(height: 1)
                                     
                                     RoundedRectangle(cornerRadius: 1)
-                                        .fill(Color.opaqueSeparator)
+                                        .fill(Color.opaqueSeparator.opacity(0.5))
                                         .frame(height: 1)
                                 }
                             }
@@ -59,7 +59,7 @@ struct OverviewWidgetView : View {
                     }
                     
                     RoundedRectangle(cornerRadius: 1)
-                        .fill(Color.opaqueSeparator)
+                        .fill(Color.opaqueSeparator.opacity(0.5))
                         .frame(width: 1)
                 }
                 .padding()

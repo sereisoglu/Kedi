@@ -12,8 +12,8 @@ struct DailyGraphWidgetProvider: TimelineProvider {
     
     typealias Entry = DailyGraphWidgetEntry
     
-    private let authManager = AuthManager.shared
-    private let apiManager = APIService.shared
+    private let meManager = MeManager.shared
+    private let apiService = APIService.shared
     private let cacheManager = CacheManager.shared
     
     func placeholder(in context: Context) -> Entry {
@@ -30,12 +30,8 @@ struct DailyGraphWidgetProvider: TimelineProvider {
         Task {
             await getEntry(context: context) { entry in
                 let policy: TimelineReloadPolicy
-                if let error = entry.error {
-                    if error.isAuthorizationError {
-                        policy = .never
-                    } else {
-                        policy = .after(Date(byAdding: .minute, value: 1))
-                    }
+                if entry.error != nil {
+                    policy = meManager.isSignedIn ? .after(Date(byAdding: .minute, value: 1)) : .never
                 } else {
                     policy = .after(Date(byAdding: .minute, value: 15))
                 }
@@ -47,6 +43,7 @@ struct DailyGraphWidgetProvider: TimelineProvider {
     
     private func getEntry(
         context: Context,
+        retryCount: Int = 2,
         completion: @escaping (Entry) -> Void
     ) async {
         var items = [RectangleMarkGraphValue]()
@@ -59,6 +56,10 @@ struct DailyGraphWidgetProvider: TimelineProvider {
                 expiry: .date(.init(byAdding: .day, value: 3))
             )
         } catch {
+            if retryCount > 0 {
+                await getEntry(context: context, retryCount: retryCount - 1, completion: completion)
+                return
+            }
             err = error as? RCError
             items = cacheManager.getWithDecode(
                 key: "widgets/dailyGraph",
@@ -76,7 +77,7 @@ struct DailyGraphWidgetProvider: TimelineProvider {
     
     private func fetchData() async throws -> [RectangleMarkGraphValue] {
         do {
-            let data = try await apiManager.request(
+            let data = try await apiService.request(
                 type: RCChartResponse.self,
                 endpoint: .charts(.init(
                     name: .revenue,

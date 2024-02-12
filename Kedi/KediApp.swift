@@ -13,7 +13,7 @@ struct KediApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
-                .environmentObject(AuthManager.shared)
+                .environmentObject(MeManager.shared)
         }
     }
 }

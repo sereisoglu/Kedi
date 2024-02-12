@@ -9,7 +9,10 @@ import Foundation
 
 final class SettingsViewModel: ObservableObject {
     
-    private let authManager = AuthManager.shared
+    private let meManager = MeManager.shared
+    
+    var me: RCMeResponse? { meManager.me }
+    var authTokenExpiresDate: Date? { meManager.getAuthTokenExpiresDate() }
 }
 
 // MARK: - Actions
@@ -18,6 +21,6 @@ extension SettingsViewModel {
     
     @MainActor
     func handleSignOutButton() {
-        authManager.signOut()
+        meManager.signOut()
     }
 }

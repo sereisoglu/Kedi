@@ -17,7 +17,8 @@ final class SignInViewModel: ObservableObject {
     }
     
     private let apiService = APIService.shared
-    private let authManager = AuthManager.shared
+    private let meManager = MeManager.shared
+    
     private let emailPredicate = NSPredicate(format: "SELF MATCHES %@", "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}")
     
     private var cancellableFields = Set<AnyCancellable>()
@@ -103,14 +104,24 @@ final class SignInViewModel: ObservableObject {
                 request = .init(email: email, password: password)
             }
             
-            let data = try await apiService.request(
+            let loginData = try await apiService.request(
                 type: RCLoginResponse.self,
                 endpoint: .login(request)
             )
             
-            if let token = data?.authenticationToken,
-               let tokenExpiration = data?.authenticationTokenExpiration {
-                authManager.signIn(token: token, tokenExpiration: tokenExpiration)
+            let meData = try await apiService.request(
+                type: RCMeResponse.self,
+                endpoint: .me
+            )
+            
+            if let meData,
+               let token = loginData?.authenticationToken,
+               let tokenExpiration = loginData?.authenticationTokenExpiration {
+                let isSignedIn = meManager.signIn(me: meData, token: token, tokenExpiration: tokenExpiration)
+                
+                if !isSignedIn {
+                    throw RCError.internal(.nilResponse)
+                }
             } else {
                 throw RCError.internal(.nilResponse)
             }

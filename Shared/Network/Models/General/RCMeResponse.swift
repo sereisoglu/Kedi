@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RCMeResponse: Decodable {
+struct RCMeResponse: Codable {
     
     var distinctId: String?
     var email: String?
@@ -26,7 +26,7 @@ struct RCMeResponse: Decodable {
     }
 }
 
-struct RCMeBillingInfo: Decodable {
+struct RCMeBillingInfo: Codable {
     
     var currentMtr: Int?
     var trailing30dayMtr: Int?

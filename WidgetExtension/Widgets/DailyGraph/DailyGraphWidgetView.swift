@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DailyGraphWidgetView : View {
     
-    @Environment(\.widgetFamily) var widgetFamily
+    @Environment(\.widgetFamily) private var widgetFamily
     
     var entry: DailyGraphWidgetProvider.Entry
 

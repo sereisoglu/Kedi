@@ -10,6 +10,7 @@ import Foundation
 final class OverviewViewModel: ObservableObject {
     
     private let apiService = APIService.shared
+    private let meManager = MeManager.shared
     
     @Published private(set) var state: GeneralState = .loading
     
@@ -107,8 +108,12 @@ final class OverviewViewModel: ObservableObject {
                     do {
                         return try await self?.apiService.request(
                             type: RCChartResponse.self,
-                            endpoint: .charts(.init(name: name, resolution: .month, startDate: "2021-07-15"))
-                        ) //.charts(name: name, resolution: .month, startDate: "2021-07-15")
+                            endpoint: .charts(.init(
+                                name: name,
+                                resolution: .month,
+                                startDate: self?.meManager.firstTransactionDate?.format(to: .yyy_MM_dd)
+                            ))
+                        )
                     } catch {
                         print(error)
                         return nil

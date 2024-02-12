@@ -10,7 +10,7 @@ import WidgetKit
 
 struct OverviewWidget: Widget {
     
-    let kind = "OverviewWidget"
+    let kind = WidgetKind.overview.rawValue
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: OverviewWidgetProvider()) { entry in
