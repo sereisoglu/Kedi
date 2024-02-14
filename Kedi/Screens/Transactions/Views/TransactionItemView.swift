@@ -47,16 +47,12 @@ struct TransactionItemView: View {
                             .foregroundStyle(.fill)
                     }
                     .frame(width: 22, height: 22)
-                    .clipShape(
-                        RoundedRectangle(cornerRadius: 5, style: .continuous)
-                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
                 } else {
                     Rectangle()
                         .foregroundStyle(.fill)
                         .frame(width: 22, height: 22)
-                        .clipShape(
-                            RoundedRectangle(cornerRadius: 5, style: .continuous)
-                        )
+                        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
                 }
                 
                 Text(transaction.appName)

@@ -51,6 +51,14 @@ struct SettingsView: View {
                     Text("Account")
                 }
                 
+                Section {
+                    NavigationLink(value: "appIcon") {
+                        Label("App Icon", systemImage: "app")
+                    }
+                } header: {
+                    Text("customization")
+                }
+                
                 AsyncButton {
                     viewModel.handleSignOutButton()
                 } label: {
@@ -60,6 +68,14 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("Settings")
+            .navigationDestination(for: String.self) { screen in
+                switch screen {
+                case "appIcon":
+                    AppIconView()
+                default:
+                    Text("Unknown destination!")
+                }
+            }
         }
     }
 }

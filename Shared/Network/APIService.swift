@@ -23,6 +23,12 @@ final class APIService {
         endpoint: Endpoint
     ) async throws -> Success? {
         try await withUnsafeThrowingContinuation { continuation in
+            var printParameters = endpoint.parameters ?? Parameters()
+            if printParameters["password"] != nil {
+                printParameters["password"] = "•••••••••••••••"
+            }
+            print("\n\(endpoint.method.rawValue) \(endpoint.urlString)\nparameters: \(printParameters)\n")
+            
             let dataRequest = AF.request(
                 endpoint.urlString,
                 method: endpoint.method,
@@ -48,7 +54,6 @@ final class APIService {
                 case 200 ..< 300:
                     if let data = result.data {
                         do {
-                            print("Request Success:", endpoint.urlString)
     //                        print("Request Success:", endpoint.urlString, String(data: data, encoding: .utf8) ?? "")
                             let decodedData = try JSONDecoder().decode(Success?.self, from: data)
                             continuation.resume(returning: decodedData)

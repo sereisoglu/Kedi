@@ -65,6 +65,7 @@ final class MeManager: ObservableObject {
         
         self.me = me
         firstTransactionDate = me.firstTransactionAt?.format(to: .iso8601WithoutMilliseconds)
+        
         cacheManager.setWithEncode(key: "me", data: me, expiry: .never)
         keychainManager.set(token, forKey: .rcAuthToken)
         keychainManager.set("\(Int(tokenExpirationDate.timeIntervalSince1970))", forKey: .rcAuthTokenExpiresAt)

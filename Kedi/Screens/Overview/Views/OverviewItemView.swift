@@ -52,9 +52,7 @@ struct OverviewItemView: View {
             }
         }
         .background(Color.secondarySystemGroupedBackground)
-        .clipShape(
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
-        )
+        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
     }
 }
 
