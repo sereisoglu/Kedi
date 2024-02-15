@@ -39,7 +39,7 @@ struct AppIconView: View {
     private func makeAppIcon(appIcon: AppIcon) -> some View {
         Button {
             self.appIcon = appIcon
-            UIApplication.shared.setAlternateIconName(appIcon.rawValue)
+            UIApplication.shared.setAlternateIconName(appIcon.identifier)
         } label: {
             VStack(alignment: .center, spacing: 5) {
                 Image(uiImage: appIcon.uiImage)

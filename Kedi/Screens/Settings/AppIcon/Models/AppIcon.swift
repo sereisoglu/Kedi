@@ -20,6 +20,10 @@ enum AppIcon: String, CaseIterable {
     case screamingWhiteBrand = "screaming-white-brand"
     case screamingBlackBrand = "screaming-black-brand"
     
+    var identifier: String? {
+        self == .default ? nil : self.rawValue
+    }
+    
     var uiImage: UIImage {
         UIImage(named: rawValue) ?? UIImage()
     }

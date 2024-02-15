@@ -16,10 +16,10 @@ extension Color {
 //    static let placeholderText = Color(UIColor.placeholderText)
 //    
 //    // MARK: - Label Colors
-//    static let label = Color(UIColor.label)
-//    static let secondaryLabel = Color(UIColor.secondaryLabel)
-//    static let tertiaryLabel = Color(UIColor.tertiaryLabel)
-//    static let quaternaryLabel = Color(UIColor.quaternaryLabel)
+    static let label = Color(UIColor.label)
+    static let secondaryLabel = Color(UIColor.secondaryLabel)
+    static let tertiaryLabel = Color(UIColor.tertiaryLabel)
+    static let quaternaryLabel = Color(UIColor.quaternaryLabel)
 //    
 //    // MARK: - Background Colors
 //    static let systemBackground = Color(UIColor.systemBackground)
