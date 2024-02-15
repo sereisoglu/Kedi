@@ -15,6 +15,7 @@ struct RCMeResponse: Codable {
     var firstTransactionAt: String?
     var currentPlan: String?
     var billingInfo: RCMeBillingInfo?
+    var apps: [RCMeApp]?
     
     enum CodingKeys: String, CodingKey {
         case distinctId = "distinct_id"
@@ -23,6 +24,7 @@ struct RCMeResponse: Codable {
         case firstTransactionAt = "first_transaction_at"
         case currentPlan = "current_plan"
         case billingInfo = "billing_info"
+        case apps
     }
 }
 
@@ -35,4 +37,43 @@ struct RCMeBillingInfo: Codable {
         case currentMtr = "current_mtr"
         case trailing30dayMtr = "trailing_30day_mtr"
     }
+}
+
+struct RCMeApp: Codable {
+    
+    var bundleId: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case bundleId = "bundle_id"
+    }
+}
+
+extension RCMeResponse {
+
+    static let stub: Self = {
+        let string = #"""
+        {
+            "apps": [
+                {
+                    "bundle_id": "com.sereisoglu.kedi",
+                    "id": "app001",
+                    "name": "Kedi",
+                }
+            ],
+            "billing_info": {
+                "current_mtr": 2345,
+                "trailing_30day_mtr": 5677
+            },
+            "current_plan": "starter",
+            "distinct_id": "RC0123456789",
+            "email": "sereisoglu@gmail.com",
+            "first_transaction_at": "2024-02-15T00:00:00Z",
+            "name": "Saffet Emin Reisoğlu",
+        }
+        """#
+
+        let data = Data(string.utf8)
+
+        return try! JSONDecoder().decode(Self.self, from: data)
+    }()
 }

@@ -9,7 +9,11 @@ import SwiftUI
 
 struct TabBarView: View {
     
-    @State private var selection: NavigationItem = .settings
+    @State private var selection: NavigationItem
+    
+    init() {
+        selection = MeManager.shared.me == nil ? .settings : .overview
+    }
 
     var body: some View {
         TabView(selection: $selection) {

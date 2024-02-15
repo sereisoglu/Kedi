@@ -13,6 +13,33 @@ struct SettingsView: View {
     
     var body: some View {
         NavigationStack {
+            makeBody()
+                .navigationTitle("Settings")
+                .background(Color.systemGroupedBackground)
+                .refreshable {
+                    await viewModel.refresh()
+                }
+        }
+    }
+    
+    @ViewBuilder
+    private func makeBody() -> some View {
+        switch viewModel.state {
+        case .empty:
+            ContentUnavailableView(
+                "No Data",
+                systemImage: "xmark.circle"
+            )
+            
+        case .error(let error):
+            ContentUnavailableView(
+                "Error",
+                systemImage: "exclamationmark.triangle",
+                description: Text(error.localizedDescription)
+            )
+            
+        case .loading,
+                .data:
             List {
                 Section {
                     SettingsAccountItemView(
@@ -116,7 +143,6 @@ struct SettingsView: View {
                 }
                 .listSectionSpacing(.compact)
             }
-            .navigationTitle("Settings")
             .navigationDestination(for: String.self) { screen in
                 switch screen {
                 case "appIcon":
@@ -127,6 +153,8 @@ struct SettingsView: View {
                     Text("Unknown destination!")
                 }
             }
+            .redacted(reason: viewModel.state == .loading ? .placeholder : [])
+            .disabled(viewModel.state == .loading)
         }
     }
 }

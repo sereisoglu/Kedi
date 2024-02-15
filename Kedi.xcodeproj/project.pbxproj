@@ -12,6 +12,7 @@
 		4A1DFC812B7C93C80094BAA0 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC802B7C93C80094BAA0 /* Bundle+Extension.swift */; };
 		4A1DFC842B7CD7460094BAA0 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC832B7CD7460094BAA0 /* AboutView.swift */; };
 		4A1DFC862B7E13430094BAA0 /* GeneralListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC852B7E13420094BAA0 /* GeneralListView.swift */; };
+		4A1DFC8A2B7ECF0C0094BAA0 /* CacheAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC892B7ECF0C0094BAA0 /* CacheAsyncImage.swift */; };
 		4AB7205C2B6BAC8D001E2C76 /* KediApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7205B2B6BAC8D001E2C76 /* KediApp.swift */; };
 		4AB7205E2B6BAC8D001E2C76 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7205D2B6BAC8D001E2C76 /* SignInView.swift */; };
 		4AB720602B6BAC8E001E2C76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AB7205F2B6BAC8E001E2C76 /* Assets.xcassets */; };
@@ -54,7 +55,6 @@
 		4AB720F12B70E399001E2C76 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720F02B70E399001E2C76 /* String+Extension.swift */; };
 		4AB720F52B70FB84001E2C76 /* TransactionItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720F42B70FB84001E2C76 /* TransactionItemView.swift */; };
 		4AB720F82B70FBF1001E2C76 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720F72B70FBF1001E2C76 /* Date+Extension.swift */; };
-		4AB720FC2B712CE4001E2C76 /* CacheAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720FB2B712CE4001E2C76 /* CacheAsyncImage.swift */; };
 		4AB721022B722DFF001E2C76 /* TransactionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721012B722DFF001E2C76 /* TransactionDetailViewModel.swift */; };
 		4AB721042B722E07001E2C76 /* TransactionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721032B722E07001E2C76 /* TransactionDetailView.swift */; };
 		4AB721062B72371E001E2C76 /* RCTransactionDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721052B72371E001E2C76 /* RCTransactionDetailResponse.swift */; };
@@ -156,6 +156,7 @@
 		4A1DFC802B7C93C80094BAA0 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		4A1DFC832B7CD7460094BAA0 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		4A1DFC852B7E13420094BAA0 /* GeneralListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralListView.swift; sourceTree = "<group>"; };
+		4A1DFC892B7ECF0C0094BAA0 /* CacheAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheAsyncImage.swift; sourceTree = "<group>"; };
 		4AB720582B6BAC8D001E2C76 /* Kedi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kedi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AB7205B2B6BAC8D001E2C76 /* KediApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KediApp.swift; sourceTree = "<group>"; };
 		4AB7205D2B6BAC8D001E2C76 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -198,7 +199,6 @@
 		4AB720F02B70E399001E2C76 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		4AB720F42B70FB84001E2C76 /* TransactionItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionItemView.swift; sourceTree = "<group>"; };
 		4AB720F72B70FBF1001E2C76 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
-		4AB720FB2B712CE4001E2C76 /* CacheAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheAsyncImage.swift; sourceTree = "<group>"; };
 		4AB721012B722DFF001E2C76 /* TransactionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewModel.swift; sourceTree = "<group>"; };
 		4AB721032B722E07001E2C76 /* TransactionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailView.swift; sourceTree = "<group>"; };
 		4AB721052B72371E001E2C76 /* RCTransactionDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTransactionDetailResponse.swift; sourceTree = "<group>"; };
@@ -464,9 +464,9 @@
 			isa = PBXGroup;
 			children = (
 				4AB720A82B6DB3A0001E2C76 /* AsyncButton.swift */,
+				4A1DFC892B7ECF0C0094BAA0 /* CacheAsyncImage.swift */,
 				4AB720B12B6DC9AB001E2C76 /* SpacingLabelStyle.swift */,
 				4AB720C32B6E6156001E2C76 /* LineAndAreaMarkChartView.swift */,
-				4AB720FB2B712CE4001E2C76 /* CacheAsyncImage.swift */,
 				4A1DFC852B7E13420094BAA0 /* GeneralListView.swift */,
 			);
 			path = Components;
@@ -872,6 +872,7 @@
 				4AB721042B722E07001E2C76 /* TransactionDetailView.swift in Sources */,
 				4AB720B82B6E3E1D001E2C76 /* TabBarView.swift in Sources */,
 				4AB720BA2B6E4183001E2C76 /* NavigationItem.swift in Sources */,
+				4A1DFC8A2B7ECF0C0094BAA0 /* CacheAsyncImage.swift in Sources */,
 				4ADF09EB2B7783FB002318B2 /* EdgeInsets+Extension.swift in Sources */,
 				4A1DFC812B7C93C80094BAA0 /* Bundle+Extension.swift in Sources */,
 				4AB720B22B6DC9AB001E2C76 /* SpacingLabelStyle.swift in Sources */,
@@ -909,7 +910,6 @@
 				4AB720CE2B6EB36C001E2C76 /* OverviewItemType.swift in Sources */,
 				4AB720C02B6E4A62001E2C76 /* RCChartResponse.swift in Sources */,
 				4AB7208C2B6C642D001E2C76 /* Color+Extension.swift in Sources */,
-				4AB720FC2B712CE4001E2C76 /* CacheAsyncImage.swift in Sources */,
 				4AB720AE2B6DB698001E2C76 /* OverviewItem.swift in Sources */,
 				4ADF09E82B7780D6002318B2 /* PaginationState.swift in Sources */,
 			);

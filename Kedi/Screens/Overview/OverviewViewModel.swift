@@ -105,19 +105,14 @@ final class OverviewViewModel: ObservableObject {
         await withTaskGroup(of: RCChartResponse?.self) { group in
             RCChartName.allCases.forEach { name in
                 group.addTask { [weak self] in
-                    do {
-                        return try await self?.apiService.request(
-                            type: RCChartResponse.self,
-                            endpoint: .charts(.init(
-                                name: name,
-                                resolution: .month,
-                                startDate: self?.meManager.firstTransactionDate?.format(to: .yyy_MM_dd)
-                            ))
-                        )
-                    } catch {
-                        print(error)
-                        return nil
-                    }
+                    try? await self?.apiService.request(
+                        type: RCChartResponse.self,
+                        endpoint: .charts(.init(
+                            name: name,
+                            resolution: .month,
+                            startDate: self?.meManager.firstTransactionDate?.format(to: .yyy_MM_dd)
+                        ))
+                    )
                 }
             }
             

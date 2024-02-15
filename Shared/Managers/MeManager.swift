@@ -26,6 +26,7 @@ final class MeManager: ObservableObject {
         apiService.setAuthToken(authToken)
         me = cacheManager.getWithDecode(key: "me", type: RCMeResponse.self)
         firstTransactionDate = me?.firstTransactionAt?.format(to: .iso8601WithoutMilliseconds)
+        
         isSignedIn = authToken != nil
     }
     
@@ -55,7 +56,6 @@ final class MeManager: ObservableObject {
     
     @discardableResult
     func signIn(
-        me: RCMeResponse,
         token: String,
         tokenExpiration: String
     ) -> Bool {
@@ -63,10 +63,6 @@ final class MeManager: ObservableObject {
             return false
         }
         
-        self.me = me
-        firstTransactionDate = me.firstTransactionAt?.format(to: .iso8601WithoutMilliseconds)
-        
-        cacheManager.setWithEncode(key: "me", data: me, expiry: .never)
         keychainManager.set(token, forKey: .rcAuthToken)
         keychainManager.set("\(Int(tokenExpirationDate.timeIntervalSince1970))", forKey: .rcAuthTokenExpiresAt)
         apiService.setAuthToken(token)
@@ -74,6 +70,13 @@ final class MeManager: ObservableObject {
         isSignedIn = true
         
         return true
+    }
+    
+    func set(me: RCMeResponse?) {
+        self.me = me
+        firstTransactionDate = me?.firstTransactionAt?.format(to: .iso8601WithoutMilliseconds)
+        
+        cacheManager.setWithEncode(key: "me", data: me, expiry: .never)
     }
     
     func signOut() {

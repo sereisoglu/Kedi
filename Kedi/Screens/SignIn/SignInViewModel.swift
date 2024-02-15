@@ -97,27 +97,18 @@ final class SignInViewModel: ObservableObject {
     @MainActor
     private func postSignIn() async throws {
         do {
-            let request: RCLoginRequest
-            if is2FARequired {
-                request = .init(email: email, password: password, otpCode: code2FA)
-            } else {
-                request = .init(email: email, password: password)
-            }
-            
             let loginData = try await apiService.request(
                 type: RCLoginResponse.self,
-                endpoint: .login(request)
+                endpoint: .login(.init(
+                    email: email,
+                    password: password,
+                    otpCode: is2FARequired ? code2FA : nil
+                ))
             )
             
-            let meData = try await apiService.request(
-                type: RCMeResponse.self,
-                endpoint: .me
-            )
-            
-            if let meData,
-               let token = loginData?.authenticationToken,
+            if let token = loginData?.authenticationToken,
                let tokenExpiration = loginData?.authenticationTokenExpiration {
-                let isSignedIn = meManager.signIn(me: meData, token: token, tokenExpiration: tokenExpiration)
+                let isSignedIn = meManager.signIn(token: token, tokenExpiration: tokenExpiration)
                 
                 if !isSignedIn {
                     throw RCError.internal(.nilResponse)

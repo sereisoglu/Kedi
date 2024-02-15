@@ -9,7 +9,11 @@ import SwiftUI
 
 struct SidebarView: View {
     
-    @State private var selection: NavigationItem? = .overview
+    @State private var selection: NavigationItem?
+    
+    init() {
+        selection = MeManager.shared.me == nil ? .settings : .overview
+    }
     
     var body: some View {
         NavigationSplitView {

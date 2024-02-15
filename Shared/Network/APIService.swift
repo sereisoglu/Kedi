@@ -84,4 +84,21 @@ final class APIService {
             }
         }
     }
+    
+    func download(urlString: String) async throws -> Data? {
+        try await withUnsafeThrowingContinuation { continuation in
+            let dataRequest = AF.request(urlString, method: .get)
+            
+            dataRequest.response { result in
+                guard let response = result.response,
+                      (200 ..< 300) ~= response.statusCode,
+                      let data = result.data else {
+                    continuation.resume(throwing: RCError.internal(.nilResponse))
+                    return
+                }
+                
+                continuation.resume(returning: data)
+            }
+        }
+    }
 }

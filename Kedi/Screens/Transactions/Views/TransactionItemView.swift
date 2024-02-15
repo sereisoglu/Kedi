@@ -38,22 +38,14 @@ struct TransactionItemView: View {
             }
             
             HStack(alignment: .center, spacing: 10) {
-                if let appIconUrl = transaction.appIconUrl,
-                   let url = URL(string: appIconUrl) {
-                    CacheAsyncImage(url: url) { image in
-                        image.resizable()
-                    } placeholder: {
-                        Rectangle()
-                            .foregroundStyle(.fill)
-                    }
-                    .frame(width: 22, height: 22)
-                    .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
-                } else {
+                CacheAsyncImage(urlString: transaction.appIconUrl) { image in
+                    image.resizable()
+                } placeholder: {
                     Rectangle()
                         .foregroundStyle(.fill)
-                        .frame(width: 22, height: 22)
-                        .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
                 }
+                .frame(width: 22, height: 22)
+                .clipShape(RoundedRectangle(cornerRadius: 22 * (2 / 9), style: .continuous))
                 
                 Text(transaction.appName)
                     .font(.footnote)
