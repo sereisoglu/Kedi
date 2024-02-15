@@ -37,6 +37,7 @@ struct RCTransactionDetailEvent: Decodable {
     var currency: String?
     var priceInPurchasedCurrency: Double?
     var eventTimestampMs: Int?
+    var purchasedAtMs: Int?
     var expirationAtMs: Int?
     var productId: String?
     var newProductId: String?
@@ -57,6 +58,7 @@ struct RCTransactionDetailEvent: Decodable {
         case currency
         case priceInPurchasedCurrency = "price_in_purchased_currency"
         case eventTimestampMs = "event_timestamp_ms"
+        case purchasedAtMs = "purchased_at_ms"
         case expirationAtMs = "expiration_at_ms"
         case productId = "product_id"
         case newProductId = "new_product_id"
@@ -77,6 +79,7 @@ struct RCTransactionDetailEvent: Decodable {
         currency = try bodyContainer.decodeIfPresent(String.self, forKey: .currency)
         priceInPurchasedCurrency = try bodyContainer.decodeIfPresent(Double.self, forKey: .priceInPurchasedCurrency)
         eventTimestampMs = try bodyContainer.decodeIfPresent(Int.self, forKey: .eventTimestampMs)
+        purchasedAtMs = try bodyContainer.decodeIfPresent(Int.self, forKey: .purchasedAtMs)
         expirationAtMs = try bodyContainer.decodeIfPresent(Int.self, forKey: .expirationAtMs)
         productId = try bodyContainer.decodeIfPresent(String.self, forKey: .productId)
         newProductId = try bodyContainer.decodeIfPresent(String.self, forKey: .newProductId)

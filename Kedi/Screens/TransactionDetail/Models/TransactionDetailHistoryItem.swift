@@ -68,12 +68,7 @@ struct TransactionDetailHistoryItem: Identifiable, Hashable {
         
         if let date = data.at?.format(to: .iso8601WithoutMilliseconds) {
             timestamp = date.timeIntervalSince1970
-            
-            if date.isToday {
-                dateText = date.relativeFormat(to: .full)
-            } else  {
-                dateText = date.formatted(date: .abbreviated, time: .shortened)
-            }
+            dateText = date.formatted(date: .abbreviated, time: .shortened)
         } else {
             dateText = "Unknown"
         }
@@ -126,12 +121,18 @@ struct TransactionDetailHistoryItem: Identifiable, Hashable {
                     productIdentifier: data.productId ?? "n/a"
                 )
             } else { // UNSUBSCRIBE
-                type = .cancellation(
+                type = .unsubscribed(
                     price: price,
                     currency: currency,
                     productIdentifier: data.productId ?? "n/a"
                 )
             }
+        case "PURCHASES_UNCANCELLATION":
+            type = .resubscribed(
+                price: price,
+                currency: currency,
+                productIdentifier: data.productId ?? "n/a"
+            )
         case "PURCHASES_EXPIRATION":
             type = .expiration(
                 price: price,
@@ -172,15 +173,10 @@ struct TransactionDetailHistoryItem: Identifiable, Hashable {
             type = .unknown(type: data.type)
         }
         
-        if let eventTimestampMs = data.eventTimestampMs {
-            let date = Date(timeIntervalSince1970: Double(eventTimestampMs) / 1000)
-            timestamp = date.timeIntervalSince1970
-            
-            if date.isToday {
-                dateText = date.relativeFormat(to: .full)
-            } else  {
-                dateText = date.formatted(date: .abbreviated, time: .shortened)
-            }
+        if let timestamp = data.purchasedAtMs ?? data.eventTimestampMs {
+            let date = Date(timeIntervalSince1970: Double(timestamp) / 1000)
+            self.timestamp = date.timeIntervalSince1970
+            dateText = date.formatted(date: .abbreviated, time: .shortened)
         } else {
             dateText = "Unknown"
         }
@@ -202,7 +198,8 @@ enum TransactionDetailHistoryType: Hashable {
     case renewal(price: Double, currency: String, productIdentifier: String)
     case trial(price: Double, currency: String, productIdentifier: String)
     case conversion(price: Double, currency: String, productIdentifier: String)
-    case cancellation(price: Double, currency: String, productIdentifier: String)
+    case resubscribed(price: Double, currency: String, productIdentifier: String)
+    case unsubscribed(price: Double, currency: String, productIdentifier: String)
     case expiration(price: Double, currency: String, productIdentifier: String)
     case billingIssue(price: Double, currency: String, productIdentifier: String)
     case refund(price: Double, currency: String, productIdentifier: String)
@@ -222,7 +219,8 @@ enum TransactionDetailHistoryType: Hashable {
         case .renewal: "Renewal"
         case .trial: "Trial"
         case .conversion: "Conversion"
-        case .cancellation: "Cancellation"
+        case .resubscribed: "Resubscribed"
+        case .unsubscribed: "Unsubscribed"
         case .expiration: "Expiration"
         case .billingIssue: "Billing Issue"
         case .refund: "Refund"
@@ -244,7 +242,8 @@ enum TransactionDetailHistoryType: Hashable {
         case .renewal: .green
         case .trial: .orange
         case .conversion: .blue
-        case .cancellation: .red
+        case .resubscribed: .blue
+        case .unsubscribed: .red
         case .expiration: .red
         case .billingIssue: .red
         case .refund: .red

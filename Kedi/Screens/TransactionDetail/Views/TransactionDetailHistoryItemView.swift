@@ -17,17 +17,13 @@ struct TransactionDetailHistoryItemView: View {
                 .lastSeen,
                 .unknown:
             VStack(alignment: .leading, spacing: 3) {
-                HStack(alignment: .center, spacing: 6) {
-                    Text(item.type.text)
-                        .font(.system(.body, weight: .semibold))
-                        .foregroundStyle(item.type.color)
-                    
-                    Spacer()
-                    
-                    Text(item.dateText)
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                }
+                Text(item.type.text)
+                    .font(.system(.body, weight: .semibold))
+                    .foregroundStyle(item.type.color)
+                
+                Text(item.dateText)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
             }
             
         case .subscriberAlias(let alias):
@@ -44,7 +40,8 @@ struct TransactionDetailHistoryItemView: View {
                 .renewal(let price, let currency, let productIdentifier),
                 .trial(let price, let currency, let productIdentifier),
                 .conversion(let price, let currency, let productIdentifier),
-                .cancellation(let price, let currency, let productIdentifier),
+                .resubscribed(let price, let currency, let productIdentifier),
+                .unsubscribed(let price, let currency, let productIdentifier),
                 .expiration(let price, let currency, let productIdentifier),
                 .billingIssue(let price, let currency, let productIdentifier),
                 .refund(let price, let currency, let productIdentifier):
@@ -61,18 +58,14 @@ struct TransactionDetailHistoryItemView: View {
                         .foregroundStyle(item.type.color)
                 }
                 
-                HStack(alignment: .bottom, spacing: 6) {
-                    Text(productIdentifier)
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                    
-                    Spacer()
-                    
-                    Text(item.dateText)
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                        .layoutPriority(1)
-                }
+                Text(item.dateText)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .layoutPriority(1)
+                
+                Text(productIdentifier)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
                 
                 if let offerCode = item.offerCode {
                     HStack {
@@ -96,18 +89,14 @@ struct TransactionDetailHistoryItemView: View {
                 .font(.system(.body, weight: .semibold))
                 .foregroundStyle(item.type.color)
             
-            HStack(alignment: .bottom, spacing: 6) {
-                Text(description)
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-                
-                Spacer()
-                
-                Text(item.dateText)
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-                    .layoutPriority(1)
-            }
+            Text(item.dateText)
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+                .layoutPriority(1)
+            
+            Text(description)
+                .font(.footnote)
+                .foregroundStyle(.secondary)
         }
     }
 }
