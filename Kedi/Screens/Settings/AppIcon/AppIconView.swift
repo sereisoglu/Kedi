@@ -12,6 +12,11 @@ struct AppIconView: View {
     @AppStorage("appIcon") private var appIcon: AppIcon = .default
     
     @State private var appIconWidth: CGFloat = .zero
+    @State private var appIconSelection: AppIcon = .default
+    
+    init() {
+        appIconSelection = appIcon
+    }
     
     var body: some View {
         List {
@@ -40,6 +45,7 @@ struct AppIconView: View {
         Button {
             self.appIcon = appIcon
             UIApplication.shared.setAlternateIconName(appIcon.identifier)
+            self.appIconSelection = appIcon
         } label: {
             VStack(alignment: .center, spacing: 5) {
                 Image(uiImage: appIcon.uiImage)
@@ -70,6 +76,7 @@ struct AppIconView: View {
             }
         }
         .buttonStyle(.plain)
+        .sensoryFeedback(.selection, trigger: appIconSelection)
     }
 }
 

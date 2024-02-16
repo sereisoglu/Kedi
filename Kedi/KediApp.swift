@@ -14,6 +14,7 @@ struct KediApp: App {
         WindowGroup {
             RootView()
                 .environmentObject(MeManager.shared)
+                .dynamicTypeSize(DynamicTypeSize.medium...DynamicTypeSize.xxxLarge)
         }
     }
 }

@@ -35,14 +35,6 @@ struct AboutView: View {
                         .listRowBackground(Color.clear)
                     
                     Text("Free and [open source](https://github.com/sereisoglu/Kedi) RevenueCat client")
-                    
-                    Text("Kedi is a Turkish word meaning cat.")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .frame(maxWidth: .infinity)
-                        .multilineTextAlignment(.center)
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(Color.clear)
                 }
                 .frame(maxWidth: .infinity)
                 .listRowInsets(.zero)
@@ -92,6 +84,12 @@ struct AboutView: View {
                         accessoryImageSystemName: "arrow.up.right"
                     )
                 }
+            }
+            
+            Section {
+                Text("Kedi is a Turkish word meaning cat.")
+            } header: {
+                Text("What does Kedi mean?")
             }
         }
         .navigationTitle("About")

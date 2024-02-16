@@ -6,5 +6,9 @@
 	<array>
 		<string>group.com.sereisoglu.kedi</string>
 	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)keychain.com.sereisoglu.kedi</string>
+	</array>
 </dict>
 </plist>

@@ -23,7 +23,7 @@ struct GeneralListView: View {
     var accessoryImageSystemName: String? = "chevron.forward"
     
     var body: some View {
-        HStack {
+        HStack(spacing: 0) {
             switch imageAsset {
             case .systemImage(let name):
                 Image(systemName: name)
@@ -49,6 +49,7 @@ struct GeneralListView: View {
                         .foregroundColor(.secondary)
                 }
             }
+            .padding(.leading)
             
             Spacer()
             
@@ -57,8 +58,10 @@ struct GeneralListView: View {
                     .font(.footnote)
                     .fontWeight(.bold)
                     .foregroundColor(.tertiaryLabel)
+                    .padding(.leading, 2)
             }
         }
+        .frame(minHeight: subtitle != nil ? 40 : nil)
     }
 }
 

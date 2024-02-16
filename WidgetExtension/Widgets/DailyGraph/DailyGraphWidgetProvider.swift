@@ -33,7 +33,7 @@ struct DailyGraphWidgetProvider: TimelineProvider {
                 if entry.error != nil {
                     policy = meManager.isSignedIn ? .after(Date(byAdding: .minute, value: 1)) : .never
                 } else {
-                    policy = .after(Date(byAdding: .minute, value: 15))
+                    policy = .after(Date(byAdding: .minute, value: 20))
                 }
                 
                 completion(.init(entries: [entry], policy: policy))

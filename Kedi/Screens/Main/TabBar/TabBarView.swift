@@ -14,7 +14,7 @@ struct TabBarView: View {
     init() {
         selection = MeManager.shared.me == nil ? .settings : .overview
     }
-
+    
     var body: some View {
         TabView(selection: $selection) {
             OverviewView()

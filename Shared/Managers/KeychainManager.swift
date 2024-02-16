@@ -17,7 +17,7 @@ final class KeychainManager {
     
     private let keychain: KeychainSwift = {
         let keychain = KeychainSwift()
-        keychain.accessGroup = "group.com.sereisoglu.kedi"
+        keychain.accessGroup = "4K634X2CUP.keychain.com.sereisoglu.kedi"
         return keychain
     }()
     

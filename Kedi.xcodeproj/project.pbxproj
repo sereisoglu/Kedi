@@ -601,12 +601,12 @@
 		4AB7212D2B738BA0001E2C76 /* WidgetExtension */ = {
 			isa = PBXGroup;
 			children = (
+				4AB7212E2B738BA0001E2C76 /* WidgetsBundle.swift */,
 				4ADF0A032B7A3B1A002318B2 /* Shared */,
 				4AB7215B2B756E37001E2C76 /* Views */,
 				4AB7215A2B756E2B001E2C76 /* Widgets */,
-				4AB7212E2B738BA0001E2C76 /* WidgetsBundle.swift */,
-				4AB721572B739F4B001E2C76 /* WidgetExtension.entitlements */,
 				4AB721322B738BA1001E2C76 /* Assets.xcassets */,
+				4AB721572B739F4B001E2C76 /* WidgetExtension.entitlements */,
 				4AB721342B738BA1001E2C76 /* Info.plist */,
 			);
 			path = WidgetExtension;
