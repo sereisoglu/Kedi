@@ -15,7 +15,7 @@ struct GeneralListView: View {
         case custom(String)
     }
     
-    @ScaledMetric private var imageWidth: CGFloat = 22
+    @ScaledMetric private var imageWidth: CGFloat = 30
     
     var imageAsset: ImageAsset
     var title: String
@@ -23,45 +23,50 @@ struct GeneralListView: View {
     var accessoryImageSystemName: String? = "chevron.forward"
     
     var body: some View {
-        HStack(spacing: 0) {
+        Label {
+            HStack(alignment: .center) {
+                VStack(alignment: .leading) {
+                    Text(title)
+                        .font(.body)
+                        .foregroundStyle(.primary)
+                        .tint(.primary)
+                    
+                    if let subtitle {
+                        Text(subtitle)
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .tint(.secondary)
+                    }
+                }
+                
+                Spacer()
+                
+                if let accessoryImageSystemName {
+                    Image(systemName: accessoryImageSystemName)
+                        .font(.footnote)
+                        .fontWeight(.bold)
+                        .foregroundStyle(Color.tertiaryLabel)
+                        .tint(.tertiaryLabel)
+//                        .padding(.leading, 2)
+                }
+            }
+        } icon: {
             switch imageAsset {
             case .systemImage(let name):
                 Image(systemName: name)
                     .font(.body)
-                    .foregroundColor(.accentColor)
-//                    .imageScale(.large)
+                    .foregroundStyle(Color.accentColor)
+                    .imageScale(.large)
                     .frame(width: imageWidth, height: imageWidth)
+                
             case .custom(let name):
                 Image(name)
                     .resizable()
-                    .foregroundColor(.accentColor)
+                    .foregroundStyle(Color.accentColor)
                     .frame(width: imageWidth, height: imageWidth)
             }
-            
-            VStack(alignment: .leading) {
-                Text(title)
-                    .font(.body)
-                    .foregroundColor(.primary)
-                
-                if let subtitle {
-                    Text(subtitle)
-                        .font(.footnote)
-                        .foregroundColor(.secondary)
-                }
-            }
-            .padding(.leading)
-            
-            Spacer()
-            
-            if let accessoryImageSystemName {
-                Image(systemName: accessoryImageSystemName)
-                    .font(.footnote)
-                    .fontWeight(.bold)
-                    .foregroundColor(.tertiaryLabel)
-                    .padding(.leading, 2)
-            }
         }
-        .frame(minHeight: subtitle != nil ? 40 : nil)
+        .labelStyle(CenterAlignedLabelStyle())
     }
 }
 

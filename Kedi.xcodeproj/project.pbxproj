@@ -13,6 +13,7 @@
 		4A1DFC842B7CD7460094BAA0 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC832B7CD7460094BAA0 /* AboutView.swift */; };
 		4A1DFC862B7E13430094BAA0 /* GeneralListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC852B7E13420094BAA0 /* GeneralListView.swift */; };
 		4A1DFC8A2B7ECF0C0094BAA0 /* CacheAsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC892B7ECF0C0094BAA0 /* CacheAsyncImage.swift */; };
+		4A1DFC8D2B80A57A0094BAA0 /* CenterAlignedLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC8C2B80A57A0094BAA0 /* CenterAlignedLabelStyle.swift */; };
 		4AB7205C2B6BAC8D001E2C76 /* KediApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7205B2B6BAC8D001E2C76 /* KediApp.swift */; };
 		4AB7205E2B6BAC8D001E2C76 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7205D2B6BAC8D001E2C76 /* SignInView.swift */; };
 		4AB720602B6BAC8E001E2C76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AB7205F2B6BAC8E001E2C76 /* Assets.xcassets */; };
@@ -157,6 +158,7 @@
 		4A1DFC832B7CD7460094BAA0 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		4A1DFC852B7E13420094BAA0 /* GeneralListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralListView.swift; sourceTree = "<group>"; };
 		4A1DFC892B7ECF0C0094BAA0 /* CacheAsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheAsyncImage.swift; sourceTree = "<group>"; };
+		4A1DFC8C2B80A57A0094BAA0 /* CenterAlignedLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterAlignedLabelStyle.swift; sourceTree = "<group>"; };
 		4AB720582B6BAC8D001E2C76 /* Kedi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kedi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AB7205B2B6BAC8D001E2C76 /* KediApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KediApp.swift; sourceTree = "<group>"; };
 		4AB7205D2B6BAC8D001E2C76 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -284,6 +286,15 @@
 				4A1DFC832B7CD7460094BAA0 /* AboutView.swift */,
 			);
 			path = About;
+			sourceTree = "<group>";
+		};
+		4A1DFC8B2B80A55B0094BAA0 /* LabelStyle */ = {
+			isa = PBXGroup;
+			children = (
+				4AB720B12B6DC9AB001E2C76 /* SpacingLabelStyle.swift */,
+				4A1DFC8C2B80A57A0094BAA0 /* CenterAlignedLabelStyle.swift */,
+			);
+			path = LabelStyle;
 			sourceTree = "<group>";
 		};
 		4AB7204F2B6BAC8D001E2C76 = {
@@ -463,9 +474,9 @@
 		4AB720A72B6DB396001E2C76 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				4A1DFC8B2B80A55B0094BAA0 /* LabelStyle */,
 				4AB720A82B6DB3A0001E2C76 /* AsyncButton.swift */,
 				4A1DFC892B7ECF0C0094BAA0 /* CacheAsyncImage.swift */,
-				4AB720B12B6DC9AB001E2C76 /* SpacingLabelStyle.swift */,
 				4AB720C32B6E6156001E2C76 /* LineAndAreaMarkChartView.swift */,
 				4A1DFC852B7E13420094BAA0 /* GeneralListView.swift */,
 			);
@@ -869,6 +880,7 @@
 				4AB721022B722DFF001E2C76 /* TransactionDetailViewModel.swift in Sources */,
 				4ADF0A082B7A3B86002318B2 /* WidgetErrorView.swift in Sources */,
 				4ADF0A052B7A3B3F002318B2 /* WidgetError.swift in Sources */,
+				4A1DFC8D2B80A57A0094BAA0 /* CenterAlignedLabelStyle.swift in Sources */,
 				4AB721042B722E07001E2C76 /* TransactionDetailView.swift in Sources */,
 				4AB720B82B6E3E1D001E2C76 /* TabBarView.swift in Sources */,
 				4AB720BA2B6E4183001E2C76 /* NavigationItem.swift in Sources */,

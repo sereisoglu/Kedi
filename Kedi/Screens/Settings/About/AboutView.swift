@@ -34,7 +34,7 @@ struct AboutView: View {
                         .listRowSeparator(.hidden)
                         .listRowBackground(Color.clear)
                     
-                    Text("Free and [open source](https://github.com/sereisoglu/Kedi) RevenueCat client")
+                    Text("Free and [open-source](https://github.com/sereisoglu/Kedi) RevenueCat client")
                 }
                 .frame(maxWidth: .infinity)
                 .listRowInsets(.zero)
@@ -59,13 +59,12 @@ struct AboutView: View {
                     GeneralListView(
                         imageAsset: .custom("github"),
                         title: "Twemoji",
+                        subtitle: "It was used when designing the app icon.",
                         accessoryImageSystemName: "arrow.up.right"
                     )
                 }
             } header: {
                 Text("Resources")
-            } footer: {
-                Text("Twemoji was used when designing the app icon.")
             }
             
             Section {

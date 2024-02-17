@@ -119,7 +119,7 @@ struct SettingsView: View {
                 } header: {
                     Text("Kedi")
                 } footer: {
-                    Text("Free and [open source](https://github.com/sereisoglu/Kedi) RevenueCat client")
+                    Text("Free and [open-source](https://github.com/sereisoglu/Kedi) RevenueCat client")
                 }
                 
                 Section {
