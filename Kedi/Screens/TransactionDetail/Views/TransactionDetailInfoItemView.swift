@@ -14,7 +14,7 @@ struct TransactionDetailInfoItemView: View {
     var body: some View {
         HStack {
             Text(item.key)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .font(.callout)
                 .layoutPriority(1)
             
@@ -23,7 +23,7 @@ struct TransactionDetailInfoItemView: View {
             if item.copyable {
                 Text(item.value)
                     .font(.callout)
-                    .foregroundColor(.primary)
+                    .foregroundStyle(.primary)
                     .lineLimit(1)
                     .contextMenu {
                         Button {
@@ -35,7 +35,7 @@ struct TransactionDetailInfoItemView: View {
             } else {
                 Text(item.value)
                     .font(.callout)
-                    .foregroundColor(.primary)
+                    .foregroundStyle(.primary)
                     .lineLimit(1)
             }
         }

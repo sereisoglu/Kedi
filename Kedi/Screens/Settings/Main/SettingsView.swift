@@ -11,15 +11,17 @@ struct SettingsView: View {
     
     @StateObject private var viewModel = SettingsViewModel()
     
+    @ScaledMetric private var supporterImageWidth: CGFloat = 80
+    
+    @State private var showingSupporterView = false
+    
     var body: some View {
-        NavigationStack {
-            makeBody()
-                .navigationTitle("Settings")
-                .background(Color.systemGroupedBackground)
-                .refreshable {
-                    await viewModel.refresh()
-                }
-        }
+        makeBody()
+            .navigationTitle("Settings")
+            .background(Color.systemGroupedBackground)
+            .refreshable {
+                await viewModel.refresh()
+            }
     }
     
     @ViewBuilder
@@ -41,6 +43,51 @@ struct SettingsView: View {
         case .loading,
                 .data:
             List {
+                Section {
+                    Button {
+                        showingSupporterView.toggle()
+                    } label: {
+                        HStack(spacing: 0) {
+                            Text("🚀")
+                                .fixedSize(horizontal: false, vertical: true)
+                                .font(.system(size: supporterImageWidth - 2))
+                                .frame(width: supporterImageWidth, height: 0)
+                            
+                            VStack(alignment: .center) {
+                                Text("Become a Supporter")
+                                
+                                Text("Support indie development!")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.secondary)
+                            }
+                            .frame(maxWidth: .infinity)
+                            
+                            HStack() {
+                                Spacer()
+                                
+                                Image(systemName: "chevron.forward")
+                                    .font(.footnote)
+                                    .fontWeight(.bold)
+                                    .foregroundStyle(.secondary)
+                            }
+                            .padding(.trailing)
+                            .frame(width: supporterImageWidth)
+                        }
+                        .padding(.vertical, 10)
+                        .background {
+                            RoundedRectangle(cornerRadius: 20, style: .continuous).fill(.accent)
+                        }
+                        .foregroundStyle(.white)
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.vertical)
+                } footer: {
+                    Text("Kedi is a free and [open-source \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://github.com/sereisoglu/Kedi) RevenueCat client. Kedi was build by a solo [developer \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://x.com/sereisoglu). If Kedi has made your life easier and you want to support development, you can become a supporter! If you become a supporter, you are eligible to use alternative app icons.")
+                        .padding(.horizontal)
+                }
+                .listRowInsets(.zero)
+                .listRowBackground(Color.clear)
+                
                 Section {
                     SettingsAccountItemView(
                         key: "Id",
@@ -91,6 +138,17 @@ struct SettingsView: View {
                 }
                 
                 Section {
+                    Button {
+                        WidgetsManager.shared.reloadAll()
+                    } label: {
+                        Text("Force Update")
+                            .foregroundStyle(.blue)
+                    }
+                } header: {
+                    Text("Widgets")
+                }
+                
+                Section {
                     Link(destination: URL(string: "mailto:sereisoglu@gmail.com")!) {
                         GeneralListView(
                             imageAsset: .systemImage("envelope"),
@@ -118,8 +176,6 @@ struct SettingsView: View {
                     }
                 } header: {
                     Text("Kedi")
-                } footer: {
-                    Text("Free and [open-source](https://github.com/sereisoglu/Kedi) RevenueCat client")
                 }
                 
                 Section {
@@ -127,7 +183,7 @@ struct SettingsView: View {
                         viewModel.handleSignOutButton()
                     } label: {
                         Text("Sign Out")
-                            .foregroundColor(.red)
+                            .foregroundStyle(.red)
                             .frame(maxWidth: .infinity)
                             .multilineTextAlignment(.center)
                     }
@@ -151,6 +207,12 @@ struct SettingsView: View {
                     AboutView()
                 default:
                     Text("Unknown destination!")
+                }
+            }
+            .sheet(isPresented: $showingSupporterView) {
+                NavigationStack {
+                    SupporterView()
+                        .environmentObject(PurchaseManager.shared)
                 }
             }
             .redacted(reason: viewModel.state == .loading ? .placeholder : [])

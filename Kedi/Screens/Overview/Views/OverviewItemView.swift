@@ -47,7 +47,6 @@ struct OverviewItemView: View {
                         .frame(height: 60)
                     
                     LineAndAreaMarkChartView(values: chartValues)
-                        .foregroundColor(.blue)
                 }
             }
         }

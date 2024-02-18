@@ -12,14 +12,12 @@ struct TransactionsView: View {
     @StateObject private var viewModel = TransactionsViewModel()
     
     var body: some View {
-        NavigationStack {
-            makeBody()
-                .navigationTitle("Transactions")
-                .background(Color.systemGroupedBackground)
-                .refreshable {
-                    await viewModel.refresh()
-                }
-        }
+        makeBody()
+            .navigationTitle("Transactions")
+            .background(Color.systemGroupedBackground)
+            .refreshable {
+                await viewModel.refresh()
+            }
     }
     
     @ViewBuilder

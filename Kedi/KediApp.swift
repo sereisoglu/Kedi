@@ -10,6 +10,10 @@ import SwiftUI
 @main
 struct KediApp: App {
     
+    init() {
+        PurchaseManager.shared.start()
+    }
+    
     var body: some Scene {
         WindowGroup {
             RootView()

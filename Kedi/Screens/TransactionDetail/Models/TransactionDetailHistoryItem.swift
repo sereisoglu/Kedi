@@ -242,7 +242,7 @@ enum TransactionDetailHistoryType: Hashable {
         case .renewal: .green
         case .trial: .orange
         case .conversion: .blue
-        case .resubscribed: .blue
+        case .resubscribed: .green
         case .unsubscribed: .red
         case .expiration: .red
         case .billingIssue: .red

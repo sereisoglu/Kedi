@@ -38,7 +38,6 @@ struct AppIconView: View {
         }
         .navigationTitle("App Icon")
         .navigationBarTitleDisplayMode(.inline)
-        .dynamicTypeSize(...DynamicTypeSize.accessibility2)
     }
     
     private func makeAppIcon(appIcon: AppIcon) -> some View {
@@ -47,6 +46,8 @@ struct AppIconView: View {
             UIApplication.shared.setAlternateIconName(appIcon.identifier)
             self.appIconSelection = appIcon
         } label: {
+            let isSelected = self.appIcon == appIcon
+            
             VStack(alignment: .center, spacing: 5) {
                 Image(uiImage: appIcon.uiImage)
                     .resizable()
@@ -61,7 +62,7 @@ struct AppIconView: View {
                     }
                     .padding(5)
                     .overlay {
-                        if self.appIcon == appIcon {
+                        if isSelected {
                             RoundedRectangle(cornerRadius: (appIconWidth + 10) * (2 / 9), style: .continuous)
                                 .stroke(Color.accentColor, lineWidth: 3)
                         }
@@ -69,9 +70,9 @@ struct AppIconView: View {
                 
                 Text(appIcon.name)
                     .font(.caption)
-                    .foregroundStyle(self.appIcon == appIcon ? .white : .primary)
+                    .foregroundStyle(isSelected ? .white : .primary)
                     .padding(.init(top: 2, leading: 5, bottom: 2, trailing: 5))
-                    .background(self.appIcon == appIcon ? Color.accentColor : .clear)
+                    .background(isSelected ? Color.accentColor : .clear)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             }
         }

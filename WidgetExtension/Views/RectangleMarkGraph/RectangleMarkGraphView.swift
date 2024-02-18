@@ -9,6 +9,7 @@ import SwiftUI
 import Charts
 
 // https://github.com/jordibruin/Swift-Charts-Examples/blob/main/Swift%20Charts%20Examples/Charts/HeatMap/GitHubContributionsGraph.swift
+
 struct RectangleMarkGraphView: View {
     
     static let INSET: CGFloat = 2

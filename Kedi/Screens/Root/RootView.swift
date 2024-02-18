@@ -15,7 +15,9 @@ struct RootView: View {
         if meManager.isSignedIn {
             MainView()
         } else {
-            SignInView()
+            NavigationStack {
+                SignInView()
+            }
         }
     }
 }

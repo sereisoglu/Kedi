@@ -17,23 +17,29 @@ struct TabBarView: View {
     
     var body: some View {
         TabView(selection: $selection) {
-            OverviewView()
-                .tag(NavigationItem.overview)
-                .tabItem {
-                    makeTabItem(item: .overview)
-                }
+            NavigationStack {
+                OverviewView()
+            }
+            .tag(NavigationItem.overview)
+            .tabItem {
+                makeTabItem(item: .overview)
+            }
             
-            TransactionsView()
-                .tag(NavigationItem.transactions)
-                .tabItem {
-                    makeTabItem(item: .transactions)
-                }
+            NavigationStack {
+                TransactionsView()
+            }
+            .tag(NavigationItem.transactions)
+            .tabItem {
+                makeTabItem(item: .transactions)
+            }
             
-            SettingsView()
-                .tag(NavigationItem.settings)
-                .tabItem {
-                    makeTabItem(item: .settings)
-                }
+            NavigationStack {
+                SettingsView()
+            }
+            .tag(NavigationItem.settings)
+            .tabItem {
+                makeTabItem(item: .settings)
+            }
         }
     }
     

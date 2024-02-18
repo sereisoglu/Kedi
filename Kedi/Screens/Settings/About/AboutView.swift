@@ -34,7 +34,7 @@ struct AboutView: View {
                         .listRowSeparator(.hidden)
                         .listRowBackground(Color.clear)
                     
-                    Text("Free and [open-source](https://github.com/sereisoglu/Kedi) RevenueCat client")
+                    Text("Free and [open-source \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://github.com/sereisoglu/Kedi) RevenueCat client")
                 }
                 .frame(maxWidth: .infinity)
                 .listRowInsets(.zero)
@@ -68,21 +68,21 @@ struct AboutView: View {
             }
             
             Section {
-                Link(destination: URL(string: "https://github.com/sereisoglu/Kedi")!) {
+                Link(destination: URL(string: "https://github.com/sereisoglu/Kedi/blob/main/privacy-policy.md")!) {
                     GeneralListView(
                         imageAsset: .systemImage("hand.raised"),
-                        title: "Privacy Policy",
-                        accessoryImageSystemName: "arrow.up.right"
+                        title: "Privacy Policy"
                     )
                 }
+                .openUrlInApp()
                 
-                Link(destination: URL(string: "https://github.com/sereisoglu/Kedi")!) {
+                Link(destination: URL(string: "https://github.com/sereisoglu/Kedi/blob/main/terms-of-service.md")!) {
                     GeneralListView(
                         imageAsset: .systemImage("doc.text"),
-                        title: "Terms & Conditions",
-                        accessoryImageSystemName: "arrow.up.right"
+                        title: "Terms & Conditions"
                     )
                 }
+                .openUrlInApp()
             }
             
             Section {

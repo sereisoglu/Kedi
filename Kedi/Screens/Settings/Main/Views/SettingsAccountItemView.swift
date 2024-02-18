@@ -15,14 +15,14 @@ struct SettingsAccountItemView: View {
     var body: some View {
         HStack {
             Text(key)
-                .foregroundColor(.secondary)
+                .foregroundStyle(.secondary)
                 .font(.callout)
             
             Spacer()
             
             Text(value)
                 .font(.callout)
-                .foregroundColor(.primary)
+                .foregroundStyle(.primary)
         }
     }
 }

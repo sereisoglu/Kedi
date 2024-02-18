@@ -14,14 +14,12 @@ struct OverviewView: View {
     @StateObject private var viewModel = OverviewViewModel()
     
     var body: some View {
-        NavigationStack {
-            makeBody()
-                .navigationTitle("Overview")
-                .background(Color.systemGroupedBackground)
-                .refreshable {
-                    await viewModel.refresh()
-                }
-        }
+        makeBody()
+            .navigationTitle("Overview")
+            .background(Color.systemGroupedBackground)
+            .refreshable {
+                await viewModel.refresh()
+            }
     }
     
     @ViewBuilder
