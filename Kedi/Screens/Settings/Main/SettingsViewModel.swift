@@ -13,7 +13,6 @@ final class SettingsViewModel: ObservableObject {
     private let meManager = MeManager.shared
     
     @Published private(set) var state: GeneralState = .loading
-    
     @Published private(set) var me: RCMeResponse?
     
     var authTokenExpiresDate: Date? {

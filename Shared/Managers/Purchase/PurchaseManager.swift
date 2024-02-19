@@ -11,13 +11,6 @@ import RevenueCat
 @MainActor
 final class PurchaseManager: NSObject, ObservableObject {
     
-    enum PurchaseState {
-        
-        case loading
-        case data
-        case error(PurchaseError)
-    }
-    
     enum PurchaseError: Error {
         
         case isPurchasing
@@ -29,12 +22,13 @@ final class PurchaseManager: NSObject, ObservableObject {
         Purchases.shared
     }
     
-    @Published private var purchases = [PurchaseModel]()
+    private var purchases = [PurchaseModel]()
     
+    @Published private(set) var meSubscriptionType: MeSubscriptionType = .normal
     @Published private(set) var meSubscription: MeSubscriptionModel?
-    @Published private(set) var meNonSubscription: [MeNonSubscriptionModel]?
+    @Published private(set) var meNonSubscriptions: [MeNonSubscriptionModel]?
     
-    @Published private(set) var state: PurchaseState = .loading
+    @Published private(set) var state: GeneralState = .loading
     @Published private(set) var isPurchasing = false
     
     static let shared = PurchaseManager()
@@ -52,6 +46,10 @@ final class PurchaseManager: NSObject, ObservableObject {
         Task {
             do {
                 try await withThrowingDiscardingTaskGroup { group in
+//                    group.addTask { [weak self] in
+//                        try await Task.sleep(nanoseconds: 5_000_000_000)
+//                    }
+                    
                     group.addTask { [weak self] in
                         try await self?.fetchPurchases()
                     }
@@ -63,7 +61,7 @@ final class PurchaseManager: NSObject, ObservableObject {
                 
                 state = .data
             } catch {
-                state = .error(.unknown(error))
+                state = .error(error)
             }
         }
     }
@@ -90,12 +88,13 @@ final class PurchaseManager: NSObject, ObservableObject {
         }
         isPurchasing = true
         
+        defer { isPurchasing = false }
+        
         let data = try await revenueCat.purchase(package: purchase.package)
         
         if !data.userCancelled {
             processInfo(info: data.customerInfo)
         }
-        isPurchasing = false
     }
     
     func restorePurchase() async throws {
@@ -113,14 +112,6 @@ final class PurchaseManager: NSObject, ObservableObject {
     
     // MARK: - purchases
     
-    func getSubscriptions() -> [PurchaseModel] {
-        purchases.filter { $0.productType.entitlement == .supporter }
-    }
-    
-    func getNonSubscriptions() -> [PurchaseModel] {
-        purchases.filter { $0.productType.entitlement == .tip }
-    }
-    
     private func fetchPurchases() async throws {
         let offering = (try await revenueCat.offerings()).current
         purchases = offering?.availablePackages.compactMap { .init(package: $0) } ?? []
@@ -131,10 +122,38 @@ final class PurchaseManager: NSObject, ObservableObject {
         processInfo(info: info)
     }
     
+    func getSubscriptions() -> [PurchaseModel] {
+        purchases.filter { purchase in
+            guard purchase.productType.entitlement == .supporter,
+                  let level = purchase.productType.level else {
+                return false
+            }
+            
+            return level > (meSubscription?.productType.level ?? 0)
+        }
+    }
+    
+    func getNonSubscriptions() -> [PurchaseModel] {
+        purchases.filter { $0.productType.entitlement == .tip }
+    }
+    
+    func getTotalSpendForTips() -> String {
+        let totalSpend: Decimal = meNonSubscriptions?.reduce(0, { partialResult, nonSubscription in
+            partialResult + nonSubscription.price
+        }) ?? 0
+        
+        guard totalSpend > 0,
+              let localizedPriceString = purchases.first?.package.storeProduct.priceFormatter?.string(from: totalSpend as NSNumber) else {
+            return "You haven't made a tip."
+        }
+        
+        return "You've tipped \(localizedPriceString) so far.\n❤️ Thanks for your support!"
+    }
+    
     // MARK: - processInfo
     
     private func processInfo(info: CustomerInfo) {
-        meNonSubscription = info.nonSubscriptions.compactMap { nonSubscription in
+        meNonSubscriptions = info.nonSubscriptions.compactMap { nonSubscription in
             guard let productType = PurchaseProductType(rawValue: nonSubscription.productIdentifier),
                   let purchase = purchases.first(where: { $0.productType == productType }) else {
                 return nil
@@ -151,19 +170,22 @@ final class PurchaseManager: NSObject, ObservableObject {
             .compactMap { productIdentifier in
                 guard let productType = PurchaseProductType(rawValue: productIdentifier),
                       let entitlement = info.entitlements[productType.entitlement.rawValue],
-                      let purchaseDate = entitlement.latestPurchaseDate else {
+                      let purchaseDate = entitlement.latestPurchaseDate,
+                      let expirationDate = entitlement.expirationDate else {
                     return nil
                 }
                 
                 return .init(
                     productType: productType,
                     purchaseDate: purchaseDate,
-                    expirationDate: entitlement.expirationDate,
+                    expirationDate: purchaseDate,
                     willRenew: entitlement.willRenew
                 )
             }
-            .sorted(by: { ($0.productType.rank ?? .max) > ($1.productType.rank ?? .max) })
+            .sorted(by: { ($0.productType.level ?? 0) > ($1.productType.level ?? 0) })
             .first
+        
+        meSubscriptionType = .init(productType: meSubscription?.productType)
     }
 }
 
@@ -196,113 +218,5 @@ extension PurchaseManager: PurchasesDelegate {
                 processInfo(info: info)
             }
         }
-    }
-}
-
-struct MeSubscriptionModel {
-    
-    var productType: PurchaseProductType
-    var purchaseDate: Date
-    var expirationDate: Date?
-    var willRenew: Bool
-}
-
-struct MeNonSubscriptionModel {
-    
-    var productType: PurchaseProductType
-    var purchaseDate: Date
-    var price: Decimal
-}
-
-struct PurchaseModel: Identifiable, Hashable {
-    
-    let id = UUID()
-    var package: Package
-    var productType: PurchaseProductType
-    
-    var localizedPriceString: String {
-        package.storeProduct.localizedPriceString
-    }
-    
-    var price: Decimal {
-        package.storeProduct.price
-    }
-    
-    init?(package: Package) {
-        guard let productType = PurchaseProductType(rawValue: package.storeProduct.productIdentifier) else {
-            return nil
-        }
-        
-        self.package = package
-        self.productType = productType
-    }
-}
-
-enum PurchaseProductType: String {
-    
-    case supporterMonthly = "kedi.supporter.monthly"
-    case fullSupporterMonthly = "kedi.fullSupporter.monthly"
-    case superSupporterMonthly = "kedi.superSupporter.monthly"
-    
-    case smallTip = "kedi.smallTip"
-    case niceTip = "kedi.niceTip"
-    case generousTip = "kedi.generousTip"
-    case hugeTip = "kedi.hugeTip"
-    
-    var emoji: String {
-        switch self {
-        case .supporterMonthly: ""
-        case .fullSupporterMonthly: ""
-        case .superSupporterMonthly: ""
-        case .smallTip: "🍪"
-        case .niceTip: "☕️"
-        case .generousTip: "🍔"
-        case .hugeTip: "🚀"
-        }
-    }
-    
-    var name: String {
-        switch self {
-        case .supporterMonthly: "Supporter Monthly"
-        case .fullSupporterMonthly: "Full Supporter Monthly"
-        case .superSupporterMonthly: "Super Supporter Monthly"
-        case .smallTip: "Small Tip"
-        case .niceTip: "Nice Tip"
-        case .generousTip: "Generous Tip"
-        case .hugeTip: "Huge Tip"
-        }
-    }
-    
-    var rank: Int? {
-        switch self {
-        case .supporterMonthly: 1
-        case .fullSupporterMonthly: 2
-        case .superSupporterMonthly: 3
-        default: nil
-        }
-    }
-    
-    var entitlement: PurchaseEntitlement {
-        switch self {
-        case .supporterMonthly,
-                .fullSupporterMonthly,
-                .superSupporterMonthly:
-            return .supporter
-        case .smallTip,
-                .niceTip,
-                .generousTip,
-                .hugeTip:
-            return .tip
-        }
-    }
-}
-    
-enum PurchaseEntitlement: String {
-    
-    case supporter
-    case tip
-    
-    var name: String {
-        rawValue.uppercased()
     }
 }

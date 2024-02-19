@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A04F7802B827E3200C9D1EB /* PurchaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F77F2B827E3200C9D1EB /* PurchaseModel.swift */; };
+		4A04F7822B827E6800C9D1EB /* MePurchaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F7812B827E6800C9D1EB /* MePurchaseModel.swift */; };
+		4A04F7842B82B8B900C9D1EB /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 4A04F7832B82B8B900C9D1EB /* Configuration.storekit */; };
+		4A04F7872B8368EA00C9D1EB /* SettingsSupporterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F7862B8368EA00C9D1EB /* SettingsSupporterView.swift */; };
 		4A1DFC7B2B7BEDAF0094BAA0 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC7A2B7BEDAF0094BAA0 /* View+Extension.swift */; };
 		4A1DFC7D2B7BEDD90094BAA0 /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC7C2B7BEDD90094BAA0 /* AppIcon.swift */; };
 		4A1DFC812B7C93C80094BAA0 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC802B7C93C80094BAA0 /* Bundle+Extension.swift */; };
@@ -158,6 +162,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4A04F77F2B827E3200C9D1EB /* PurchaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseModel.swift; sourceTree = "<group>"; };
+		4A04F7812B827E6800C9D1EB /* MePurchaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MePurchaseModel.swift; sourceTree = "<group>"; };
+		4A04F7832B82B8B900C9D1EB /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
+		4A04F7862B8368EA00C9D1EB /* SettingsSupporterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSupporterView.swift; sourceTree = "<group>"; };
 		4A1DFC7A2B7BEDAF0094BAA0 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		4A1DFC7C2B7BEDD90094BAA0 /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
 		4A1DFC802B7C93C80094BAA0 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
@@ -285,6 +293,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A04F77E2B827E1600C9D1EB /* Purchase */ = {
+			isa = PBXGroup;
+			children = (
+				4A1DFC9D2B8200BA0094BAA0 /* PurchaseManager.swift */,
+				4A04F77F2B827E3200C9D1EB /* PurchaseModel.swift */,
+				4A04F7812B827E6800C9D1EB /* MePurchaseModel.swift */,
+			);
+			path = Purchase;
+			sourceTree = "<group>";
+		};
 		4A1DFC7E2B7BEDDC0094BAA0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,6 +372,7 @@
 				4AB720A72B6DB396001E2C76 /* Components */,
 				4A1DFC982B815CAC0094BAA0 /* Helpers */,
 				4AB7205F2B6BAC8E001E2C76 /* Assets.xcassets */,
+				4A04F7832B82B8B900C9D1EB /* Configuration.storekit */,
 				4AB720612B6BAC8E001E2C76 /* Kedi.entitlements */,
 				4AB720622B6BAC8E001E2C76 /* Preview Content */,
 			);
@@ -495,11 +514,11 @@
 		4AB720A02B6C791A001E2C76 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				4A04F77E2B827E1600C9D1EB /* Purchase */,
 				4AB720A32B6DA77C001E2C76 /* MeManager.swift */,
 				4AB720A12B6C7925001E2C76 /* KeychainManager.swift */,
 				4ADF09E32B763CCE002318B2 /* CacheManager.swift */,
 				4ADF09F82B792998002318B2 /* WidgetsManager.swift */,
-				4A1DFC9D2B8200BA0094BAA0 /* PurchaseManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -740,6 +759,7 @@
 		4ADF0A022B7934BE002318B2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4A04F7862B8368EA00C9D1EB /* SettingsSupporterView.swift */,
 				4ADF09FF2B7934B8002318B2 /* SettingsAccountItemView.swift */,
 			);
 			path = Views;
@@ -871,6 +891,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AB720642B6BAC8E001E2C76 /* Preview Assets.xcassets in Resources */,
+				4A04F7842B82B8B900C9D1EB /* Configuration.storekit in Resources */,
 				4AB720602B6BAC8E001E2C76 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -900,6 +921,7 @@
 				4A1DFC7D2B7BEDD90094BAA0 /* AppIcon.swift in Sources */,
 				4ADF09F92B792998002318B2 /* WidgetsManager.swift in Sources */,
 				4A1DFC9A2B815CD30094BAA0 /* BrowserUtility.swift in Sources */,
+				4A04F7822B827E6800C9D1EB /* MePurchaseModel.swift in Sources */,
 				4A1DFC902B80B9290094BAA0 /* SupporterView.swift in Sources */,
 				4AB720F82B70FBF1001E2C76 /* Date+Extension.swift in Sources */,
 				4AB721222B73881B001E2C76 /* OverviewItemView.swift in Sources */,
@@ -924,6 +946,7 @@
 				4AB720B82B6E3E1D001E2C76 /* TabBarView.swift in Sources */,
 				4AB720BA2B6E4183001E2C76 /* NavigationItem.swift in Sources */,
 				4A1DFC8A2B7ECF0C0094BAA0 /* CacheAsyncImage.swift in Sources */,
+				4A04F7802B827E3200C9D1EB /* PurchaseModel.swift in Sources */,
 				4ADF09EB2B7783FB002318B2 /* EdgeInsets+Extension.swift in Sources */,
 				4A1DFC812B7C93C80094BAA0 /* Bundle+Extension.swift in Sources */,
 				4AB720B22B6DC9AB001E2C76 /* SpacingLabelStyle.swift in Sources */,
@@ -960,6 +983,7 @@
 				4AB720A92B6DB3A0001E2C76 /* AsyncButton.swift in Sources */,
 				4AB721092B726C62001E2C76 /* TransactionDetailInfoItem.swift in Sources */,
 				4AB720CE2B6EB36C001E2C76 /* OverviewItemType.swift in Sources */,
+				4A04F7872B8368EA00C9D1EB /* SettingsSupporterView.swift in Sources */,
 				4AB720C02B6E4A62001E2C76 /* RCChartResponse.swift in Sources */,
 				4AB7208C2B6C642D001E2C76 /* Color+Extension.swift in Sources */,
 				4AB720AE2B6DB698001E2C76 /* OverviewItem.swift in Sources */,
@@ -1055,6 +1079,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1116,6 +1141,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1146,6 +1172,7 @@
 				CODE_SIGN_ENTITLEMENTS = Kedi/Kedi.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Kedi/Preview Content\"";
 				DEVELOPMENT_TEAM = 4K634X2CUP;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1191,6 +1218,7 @@
 				CODE_SIGN_ENTITLEMENTS = Kedi/Kedi.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Kedi/Preview Content\"";
 				DEVELOPMENT_TEAM = 4K634X2CUP;
 				ENABLE_HARDENED_RUNTIME = YES;

@@ -14,12 +14,33 @@ struct AppIconView: View {
     @State private var appIconWidth: CGFloat = .zero
     @State private var appIconSelection: AppIcon = .default
     
+    @State private var showingSupporterView = false
+    
+    @EnvironmentObject var purchaseManager: PurchaseManager
+    
     init() {
         appIconSelection = appIcon
     }
     
     var body: some View {
         List {
+            if purchaseManager.state == .data,
+               purchaseManager.meSubscriptionType == .normal {
+                Section {
+                    SettingsSupporterView(
+                        title: "Become a Supporter!",
+                        subtitle: "Support indie development",
+                        isActive: true,
+                        action: {
+                            showingSupporterView.toggle()
+                        }
+                    )
+                }
+                .listRowInsets(.zero)
+                .listRowBackground(Color.clear)
+                .listSectionSpacing(.custom(.zero))
+            }
+            
             ForEach(AppIcon.sections, id: \.self) { section in
                 Section {
                     Grid(horizontalSpacing: 10, verticalSpacing: 10) {
@@ -38,13 +59,25 @@ struct AppIconView: View {
         }
         .navigationTitle("App Icon")
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $showingSupporterView) {
+            NavigationStack {
+                SupporterView()
+                    .environmentObject(purchaseManager)
+            }
+        }
     }
     
     private func makeAppIcon(appIcon: AppIcon) -> some View {
         Button {
-            self.appIcon = appIcon
-            UIApplication.shared.setAlternateIconName(appIcon.identifier)
-            self.appIconSelection = appIcon
+            if purchaseManager.meSubscriptionType != .normal {
+                if appIconSelection != appIcon {
+                    self.appIcon = appIcon
+                    UIApplication.shared.setAlternateIconName(appIcon.identifier)
+                    appIconSelection = appIcon
+                }
+            } else {
+                showingSupporterView.toggle()
+            }
         } label: {
             let isSelected = self.appIcon == appIcon
             

@@ -1,0 +1,221 @@
+{
+  "identifier" : "503718C5",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "6478074588",
+      "localizations" : [
+        {
+          "description" : "You can support the development of the app.",
+          "displayName" : "Generous Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "kedi.generousTip",
+      "referenceName" : "Generous Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "6478074564",
+      "localizations" : [
+        {
+          "description" : "You can support the development of the app.",
+          "displayName" : "Huge Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "kedi.hugeTip",
+      "referenceName" : "Huge Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "2.49",
+      "familyShareable" : false,
+      "internalID" : "6478074537",
+      "localizations" : [
+        {
+          "description" : "You can support the development of the app.",
+          "displayName" : "Nice Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "kedi.niceTip",
+      "referenceName" : "Nice Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "6478061875",
+      "localizations" : [
+        {
+          "description" : "You can support the development of the app.",
+          "displayName" : "Small Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "kedi.smallTip",
+      "referenceName" : "Small Tip",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6478032635",
+    "_compatibilityTimeRate" : {
+      "3" : 6
+    },
+    "_developerTeamID" : "4K634X2CUP",
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 729987261.90729594,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ],
+    "_timeRate" : 1003
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "21447850",
+      "localizations" : [
+
+      ],
+      "name" : "kediSubscription",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "4.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "6478033059",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Gain access to all Full Supporter features.",
+              "displayName" : "Full Supporter Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "kedi.fullSupporter.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "fullSupporterMonthly",
+          "subscriptionGroupID" : "21447850",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "19.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6478032959",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Gain access to all Super Supporter features.",
+              "displayName" : "Super Supporter Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "kedi.superSupporter.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "superSupporterMonthly",
+          "subscriptionGroupID" : "21447850",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "1.99",
+          "familyShareable" : false,
+          "groupNumber" : 3,
+          "internalID" : "6478032871",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Gain access to all Supporter features.",
+              "displayName" : "Supporter Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "kedi.supporter.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "supporterMonthly",
+          "subscriptionGroupID" : "21447850",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "subscriptionOffersKeyPair" : {
+    "id" : "9562283A",
+    "privateKey" : "MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgk88+3++lssQvZAq2W6KbTDEdDcEpflAepHALXPCsqgSgCgYIKoZIzj0DAQehRANCAASfE2uxNL7P95lwzFHNfkCpqXh77MPRnAheFTB2e2nA+Sm8N7I7yCv42UGv5ZsDj4IDtfvCxIR+DrMlIp4Dh1SE"
+  },
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

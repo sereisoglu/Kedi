@@ -79,12 +79,13 @@ struct SignInView: View {
         .onChange(of: focusedField) { oldValue, newValue in
             viewModel.onFocusedFieldChange(field: focusedField)
         }
-        .alert(isPresented: $viewModel.showingAlert) {
-            Alert(
-                title: Text("Sign In Error"),
-                message: Text(viewModel.alertMessage ?? "An error has occurred."),
-                dismissButton: .default(Text("OK!"))
-            )
+        .alert(
+            "Sign In Error",
+            isPresented: $viewModel.showingAlert
+        ) {
+            Button("OK!", role: .cancel) {}
+        } message: {
+            Text(viewModel.alertMessage ?? "An error has occurred.")
         }
     }
 }

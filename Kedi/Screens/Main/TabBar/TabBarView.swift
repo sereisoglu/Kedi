@@ -35,6 +35,7 @@ struct TabBarView: View {
             
             NavigationStack {
                 SettingsView()
+                    .environmentObject(PurchaseManager.shared)
             }
             .tag(NavigationItem.settings)
             .tabItem {

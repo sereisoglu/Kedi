@@ -10,8 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     
     @StateObject private var viewModel = SettingsViewModel()
-    
-    @ScaledMetric private var supporterImageWidth: CGFloat = 80
+    @EnvironmentObject var purchaseManager: PurchaseManager
     
     @State private var showingSupporterView = false
     
@@ -43,50 +42,39 @@ struct SettingsView: View {
         case .loading,
                 .data:
             List {
-                Section {
-                    Button {
-                        showingSupporterView.toggle()
-                    } label: {
-                        HStack(spacing: 0) {
-                            Text("🚀")
-                                .fixedSize(horizontal: false, vertical: true)
-                                .font(.system(size: supporterImageWidth - 2))
-                                .frame(width: supporterImageWidth, height: 0)
-                            
-                            VStack(alignment: .center) {
-                                Text("Become a Supporter")
-                                
-                                Text("Support indie development!")
-                                    .font(.subheadline)
-                                    .foregroundStyle(.secondary)
-                            }
-                            .frame(maxWidth: .infinity)
-                            
-                            HStack() {
-                                Spacer()
-                                
-                                Image(systemName: "chevron.forward")
-                                    .font(.footnote)
-                                    .fontWeight(.bold)
-                                    .foregroundStyle(.secondary)
-                            }
-                            .padding(.trailing)
-                            .frame(width: supporterImageWidth)
+                if purchaseManager.state == .data {
+                    if let meSubscription = purchaseManager.meSubscription {
+                        Section {
+                            SettingsSupporterView(
+                                title: "You're a \(meSubscription.productType.distinctName)!",
+                                subtitle: "Thanks for your support",
+                                isActive: false,
+                                action: {
+                                    showingSupporterView.toggle()
+                                }
+                            )
                         }
-                        .padding(.vertical, 10)
-                        .background {
-                            RoundedRectangle(cornerRadius: 20, style: .continuous).fill(.accent)
+                        .listRowInsets(.zero)
+                        .listRowBackground(Color.clear)
+                        .listSectionSpacing(.custom(.zero))
+                    } else {
+                        Section {
+                            SettingsSupporterView(
+                                title: "Become a Supporter!",
+                                subtitle: "Support indie development",
+                                isActive: true,
+                                action: {
+                                    showingSupporterView.toggle()
+                                }
+                            )
+                        } footer: {
+                            Text("Kedi is a free and [open-source \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://github.com/sereisoglu/Kedi) RevenueCat client. Kedi was build by a solo [developer \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://x.com/sereisoglu). If Kedi has made your life easier and you want to support development, you can become a supporter!")
+                                .padding(.horizontal)
                         }
-                        .foregroundStyle(.white)
+                        .listRowInsets(.zero)
+                        .listRowBackground(Color.clear)
                     }
-                    .buttonStyle(.plain)
-                    .padding(.vertical)
-                } footer: {
-                    Text("Kedi is a free and [open-source \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://github.com/sereisoglu/Kedi) RevenueCat client. Kedi was build by a solo [developer \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://x.com/sereisoglu). If Kedi has made your life easier and you want to support development, you can become a supporter! If you become a supporter, you are eligible to use alternative app icons.")
-                        .padding(.horizontal)
                 }
-                .listRowInsets(.zero)
-                .listRowBackground(Color.clear)
                 
                 Section {
                     SettingsAccountItemView(
@@ -203,6 +191,7 @@ struct SettingsView: View {
                 switch screen {
                 case "appIcon":
                     AppIconView()
+                        .environmentObject(purchaseManager)
                 case "about":
                     AboutView()
                 default:
@@ -212,7 +201,7 @@ struct SettingsView: View {
             .sheet(isPresented: $showingSupporterView) {
                 NavigationStack {
                     SupporterView()
-                        .environmentObject(PurchaseManager.shared)
+                        .environmentObject(purchaseManager)
                 }
             }
             .redacted(reason: viewModel.state == .loading ? .placeholder : [])
