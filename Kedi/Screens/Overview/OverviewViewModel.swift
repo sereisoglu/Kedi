@@ -11,6 +11,7 @@ final class OverviewViewModel: ObservableObject {
     
     private let apiService = APIService.shared
     private let meManager = MeManager.shared
+    private let widgetsManager = WidgetsManager.shared
     
     @Published private(set) var state: GeneralState = .loading
     
@@ -127,6 +128,7 @@ final class OverviewViewModel: ObservableObject {
     }
     
     func refresh() async {
+        widgetsManager.reloadAll()
         await fetchAll()
     }
 }

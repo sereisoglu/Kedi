@@ -31,6 +31,7 @@ struct SidebarView: View {
                 TransactionsView()
             case .settings:
                 SettingsView()
+                    .environmentObject(PurchaseManager.shared)
             case .none:
                 Text("")
             }

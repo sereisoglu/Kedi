@@ -9,8 +9,6 @@ import SwiftUI
 
 struct OverviewView: View {
     
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    
     @StateObject private var viewModel = OverviewViewModel()
     
     var body: some View {
@@ -42,10 +40,7 @@ struct OverviewView: View {
                 .data:
             ScrollView {
                 LazyVGrid(
-                    columns: .init(
-                        repeating: .init(.flexible(), spacing: 12),
-                        count: horizontalSizeClass == .compact ? 2 : 4
-                    ),
+                    columns: [.init(.adaptive(minimum: 165))],
                     spacing: 12
                 ) {
                     ForEach(viewModel.items, id: \.self) { item in
