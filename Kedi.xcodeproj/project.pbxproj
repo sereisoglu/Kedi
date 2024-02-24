@@ -24,6 +24,9 @@
 		4A1DFC9A2B815CD30094BAA0 /* BrowserUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC992B815CD30094BAA0 /* BrowserUtility.swift */; };
 		4A1DFC9C2B81FA6C0094BAA0 /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC9B2B81FA6C0094BAA0 /* Text+Extension.swift */; };
 		4A1DFC9E2B8200BB0094BAA0 /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC9D2B8200BA0094BAA0 /* PurchaseManager.swift */; };
+		4A41460A2B85EC0800489D9C /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4146092B85EC0800489D9C /* SessionManager.swift */; };
+		4A41460B2B85EC0800489D9C /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4146092B85EC0800489D9C /* SessionManager.swift */; };
+		4A97D5A82B83D70A0073C11E /* OverviewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97D5A72B83D70A0073C11E /* OverviewDetailView.swift */; };
 		4AB7205C2B6BAC8D001E2C76 /* KediApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7205B2B6BAC8D001E2C76 /* KediApp.swift */; };
 		4AB7205E2B6BAC8D001E2C76 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7205D2B6BAC8D001E2C76 /* SignInView.swift */; };
 		4AB720602B6BAC8E001E2C76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AB7205F2B6BAC8E001E2C76 /* Assets.xcassets */; };
@@ -178,6 +181,8 @@
 		4A1DFC992B815CD30094BAA0 /* BrowserUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserUtility.swift; sourceTree = "<group>"; };
 		4A1DFC9B2B81FA6C0094BAA0 /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
 		4A1DFC9D2B8200BA0094BAA0 /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
+		4A4146092B85EC0800489D9C /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		4A97D5A72B83D70A0073C11E /* OverviewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewDetailView.swift; sourceTree = "<group>"; };
 		4AB720582B6BAC8D001E2C76 /* Kedi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kedi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AB7205B2B6BAC8D001E2C76 /* KediApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KediApp.swift; sourceTree = "<group>"; };
 		4AB7205D2B6BAC8D001E2C76 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -344,6 +349,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		4A97D5A62B83D6FC0073C11E /* OverviewDetail */ = {
+			isa = PBXGroup;
+			children = (
+				4A97D5A72B83D70A0073C11E /* OverviewDetailView.swift */,
+			);
+			path = OverviewDetail;
+			sourceTree = "<group>";
+		};
 		4AB7204F2B6BAC8D001E2C76 = {
 			isa = PBXGroup;
 			children = (
@@ -395,6 +408,7 @@
 				4AB7206B2B6BDC27001E2C76 /* SignIn */,
 				4AB7208D2B6C682C001E2C76 /* Main */,
 				4AB720802B6C4FDA001E2C76 /* Overview */,
+				4A97D5A62B83D6FC0073C11E /* OverviewDetail */,
 				4AB720E32B70C8BA001E2C76 /* Transactions */,
 				4AB721002B722DF1001E2C76 /* TransactionDetail */,
 				4AB720902B6C6888001E2C76 /* Settings */,
@@ -519,6 +533,7 @@
 				4AB720A12B6C7925001E2C76 /* KeychainManager.swift */,
 				4ADF09E32B763CCE002318B2 /* CacheManager.swift */,
 				4ADF09F82B792998002318B2 /* WidgetsManager.swift */,
+				4A4146092B85EC0800489D9C /* SessionManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -942,6 +957,7 @@
 				4ADF0A082B7A3B86002318B2 /* WidgetErrorView.swift in Sources */,
 				4ADF0A052B7A3B3F002318B2 /* WidgetError.swift in Sources */,
 				4A1DFC8D2B80A57A0094BAA0 /* CenterAlignedLabelStyle.swift in Sources */,
+				4A41460A2B85EC0800489D9C /* SessionManager.swift in Sources */,
 				4AB721042B722E07001E2C76 /* TransactionDetailView.swift in Sources */,
 				4AB720B82B6E3E1D001E2C76 /* TabBarView.swift in Sources */,
 				4AB720BA2B6E4183001E2C76 /* NavigationItem.swift in Sources */,
@@ -961,6 +977,7 @@
 				4AB720742B6BF4A9001E2C76 /* Endpoint.swift in Sources */,
 				4AB720E92B70C8EC001E2C76 /* TransactionsView.swift in Sources */,
 				4AB7211A2B736FEC001E2C76 /* TransactionDetailEntitlementItemView.swift in Sources */,
+				4A97D5A82B83D70A0073C11E /* OverviewDetailView.swift in Sources */,
 				4AB720F12B70E399001E2C76 /* String+Extension.swift in Sources */,
 				4A1DFC7B2B7BEDAF0094BAA0 /* View+Extension.swift in Sources */,
 				4ADF09D72B761CED002318B2 /* RCChartRequest.swift in Sources */,
@@ -1019,6 +1036,7 @@
 				4AB721642B756F75001E2C76 /* DailyGraphWidgetEntry.swift in Sources */,
 				4ADF09D52B761CD6002318B2 /* RCLoginRequest.swift in Sources */,
 				4AB721542B739D30001E2C76 /* RCError.swift in Sources */,
+				4A41460B2B85EC0800489D9C /* SessionManager.swift in Sources */,
 				4AB7215E2B756E9C001E2C76 /* DailyGraphWidget.swift in Sources */,
 				4AB721532B739C6D001E2C76 /* RCChartResponse.swift in Sources */,
 				4AB721602B756ED5001E2C76 /* DailyGraphWidgetView.swift in Sources */,

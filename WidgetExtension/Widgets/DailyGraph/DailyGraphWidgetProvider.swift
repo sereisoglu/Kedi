@@ -31,7 +31,7 @@ struct DailyGraphWidgetProvider: TimelineProvider {
             await getEntry(context: context) { entry in
                 let policy: TimelineReloadPolicy
                 if entry.error != nil {
-                    policy = meManager.isSignedIn ? .after(Date(byAdding: .minute, value: 1)) : .never
+                    policy = .after(Date(byAdding: .minute, value: 1))
                 } else {
                     policy = .after(Date(byAdding: .minute, value: 20))
                 }
@@ -46,6 +46,12 @@ struct DailyGraphWidgetProvider: TimelineProvider {
         retryCount: Int = 2,
         completion: @escaping (Entry) -> Void
     ) async {
+        //        guard let authToken = meManager.getAuthToken() else {
+        //            completion(.placeholder) // TODO: ?
+        //            return
+        //        }
+        //        apiService.setAuthToken(authToken)
+        
         var items = [RectangleMarkGraphValue]()
         var err: RCError?
         do {
@@ -76,6 +82,11 @@ struct DailyGraphWidgetProvider: TimelineProvider {
     }
     
     private func fetchData() async throws -> [RectangleMarkGraphValue] {
+        if Endpoint.AUTH_TOKEN == nil {
+            SessionManager.shared.startWidgetExtension()
+            apiService.setAuthToken(SessionManager.shared.getRevenueCatCookie()?.value)
+        }
+        
         do {
             let data = try await apiService.request(
                 type: RCChartResponse.self,

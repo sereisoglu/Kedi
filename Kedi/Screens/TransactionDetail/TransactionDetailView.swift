@@ -14,8 +14,8 @@ struct TransactionDetailView: View {
     var body: some View {
         makeBody()
             .navigationTitle(viewModel.navigationTitle)
-            .background(Color.systemGroupedBackground)
             .navigationBarTitleDisplayMode(.inline)
+            .background(Color.systemGroupedBackground)
     }
     
     @ViewBuilder

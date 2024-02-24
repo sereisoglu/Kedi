@@ -9,17 +9,21 @@ import SwiftUI
 
 struct AppIconView: View {
     
-    @AppStorage("appIcon") private var appIcon: AppIcon = .default
+//    @AppStorage("appIcon") private var appIcon: AppIcon = .default
+    
+    @State private var appIconSelection: AppIcon {
+        didSet {
+            UserDefaults.standard.appIcon = appIconSelection.rawValue
+        }
+    }
     
     @State private var appIconWidth: CGFloat = .zero
-    @State private var appIconSelection: AppIcon = .default
-    
     @State private var showingSupporterView = false
     
     @EnvironmentObject var purchaseManager: PurchaseManager
     
     init() {
-        appIconSelection = appIcon
+        appIconSelection = .init(rawValue: UserDefaults.standard.appIcon ?? "AppIcon") ?? .default
     }
     
     var body: some View {
@@ -71,7 +75,6 @@ struct AppIconView: View {
         Button {
             if purchaseManager.meSubscriptionType != .normal {
                 if appIconSelection != appIcon {
-                    self.appIcon = appIcon
                     UIApplication.shared.setAlternateIconName(appIcon.identifier)
                     appIconSelection = appIcon
                 }
@@ -79,7 +82,7 @@ struct AppIconView: View {
                 showingSupporterView.toggle()
             }
         } label: {
-            let isSelected = self.appIcon == appIcon
+            let isSelected = appIconSelection == appIcon
             
             VStack(alignment: .center, spacing: 5) {
                 Image(uiImage: appIcon.uiImage)

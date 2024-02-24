@@ -43,16 +43,22 @@ struct OverviewView: View {
                     columns: [.init(.adaptive(minimum: 165))],
                     spacing: 12
                 ) {
-                    ForEach(viewModel.items, id: \.self) { item in
-                        OverviewItemView(item: item, chartValues: viewModel.chartValues[item.type])
-                            .aspectRatio(1, contentMode: .fit)
+                    ForEach(viewModel.getItems()) { item in
+                        NavigationLink(value: item) {
+                            OverviewItemView(item: item)
+                                .aspectRatio(1, contentMode: .fit)
+                        }
+                        .foregroundStyle(.primary)
                     }
                 }
                 .padding(.horizontal)
                 .padding(.bottom)
             }
-            .redacted(reason: viewModel.state == .loading ? .placeholder : [])
-            .disabled(viewModel.state == .loading)
+            .navigationDestination(for: OverviewItem.self) { item in
+//                OverviewDetailView(item: item, chartValues: viewModel.chartValues[item.type])
+            }
+//            .redacted(reason: viewModel.state == .loading ? .placeholder : [])
+//            .disabled(viewModel.state == .loading)
         }
     }
 }

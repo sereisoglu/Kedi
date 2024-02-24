@@ -15,8 +15,14 @@ final class OverviewViewModel: ObservableObject {
     
     @Published private(set) var state: GeneralState = .loading
     
-    @Published private(set) var items: [OverviewItem] = .stub
-    @Published private(set) var chartValues = [OverviewItemType: [LineAndAreaMarkChartValue]]()
+    @Published private(set) var configs: [OverviewItemConfig] = .get()
+    @Published private(set) var items: [OverviewItemType: OverviewItem] = .placeholder(configs: .get())
+    
+    func getItems() -> [OverviewItem] {
+        configs.compactMap { config in
+            items[config.type]
+        }
+    }
     
     init() {
         Task {
@@ -30,8 +36,10 @@ final class OverviewViewModel: ObservableObject {
                 await self?.fetchOverview()
             }
             
-            group.addTask { [weak self] in
-                await self?.fetchCharts()
+            configs.forEach { config in
+                group.addTask { [weak self] in
+                    await self?.fetchChart(config: config)
+                }
             }
         }
     }
@@ -44,86 +52,67 @@ final class OverviewViewModel: ObservableObject {
                 endpoint: .overview
             )
             
-            items = [
-                .init(type: .mrr, value: "\(data?.mrr?.formatted(.currency(code: "USD")) ?? "")"),
-                .init(type: .subsciptions, value: "\(data?.activeSubscribersCount?.formatted() ?? "")"),
-                .init(type: .trials, value: "\(data?.activeTrialsCount?.formatted() ?? "")"),
-                .init(type: .revenue, value: "\(data?.revenue?.formatted(.currency(code: "USD")) ?? "")"),
-                .init(type: .users, value: "\(data?.activeUsersCount?.formatted() ?? "")"),
-                .init(type: .installs, value: "\(data?.installsCount?.formatted() ?? "")")
-            ]
+            items[.mrr]?.set(value: .mrr(data?.mrr ?? 0))
+            items[.subsciptions]?.set(value: .subsciptions(data?.activeSubscribersCount ?? 0))
+            items[.trials]?.set(value: .trials(data?.activeTrialsCount ?? 0))
+            items[.revenue]?.set(value: .revenue(data?.revenue ?? 0))
+            items[.users]?.set(value: .users(data?.activeUsersCount ?? 0))
+            items[.installs]?.set(value: .installs(data?.installsCount ?? 0))
             
-            state = .data
+//            state = .data
         } catch {
-            items = []
-            state = .error(error)
+//            state = .error(error)
         }
     }
     
     @MainActor
-    private func fetchCharts() async {
-        let charts = await fetchAllCharts()
-        let chartsByName = charts.keyBy(\.name)
+    private func fetchChart(config: OverviewItemConfig) async {
+        let type = config.type
         
-        chartValues = OverviewItemType.allCases.reduce(
-            [OverviewItemType: [LineAndAreaMarkChartValue]](),
-            { partialResult, itemType in
-                var partialResult = partialResult
-                if let chartName = itemType.chartName,
-                   let chartIndex = itemType.chartIndex,
-                   let values = chartsByName[chartName]?.values {
-                    partialResult[itemType] = values.map { .init(
-                        date: .init(timeIntervalSince1970: $0[safe: 0] ?? 0),
-                        value: $0[safe: chartIndex] ?? 0
-                    ) }
-                }
-                return partialResult
-            }
-        )
-        
-        if let value = chartValues[.arr]?.last?.value {
-            items.append(.init(type: .arr, value: value.formatted(.currency(code: "USD"))))
+        guard let chartName = type.chartName,
+              let chartIndex = type.chartIndex else {
+            return
         }
         
-        if let value = chartsByName[.revenue]?.summary?["total"]?["Total Revenue"] {
-            items.append(.init(type: .revenueAllTime, value: value.formatted(.currency(code: "USD"))))
-        }
-        
-        if let value = chartValues[.proceeds]?.last?.value {
-            items.append(.init(type: .proceeds, value: value.formatted(.currency(code: "USD"))))
-        }
-        
-        if let value = chartsByName[.revenue]?.summary?["total"]?["Proceeds"] {
-            items.append(.init(type: .proceedsAllTime, value: value.formatted(.currency(code: "USD"))))
-        }
-        
-        if let value = chartsByName[.conversionToPaying]?.values?.last?[safe: 1] {
-            items.append(.init(type: .newUsers, value: value.formatted()))
-        }
-    }
-    
-    private func fetchAllCharts() async -> [RCChartResponse] {
-        await withTaskGroup(of: RCChartResponse?.self) { group in
-            RCChartName.allCases.forEach { name in
-                group.addTask { [weak self] in
-                    try? await self?.apiService.request(
-                        type: RCChartResponse.self,
-                        endpoint: .charts(.init(
-                            name: name,
-                            resolution: .month,
-                            startDate: self?.meManager.firstTransactionDate?.format(to: .yyy_MM_dd)
-                        ))
-                    )
-                }
+        do {
+            let data = try await apiService.request(
+                type: RCChartResponse.self,
+                endpoint: .charts(.init(
+                    name: chartName,
+                    resolution: config.timePeriod.resolution,
+                    startDate: config.timePeriod.startDate,
+                    endDate: config.timePeriod.endDate
+                ))
+            )
+            
+            let chartValues: [LineAndAreaMarkChartValue]? = data?.values?.map { .init(
+                date: .init(timeIntervalSince1970: $0[safe: 0] ?? 0),
+                value: $0[safe: chartIndex] ?? 0
+            ) }
+            
+            switch type {
+            case .mrr,
+                    .subsciptions,
+                    .trials,
+                    .revenue,
+                    .users,
+                    .installs:
+                items[type]?.chartValues = chartValues
+            case .arr:
+                items[type]?.set(value: .arr(chartValues?.last?.value ?? 0), chartValues: chartValues)
+            case .proceeds:
+                items[type]?.set(value: .proceeds(data?.summary?["total"]?["Total Revenue"] ?? 0), chartValues: chartValues)
+            case .newUsers:
+                items[type]?.set(value: .newUsers(Int(chartValues?.last?.value ?? 0)), chartValues: chartValues)
+            case .churnRate:
+                items[type]?.set(value: .churnRate(chartValues?.last?.value ?? 0), chartValues: chartValues)
+            case .subsciptionsLost:
+                items[type]?.set(value: .subsciptionsLost(Int(chartValues?.last?.value ?? 0)), chartValues: chartValues)
             }
             
-            var charts = [RCChartResponse]()
-            for await chart in group {
-                if let chart {
-                    charts.append(chart)
-                }
-            }
-            return charts
+//            state = .data
+        } catch {
+//            state = .error(error)
         }
     }
     

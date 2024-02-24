@@ -99,7 +99,7 @@ struct SupporterView: View {
                     if !purchaseManager.getSubscriptions().isEmpty {
                         Section {
                             VStack(spacing: 10) {
-                                ForEach(purchaseManager.getSubscriptions(), id: \.self) { subscription in
+                                ForEach(purchaseManager.getSubscriptions()) { subscription in
                                     makeSubscriptionView(subscription: subscription)
                                 }
                             }
@@ -112,7 +112,7 @@ struct SupporterView: View {
                 } else {
                     Section {
                         VStack(spacing: 10) {
-                            ForEach(purchaseManager.getSubscriptions(), id: \.self) { subscription in
+                            ForEach(purchaseManager.getSubscriptions()) { subscription in
                                 makeSubscriptionView(subscription: subscription)
                             }
                         }
@@ -126,7 +126,7 @@ struct SupporterView: View {
                 }
                 
                 Section {
-                    ForEach(purchaseManager.getNonSubscriptions(), id: \.self) { nonSubscription in
+                    ForEach(purchaseManager.getNonSubscriptions()) { nonSubscription in
                         makeTipView(nonSubscription: nonSubscription)
                     }
                     

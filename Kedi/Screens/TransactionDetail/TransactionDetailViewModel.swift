@@ -101,13 +101,12 @@ final class TransactionDetailViewModel: ObservableObject {
             )
         ]
         
-        entitlementItems = detailData.subscriptionStatuses?.map { .init(data: $0) }
+        entitlementItems = detailData.subscriptionStatuses?
+            .map { .init(data: $0) }
+            .sorted(by: { $0.type.rawValue < $1.type.rawValue })
         
-        attributeItems = detailData.subscriberAttributes?.map { .init(
-            key: $0.key ?? "n/a",
-            value: $0.value ?? "n/a",
-            copyable: true
-        ) } ?? []
+        attributeItems = detailData.subscriberAttributes?
+            .map { .init(key: $0.key ?? "n/a", value: $0.value ?? "n/a", copyable: true) } ?? []
         
         let detailHistoryItems = detailData.history?.compactMap { TransactionDetailHistoryItem(data: $0) } ?? []
         let activityHistoryItems = activityData?.events?.map { TransactionDetailHistoryItem(data: $0, appUserId: activityData?.appUserId ?? "") } ?? []

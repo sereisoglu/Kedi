@@ -178,7 +178,7 @@ final class PurchaseManager: NSObject, ObservableObject {
                 return .init(
                     productType: productType,
                     purchaseDate: purchaseDate,
-                    expirationDate: purchaseDate,
+                    expirationDate: expirationDate,
                     willRenew: entitlement.willRenew
                 )
             }

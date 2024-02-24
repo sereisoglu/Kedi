@@ -47,7 +47,8 @@ struct TabBarView: View {
     private func makeTabItem(
         item: NavigationItem
     ) -> some View {
-        Label(item.title, systemImage: item.getIcon(isSelected: item == selection))
+        Label(item.title, systemImage: item.icon)
+            .symbolVariant(item == selection ? .fill : .none)
             .environment(\.symbolVariants, .none)
     }
 }

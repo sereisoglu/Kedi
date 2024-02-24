@@ -15,12 +15,8 @@ struct SidebarView: View {
     
     var body: some View {
         NavigationSplitView {
-            List(selection: $selection) {
-                makeSideItem(item: .overview)
-                
-                makeSideItem(item: .transactions)
-                
-                makeSideItem(item: .settings)
+            List(NavigationItem.allCases, selection: $selection) { item in
+                makeSideItem(item: item)
             }
             .navigationTitle("Kedi")
         } detail: {
@@ -42,7 +38,8 @@ struct SidebarView: View {
         item: NavigationItem
     ) -> some View {
         NavigationLink(value: item) {
-            Label(item.title, systemImage: item.getIcon(isSelected: item == selection))
+            Label(item.title, systemImage: item.icon)
+                .symbolVariant(item == selection ? .fill : .none)
         }
     }
 }

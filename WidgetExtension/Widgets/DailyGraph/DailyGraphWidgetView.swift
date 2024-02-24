@@ -34,9 +34,10 @@ struct DailyGraphWidgetView : View {
                     Text(message)
                         .font(.caption2)
                         .fontWeight(.semibold)
-                        .foregroundColor(.red)
+                        .foregroundStyle(.red)
                         .multilineTextAlignment(.center)
                         .lineLimit(1)
+                        .dynamicTypeSize(DynamicTypeSize.large)
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 2)

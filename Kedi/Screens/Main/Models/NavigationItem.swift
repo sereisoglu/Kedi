@@ -7,29 +7,19 @@
 
 import Foundation
 
-enum NavigationItem: Identifiable, Hashable {
+enum NavigationItem: String, Identifiable, Hashable, CaseIterable {
     
     case overview
     case transactions
     case settings
     
-    var id: UUID {
-        UUID()
-    }
+    var id: String { rawValue }
     
     var icon: String {
         switch self {
         case .overview: "square.grid.2x2"
-        case .transactions: "banknote"
+        case .transactions: "arrow.left.arrow.right.circle"
         case .settings: "gearshape"
-        }
-    }
-    
-    var selectedIcon: String {
-        switch self {
-        case .overview: "square.grid.2x2.fill"
-        case .transactions: "banknote.fill"
-        case .settings: "gearshape.fill"
         }
     }
     
@@ -39,9 +29,5 @@ enum NavigationItem: Identifiable, Hashable {
         case .transactions: "Transactions"
         case .settings: "Settings"
         }
-    }
-    
-    func getIcon(isSelected: Bool) -> String {
-        isSelected ? selectedIcon : icon
     }
 }

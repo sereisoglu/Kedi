@@ -68,6 +68,7 @@ final class MeManager: ObservableObject {
         apiService.setAuthToken(token)
         widgetsManager.reloadAll()
         isSignedIn = true
+        SessionManager.shared.start()
         
         return true
     }

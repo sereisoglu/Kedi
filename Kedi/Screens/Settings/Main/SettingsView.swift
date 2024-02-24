@@ -118,9 +118,7 @@ struct SettingsView: View {
                         imageAsset: .systemImage("app"),
                         title: "App Icon"
                     )
-                    .overlay {
-                        NavigationLink(value: "appIcon") { EmptyView() }.opacity(0)
-                    }
+                    .overlay { NavigationLink(value: "appIcon") { EmptyView() }.opacity(0) }
                 } header: {
                     Text("Customization")
                 }
@@ -159,9 +157,7 @@ struct SettingsView: View {
                         imageAsset: .systemImage("info.circle"),
                         title: "About"
                     )
-                    .overlay {
-                        NavigationLink(value: "about") { EmptyView() }.opacity(0)
-                    }
+                    .overlay { NavigationLink(value: "about") { EmptyView() }.opacity(0) }
                 } header: {
                     Text("Kedi")
                 }

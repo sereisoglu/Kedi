@@ -12,13 +12,14 @@ struct KediApp: App {
     
     init() {
         PurchaseManager.shared.start()
+        SessionManager.shared.start()
     }
     
     var body: some Scene {
         WindowGroup {
             RootView()
                 .environmentObject(MeManager.shared)
-                .dynamicTypeSize(DynamicTypeSize.medium...DynamicTypeSize.xxxLarge)
+                .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
         }
     }
 }

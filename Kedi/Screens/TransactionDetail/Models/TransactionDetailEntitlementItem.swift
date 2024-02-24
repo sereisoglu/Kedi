@@ -25,20 +25,16 @@ struct TransactionDetailEntitlementItem: Identifiable, Hashable {
         } else if let date = data.expiresDate?.format(to: .iso8601WithoutMilliseconds),
                   !date.isFuture {
             type = .expired
-            description = "Subscription expired on \(date.formatted(date: .abbreviated, time: .shortened))"
-        } else if let date = data.unsubscribeDetectedAt?.format(to: .iso8601WithoutMilliseconds) {
+            description = "Expired on \(date.formatted(date: .abbreviated, time: .shortened))"
+        } else if let date = (data.unsubscribeDetectedAt ?? data.cancellationDate)?.format(to: .iso8601WithoutMilliseconds) {
             type = .unsubscribed
             description = "Unsubscribed on \(date.formatted(date: .abbreviated, time: .shortened))"
-        } else if let date = data.cancellationDate?.format(to: .iso8601WithoutMilliseconds) {
-            type = .cancelled
-            description = "Cancelled on \(date.formatted(date: .abbreviated, time: .shortened))"
-        } else if let date = data.expiresDate?.format(to: .iso8601WithoutMilliseconds) {
-            if data.isTrial ?? false {
-                type = .trial
-            } else {
-                type = .subscription
+            if let date = data.expiresDate?.format(to: .iso8601WithoutMilliseconds) {
+                description += "\nExpires on \(date.formatted(date: .abbreviated, time: .shortened))"
             }
-            description = "Subscription expires on \(date.formatted(date: .abbreviated, time: .shortened))"
+        } else if let date = data.expiresDate?.format(to: .iso8601WithoutMilliseconds) {
+            type = (data.isTrial ?? false) ? .trial : .subscription
+            description = "Expires on \(date.formatted(date: .abbreviated, time: .shortened))"
         } else {
             type = .oneTimePurchase
             if let date = data.purchaseDate?.format(to: .iso8601WithoutMilliseconds) {
@@ -53,26 +49,24 @@ struct TransactionDetailEntitlementItem: Identifiable, Hashable {
     }
 }
 
-enum TransactionDetailEntitlementType {
+enum TransactionDetailEntitlementType: Int {
     
     case subscription
     case oneTimePurchase
-    case expired
     case trial
     case unsubscribed
-    case cancelled
     case billingIssue
+    case expired
     case refunded
     
     var status: String {
         switch self {
         case .subscription: "🟢"
         case .oneTimePurchase: "🟢"
-        case .expired: "❌"
         case .trial: "🟠"
         case .unsubscribed: "🔴"
-        case .cancelled: "🔴"
         case .billingIssue: "🔴"
+        case .expired: "❌"
         case .refunded: "❌"
         }
     }

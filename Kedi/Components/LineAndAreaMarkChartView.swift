@@ -8,9 +8,9 @@
 import SwiftUI
 import Charts
 
-struct LineAndAreaMarkChartValue: Identifiable {
-    var id: Int { Int(date.timeIntervalSince1970) }
+struct LineAndAreaMarkChartValue: Identifiable, Hashable {
     
+    var id: Int { Int(date.timeIntervalSince1970) }
     let date: Date
     let value: Double
 }

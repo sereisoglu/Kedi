@@ -29,4 +29,12 @@ extension DateFormatter {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
+    
+    static let yyy_MM_dd_GMT: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.timeZone = .gmt
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
 }
