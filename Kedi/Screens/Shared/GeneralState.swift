@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum GeneralState: Equatable {
+enum GeneralState: Equatable, Hashable {
     
     case loading
     case empty
@@ -24,5 +24,9 @@ enum GeneralState: Equatable {
         default:
             return false
         }
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self)
     }
 }

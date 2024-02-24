@@ -57,8 +57,18 @@ struct OverviewView: View {
             .navigationDestination(for: OverviewItem.self) { item in
 //                OverviewDetailView(item: item, chartValues: viewModel.chartValues[item.type])
             }
-//            .redacted(reason: viewModel.state == .loading ? .placeholder : [])
-//            .disabled(viewModel.state == .loading)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Remove") {
+                        viewModel.removeItem()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Add") {
+                        viewModel.addItem()
+                    }
+                }
+            }
         }
     }
 }

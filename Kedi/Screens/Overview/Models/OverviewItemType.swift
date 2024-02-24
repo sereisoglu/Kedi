@@ -68,16 +68,29 @@ enum OverviewItemType: String, Codable, CaseIterable {
                 .last30Days,
                 .last90Days,
                 .last12Months,
-                .lastWeek,
-                .lastMonth,
-                .lastYear,
+//                .lastWeek,
+//                .lastMonth,
+//                .lastYear,
                 .thisWeek,
                 .thisMonth,
                 .thisYear,
                 .allTime
             ]
         case .revenue: 
-            return OverviewItemTimePeriod.allCases
+            return [
+                .last7Days,
+                .last28Days,
+                .last30Days,
+                .last90Days,
+                .last12Months,
+//                .lastWeek,
+//                .lastMonth,
+//                .lastYear,
+                .thisWeek,
+                .thisMonth,
+                .thisYear,
+                .allTime
+            ]
         case .users,
                 .installs:
             return [.last28Days]
@@ -109,9 +122,7 @@ enum OverviewItemType: String, Codable, CaseIterable {
         case .users: nil
         case .installs: nil
         case .arr: 1
-        // case .revenueAllTime: 3
         case .proceeds: 6
-//        case .proceedsAllTime: 6
         case .newUsers: 1
         case .churnRate: 3
         case .subsciptionsLost: 2

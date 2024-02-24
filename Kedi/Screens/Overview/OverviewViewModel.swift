@@ -13,16 +13,10 @@ final class OverviewViewModel: ObservableObject {
     private let meManager = MeManager.shared
     private let widgetsManager = WidgetsManager.shared
     
-    @Published private(set) var state: GeneralState = .loading
+    @Published private(set) var state: GeneralState = .data
     
-    @Published private(set) var configs: [OverviewItemConfig] = .get()
-    @Published private(set) var items: [OverviewItemType: OverviewItem] = .placeholder(configs: .get())
-    
-    func getItems() -> [OverviewItem] {
-        configs.compactMap { config in
-            items[config.type]
-        }
-    }
+    @Published private(set) var configs: [OverviewItemConfig] = OverviewItemConfig.get()
+    @Published private(set) var items: [OverviewItemConfig: OverviewItem] = .placeholder(configs: OverviewItemConfig.get())
     
     init() {
         Task {
@@ -52,16 +46,14 @@ final class OverviewViewModel: ObservableObject {
                 endpoint: .overview
             )
             
-            items[.mrr]?.set(value: .mrr(data?.mrr ?? 0))
-            items[.subsciptions]?.set(value: .subsciptions(data?.activeSubscribersCount ?? 0))
-            items[.trials]?.set(value: .trials(data?.activeTrialsCount ?? 0))
-            items[.revenue]?.set(value: .revenue(data?.revenue ?? 0))
-            items[.users]?.set(value: .users(data?.activeUsersCount ?? 0))
-            items[.installs]?.set(value: .installs(data?.installsCount ?? 0))
-            
-//            state = .data
+            setItem(type: .mrr, value: .mrr(data?.mrr ?? 0))
+            setItem(type: .subsciptions, value: .subsciptions(data?.activeSubscribersCount ?? 0))
+            setItem(type: .trials, value: .trials(data?.activeTrialsCount ?? 0))
+            setItem(config: .init(type: .revenue, timePeriod: .last28Days), value: .revenue(data?.revenue ?? 0))
+            setItem(config: .init(type: .users, timePeriod: .last28Days), value: .users(data?.activeUsersCount ?? 0))
+            setItem(config: .init(type: .installs, timePeriod: .last28Days), value: .installs(data?.installsCount ?? 0))
         } catch {
-//            state = .error(error)
+            state = .error(error)
         }
     }
     
@@ -94,30 +86,79 @@ final class OverviewViewModel: ObservableObject {
             case .mrr,
                     .subsciptions,
                     .trials,
-                    .revenue,
                     .users,
                     .installs:
-                items[type]?.chartValues = chartValues
+                items[config]?.set(chartValues: chartValues)
+            case .revenue:
+                if config.timePeriod == .last28Days {
+                    items[config]?.set(chartValues: chartValues)
+                } else {
+                    items[config]?.set(value: .revenue(data?.summary?["total"]?["Total Revenue"] ?? 0), chartValues: chartValues)
+                }
             case .arr:
-                items[type]?.set(value: .arr(chartValues?.last?.value ?? 0), chartValues: chartValues)
+                items[config]?.set(value: .arr(chartValues?.last?.value ?? 0), chartValues: chartValues)
             case .proceeds:
-                items[type]?.set(value: .proceeds(data?.summary?["total"]?["Total Revenue"] ?? 0), chartValues: chartValues)
+                items[config]?.set(value: .proceeds(data?.summary?["total"]?["Proceeds"] ?? 0), chartValues: chartValues)
             case .newUsers:
-                items[type]?.set(value: .newUsers(Int(chartValues?.last?.value ?? 0)), chartValues: chartValues)
+                items[config]?.set(value: .newUsers(Int(chartValues?.last?.value ?? 0)), chartValues: chartValues)
             case .churnRate:
-                items[type]?.set(value: .churnRate(chartValues?.last?.value ?? 0), chartValues: chartValues)
+                items[config]?.set(value: .churnRate(chartValues?.last?.value ?? 0), chartValues: chartValues)
             case .subsciptionsLost:
-                items[type]?.set(value: .subsciptionsLost(Int(chartValues?.last?.value ?? 0)), chartValues: chartValues)
+                items[config]?.set(value: .subsciptionsLost(Int(chartValues?.last?.value ?? 0)), chartValues: chartValues)
             }
-            
-//            state = .data
         } catch {
-//            state = .error(error)
+            print(error)
         }
     }
     
     func refresh() async {
         widgetsManager.reloadAll()
         await fetchAll()
+    }
+    
+    // MARK: - Items
+    
+    func getItems() -> [OverviewItem] {
+        configs.compactMap { items[$0] }
+    }
+    
+    private func setItem(
+        type: OverviewItemType,
+        value: OverviewItemValue
+    ) {
+        guard let config = configs.first(where: { $0.type == type }) else {
+            return
+        }
+        items[config]?.set(value: value)
+    }
+    
+    private func setItem(
+        config: OverviewItemConfig,
+        value: OverviewItemValue?,
+        chartValues: [LineAndAreaMarkChartValue]? = nil
+    ) {
+        if let value {
+            items[config]?.set(value: value, chartValues: chartValues)
+        } else {
+            items[config]?.set(chartValues: chartValues)
+        }
+    }
+    
+    func addItem() {
+        let config = OverviewItemConfig(type: .revenue, timePeriod: .allTime)
+        let item = OverviewItem(config: config)
+        
+        configs.insert(config, at: 0)
+        items[config] = item
+        
+        OverviewItemConfig.set(to: configs)
+        
+        Task {
+            await fetchChart(config: config)
+        }
+    }
+    
+    func removeItem() {
+        OverviewItemConfig.set(to: nil)
     }
 }
