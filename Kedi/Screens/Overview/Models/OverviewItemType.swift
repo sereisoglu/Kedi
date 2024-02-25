@@ -37,7 +37,7 @@ enum OverviewItemType: String, Codable, CaseIterable {
         }
     }
     
-    var name: String {
+    var title: String {
         switch self {
         case .mrr: "MRR"
         case .subsciptions: "Subsciptions"

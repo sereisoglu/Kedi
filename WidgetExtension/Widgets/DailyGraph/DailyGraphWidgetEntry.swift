@@ -25,7 +25,7 @@ extension DailyGraphWidgetEntry {
         
         return .init(
             date: Date(),
-            items: dates.compactMap { .init(date: $0, value: Double(Int.random(in: 0...10))) }
+            items: dates.map { .init(date: $0, value: Double(Int.random(in: 0...10))) }
         )
     }()
 }

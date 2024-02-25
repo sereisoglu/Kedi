@@ -27,7 +27,7 @@ struct OverviewItemView: View {
                 VStack(alignment: .leading) {
                     HStack(spacing: 2) {
                         Image(systemName: item.icon)
-                        Text(item.name.uppercased())
+                        Text(item.title.uppercased())
                     }
                     .font(.subheadline)
                     .fontWeight(.medium)
@@ -72,7 +72,7 @@ struct OverviewItemView: View {
             VStack(alignment: .leading) {
                 HStack(spacing: 2) {
                     Image(systemName: item.icon)
-                    Text(item.name.uppercased())
+                    Text(item.title.uppercased())
                 }
                 .font(.subheadline)
                 .fontWeight(.medium)

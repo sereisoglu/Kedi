@@ -17,7 +17,7 @@ struct OverviewItem: Identifiable, Hashable {
     var id: String { "\(type.rawValue)-\(config.timePeriod)" }
     var type: OverviewItemType { value.type }
     var icon: String { type.icon }
-    var name: String { type.name }
+    var title: String { type.title }
     var note: String? {
         switch type {
         case .mrr,

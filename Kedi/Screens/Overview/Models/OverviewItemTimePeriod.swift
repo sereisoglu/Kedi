@@ -19,7 +19,7 @@ enum OverviewItemTimePeriod: String, CaseIterable, Codable {
     case lastYear
     case thisWeek
     case thisMonth
-    case thisYear
+    case thisYear // Year to date
     case allTime
     
     var title: String {
@@ -34,7 +34,7 @@ enum OverviewItemTimePeriod: String, CaseIterable, Codable {
         case .lastYear: "Last year"
         case .thisWeek: "This week"
         case .thisMonth: "This month"
-        case .thisYear: "This year (Year to date)"
+        case .thisYear: "This year"
         case .allTime: "All-time"
         }
     }

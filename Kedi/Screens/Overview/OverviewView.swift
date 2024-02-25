@@ -11,10 +11,17 @@ struct OverviewView: View {
     
     @StateObject private var viewModel = OverviewViewModel()
     
+    @State private var activeItem: OverviewItem?
+    
     var body: some View {
         makeBody()
             .navigationTitle("Overview")
             .background(Color.systemGroupedBackground)
+            .sheet(item: $activeItem) { item in
+                NavigationStack {
+                    OverviewItemDetailView(item: item)
+                }
+            }
             .refreshable {
                 await viewModel.refresh()
             }
@@ -47,8 +54,22 @@ struct OverviewView: View {
                         NavigationLink(value: item) {
                             OverviewItemView(item: item)
                                 .aspectRatio(1, contentMode: .fit)
+                                .contentShape(.contextMenuPreview, RoundedRectangle(cornerRadius: 20, style: .continuous))
+                                .contextMenu {
+                                    Button {
+                                        activeItem = item
+                                    } label: {
+                                        Label("Edit", systemImage: "slider.horizontal.3")
+                                    }
+                                    
+                                    Button(role: .destructive) {
+                                        print("Remove", item.type.title)
+                                    } label: {
+                                        Label("Remove", systemImage: "trash")
+                                    }
+                                }
                         }
-                        .foregroundStyle(.primary)
+                        .buttonStyle(StandardButtonStyle())
                     }
                 }
                 .padding(.horizontal)
