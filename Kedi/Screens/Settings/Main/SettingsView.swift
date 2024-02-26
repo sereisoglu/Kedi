@@ -91,7 +91,7 @@ struct SettingsView: View {
                     )
                     SettingsAccountItemView(
                         key: "Current Plan",
-                        value: viewModel.me?.currentPlan?.capitalized ?? "n/a"
+                        value: viewModel.me?.currentPlan?.localizedCapitalized ?? "n/a"
                     )
                     SettingsAccountItemView(
                         key: "Current MTR",
@@ -107,10 +107,20 @@ struct SettingsView: View {
                     )
                     SettingsAccountItemView(
                         key: "Token Expires",
-                        value: viewModel.authTokenExpiresDate?.relativeFormat(to: .full).capitalized ?? "n/a"
+                        value: viewModel.authTokenExpiresDate?.formatted(.relative(presentation: .named)).localizedCapitalized ?? "n/a"
                     )
                 } header: {
                     Text("Account")
+                }
+                
+                Section {
+                    GeneralListView(
+                        imageAsset: .emoji("🤑"),
+                        title: "App Store Payday"
+                    )
+                    .overlay { NavigationLink(value: "payday") { EmptyView() }.opacity(0) }
+                } header: {
+                    Text("Payday")
                 }
                 
                 Section {
@@ -185,6 +195,8 @@ struct SettingsView: View {
             }
             .navigationDestination(for: String.self) { screen in
                 switch screen {
+                case "payday":
+                    PaydayView()
                 case "appIcon":
                     AppIconView()
                         .environmentObject(purchaseManager)

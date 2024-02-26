@@ -188,7 +188,7 @@ struct RCSubscriptionStatusEntitlement: Decodable {
 }
 
 extension RCTransactionDetailResponse {
-
+    
     static let stub: Self = {
         let string = #"""
         {
@@ -302,10 +302,8 @@ extension RCTransactionDetailResponse {
             }
         }
         """#
-
-        let data = Data(string.utf8)
-
-        return try! JSONDecoder().decode(Self.self, from: data)
+        
+        return try! JSONDecoder().decode(Self.self, from: .init(string.utf8))
     }()
 }
 

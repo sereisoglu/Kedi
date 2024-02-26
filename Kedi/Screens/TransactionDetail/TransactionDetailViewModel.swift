@@ -77,11 +77,11 @@ final class TransactionDetailViewModel: ObservableObject {
             ),
             .init(
                 key: "Last Seen",
-                value: detailData.lastSeen?.relativeDate(from: .iso8601WithoutMilliseconds, to: .full) ?? "n/a"
+                value: detailData.lastSeen?.relativeDate(from: .iso8601WithoutMilliseconds) ?? "n/a"
             ),
             .init(
                 key: "Created",
-                value: detailData.createdAt?.relativeDate(from: .iso8601WithoutMilliseconds, to: .full) ?? "n/a"
+                value: detailData.createdAt?.relativeDate(from: .iso8601WithoutMilliseconds) ?? "n/a"
             ),
             .init(
                 key: "Country",

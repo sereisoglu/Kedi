@@ -49,7 +49,7 @@ struct RCMeApp: Codable {
 }
 
 extension RCMeResponse {
-
+    
     static let stub: Self = {
         let string = #"""
         {
@@ -71,9 +71,7 @@ extension RCMeResponse {
             "name": "Saffet Emin Reisoğlu",
         }
         """#
-
-        let data = Data(string.utf8)
-
-        return try! JSONDecoder().decode(Self.self, from: data)
+        
+        return try! JSONDecoder().decode(Self.self, from: .init(string.utf8))
     }()
 }

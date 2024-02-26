@@ -12,6 +12,7 @@ struct GeneralListView: View {
     enum ImageAsset {
         
         case systemImage(String)
+        case emoji(String)
         case custom(String)
     }
     
@@ -57,6 +58,10 @@ struct GeneralListView: View {
                     .font(.body)
                     .foregroundStyle(Color.accentColor)
                     .imageScale(.large)
+                    .frame(width: imageWidth, height: imageWidth)
+                
+            case .emoji(let emoji):
+                Text(emoji)
                     .frame(width: imageWidth, height: imageWidth)
                 
             case .custom(let name):

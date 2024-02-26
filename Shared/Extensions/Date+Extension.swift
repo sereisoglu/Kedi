@@ -20,16 +20,16 @@ extension Date {
         self.init()
         self = calendar.date(byAdding: component, value: value, to: date) ?? date
     }
+    
+    mutating func byAdding(_ component: Calendar.Component, value: Int) {
+        self = calendar.date(byAdding: component, value: value, to: self) ?? self
+    }
 }
 
 extension Date {
     
     func format(to dateFormatter: DateFormatter) -> String {
         dateFormatter.string(from: self)
-    }
-    
-    func relativeFormat(to relativeDateFormatter: RelativeDateTimeFormatter) -> String {
-        relativeDateFormatter.localizedString(for: self, relativeTo: Date.now)
     }
 }
 

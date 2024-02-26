@@ -76,7 +76,7 @@ struct TransactionItem: Identifiable, Hashable {
         
         if let date = data.purchaseDate?.format(to: .iso8601WithoutMilliseconds) {
             if date.isToday || date.isFuture {
-                self.date = date.relativeFormat(to: .full)
+                self.date = date.formatted(.relative(presentation: .named))
             } else  {
                 self.date = date.formatted(date: .omitted, time: .standard)
             }

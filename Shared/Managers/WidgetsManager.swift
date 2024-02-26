@@ -29,4 +29,5 @@ enum WidgetKind: String {
     
     case overview = "OverviewWidget"
     case dailyGraph = "DailyGraphWidget"
+    case payday = "PaydayWidget"
 }

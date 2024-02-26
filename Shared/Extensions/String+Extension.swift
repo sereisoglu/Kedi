@@ -34,10 +34,10 @@ extension String {
         dateFormatter.date(from: self)
     }
     
-    func relativeDate(from dateFormatter: DateFormatter, to relativeDateFormatter: RelativeDateTimeFormatter) -> String? {
+    func relativeDate(from dateFormatter: DateFormatter) -> String? {
         guard let date = dateFormatter.date(from: self) else {
             return nil
         }
-        return relativeDateFormatter.localizedString(for: date, relativeTo: Date.now)
+        return date.formatted(.relative(presentation: .named))
     }
 }

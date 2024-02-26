@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OverviewWidgetView : View {
+struct OverviewWidgetView: View {
     
     @Environment(\.widgetFamily) private var widgetFamily
     

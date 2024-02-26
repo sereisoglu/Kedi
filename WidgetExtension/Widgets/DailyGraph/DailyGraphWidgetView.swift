@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DailyGraphWidgetView : View {
+struct DailyGraphWidgetView: View {
     
     @Environment(\.widgetFamily) private var widgetFamily
     

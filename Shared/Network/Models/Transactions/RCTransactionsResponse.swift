@@ -73,7 +73,7 @@ struct RCTransactionApp: Decodable {
 }
 
 extension RCTransactionsResponse {
-
+    
     static let stub: Self = {
         let string = #"""
         {
@@ -259,9 +259,7 @@ extension RCTransactionsResponse {
             ]
         }
         """#
-
-        let data = Data(string.utf8)
-
-        return try! JSONDecoder().decode(Self.self, from: data)
+        
+        return try! JSONDecoder().decode(Self.self, from: .init(string.utf8))
     }()
 }
