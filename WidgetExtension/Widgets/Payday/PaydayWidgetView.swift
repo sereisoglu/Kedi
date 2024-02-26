@@ -74,6 +74,7 @@ struct PaydayWidgetView: View {
         }
         .padding()
         .dynamicTypeSize(DynamicTypeSize.large)
+        .widgetURL(DeepLink.make(host: .payday))
     }
     
     private func makeItem(emoji: String, title: String) -> some View {
