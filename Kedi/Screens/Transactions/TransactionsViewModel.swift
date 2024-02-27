@@ -32,7 +32,7 @@ final class TransactionsViewModel: ObservableObject {
                 type: RCTransactionsResponse.self,
                 endpoint: .transactions(.init(
                     limit: 100,
-                    endDate: Date(byAdding: .day, value: 7).format(to: .yyy_MM_dd)
+                    endDate: Date().byAdding(.day, value: 7).format(to: .yyy_MM_dd)
                 ))
             )
             

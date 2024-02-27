@@ -9,20 +9,38 @@ import Foundation
 
 extension Date {
     
-    var calendar: Calendar {
+    private var calendar: Calendar {
         Calendar.current
     }
-}
-
-extension Date {
     
-    init(byAdding component: Calendar.Component, value: Int, to date: Date = Date()) {
-        self.init()
-        self = calendar.date(byAdding: component, value: value, to: date) ?? date
+    var isToday: Bool {
+        calendar.isDateInToday(self)
     }
     
-    mutating func byAdding(_ component: Calendar.Component, value: Int) {
-        self = calendar.date(byAdding: component, value: value, to: self) ?? self
+    var isFuture: Bool {
+        self > .now
+    }
+    
+    var withoutTime: Date {
+        let dateComponents = calendar.dateComponents([.year, .month, .day], from: self)
+        return calendar.date(from: dateComponents) ?? self
+    }
+    
+    var startOfDay: Date {
+        calendar.startOfDay(for: self)
+    }
+    
+    var startOfWeek: Date {
+        calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) ?? self
+    }
+    
+    // https://stackoverflow.com/a/65498893/9212388
+    var weekday: Int {
+        (calendar.component(.weekday, from: self) - calendar.firstWeekday + 7) % 7 + 1
+    }
+    
+    func byAdding(_ component: Calendar.Component, value: Int) -> Date {
+        calendar.date(byAdding: component, value: value, to: self) ?? self
     }
 }
 
@@ -35,41 +53,31 @@ extension Date {
 
 extension Date {
     
-    var isToday: Bool {
-        calendar.isDateInToday(self)
-    }
-    
-    var isFuture: Bool {
-        self > Date.now
-    }
-    
-    var startOfWeek: Date {
-        calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) ?? self
-    }
-    
-    var withoutTime: Date {
-        let comps = calendar.dateComponents([.year, .month, .day], from: self)
-        return calendar.date(from: comps) ?? self
-    }
-    
-    // https://stackoverflow.com/a/65498893/9212388
-    var weekday: Int {
-        (calendar.component(.weekday, from: self) - calendar.firstWeekday + 7) % 7 + 1
+    // https://stackoverflow.com/a/72765548/9212388
+    func nearestDate(secondGranularity: Double) -> Date {
+        .init(timeIntervalSinceReferenceDate: (self.timeIntervalSinceReferenceDate / secondGranularity).rounded(.up) * secondGranularity)
     }
 }
 
 extension Date {
     
-    var getHourTo0: Date {
-        var comps = calendar.dateComponents([.year, .month, .day], from: self)
-        comps.timeZone = .current
-        comps.hour = 0
-        return calendar.date(from: comps) ?? self
+    // https://stackoverflow.com/a/45757921/9212388
+    func days(since: Date) -> Int? {
+        Calendar.current.dateComponents([.day], from: since, to: self).day
     }
+}
+
+extension Date {
     
-    static func generate(from: Date, to: Date = Date(), isFromIncluded: Bool = true, isToIncluded: Bool = true) -> [Date] {
-        let from = from.getHourTo0
-        let to = to.getHourTo0
+    static func generate(
+        from: Date,
+        to: Date = Date(),
+        isFromIncluded: Bool = true,
+        isToIncluded: Bool = true
+    ) -> [Date] {
+        let calendar = Calendar.current
+        let from = calendar.startOfDay(for: from)
+        let to = calendar.startOfDay(for: to)
         
         guard from <= to else {
             return []
@@ -80,12 +88,13 @@ extension Date {
         var current = from
         while current <= to {
             dates.append(current)
-            current = Calendar.current.date(byAdding: .day, value: 1, to: current) ?? current
+            current = calendar.date(byAdding: .day, value: 1, to: current) ?? current
         }
         
         if !isFromIncluded {
             dates = Array(dates.dropFirst())
         }
+        
         if !isToIncluded {
             dates = dates.dropLast()
         }

@@ -31,9 +31,9 @@ struct OverviewWidgetProvider: TimelineProvider {
             await getEntry(context: context) { entry in
                 let policy: TimelineReloadPolicy
                 if entry.error != nil {
-                    policy = .after(Date(byAdding: .minute, value: 1))
+                    policy = .after(Date().byAdding(.minute, value: 2))
                 } else {
-                    policy = .after(Date(byAdding: .minute, value: 20))
+                    policy = .after(Date().nearestDate(secondGranularity: 60 * 30))
                 }
                 
                 completion(.init(entries: [entry], policy: policy))
@@ -59,7 +59,7 @@ struct OverviewWidgetProvider: TimelineProvider {
             cacheManager.setWithEncode(
                 key: "widgets/overview",
                 data: items,
-                expiry: .date(.init(byAdding: .day, value: 3))
+                expiry: .date(Date().byAdding(.day, value: 1))
             )
         } catch {
             if retryCount > 0 {

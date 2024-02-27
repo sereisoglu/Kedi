@@ -16,18 +16,18 @@ struct RectangleMarkGraphView: View {
     static let CORNER_RADIUS: CGFloat = 2
     
     private let dates: [Date]
-    private let data: RectangleMarkGraphModel
+    private let valuesByDate: [Date: RectangleMarkGraphValue]
     private let median: Double
     
     init(values: [RectangleMarkGraphValue], weekCount: Int = 17) {
         dates = Self.getDates(weekCount: weekCount)
-        data = values.keyBy(\.date)
+        valuesByDate = values.keyBy(\.date)
         median = values.compactMap { $0.value }.median() ?? 0
     }
     
     var body: some View {
         Chart(dates, id: \.self) { date in
-            let value = data[date]?.value
+            let value = valuesByDate[date]?.value
             let relativeWeek = relativeWeek(from: dates.first ?? date, to: date)
             
             RectangleMark(
@@ -46,9 +46,10 @@ struct RectangleMarkGraphView: View {
         .padding(-Self.INSET)
     }
     
-    private static func getDates(weekCount: Int) -> [Date] {
-        let from = Date(byAdding: .weekOfMonth, value: -(weekCount - 1), to: Date().startOfWeek)
-        let to = Date(byAdding: .weekOfMonth, value: 1, to: Date().startOfWeek)
+    static func getDates(weekCount: Int) -> [Date] {
+        let startOfWeek = Date().startOfWeek
+        let from = startOfWeek.byAdding(.weekOfYear, value: -(weekCount - 1))
+        let to = startOfWeek.byAdding(.weekOfYear, value: 1)
         return Date.generate(from: from, to: to, isToIncluded: false)
     }
     

@@ -22,41 +22,32 @@ struct PaydayWidgetView: View {
             
             Spacer()
             
-            if let payday = entry.payday {
-                switch payday.state {
+            if let paymentDate = entry.paymentDate,
+               let paymentDateFormatted = entry.paymentDateFormatted,
+               let paymentDateRelativeFormatted = entry.paymentDateRelativeFormatted {
+                switch entry.state {
                 case .today:
                     makeItem(
-                        emoji: payday.emoji,
+                        emoji: entry.state.emoji,
                         title: "It’s payday!"
                     )
-                    
                 case .tomorrow:
-                    VStack(alignment: .center, spacing: 2) {
-                        Text(payday.emoji)
-                            .font(.title)
-                            .multilineTextAlignment(.center)
-                        
-                        Text(payday.paymentDate, style: .timer)
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                            .minimumScaleFactor(0.5)
-                            .multilineTextAlignment(.center)
-                            .monospacedDigit()
-                            .contentTransition(.numericText(countsDown: true))
-                    }
-                    
+                    makeItemWithTimer(
+                        emoji: entry.state.emoji,
+                        date: paymentDate
+                    )
                 case .upcoming,
                         .future,
                         .past:
                     makeItem(
-                        emoji: payday.emoji,
-                        title: payday.paymentDateRelativeFormatted
+                        emoji: entry.state.emoji,
+                        title: paymentDateRelativeFormatted
                     )
                 }
                 
                 Spacer()
                 
-                Text(payday.paymentDateFormatted)
+                Text(paymentDateFormatted)
                     .font(.footnote)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 10)
@@ -90,8 +81,24 @@ struct PaydayWidgetView: View {
                 .multilineTextAlignment(.center)
         }
     }
+    
+    private func makeItemWithTimer(emoji: String, date: Date) -> some View {
+        VStack(alignment: .center, spacing: 2) {
+            Text(emoji)
+                .font(.title)
+                .multilineTextAlignment(.center)
+            
+            Text(date, style: .timer)
+                .font(.title2)
+                .fontWeight(.semibold)
+                .minimumScaleFactor(0.5)
+                .multilineTextAlignment(.center)
+                .monospacedDigit()
+                .contentTransition(.numericText(countsDown: true))
+        }
+    }
 }
 
 #Preview {
-    PaydayWidgetView(entry: .init(date: .now, payday: .upcomingPayday))
+    PaydayWidgetView(entry: .placeholder)
 }

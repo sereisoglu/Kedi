@@ -7,10 +7,10 @@
 
 import Foundation
 
-// https://stackoverflow.com/a/30593673/9212388
-extension Collection {
+// https://medium.com/flawless-app-stories/say-goodbye-to-index-out-of-range-swift-eca7c4c7b6ca
+extension Collection where Indices.Iterator.Element == Index {
     
     subscript(safe index: Index) -> Iterator.Element? {
-        indices.contains(index) ? self[index] : nil
+        (startIndex <= index && index < endIndex) ? self[index] : nil
     }
 }

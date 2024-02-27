@@ -12,24 +12,30 @@ struct PaydayView: View {
     @StateObject private var viewModel = PaydayViewModel()
     
     @ScaledMetric private var emojiWidth: CGFloat = 30
+    @Environment(\.dismiss) private var dismiss
+    
+    var isPresented = false
     
     var body: some View {
         List {
             if let payday = viewModel.upcomingPayday {
                 Section {
-                    if payday.isPaymentDateToday {
+                    switch payday.state {
+                    case .today:
                         makeItem(
                             emoji: payday.emoji,
                             title: "It’s payday!",
                             subtitle: "\(payday.fiscalMonthFormatted) (\(payday.startDateFormatted) - \(payday.endDateFormatted))"
                         )
-                    } else if payday.isPaymentDateTomorrow {
+                    case .tomorrow:
                         makeItemWithTimer(
                             emoji: payday.emoji,
                             date: payday.paymentDate,
                             subtitle: "\(payday.fiscalMonthFormatted) (\(payday.startDateFormatted) - \(payday.endDateFormatted))"
                         )
-                    } else {
+                    case .upcoming,
+                            .future,
+                            .past:
                         makeItem(
                             emoji: payday.emoji,
                             title: "\(payday.paymentDateRelativeFormatted) – \(payday.paymentDateFormatted)",
@@ -60,10 +66,18 @@ struct PaydayView: View {
         .navigationTitle("App Store Payday")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            Button {
-                BrowserUtility.openUrlInApp(urlString: "https://www.revenuecat.com/blog/growth/apple-fiscal-calendar-year-payment-dates")
-            } label: {
-                Image(systemName: "info.circle")
+            if isPresented {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Dismiss", role: .cancel) { dismiss() }
+                }
+            }
+            
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    BrowserUtility.openUrlInApp(urlString: "https://www.revenuecat.com/blog/growth/apple-fiscal-calendar-year-payment-dates")
+                } label: {
+                    Image(systemName: "info.circle")
+                }
             }
         }
     }

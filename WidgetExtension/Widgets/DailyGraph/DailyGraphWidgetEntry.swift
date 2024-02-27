@@ -18,11 +18,7 @@ struct DailyGraphWidgetEntry: TimelineEntry {
 extension DailyGraphWidgetEntry {
     
     static let placeholder: Self = {
-        let WEEK_COUNT = 17
-        let from = Date(byAdding: .weekOfMonth, value: -(WEEK_COUNT - 1), to: Date().startOfWeek)
-        let to = Date()
-        let dates = Date.generate(from: from, to: to, isToIncluded: false)
-        
+        let dates = RectangleMarkGraphView.getDates(weekCount: 17)
         return .init(
             date: Date(),
             items: dates.map { .init(date: $0, value: Double(Int.random(in: 0...10))) }

@@ -20,7 +20,11 @@ struct SupporterView: View {
         makeBody()
             .navigationTitle("Supporter")
             .background(Color.systemGroupedBackground)
-            .toolbar { Button("Dismiss") { dismiss() } }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Dismiss", role: .cancel) { dismiss() }
+                }
+            }
             .sensoryFeedback(.selection, trigger: purchaseManager.isPurchasing)
             .onAppear {
                 subscriptionSelection = Self.getDefaultSubscriptionSelection(productType: purchaseManager.meSubscription?.productType)

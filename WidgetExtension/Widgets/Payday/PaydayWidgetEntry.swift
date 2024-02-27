@@ -11,5 +11,36 @@ import WidgetKit
 struct PaydayWidgetEntry: TimelineEntry {
     
     var date: Date
-    var payday: AppStorePayday?
+    var state: AppStorePaydayState
+    var paymentDate: Date?
+    
+    var paymentDateFormatted: String? {
+        guard let paymentDate else {
+            return nil
+        }
+        return paymentDate.formatted(date: .abbreviated, time: .omitted)
+    }
+    
+    var paymentDateRelativeFormatted: String? {
+        guard let paymentDate else {
+            return nil
+        }
+        let remainingDays = paymentDate.days(since: .now) ?? 0
+        if remainingDays > 0 {
+            return "\(remainingDays + 1) Days"
+        } else {
+            return paymentDate.formatted(.relative(presentation: .named)).localizedCapitalized
+        }
+    }
+}
+
+extension PaydayWidgetEntry {
+    
+    static var placeholder: Self {
+        .init(
+            date: .now,
+            state: AppStorePayday.upcomingPayday?.state ?? .past,
+            paymentDate: AppStorePayday.upcomingPayday?.paymentDate
+        )
+    }
 }

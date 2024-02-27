@@ -46,10 +46,6 @@ final class PurchaseManager: NSObject, ObservableObject {
         Task {
             do {
                 try await withThrowingDiscardingTaskGroup { group in
-//                    group.addTask { [weak self] in
-//                        try await Task.sleep(nanoseconds: 5_000_000_000)
-//                    }
-                    
                     group.addTask { [weak self] in
                         try await self?.fetchPurchases()
                     }

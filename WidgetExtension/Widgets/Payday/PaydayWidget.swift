@@ -27,5 +27,5 @@ struct PaydayWidget: Widget {
 #Preview(as: .systemSmall) {
     PaydayWidget()
 } timeline: {
-    PaydayWidgetEntry(date: .now, payday: .upcomingPayday)
+    PaydayWidgetEntry.placeholder
 }

@@ -31,9 +31,9 @@ struct DailyGraphWidgetProvider: TimelineProvider {
             await getEntry(context: context) { entry in
                 let policy: TimelineReloadPolicy
                 if entry.error != nil {
-                    policy = .after(Date(byAdding: .minute, value: 1))
+                    policy = .after(Date().byAdding(.minute, value: 2))
                 } else {
-                    policy = .after(Date(byAdding: .minute, value: 20))
+                    policy = .after(Date().nearestDate(secondGranularity: 60 * 30))
                 }
                 
                 completion(.init(entries: [entry], policy: policy))
@@ -59,7 +59,7 @@ struct DailyGraphWidgetProvider: TimelineProvider {
             cacheManager.setWithEncode(
                 key: "widgets/dailyGraph",
                 data: items,
-                expiry: .date(.init(byAdding: .day, value: 3))
+                expiry: .date(Date().byAdding(.day, value: 1))
             )
         } catch {
             if retryCount > 0 {
@@ -93,13 +93,13 @@ struct DailyGraphWidgetProvider: TimelineProvider {
                 endpoint: .charts(.init(
                     name: .revenue,
                     resolution: .day,
-                    startDate: Date(byAdding: .month, value: -4).format(to: .yyy_MM_dd)
+                    startDate: Date().byAdding(.weekOfYear, value: -18).format(to: .yyy_MM_dd)
                 ))
             )
             
             return data?.values?.map {
                 .init(
-                    date: .init(timeIntervalSince1970: $0[safe: 0] ?? 0).getHourTo0,
+                    date: .init(timeIntervalSince1970: $0[safe: 0] ?? 0).startOfDay,
                     value: $0[safe: 3] ?? 0
                 )
             } ?? []

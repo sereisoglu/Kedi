@@ -94,11 +94,11 @@ struct SettingsView: View {
                         value: viewModel.me?.currentPlan?.localizedCapitalized ?? "n/a"
                     )
                     SettingsAccountItemView(
-                        key: "Current MTR",
+                        key: "This month MTR",
                         value: viewModel.me?.billingInfo?.currentMtr?.formatted(.currency(code: "USD").precision(.fractionLength(0))) ?? "n/a"
                     )
                     SettingsAccountItemView(
-                        key: "Trailing 30-day MTR",
+                        key: "Last 30-day MTR",
                         value: viewModel.me?.billingInfo?.trailing30dayMtr?.formatted(.currency(code: "USD").precision(.fractionLength(0))) ?? "n/a"
                     )
                     SettingsAccountItemView(

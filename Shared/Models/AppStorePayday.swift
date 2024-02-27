@@ -30,12 +30,12 @@ struct AppStorePayday: Decodable, Identifiable, Hashable {
     
     var isPaymentDateToday: Bool {
         let calendar = Calendar.current
-        return calendar.component(.day, from: paymentDate) == calendar.component(.day, from: .now)
+        return calendar.isDateInToday(paymentDate)
     }
     
     var isPaymentDateTomorrow: Bool {
         let calendar = Calendar.current
-        return calendar.component(.day, from: paymentDate) == calendar.component(.day, from: calendar.date(byAdding: .day, value: 1, to: .now) ?? .now)
+        return calendar.isDateInTomorrow(paymentDate)
     }
     
     var emoji: String {
@@ -59,7 +59,12 @@ struct AppStorePayday: Decodable, Identifiable, Hashable {
     }
     
     var paymentDateRelativeFormatted: String {
-        paymentDate.formatted(.relative(presentation: .named)).localizedCapitalized
+        let remainingDays = paymentDate.days(since: .now) ?? 0
+        if remainingDays > 0 {
+            return "\(remainingDays + 1) Days"
+        } else {
+            return paymentDate.formatted(.relative(presentation: .named)).localizedCapitalized
+        }
     }
     
     enum CodingKeys: String, CodingKey {
@@ -68,6 +73,20 @@ struct AppStorePayday: Decodable, Identifiable, Hashable {
         case startDate
         case endDate
         case paymentDate
+    }
+    
+    init(
+        fiscalYear: Int,
+        fiscalMonth: Date,
+        startDate: Date,
+        endDate: Date,
+        paymentDate: Date
+    ) {
+        self.fiscalYear = fiscalYear
+        self.fiscalMonth = fiscalMonth
+        self.startDate = startDate
+        self.endDate = endDate
+        self.paymentDate = paymentDate
     }
     
     init(from decoder: Decoder) throws {
@@ -113,10 +132,18 @@ extension AppStorePayday {
     static var upcomingPayday: Self? {
         Self.paydays.first { $0.paymentDate > .now || $0.isPaymentDateToday }
     }
+    
+    static var nextToUpcomingPayday: Self? {
+        guard let upcomingPayday = Self.upcomingPayday,
+              let index = Self.paydays.firstIndex(where: { upcomingPayday.paymentDate == $0.paymentDate }) else {
+            return nil
+        }
+        return Self.paydays[safe: index + 1]
+    }
 }
 
 extension AppStorePayday {
-    // "paymentDate": "2024-03-07"
+    
     static let paydays: [Self] = {
         let string = #"""
         [
@@ -146,7 +173,7 @@ extension AppStorePayday {
                 "fiscalMonth": "2024-01",
                 "startDate": "2023-12-31",
                 "endDate": "2024-02-03",
-                "paymentDate": "2024-02-27"
+                "paymentDate": "2024-03-07"
             },
             {
                 "fiscalYear": 2024,

@@ -20,7 +20,7 @@ struct RootView: View {
                     handleDeepLink(url: url)
                 }
                 .sheet(item: $showingDeepLink) { deepLink in
-                    deepLink.view
+                    makeView(deepLink: deepLink)
                 }
         } else {
             NavigationStack {
@@ -35,6 +35,15 @@ struct RootView: View {
             return
         }
         showingDeepLink = deepLink
+    }
+    
+    private func makeView(deepLink: DeepLink) -> some View {
+        switch deepLink.host {
+        case .payday:
+            NavigationStack {
+                PaydayView(isPresented: true)
+            }
+        }
     }
 }
 

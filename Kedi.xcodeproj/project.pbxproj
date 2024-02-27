@@ -92,7 +92,7 @@
 		4AB721452B739B3A001E2C76 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720CB2B6EAECD001E2C76 /* Array+Extension.swift */; };
 		4AB721462B739BAB001E2C76 /* RectangleMarkGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7213E2B739A8A001E2C76 /* RectangleMarkGraphView.swift */; };
 		4AB721472B739BAB001E2C76 /* InsettableRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721432B739AFD001E2C76 /* InsettableRectangle.swift */; };
-		4AB721482B739BAB001E2C76 /* RectangleMarkGraphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721412B739AEC001E2C76 /* RectangleMarkGraphModel.swift */; };
+		4AB721482B739BAB001E2C76 /* RectangleMarkGraphValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721412B739AEC001E2C76 /* RectangleMarkGraphValue.swift */; };
 		4AB721492B739C21001E2C76 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720702B6BF497001E2C76 /* APIService.swift */; };
 		4AB7214A2B739C21001E2C76 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720732B6BF4A9001E2C76 /* Endpoint.swift */; };
 		4AB7214C2B739C2D001E2C76 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4AB7214B2B739C2D001E2C76 /* Alamofire */; };
@@ -261,7 +261,7 @@
 		4AB721322B738BA1001E2C76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4AB721342B738BA1001E2C76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4AB7213E2B739A8A001E2C76 /* RectangleMarkGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleMarkGraphView.swift; sourceTree = "<group>"; };
-		4AB721412B739AEC001E2C76 /* RectangleMarkGraphModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleMarkGraphModel.swift; sourceTree = "<group>"; };
+		4AB721412B739AEC001E2C76 /* RectangleMarkGraphValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangleMarkGraphValue.swift; sourceTree = "<group>"; };
 		4AB721432B739AFD001E2C76 /* InsettableRectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsettableRectangle.swift; sourceTree = "<group>"; };
 		4AB721572B739F4B001E2C76 /* WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetExtension.entitlements; sourceTree = "<group>"; };
 		4AB7215C2B756E97001E2C76 /* DailyGraphWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyGraphWidget.swift; sourceTree = "<group>"; };
@@ -742,7 +742,7 @@
 			isa = PBXGroup;
 			children = (
 				4AB7213E2B739A8A001E2C76 /* RectangleMarkGraphView.swift */,
-				4AB721412B739AEC001E2C76 /* RectangleMarkGraphModel.swift */,
+				4AB721412B739AEC001E2C76 /* RectangleMarkGraphValue.swift */,
 				4AB721432B739AFD001E2C76 /* InsettableRectangle.swift */,
 			);
 			path = RectangleMarkGraph;
@@ -1107,7 +1107,7 @@
 				4ADF09D82B761CED002318B2 /* RCChartRequest.swift in Sources */,
 				4ADF0A062B7A3B3F002318B2 /* WidgetError.swift in Sources */,
 				4ADF09F52B77CEE3002318B2 /* RCOverviewResponse.swift in Sources */,
-				4AB721482B739BAB001E2C76 /* RectangleMarkGraphModel.swift in Sources */,
+				4AB721482B739BAB001E2C76 /* RectangleMarkGraphValue.swift in Sources */,
 				4ADF09E92B7780D6002318B2 /* PaginationState.swift in Sources */,
 				4AB7216F2B7619E6001E2C76 /* Encodable+Extension.swift in Sources */,
 				4AB7214A2B739C21001E2C76 /* Endpoint.swift in Sources */,

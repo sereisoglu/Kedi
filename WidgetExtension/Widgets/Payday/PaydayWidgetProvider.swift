@@ -13,14 +13,49 @@ struct PaydayWidgetProvider: TimelineProvider {
     typealias Entry = PaydayWidgetEntry
     
     func placeholder(in context: Context) -> Entry {
-        .init(date: .now, payday: .upcomingPayday)
+        .placeholder
     }
-
+    
     func getSnapshot(in context: Context, completion: @escaping (Entry) -> ()) {
-        completion(.init(date: .now, payday: .upcomingPayday))
+        completion(.placeholder)
     }
-
+    
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        completion(.init(entries: [.init(date: .now, payday: .upcomingPayday)], policy: .atEnd))
+        guard let payday = AppStorePayday.upcomingPayday else {
+            completion(.init(entries: [.placeholder], policy: .after(Date().nearestDate(secondGranularity: 60 * 60))))
+            return
+        }
+        
+        let entries: [Entry]
+        switch payday.state {
+        case .today:
+            if let nextPayday = AppStorePayday.nextToUpcomingPayday {
+                entries = [
+                    Entry(date: .now, state: .today, paymentDate: payday.paymentDate),
+                    Entry(date: nextPayday.paymentDate, state: .upcoming, paymentDate: nextPayday.paymentDate)
+                ]
+            } else {
+                entries = [
+                    Entry(date: .now, state: .today, paymentDate: payday.paymentDate)
+                ]
+            }
+        case .tomorrow:
+            entries = [
+                Entry(date: .now, state: .tomorrow, paymentDate: payday.paymentDate),
+                Entry(date: payday.paymentDate, state: .today, paymentDate: payday.paymentDate)
+            ]
+        case .upcoming:
+            entries = [
+                Entry(date: .now,  state: .upcoming, paymentDate: payday.paymentDate),
+                Entry(date: payday.paymentDate.byAdding(.day, value: -1),  state: .tomorrow, paymentDate: payday.paymentDate),
+                Entry(date: payday.paymentDate, state: .today, paymentDate: payday.paymentDate)
+            ]
+        case .future,
+                .past:
+            completion(.init(entries: [.placeholder], policy: .after(Date().nearestDate(secondGranularity: 60 * 60))))
+            return
+        }
+        
+        completion(.init(entries: entries, policy: .after(Date().nearestDate(secondGranularity: 60 * 60))))
     }
 }

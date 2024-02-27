@@ -15,7 +15,6 @@ final class MeManager: ObservableObject {
     private let widgetsManager = WidgetsManager.shared
     
     private(set) var me: RCMeResponse?
-    private(set) var firstTransactionDate: Date?
     @Published private(set) var isSignedIn: Bool = false
     
     static let shared = MeManager()
@@ -25,7 +24,6 @@ final class MeManager: ObservableObject {
         
         apiService.setAuthToken(authToken)
         me = cacheManager.getWithDecode(key: "me", type: RCMeResponse.self)
-        firstTransactionDate = me?.firstTransactionAt?.format(to: .iso8601WithoutMilliseconds)
         
         isSignedIn = authToken != nil
     }
@@ -75,8 +73,6 @@ final class MeManager: ObservableObject {
     
     func set(me: RCMeResponse?) {
         self.me = me
-        firstTransactionDate = me?.firstTransactionAt?.format(to: .iso8601WithoutMilliseconds)
-        
         cacheManager.setWithEncode(key: "me", data: me, expiry: .never)
     }
     
