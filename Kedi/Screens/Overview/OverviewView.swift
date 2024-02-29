@@ -11,17 +11,14 @@ struct OverviewView: View {
     
     @StateObject private var viewModel = OverviewViewModel()
     
-    @State private var activeItem: OverviewItem?
+    @State private var showingAddItem = false
+    @State private var activeItem: OverviewItem? // edit item
+    @State private var showingRestoreDefaultsAlert = false
     
     var body: some View {
         makeBody()
             .navigationTitle("Overview")
             .background(Color.systemGroupedBackground)
-            .sheet(item: $activeItem) { item in
-                NavigationStack {
-                    OverviewItemDetailView(item: item)
-                }
-            }
             .refreshable {
                 await viewModel.refresh()
             }
@@ -47,25 +44,27 @@ struct OverviewView: View {
                 .data:
             ScrollView {
                 LazyVGrid(
-                    columns: [.init(.adaptive(minimum: 165))],
+                    columns: [.init(.adaptive(minimum: 165), alignment: .top)],
                     spacing: 12
                 ) {
                     ForEach(viewModel.getItems()) { item in
                         NavigationLink(value: item) {
                             OverviewItemView(item: item)
-                                .aspectRatio(1, contentMode: .fit)
-                                .contentShape(.contextMenuPreview, RoundedRectangle(cornerRadius: 20, style: .continuous))
                                 .contextMenu {
-                                    Button {
-                                        activeItem = item
-                                    } label: {
-                                        Label("Edit", systemImage: "slider.horizontal.3")
-                                    }
-                                    
-                                    Button(role: .destructive) {
-                                        print("Remove", item.type.title)
-                                    } label: {
-                                        Label("Remove", systemImage: "trash")
+                                    Section(item.chart?.updatedAtFormatted ?? "") {
+                                        Button {
+                                            activeItem = item
+                                        } label: {
+                                            Label("Edit", systemImage: "slider.horizontal.3")
+                                        }
+                                        
+                                        Button(role: .destructive) {
+                                            withAnimation {
+                                                viewModel.removeItem(config: item.config)
+                                            }
+                                        } label: {
+                                            Label("Remove", systemImage: "trash")
+                                        }
                                     }
                                 }
                         }
@@ -74,20 +73,53 @@ struct OverviewView: View {
                 }
                 .padding(.horizontal)
                 .padding(.bottom)
+                
+                Button {
+                    showingRestoreDefaultsAlert = true
+                } label: {
+                    Label("Restore Defaults", systemImage: "clock.arrow.circlepath")
+                        .font(.subheadline)
+                }
+                .disabled(viewModel.isRestoreDefaultsDisabled)
+                .alert(
+                    "Restore Defaults",
+                    isPresented: $showingRestoreDefaultsAlert
+                ) {
+                    Button("Cancel", role: .cancel) {}
+                    Button("Yes", role: .destructive) {
+                        withAnimation {
+                            viewModel.restoreDefaults()
+                        }
+                    }
+                } message: {
+                    Text("Are you sure you want to restore the default settings?")
+                }
+                .padding(.bottom)
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        withAnimation {
+                            showingAddItem = true
+                        }
+                    } label: {
+                        Image(systemName: "plus.square")
+                    }
+                }
             }
             .navigationDestination(for: OverviewItem.self) { item in
 //                OverviewDetailView(item: item, chartValues: viewModel.chartValues[item.type])
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Remove") {
-                        viewModel.removeItem()
-                    }
+            .sheet(isPresented: $showingAddItem) {
+                NavigationStack {
+                    OverviewItemDetailView(viewModel: .init(config: nil))
+                        .environmentObject(viewModel)
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Add") {
-                        viewModel.addItem()
-                    }
+            }
+            .sheet(item: $activeItem) { item in
+                NavigationStack {
+                    OverviewItemDetailView(viewModel: .init(config: item.config))
+                        .environmentObject(viewModel)
                 }
             }
         }

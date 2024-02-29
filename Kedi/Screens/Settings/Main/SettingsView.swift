@@ -12,7 +12,7 @@ struct SettingsView: View {
     @StateObject private var viewModel = SettingsViewModel()
     @EnvironmentObject var purchaseManager: PurchaseManager
     
-    @State private var showingSupporterView = false
+    @State private var showingSupporter = false
     
     var body: some View {
         makeBody()
@@ -50,7 +50,7 @@ struct SettingsView: View {
                                 subtitle: "Thanks for your support",
                                 isActive: false,
                                 action: {
-                                    showingSupporterView.toggle()
+                                    showingSupporter.toggle()
                                 }
                             )
                         }
@@ -64,7 +64,7 @@ struct SettingsView: View {
                                 subtitle: "Support indie development",
                                 isActive: true,
                                 action: {
-                                    showingSupporterView.toggle()
+                                    showingSupporter.toggle()
                                 }
                             )
                         } footer: {
@@ -205,7 +205,7 @@ struct SettingsView: View {
                     Text("Unknown destination!")
                 }
             }
-            .sheet(isPresented: $showingSupporterView) {
+            .sheet(isPresented: $showingSupporter) {
                 NavigationStack {
                     SupporterView()
                         .environmentObject(purchaseManager)

@@ -16,6 +16,15 @@ struct TransactionDetailView: View {
             .navigationTitle(viewModel.navigationTitle)
             .navigationBarTitleDisplayMode(.inline)
             .background(Color.systemGroupedBackground)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        BrowserUtility.openUrlOutsideApp(urlString: "https://app.revenuecat.com/customers/\(viewModel.appId)/\(viewModel.subscriberId)")
+                    } label: {
+                        Image(systemName: "arrow.up.forward")
+                    }
+                }
+            }
     }
     
     @ViewBuilder

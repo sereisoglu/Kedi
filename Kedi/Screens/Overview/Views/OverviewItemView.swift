@@ -12,9 +12,17 @@ struct OverviewItemView: View {
     let item: OverviewItem
     
     var body: some View {
-        makeBody()
-            .background(Color.secondarySystemGroupedBackground)
-            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        VStack {
+            makeBody()
+                .aspectRatio(1, contentMode: .fit)
+                .background(Color.secondarySystemGroupedBackground)
+                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .contentShape(.contextMenuPreview, RoundedRectangle(cornerRadius: 20, style: .continuous))
+            
+            Text(item.caption ?? " ")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
     }
     
     @ViewBuilder
@@ -47,9 +55,9 @@ struct OverviewItemView: View {
                 .padding(.top)
                 
                 ZStack(alignment: .leading) {
-                    if let note = item.note {
+                    if let subtitle = item.subtitle {
                         VStack(alignment: .leading) {
-                            Text(note)
+                            Text(subtitle)
                                 .font(.footnote)
                                 .foregroundStyle(.secondary)
                                 .multilineTextAlignment(.leading)
@@ -61,7 +69,7 @@ struct OverviewItemView: View {
                         .zIndex(1)
                     }
                     
-                    if let chartValues = item.chartValues {
+                    if let chartValues = item.chart?.chartValues {
                         LineAndAreaMarkChartView(values: chartValues)
                     }
                 }

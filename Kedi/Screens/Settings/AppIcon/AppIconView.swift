@@ -18,7 +18,7 @@ struct AppIconView: View {
     }
     
     @State private var appIconWidth: CGFloat = .zero
-    @State private var showingSupporterView = false
+    @State private var showingSupporter = false
     
     @EnvironmentObject var purchaseManager: PurchaseManager
     
@@ -36,7 +36,7 @@ struct AppIconView: View {
                         subtitle: "Support indie development",
                         isActive: true,
                         action: {
-                            showingSupporterView.toggle()
+                            showingSupporter.toggle()
                         }
                     )
                 }
@@ -63,7 +63,7 @@ struct AppIconView: View {
         }
         .navigationTitle("App Icon")
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $showingSupporterView) {
+        .sheet(isPresented: $showingSupporter) {
             NavigationStack {
                 SupporterView()
                     .environmentObject(purchaseManager)
@@ -79,7 +79,7 @@ struct AppIconView: View {
                     appIconSelection = appIcon
                 }
             } else {
-                showingSupporterView.toggle()
+                showingSupporter.toggle()
             }
         } label: {
             let isSelected = appIconSelection == appIcon

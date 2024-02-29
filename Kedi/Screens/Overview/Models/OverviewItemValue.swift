@@ -55,13 +55,16 @@ enum OverviewItemValue: Hashable, Equatable {
             return (double / 100).formatted(.percent)
         }
     }
+}
+
+extension OverviewItemValue {
     
     static func placeholder(type: OverviewItemType) -> Self {
         let data = RCOverviewResponse.stub
         switch type {
-        case .mrr: 
+        case .mrr:
             return .mrr(data.mrr ?? 0)
-        case .subsciptions: 
+        case .subsciptions:
             return.subsciptions(data.activeSubscribersCount ?? 0)
         case .trials:
             return .trials(data.activeTrialsCount ?? 0)

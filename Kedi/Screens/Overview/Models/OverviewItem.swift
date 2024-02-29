@@ -12,34 +12,42 @@ struct OverviewItem: Identifiable, Hashable {
     private(set) var config: OverviewItemConfig
     private(set) var value: OverviewItemValue
     private(set) var valueState: GeneralState = .loading
-    private(set) var chartValues: [LineAndAreaMarkChartValue]?
+    private(set) var chart: OverviewItemChart?
     
     var id: String { "\(type.rawValue)-\(config.timePeriod)" }
     var type: OverviewItemType { value.type }
     var icon: String { type.icon }
     var title: String { type.title }
-    var note: String? {
-        switch type {
-        case .mrr,
-                .subsciptions,
-                .trials,
-                .arr:
-            return "\(config.timePeriod.title) (graph)"
-        default:
+    var subtitle: String? {
+        switch type.valueType {
+        case .live:
+            return nil
+        case .last:
+            return config.timePeriod.resolutionTitle
+        case .average:
+            return "Average \(config.timePeriod.title.lowercased())"
+        case .total:
             return config.timePeriod.title
         }
+    }
+    var caption: String? {
+        guard chart != nil,
+              type.valueType != .total else {
+            return nil
+        }
+        return "Graph shows \(config.timePeriod.title.lowercased())"
     }
     
     init(
         config: OverviewItemConfig,
         value: OverviewItemValue,
         valueState: GeneralState = .loading,
-        chartValues: [LineAndAreaMarkChartValue]? = nil
+        chart: OverviewItemChart? = nil
     ) {
-        self.value = value
-        self.chartValues = chartValues
         self.config = config
+        self.value = value
         self.valueState = valueState
+        self.chart = chart
     }
     
     init(config: OverviewItemConfig) {
@@ -49,15 +57,15 @@ struct OverviewItem: Identifiable, Hashable {
     
     mutating func set(
         value: OverviewItemValue,
-        chartValues: [LineAndAreaMarkChartValue]? = nil
+        chart: OverviewItemChart? = nil
     ) {
         valueState = .data
         self.value = value
-        self.chartValues = chartValues
+        self.chart = chart
     }
     
-    mutating func set(chartValues: [LineAndAreaMarkChartValue]?) {
-        self.chartValues = chartValues
+    mutating func set(chart: OverviewItemChart?) {
+        self.chart = chart
     }
     
     mutating func set(valueState: GeneralState) {

@@ -45,4 +45,13 @@ extension OverviewItemConfig {
     static func set(to configs: [Self]?) {
         UserDefaults.shared.overviewConfigs = try? JSONEncoder().encode(configs)
     }
+    
+    static func isAvailable(config: Self) -> Bool {
+        let configs = get()
+        if config.type.valueType == .live {
+            return !configs.contains(where: { $0.type == config.type })
+        } else {
+            return !configs.contains(config)
+        }
+    }
 }

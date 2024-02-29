@@ -19,7 +19,7 @@ enum OverviewItemTimePeriod: String, CaseIterable, Codable {
     case lastYear
     case thisWeek
     case thisMonth
-    case thisYear // Year to date
+    case thisYear
     case allTime
     
     var title: String {
@@ -126,6 +126,16 @@ enum OverviewItemTimePeriod: String, CaseIterable, Codable {
         case .thisMonth: .day
         case .thisYear: .month
         case .allTime: .month
+        }
+    }
+    
+    var resolutionTitle: String {
+        switch resolution {
+        case .day: "Today"
+        case .week: "This week"
+        case .month: "This month"
+        case .quarter: "This quarter"
+        case .year: "This year"
         }
     }
 }

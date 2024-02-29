@@ -97,6 +97,22 @@ enum OverviewItemType: String, Codable, CaseIterable {
         }
     }
     
+    var valueType: OverviewItemValueType {
+        switch self {
+        case .mrr: .live
+        case .subsciptions: .live
+        case .trials: .live
+        case .revenue: .total
+        case .users: .total
+        case .installs: .total
+        case .arr: .live
+        case .proceeds: .total
+        case .newUsers: .last
+        case .churnRate: .last
+        case .subsciptionsLost: .last
+        }
+    }
+    
     var chartName: RCChartName? {
         switch self {
         case .mrr: .mrr
@@ -128,4 +144,12 @@ enum OverviewItemType: String, Codable, CaseIterable {
         case .subsciptionsLost: 2
         }
     }
+}
+
+enum OverviewItemValueType {
+    
+    case live
+    case last
+    case average
+    case total
 }

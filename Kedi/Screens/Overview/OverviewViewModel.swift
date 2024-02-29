@@ -17,6 +17,8 @@ final class OverviewViewModel: ObservableObject {
     
     @Published private(set) var configs: [OverviewItemConfig] = OverviewItemConfig.get()
     @Published private(set) var items: [OverviewItemConfig: OverviewItem] = .placeholder(configs: OverviewItemConfig.get())
+    @Published private(set) var isAddDisabled = OverviewItemConfig.get().count >= 20
+    @Published private(set) var isRestoreDefaultsDisabled = OverviewItemConfig.current == nil
     
     init() {
         Task {
@@ -59,6 +61,8 @@ final class OverviewViewModel: ObservableObject {
     
     @MainActor
     private func fetchChart(config: OverviewItemConfig) async {
+//        try? await Task.sleep(nanoseconds: 3_000_000_000)
+        
         let type = config.type
         
         guard let chartName = type.chartName,
@@ -82,33 +86,44 @@ final class OverviewViewModel: ObservableObject {
                 value: $0[safe: chartIndex] ?? 0
             ) }
             
+            var chart: OverviewItemChart?
+            if let chartValues {
+                chart = .init(chartValues: chartValues, updatedAt: data?.lastComputedAt)
+            }
+            
             switch type {
             case .mrr,
                     .subsciptions,
                     .trials,
                     .users,
                     .installs:
-                items[config]?.set(chartValues: chartValues)
+                items[config]?.set(chart: chart)
             case .revenue:
                 if config.timePeriod == .last28Days {
-                    items[config]?.set(chartValues: chartValues)
+                    items[config]?.set(chart: chart)
                 } else {
-                    items[config]?.set(value: .revenue(data?.summary?["total"]?["Total Revenue"] ?? 0), chartValues: chartValues)
+                    items[config]?.set(value: .revenue(data?.summary?["total"]?["Total Revenue"] ?? 0), chart: chart)
                 }
             case .arr:
-                items[config]?.set(value: .arr(chartValues?.last?.value ?? 0), chartValues: chartValues)
+                items[config]?.set(value: .arr(chartValues?.last?.value ?? 0), chart: chart)
             case .proceeds:
-                items[config]?.set(value: .proceeds(data?.summary?["total"]?["Proceeds"] ?? 0), chartValues: chartValues)
+                items[config]?.set(value: .proceeds(data?.summary?["total"]?["Proceeds"] ?? 0), chart: chart)
             case .newUsers:
-                items[config]?.set(value: .newUsers(Int(chartValues?.last?.value ?? 0)), chartValues: chartValues)
+                items[config]?.set(value: .newUsers(Int(chartValues?.last?.value ?? 0)), chart: chart)
             case .churnRate:
-                items[config]?.set(value: .churnRate(chartValues?.last?.value ?? 0), chartValues: chartValues)
+                items[config]?.set(value: .churnRate(chartValues?.last?.value ?? 0), chart: chart)
             case .subsciptionsLost:
-                items[config]?.set(value: .subsciptionsLost(Int(chartValues?.last?.value ?? 0)), chartValues: chartValues)
+                items[config]?.set(value: .subsciptionsLost(Int(chartValues?.last?.value ?? 0)), chart: chart)
             }
         } catch {
             print(error)
         }
+    }
+    
+    func restoreDefaults() {
+        OverviewItemConfig.set(to: nil)
+        isRestoreDefaultsDisabled = true
+        configs = OverviewItemConfig.get()
     }
     
     func refresh() async {
@@ -135,30 +150,59 @@ final class OverviewViewModel: ObservableObject {
     private func setItem(
         config: OverviewItemConfig,
         value: OverviewItemValue?,
-        chartValues: [LineAndAreaMarkChartValue]? = nil
+        chart: OverviewItemChart? = nil
     ) {
         if let value {
-            items[config]?.set(value: value, chartValues: chartValues)
+            items[config]?.set(value: value, chart: chart)
         } else {
-            items[config]?.set(chartValues: chartValues)
+            items[config]?.set(chart: chart)
         }
     }
     
-    func addItem() {
-        let config = OverviewItemConfig(type: .revenue, timePeriod: .allTime)
+    func addItem(config: OverviewItemConfig) {
         let item = OverviewItem(config: config)
         
         configs.insert(config, at: 0)
         items[config] = item
         
         OverviewItemConfig.set(to: configs)
+        isRestoreDefaultsDisabled = false
+        isAddDisabled = configs.count >= 20
         
         Task {
             await fetchChart(config: config)
         }
     }
     
-    func removeItem() {
-        OverviewItemConfig.set(to: nil)
+    func updateItem(config: OverviewItemConfig, timePeriod: OverviewItemTimePeriod) {
+        guard let index = configs.firstIndex(where: { $0 == config }) else {
+            return
+        }
+        
+        let newConfig = OverviewItemConfig(type: config.type, timePeriod: timePeriod)
+        let item = OverviewItem(config: config)
+        
+        configs[index].timePeriod = timePeriod
+        items[config] = nil
+        items[newConfig] = item
+        
+        OverviewItemConfig.set(to: configs)
+        isRestoreDefaultsDisabled = false
+        
+        Task {
+            await fetchChart(config: config)
+        }
+    }
+    
+    func removeItem(config: OverviewItemConfig) {
+        guard let index = configs.firstIndex(where: { $0 == config }) else {
+            return
+        }
+        configs.remove(at: index)
+        items[config] = nil
+        
+        OverviewItemConfig.set(to: configs)
+        isRestoreDefaultsDisabled = false
+        isAddDisabled = configs.count >= 20
     }
 }

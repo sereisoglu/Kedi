@@ -72,7 +72,7 @@ struct PaydayView: View {
                 }
             }
             
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
                     BrowserUtility.openUrlInApp(urlString: "https://www.revenuecat.com/blog/growth/apple-fiscal-calendar-year-payment-dates")
                 } label: {
