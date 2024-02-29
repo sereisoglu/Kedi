@@ -91,3 +91,40 @@ struct RCTransactionDetailEvent: Decodable {
         transferredTo = try bodyContainer.decodeIfPresent([String].self, forKey: .transferredTo)
     }
 }
+
+extension RCTransactionDetailEvent {
+    
+    static let stub: Self = {
+        let string = #"""
+        {
+            "body": {
+                "app_id": "app001",
+                "app_user_id": "app_user001",
+                "country_code": "TR",
+                "currency": "TRY",
+                "entitlement_ids": [
+                    "supporter"
+                ],
+                "environment": "PRODUCTION",
+                "event_timestamp_ms": 1705350714054,
+                "expiration_at_ms": 1708029108000,
+                "is_family_share": false,
+                "offer_code": "offer_code",
+                "period_type": "NORMAL",
+                "price": 99.99,
+                "price_in_purchased_currency": 2.99,
+                "product_id": "kedi.supporter.monthly",
+                "purchased_at_ms": 1705350708000,
+                "store": "APP_STORE",
+                "takehome_percentage": 0.85,
+                "transaction_id": "transaction001"
+            },
+            "type": "PURCHASES_INITIAL_PURCHASE",
+            "uuid": "uuid001"
+        }
+
+        """#
+        
+        return try! JSONDecoder().decode(Self.self, from: .init(string.utf8))
+    }()
+}

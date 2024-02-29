@@ -61,9 +61,9 @@ struct AppStorePayday: Decodable, Identifiable, Hashable {
     var paymentDateRelativeFormatted: String {
         let remainingDays = paymentDate.days(since: .now) ?? 0
         if remainingDays > 0 {
-            return "\(remainingDays + 1) Days"
+            return "\(remainingDays + 1) days"
         } else {
-            return paymentDate.formatted(.relative(presentation: .named)).localizedCapitalized
+            return paymentDate.formatted(.relative(presentation: .named)).capitalizedSentence
         }
     }
     

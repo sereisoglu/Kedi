@@ -16,24 +16,40 @@ struct TransactionDetailHistoryItemView: View {
         case .installation,
                 .lastSeen,
                 .unknown:
-            VStack(alignment: .leading, spacing: 3) {
-                Text(item.type.text)
-                    .font(.system(.body, weight: .semibold))
-                    .foregroundStyle(item.type.color)
-                
-                Text(item.dateText)
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-            }
+            makeItem(
+                title: item.type.text,
+                titleTrailing: nil,
+                subtitle: item.dateFormatted,
+                description: nil,
+                tag: nil
+            )
             
         case .subscriberAlias(let alias):
-            descriptionView(item: item, description: alias)
+            makeItem(
+                title: item.type.text,
+                titleTrailing: nil,
+                subtitle: item.dateFormatted,
+                description: alias,
+                tag: nil
+            )
             
         case .productChange(let productIdentifier):
-            descriptionView(item: item, description: productIdentifier)
+            makeItem(
+                title: item.type.text,
+                titleTrailing: nil,
+                subtitle: item.dateFormatted,
+                description: productIdentifier,
+                tag: nil
+            )
             
         case .transfer(_, let id):
-            descriptionView(item: item, description: id)
+            makeItem(
+                title: item.type.text,
+                titleTrailing: nil,
+                subtitle: item.dateFormatted,
+                description: id,
+                tag: nil
+            )
             
         case .initialPurchase(let price, let currency, let productIdentifier),
                 .oneTimePurchase(let price, let currency, let productIdentifier),
@@ -45,62 +61,66 @@ struct TransactionDetailHistoryItemView: View {
                 .expiration(let price, let currency, let productIdentifier),
                 .billingIssue(let price, let currency, let productIdentifier),
                 .refund(let price, let currency, let productIdentifier):
-            VStack(alignment: .leading, spacing: 3) {
-                HStack(alignment: .center, spacing: 6) {
-                    Text(item.type.text)
-                        .font(.system(.body, weight: .semibold))
-                        .foregroundStyle(item.type.color)
-                    
-                    Spacer()
-                    
-                    Text(price.formatted(.currency(code: currency)))
-                        .font(.system(.body, weight: .semibold))
-                        .foregroundStyle(item.type.color)
-                }
-                
-                Text(item.dateText)
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-                    .layoutPriority(1)
-                
-                Text(productIdentifier)
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-                
-                if let offerCode = item.offerCode {
-                    HStack {
-                        Text("Offer Code: \(offerCode)")
-                            .font(.footnote)
-                            .foregroundStyle(.secondary)
-                        
-                        Spacer()
-                    }
-                }
-            }
+            makeItem(
+                title: item.type.text,
+                titleTrailing: price.formatted(.currency(code: currency)),
+                subtitle: item.dateFormatted,
+                description: productIdentifier,
+                tag: item.offerCode
+            )
         }
     }
     
-    private func descriptionView(
-        item: TransactionDetailHistoryItem,
-        description: String
+    private func makeItem(
+        title: String,
+        titleTrailing: String?,
+        subtitle: String,
+        description: String?,
+        tag: String?
     ) -> some View {
         VStack(alignment: .leading, spacing: 3) {
-            Text(item.type.text)
-                .font(.system(.body, weight: .semibold))
-                .foregroundStyle(item.type.color)
+            HStack(alignment: .center, spacing: 6) {
+                Text(title)
+                    .font(.system(.body, weight: .semibold))
+                    .foregroundStyle(item.type.color)
+                
+                if let titleTrailing {
+                    Spacer()
+                    
+                    Text(titleTrailing)
+                        .font(.system(.body, weight: .semibold))
+                        .foregroundStyle(item.type.color)
+                }
+            }
             
-            Text(item.dateText)
+            Text(subtitle)
                 .font(.footnote)
                 .foregroundStyle(.secondary)
                 .layoutPriority(1)
             
-            Text(description)
-                .font(.footnote)
-                .foregroundStyle(.secondary)
+            if let description {
+                Text(description)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
+            
+            if let tag {
+                HStack {
+                    Text(tag)
+                        .font(.caption)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 2)
+                        .background(Color.primary.opacity(0.1))
+                        .clipShape(Capsule())
+                    
+                    Spacer()
+                }
+                .padding(.top, 2)
+            }
         }
     }
 }
 
-//#Preview {
-//    TransactionDetailHistoryItemView(item: )
-//}
+#Preview {
+    TransactionDetailHistoryItemView(item: .init(data: .stub, appUserId: "app_user001"))
+}

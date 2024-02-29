@@ -57,6 +57,16 @@ struct TransactionDetailView: View {
                     }
                 }
                 
+                if let items = viewModel.insightItems {
+                    Section {
+                        ForEach(items) { item in
+                            TransactionDetailInsightItemView(item: item)
+                        }
+                    } header: {
+                        Label("Insights", systemImage: "sparkles")
+                    }
+                }
+                
                 if let items = viewModel.attributeItems {
                     Section {
                         ForEach(items) { item in

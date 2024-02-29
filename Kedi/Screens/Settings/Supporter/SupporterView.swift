@@ -134,7 +134,7 @@ struct SupporterView: View {
                         makeTipView(nonSubscription: nonSubscription)
                     }
                     
-                    Text(purchaseManager.getTotalSpendForTips())
+                    Text(purchaseManager.getTotalSpentForTips())
                         .frame(maxWidth: .infinity)
                         .multilineTextAlignment(.center)
                 } header: {

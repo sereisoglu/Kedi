@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A044E472B9082C3000DACBF /* TransactionDetailInsightItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A044E462B9082C3000DACBF /* TransactionDetailInsightItem.swift */; };
+		4A044E492B9082DA000DACBF /* TransactionDetailInsightItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A044E482B9082DA000DACBF /* TransactionDetailInsightItemView.swift */; };
+		4A044E4B2B908931000DACBF /* RelativeDateTimeFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A044E4A2B908931000DACBF /* RelativeDateTimeFormatter+Extension.swift */; };
 		4A04F7802B827E3200C9D1EB /* PurchaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F77F2B827E3200C9D1EB /* PurchaseModel.swift */; };
 		4A04F7822B827E6800C9D1EB /* MePurchaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F7812B827E6800C9D1EB /* MePurchaseModel.swift */; };
 		4A04F7842B82B8B900C9D1EB /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 4A04F7832B82B8B900C9D1EB /* Configuration.storekit */; };
@@ -180,6 +183,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4A044E462B9082C3000DACBF /* TransactionDetailInsightItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailInsightItem.swift; sourceTree = "<group>"; };
+		4A044E482B9082DA000DACBF /* TransactionDetailInsightItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailInsightItemView.swift; sourceTree = "<group>"; };
+		4A044E4A2B908931000DACBF /* RelativeDateTimeFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RelativeDateTimeFormatter+Extension.swift"; sourceTree = "<group>"; };
 		4A04F77F2B827E3200C9D1EB /* PurchaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseModel.swift; sourceTree = "<group>"; };
 		4A04F7812B827E6800C9D1EB /* MePurchaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MePurchaseModel.swift; sourceTree = "<group>"; };
 		4A04F7832B82B8B900C9D1EB /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
@@ -502,6 +508,7 @@
 				4AB720F72B70FBF1001E2C76 /* Date+Extension.swift */,
 				4AB7208B2B6C642D001E2C76 /* Color+Extension.swift */,
 				4AB720A52B6DAC81001E2C76 /* DateFormatter+Extension.swift */,
+				4A044E4A2B908931000DACBF /* RelativeDateTimeFormatter+Extension.swift */,
 				4AB720C12B6E4DFD001E2C76 /* Collection+Extension.swift */,
 				4AB720CB2B6EAECD001E2C76 /* Array+Extension.swift */,
 				4AB720F02B70E399001E2C76 /* String+Extension.swift */,
@@ -671,6 +678,7 @@
 			children = (
 				4AB721082B726C62001E2C76 /* TransactionDetailInfoItem.swift */,
 				4AB721152B72DD8B001E2C76 /* TransactionDetailEntitlementItem.swift */,
+				4A044E462B9082C3000DACBF /* TransactionDetailInsightItem.swift */,
 				4AB7210A2B72B8A6001E2C76 /* TransactionDetailHistoryItem.swift */,
 			);
 			path = Models;
@@ -681,6 +689,7 @@
 			children = (
 				4AB721112B72B970001E2C76 /* TransactionDetailInfoItemView.swift */,
 				4AB721192B736FEC001E2C76 /* TransactionDetailEntitlementItemView.swift */,
+				4A044E482B9082DA000DACBF /* TransactionDetailInsightItemView.swift */,
 				4AB7210F2B72B966001E2C76 /* TransactionDetailHistoryItemView.swift */,
 			);
 			path = Views;
@@ -1009,6 +1018,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A044E472B9082C3000DACBF /* TransactionDetailInsightItem.swift in Sources */,
 				4A1DFC862B7E13430094BAA0 /* GeneralListView.swift in Sources */,
 				4AB720922B6C6893001E2C76 /* SettingsView.swift in Sources */,
 				4A1DFC9E2B8200BB0094BAA0 /* PurchaseManager.swift in Sources */,
@@ -1022,6 +1032,7 @@
 				4ADF09F92B792998002318B2 /* WidgetsManager.swift in Sources */,
 				4A1DFC9A2B815CD30094BAA0 /* BrowserUtility.swift in Sources */,
 				4A04F7822B827E6800C9D1EB /* MePurchaseModel.swift in Sources */,
+				4A044E492B9082DA000DACBF /* TransactionDetailInsightItemView.swift in Sources */,
 				4A1DFC902B80B9290094BAA0 /* SupporterView.swift in Sources */,
 				4AB720F82B70FBF1001E2C76 /* Date+Extension.swift in Sources */,
 				4AB721222B73881B001E2C76 /* OverviewItemView.swift in Sources */,
@@ -1066,6 +1077,7 @@
 				4AB720E92B70C8EC001E2C76 /* TransactionsView.swift in Sources */,
 				4AB7211A2B736FEC001E2C76 /* TransactionDetailEntitlementItemView.swift in Sources */,
 				4A97D5A82B83D70A0073C11E /* OverviewDetailView.swift in Sources */,
+				4A044E4B2B908931000DACBF /* RelativeDateTimeFormatter+Extension.swift in Sources */,
 				4AB720F12B70E399001E2C76 /* String+Extension.swift in Sources */,
 				4A1DFC7B2B7BEDAF0094BAA0 /* View+Extension.swift in Sources */,
 				4ADF09D72B761CED002318B2 /* RCChartRequest.swift in Sources */,

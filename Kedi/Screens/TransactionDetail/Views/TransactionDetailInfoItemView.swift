@@ -29,7 +29,7 @@ struct TransactionDetailInfoItemView: View {
                         Button {
                             UIPasteboard.general.setValue(item.value, forPasteboardType: "public.plain-text")
                         } label: {
-                            Label("Copy to clipboard", systemImage: "doc.on.doc")
+                            Label("Copy", systemImage: "doc.on.doc")
                         }
                     }
             } else {

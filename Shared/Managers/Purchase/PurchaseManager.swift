@@ -133,13 +133,13 @@ final class PurchaseManager: NSObject, ObservableObject {
         purchases.filter { $0.productType.entitlement == .tip }
     }
     
-    func getTotalSpendForTips() -> String {
-        let totalSpend: Decimal = meNonSubscriptions?.reduce(0, { partialResult, nonSubscription in
+    func getTotalSpentForTips() -> String {
+        let totalSpent: Decimal = meNonSubscriptions?.reduce(0, { partialResult, nonSubscription in
             partialResult + nonSubscription.price
         }) ?? 0
         
-        guard totalSpend > 0,
-              let localizedPriceString = purchases.first?.package.storeProduct.priceFormatter?.string(from: totalSpend as NSNumber) else {
+        guard totalSpent > 0,
+              let localizedPriceString = purchases.first?.package.storeProduct.priceFormatter?.string(from: totalSpent as NSNumber) else {
             return "You haven't made a tip."
         }
         

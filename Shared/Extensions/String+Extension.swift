@@ -30,6 +30,10 @@ extension String {
 
 extension String {
     
+    func toDate(formatter: DateFormatter) -> Date? {
+        formatter.date(from: self)
+    }
+    
     func format(to dateFormatter: DateFormatter) -> Date? {
         dateFormatter.date(from: self)
     }
@@ -39,5 +43,15 @@ extension String {
             return nil
         }
         return date.formatted(.relative(presentation: .named))
+    }
+}
+
+// https://sarunw.com/posts/how-to-capitalize-the-first-letter-in-swift
+extension String {
+    
+    var capitalizedSentence: String {
+        let firstLetter = self.prefix(1).capitalized
+        let remainingLetters = self.dropFirst().lowercased()
+        return firstLetter + remainingLetters
     }
 }

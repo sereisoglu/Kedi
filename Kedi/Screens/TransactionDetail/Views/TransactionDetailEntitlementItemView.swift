@@ -9,12 +9,15 @@ import SwiftUI
 
 struct TransactionDetailEntitlementItemView: View {
     
+    @ScaledMetric private var emojiWidth: CGFloat = 18
+    
     let item: TransactionDetailEntitlementItem
     
     var body: some View {
         HStack(alignment: .center, spacing: 10) {
             Text(item.type.status)
                 .font(.footnote)
+                .frame(width: emojiWidth)
             
             VStack(alignment: .leading, spacing: 3) {
                 Text("\(item.entitlementIdentifier) (\(item.productIdentifier))")
@@ -25,6 +28,9 @@ struct TransactionDetailEntitlementItemView: View {
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             }
+        }
+        .alignmentGuide(.listRowSeparatorLeading) { viewDimensions in
+            viewDimensions[.listRowSeparatorLeading] + emojiWidth + 10
         }
     }
 }

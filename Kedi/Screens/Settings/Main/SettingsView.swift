@@ -107,7 +107,7 @@ struct SettingsView: View {
                     )
                     SettingsAccountItemView(
                         key: "Token Expires",
-                        value: viewModel.authTokenExpiresDate?.formatted(.relative(presentation: .named)).localizedCapitalized ?? "n/a"
+                        value: viewModel.authTokenExpiresDate?.formatted(.relative(presentation: .named)).capitalizedSentence ?? "n/a"
                     )
                 } header: {
                     Text("Account")
@@ -138,7 +138,6 @@ struct SettingsView: View {
                         WidgetsManager.shared.reloadAll()
                     } label: {
                         Text("Force Update")
-                            .foregroundStyle(.blue)
                     }
                 } header: {
                     Text("Widgets")

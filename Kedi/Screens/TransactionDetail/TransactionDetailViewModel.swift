@@ -16,6 +16,7 @@ final class TransactionDetailViewModel: ObservableObject {
     @Published private(set) var navigationTitle: String = ""
     @Published private(set) var detailItems: [TransactionDetailInfoItem]?
     @Published private(set) var entitlementItems: [TransactionDetailEntitlementItem]?
+    @Published private(set) var insightItems: [TransactionDetailInsightItem]?
     @Published private(set) var attributeItems: [TransactionDetailInfoItem]?
     @Published private(set) var historyItems: [TransactionDetailHistoryItem]?
     
@@ -72,16 +73,16 @@ final class TransactionDetailViewModel: ObservableObject {
                 copyable: true
             ),
             .init(
-                key: "Total Spend",
+                key: "Total Spent",
                 value: detailData.dollarsSpent?.formatted(.currency(code: "USD")) ?? "n/a"
             ),
             .init(
                 key: "Last Seen",
-                value: detailData.lastSeen?.relativeDate(from: .iso8601WithoutMilliseconds) ?? "n/a"
+                value: detailData.lastSeen?.relativeDate(from: .iso8601WithoutMilliseconds)?.capitalizedSentence ?? "n/a"
             ),
             .init(
                 key: "Created",
-                value: detailData.createdAt?.relativeDate(from: .iso8601WithoutMilliseconds) ?? "n/a"
+                value: detailData.createdAt?.relativeDate(from: .iso8601WithoutMilliseconds)?.capitalizedSentence ?? "n/a"
             ),
             .init(
                 key: "Country",
@@ -113,5 +114,59 @@ final class TransactionDetailViewModel: ObservableObject {
         let allHistoryItems = (detailHistoryItems + activityHistoryItems)
             .sorted(by: { ($0.timestamp ?? 0) > ($1.timestamp ?? 0) })
         historyItems = allHistoryItems
+        
+        if let items = historyItems?.reversed() {
+            insightItems = []
+            
+            let refundCount = items.filter { $0.type.transactionType == .refund }.count
+            
+            if refundCount == 0,
+               items.first?.type == .installation,
+               let installationDate = items.first?.date,
+               let firstPurchaseDate = items.first(where: { [.initialPurchase, .oneTimePurchase].contains($0.type.transactionType) })?.date {
+                insightItems?.append(.init(
+                    type: .firstPurchase,
+                    text: "The user made the first purchase **with\(RelativeDateTimeFormatter.full.localizedString(for: firstPurchaseDate, relativeTo: installationDate))** of installing the app."
+                ))
+            }
+            
+            if refundCount == 0,
+               let lastSeenTimestamp = detailData.lastSeen?.toDate(formatter: .iso8601WithoutMilliseconds)?.timeIntervalSince1970 {
+                let filteredItems = items.filter { ($0.timestamp ?? 0) > lastSeenTimestamp && [.oneTimePurchase, .renewal, .conversion].contains($0.type.transactionType) }
+                let spentDollars = filteredItems.reduce(0.0) { partialResult, item in
+                    partialResult + (item.priceInUsd ?? 0)
+                }
+                if spentDollars > 0 {
+                    insightItems?.append(.init(
+                        type: .spentDollarsSinceLastSeen,
+                        text: "The user spent **\(spentDollars.formatted(.currency(code: "USD")))** after the last seen."
+                    ))
+                }
+            }
+            
+            if refundCount > 0 {
+                insightItems?.append(.init(
+                    type: .refundCount,
+                    text: "The user made a refund **\(refundCount) time\(refundCount > 1 ? "s" : "")** so far."
+                ))
+            }
+            
+            let transferCount = items.filter { item in
+                guard case .transfer(let isFrom, _) = item.type else {
+                    return false
+                }
+                return isFrom
+            }.count
+            if transferCount > 0 {
+                insightItems?.append(.init(
+                    type: .transferCount,
+                    text: "The user made a transfer to another user **\(transferCount) time\(refundCount > 1 ? "s" : "")** so far."
+                ))
+            }
+            
+            if insightItems?.isEmpty ?? false {
+                insightItems = nil
+            }
+        }
     }
 }

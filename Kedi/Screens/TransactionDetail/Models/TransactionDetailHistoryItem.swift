@@ -11,9 +11,17 @@ struct TransactionDetailHistoryItem: Identifiable, Hashable {
     
     let id = UUID()
     var type: TransactionDetailHistoryType
+    var date: Date?
     var timestamp: TimeInterval?
-    var dateText: String
     var offerCode: String?
+    var priceInUsd: Double?
+    
+    var dateFormatted: String {
+        guard let date else {
+            return "Unknown"
+        }
+        return "\(date.formatted(.relative(presentation: .named)).capitalizedSentence) (\(date.formatted(date: .abbreviated, time: .shortened)))"
+    }
     
     init?(data: RCSubscriberHistory) {
 //        let price = (data.priceInPurchasedCurrency ?? 0) != 0 ? (data.priceInPurchasedCurrency ?? 0) : (data.priceInUsd ?? 0)
@@ -66,12 +74,8 @@ struct TransactionDetailHistoryItem: Identifiable, Hashable {
             return nil
         }
         
-        if let date = data.at?.format(to: .iso8601WithoutMilliseconds) {
-            timestamp = date.timeIntervalSince1970
-            dateText = date.formatted(date: .abbreviated, time: .shortened)
-        } else {
-            dateText = "Unknown"
-        }
+        date = data.at?.format(to: .iso8601WithoutMilliseconds)
+        timestamp = date?.timeIntervalSince1970
     }
     
     init(data: RCTransactionDetailEvent, appUserId: String) {
@@ -174,14 +178,12 @@ struct TransactionDetailHistoryItem: Identifiable, Hashable {
         }
         
         if let timestamp = data.purchasedAtMs ?? data.eventTimestampMs {
-            let date = Date(timeIntervalSince1970: Double(timestamp) / 1000)
-            self.timestamp = date.timeIntervalSince1970
-            dateText = date.formatted(date: .abbreviated, time: .shortened)
-        } else {
-            dateText = "Unknown"
+            date = Date(timeIntervalSince1970: Double(timestamp) / 1000)
+            self.timestamp = date?.timeIntervalSince1970
         }
         
         offerCode = data.offerCode
+        priceInUsd = data.price
     }
 }
 
@@ -249,6 +251,18 @@ enum TransactionDetailHistoryType: Hashable {
         case .refund: .red
             
         case .unknown: .primary
+        }
+    }
+    
+    var transactionType: TransactionType? {
+        switch self {
+        case .initialPurchase: .initialPurchase
+        case .oneTimePurchase: .oneTimePurchase
+        case .renewal: .renewal
+        case .trial: .trial
+        case .conversion: .conversion
+        case .refund: .refund
+        default: nil
         }
     }
 }
