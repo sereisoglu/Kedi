@@ -139,30 +139,6 @@ struct RCSubscriptionStatus: Decodable {
         case unsubscribeDetectedAt = "unsubscribe_detected_at"
     }
     
-    init(
-        billingIssuesDetectedAt: String? = nil,
-        cancellationDate: String? = nil,
-        entitlementIdentifier: String? = nil,
-        expiresDate: String? = nil,
-        isAutoRenewing: Bool? = nil,
-        isTrial: Bool? = nil,
-        productIdentifier: String? = nil,
-        purchaseDate: String? = nil,
-        refundedAt: String? = nil,
-        unsubscribeDetectedAt: String? = nil
-    ) {
-        self.billingIssuesDetectedAt = billingIssuesDetectedAt
-        self.cancellationDate = cancellationDate
-        self.entitlementIdentifier = entitlementIdentifier
-        self.expiresDate = expiresDate
-        self.isAutoRenewing = isAutoRenewing
-        self.isTrial = isTrial
-        self.productIdentifier = productIdentifier
-        self.purchaseDate = purchaseDate
-        self.refundedAt = refundedAt
-        self.unsubscribeDetectedAt = unsubscribeDetectedAt
-    }
-    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
@@ -307,3 +283,7 @@ extension RCTransactionDetailResponse {
     }()
 }
 
+extension RCSubscriptionStatus {
+    
+    static let stub: Self = (RCTransactionDetailResponse.stub.subscriptionStatuses?.first)!
+}

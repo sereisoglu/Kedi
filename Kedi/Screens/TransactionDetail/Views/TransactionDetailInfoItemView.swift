@@ -43,5 +43,5 @@ struct TransactionDetailInfoItemView: View {
 }
 
 #Preview {
-    TransactionDetailInfoItemView(item: .init(key: "", value: ""))
+    TransactionDetailInfoItemView(item: .init(key: "Id", value: "RC001", copyable: true))
 }

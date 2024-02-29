@@ -27,7 +27,7 @@ final class TransactionDetailViewModel: ObservableObject {
         self.appId = appId
         self.subscriberId = subscriberId
         
-        set(detailData: .stub, activityData: nil)
+        set(detailData: .stub, activityData: .stub)
         navigationTitle = ""
         
         Task {

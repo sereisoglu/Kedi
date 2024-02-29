@@ -36,5 +36,5 @@ struct TransactionDetailEntitlementItemView: View {
 }
 
 #Preview {
-    TransactionDetailEntitlementItemView(item: .init(data: .init()))
+    TransactionDetailEntitlementItemView(item: .init(data: .stub))
 }
