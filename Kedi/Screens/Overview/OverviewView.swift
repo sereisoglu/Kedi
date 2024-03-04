@@ -11,8 +11,9 @@ struct OverviewView: View {
     
     @StateObject private var viewModel = OverviewViewModel()
     
+    @State private var contextMenuItem: OverviewItem?
+    @State private var draggingItem: OverviewItem?
     @State private var showingAddItem = false
-    @State private var activeItem: OverviewItem? // edit item
     @State private var showingRestoreDefaultsAlert = false
     
     var body: some View {
@@ -53,7 +54,7 @@ struct OverviewView: View {
                                 .contextMenu {
                                     Section(item.chart?.updatedAtFormatted ?? "") {
                                         Button {
-                                            activeItem = item
+                                            contextMenuItem = item
                                         } label: {
                                             Label("Edit", systemImage: "slider.horizontal.3")
                                         }
@@ -67,6 +68,21 @@ struct OverviewView: View {
                                         }
                                     }
                                 }
+                                .onDrag {
+                                    draggingItem = item
+                                    return NSItemProvider(object: item.id as NSString)
+                                } preview: {
+                                    Color.clear
+                                        .frame(width: 0.5, height: 0.5)
+                                }
+                                .onDrop(
+                                    of: [.text],
+                                    delegate: OverviewDropDelegate(
+                                        viewModel: viewModel,
+                                        item: item,
+                                        draggingItem: $draggingItem
+                                    )
+                                )
                         }
                         .buttonStyle(StandardButtonStyle())
                     }
@@ -116,7 +132,7 @@ struct OverviewView: View {
                         .environmentObject(viewModel)
                 }
             }
-            .sheet(item: $activeItem) { item in
+            .sheet(item: $contextMenuItem) { item in
                 NavigationStack {
                     OverviewItemDetailView(viewModel: .init(config: item.config))
                         .environmentObject(viewModel)

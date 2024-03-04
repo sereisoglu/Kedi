@@ -174,8 +174,11 @@ final class OverviewViewModel: ObservableObject {
         }
     }
     
-    func updateItem(config: OverviewItemConfig, timePeriod: OverviewItemTimePeriod) {
-        guard let index = configs.firstIndex(where: { $0 == config }) else {
+    func updateItem(
+        config: OverviewItemConfig,
+        timePeriod: OverviewItemTimePeriod
+    ) {
+        guard let index = configs.firstIndex(of: config) else {
             return
         }
         
@@ -192,6 +195,24 @@ final class OverviewViewModel: ObservableObject {
         Task {
             await fetchChart(config: config)
         }
+    }
+    
+    func moveItem(
+        source: OverviewItem,
+        target: OverviewItem
+    ) {
+        guard let sourceIndex = configs.firstIndex(of: source.config),
+              let targetIndex = configs.firstIndex(of: target.config) else {
+            return
+        }
+        
+        configs.move(
+            fromOffsets: IndexSet(integer: sourceIndex),
+            toOffset: targetIndex > sourceIndex ? targetIndex + 1 : targetIndex
+        )
+        
+        OverviewItemConfig.set(to: configs)
+        isRestoreDefaultsDisabled = false
     }
     
     func removeItem(config: OverviewItemConfig) {

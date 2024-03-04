@@ -7,28 +7,6 @@
 
 import SwiftUI
 
-final class OverviewItemDetailViewModel: ObservableObject {
-    
-    enum Action {
-        
-        case add
-        case edit(config: OverviewItemConfig)
-    }
-    
-    let action: Action
-    @Published var configSelection: OverviewItemConfig
-    
-    init(config: OverviewItemConfig?) {
-        if let config {
-            action = .edit(config: config)
-            configSelection = config
-        } else {
-            action = .add
-            configSelection = .init(type: .revenue, timePeriod: .last30Days)
-        }
-    }
-}
-
 struct OverviewItemDetailView: View {
     
     @Environment(\.dismiss) private var dismiss

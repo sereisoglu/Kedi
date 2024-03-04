@@ -17,7 +17,7 @@ struct OverviewItemView: View {
                 .aspectRatio(1, contentMode: .fit)
                 .background(Color.secondarySystemGroupedBackground)
                 .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                .contentShape(.contextMenuPreview, RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .contentShape([.contextMenuPreview, .dragPreview], RoundedRectangle(cornerRadius: 20, style: .continuous))
             
             Text(item.caption ?? " ")
                 .font(.caption)
