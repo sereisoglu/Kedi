@@ -133,22 +133,22 @@ struct SettingsView: View {
                     Text("Customization")
                 }
                 
-                Section {
-                    Button {
-                        WidgetsManager.shared.reloadAll()
-                    } label: {
-                        Text("Force Update")
-                    }
-                } header: {
-                    Text("Widgets")
-                }
+//                Section {
+//                    Button {
+//                        WidgetsManager.shared.reloadAll()
+//                    } label: {
+//                        Text("Force Update")
+//                    }
+//                } header: {
+//                    Text("Widgets")
+//                }
                 
                 Section {
-                    Link(destination: URL(string: "mailto:sereisoglu@gmail.com")!) {
+                    Link(destination: URL(string: "mailto:support@kediapp.com")!) {
                         GeneralListView(
                             imageAsset: .systemImage("envelope"),
                             title: "Support",
-                            subtitle: "sereisoglu@gmail.com",
+                            subtitle: "support@kediapp.com",
                             accessoryImageSystemName: "arrow.up.right"
                         )
                     }

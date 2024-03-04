@@ -216,7 +216,7 @@ extension RCTransactionDetailResponse {
                         "key": "$email",
                         "value": {
                             "updated_at_ms": 1707577551000,
-                            "value": "sereisoglu@gmail.com"
+                            "value": "support@kediapp.com"
                         }
                     },
                     {

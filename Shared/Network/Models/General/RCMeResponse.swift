@@ -66,7 +66,7 @@ extension RCMeResponse {
             },
             "current_plan": "starter",
             "distinct_id": "RC0123456789",
-            "email": "sereisoglu@gmail.com",
+            "email": "support@kediapp.com",
             "first_transaction_at": "2024-02-15T00:00:00Z",
             "name": "Saffet Emin Reisoğlu",
         }

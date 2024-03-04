@@ -49,42 +49,14 @@ struct OverviewView: View {
                     spacing: 12
                 ) {
                     ForEach(viewModel.getItems()) { item in
-                        NavigationLink(value: item) {
-                            OverviewItemView(item: item)
-                                .contextMenu {
-                                    Section(item.chart?.updatedAtFormatted ?? "") {
-                                        Button {
-                                            contextMenuItem = item
-                                        } label: {
-                                            Label("Edit", systemImage: "slider.horizontal.3")
-                                        }
-                                        
-                                        Button(role: .destructive) {
-                                            withAnimation {
-                                                viewModel.removeItem(config: item.config)
-                                            }
-                                        } label: {
-                                            Label("Remove", systemImage: "trash")
-                                        }
-                                    }
-                                }
-                                .onDrag {
-                                    draggingItem = item
-                                    return NSItemProvider(object: item.id as NSString)
-                                } preview: {
-                                    Color.clear
-                                        .frame(width: 0.5, height: 0.5)
-                                }
-                                .onDrop(
-                                    of: [.text],
-                                    delegate: OverviewDropDelegate(
-                                        viewModel: viewModel,
-                                        item: item,
-                                        draggingItem: $draggingItem
-                                    )
-                                )
+                        if item.chart == nil {
+                            makeItem(item: item)
+                        } else {
+                            NavigationLink(value: item) {
+                                makeItem(item: item)
+                            }
+                            .buttonStyle(StandardButtonStyle())
                         }
-                        .buttonStyle(StandardButtonStyle())
                     }
                 }
                 .padding(.horizontal)
@@ -124,7 +96,7 @@ struct OverviewView: View {
                 }
             }
             .navigationDestination(for: OverviewItem.self) { item in
-//                OverviewDetailView(item: item, chartValues: viewModel.chartValues[item.type])
+                OverviewDetailView(viewModel: .init(item: item))
             }
             .sheet(isPresented: $showingAddItem) {
                 NavigationStack {
@@ -139,6 +111,43 @@ struct OverviewView: View {
                 }
             }
         }
+    }
+    
+    @ViewBuilder
+    private func makeItem(item: OverviewItem) -> some View {
+        OverviewItemView(item: item)
+            .contextMenu {
+                Section(item.chart?.updatedAtFormatted ?? "") {
+                    Button {
+                        contextMenuItem = item
+                    } label: {
+                        Label("Edit", systemImage: "slider.horizontal.3")
+                    }
+                    
+                    Button(role: .destructive) {
+                        withAnimation {
+                            viewModel.removeItem(config: item.config)
+                        }
+                    } label: {
+                        Label("Remove", systemImage: "trash")
+                    }
+                }
+            }
+            .onDrag {
+                draggingItem = item
+                return NSItemProvider(object: item.id as NSString)
+            } preview: {
+                Color.clear
+                    .frame(width: 0.5, height: 0.5)
+            }
+            .onDrop(
+                of: [.text],
+                delegate: OverviewDropDelegate(
+                    viewModel: viewModel,
+                    item: item,
+                    draggingItem: $draggingItem
+                )
+            )
     }
 }
 

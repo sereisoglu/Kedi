@@ -55,7 +55,7 @@ struct LineAndAreaMarkChartView: View {
                         y: .value("Value", value.value)
                     )
                 }
-                .interpolationMethod(.cardinal)
+                .interpolationMethod(.catmullRom)
                 .foregroundStyle(foregroundColor)
                 
                 ForEach(values) { value in
@@ -64,7 +64,7 @@ struct LineAndAreaMarkChartView: View {
                         y: .value("Value", value.value)
                     )
                 }
-                .interpolationMethod(.cardinal)
+                .interpolationMethod(.catmullRom)
                 .foregroundStyle(LinearGradient(
                     gradient: .init(colors: [foregroundColor.opacity(0.5), foregroundColor.opacity(0)]),
                     startPoint: .top,

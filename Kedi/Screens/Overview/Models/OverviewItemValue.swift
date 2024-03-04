@@ -56,32 +56,32 @@ enum OverviewItemValue: Hashable, Equatable {
         }
     }
     
-//    init(type: OverviewItemType, value: Double) {
-//        switch type {
-//        case .mrr:
-//            self = .mrr(value)
-//        case .subsciptions:
-//            self = .subsciptions(Int(value))
-//        case .trials:
-//            self = .trials(Int(value))
-//        case .revenue:
-//            self = .revenue(value)
-//        case .users:
-//            self = .users(Int(value))
-//        case .installs:
-//            self = .installs(Int(value))
-//        case .arr:
-//            self = .arr(value)
-//        case .proceeds:
-//            self = .proceeds(value)
-//        case .newUsers:
-//            self = .newUsers(Int(value))
-//        case .churnRate:
-//            self = .churnRate(value)
-//        case .subsciptionsLost:
-//            self = .subsciptionsLost(Int(value))
-//        }
-//    }
+    init(type: OverviewItemType, value: Double) {
+        switch type {
+        case .mrr:
+            self = .mrr(value)
+        case .subsciptions:
+            self = .subsciptions(Int(value))
+        case .trials:
+            self = .trials(Int(value))
+        case .revenue:
+            self = .revenue(value)
+        case .users:
+            self = .users(Int(value))
+        case .installs:
+            self = .installs(Int(value))
+        case .arr:
+            self = .arr(value)
+        case .proceeds:
+            self = .proceeds(value)
+        case .newUsers:
+            self = .newUsers(Int(value))
+        case .churnRate:
+            self = .churnRate(value)
+        case .subsciptionsLost:
+            self = .subsciptionsLost(Int(value))
+        }
+    }
 }
 
 extension OverviewItemValue {
