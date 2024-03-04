@@ -55,13 +55,9 @@ struct OverviewItem: Identifiable, Hashable {
         value = .placeholder(type: config.type)
     }
     
-    mutating func set(
-        value: OverviewItemValue,
-        chart: OverviewItemChart? = nil
-    ) {
+    mutating func set(value: OverviewItemValue) {
         valueState = .data
         self.value = value
-        self.chart = chart
     }
     
     mutating func set(chart: OverviewItemChart?) {
@@ -69,6 +65,9 @@ struct OverviewItem: Identifiable, Hashable {
     }
     
     mutating func set(valueState: GeneralState) {
+        guard self.valueState != .data else {
+            return
+        }
         self.valueState = valueState
     }
 }

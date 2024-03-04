@@ -13,6 +13,8 @@ final class OverviewViewModel: ObservableObject {
     private let meManager = MeManager.shared
     private let widgetsManager = WidgetsManager.shared
     
+    private var overviewData: RCOverviewResponse?
+    
     @Published private(set) var state: GeneralState = .data
     
     @Published private(set) var configs: [OverviewItemConfig] = OverviewItemConfig.get()
@@ -41,19 +43,43 @@ final class OverviewViewModel: ObservableObject {
     }
     
     @MainActor
+    private func fetch(for config: OverviewItemConfig) async {
+        switch config.type {
+        case .mrr:
+            setItem(type: .mrr, value: .mrr(overviewData?.mrr ?? 0))
+        case .subsciptions:
+            setItem(type: .subsciptions, value: .subsciptions(overviewData?.activeSubscribersCount ?? 0))
+        case .trials:
+            setItem(type: .trials, value: .trials(overviewData?.activeTrialsCount ?? 0))
+        case .revenue:
+            if config.timePeriod == .last28Days {
+                setItem(config: .init(type: .revenue, timePeriod: .last28Days), value: .revenue(overviewData?.revenue ?? 0))
+            }
+        case .users:
+            setItem(config: .init(type: .users, timePeriod: .last28Days), value: .users(overviewData?.activeUsersCount ?? 0))
+        case .installs:
+            setItem(config: .init(type: .installs, timePeriod: .last28Days), value: .installs(overviewData?.installsCount ?? 0))
+        default:
+            break
+        }
+        
+        await fetchChart(config: config)
+    }
+    
+    @MainActor
     private func fetchOverview() async {
         do {
-            let data = try await apiService.request(
+            overviewData = try await apiService.request(
                 type: RCOverviewResponse.self,
                 endpoint: .overview
             )
             
-            setItem(type: .mrr, value: .mrr(data?.mrr ?? 0))
-            setItem(type: .subsciptions, value: .subsciptions(data?.activeSubscribersCount ?? 0))
-            setItem(type: .trials, value: .trials(data?.activeTrialsCount ?? 0))
-            setItem(config: .init(type: .revenue, timePeriod: .last28Days), value: .revenue(data?.revenue ?? 0))
-            setItem(config: .init(type: .users, timePeriod: .last28Days), value: .users(data?.activeUsersCount ?? 0))
-            setItem(config: .init(type: .installs, timePeriod: .last28Days), value: .installs(data?.installsCount ?? 0))
+            setItem(type: .mrr, value: .mrr(overviewData?.mrr ?? 0))
+            setItem(type: .subsciptions, value: .subsciptions(overviewData?.activeSubscribersCount ?? 0))
+            setItem(type: .trials, value: .trials(overviewData?.activeTrialsCount ?? 0))
+            setItem(config: .init(type: .revenue, timePeriod: .last28Days), value: .revenue(overviewData?.revenue ?? 0))
+            setItem(config: .init(type: .users, timePeriod: .last28Days), value: .users(overviewData?.activeUsersCount ?? 0))
+            setItem(config: .init(type: .installs, timePeriod: .last28Days), value: .installs(overviewData?.installsCount ?? 0))
         } catch {
             state = .error(error)
         }
@@ -61,8 +87,6 @@ final class OverviewViewModel: ObservableObject {
     
     @MainActor
     private func fetchChart(config: OverviewItemConfig) async {
-//        try? await Task.sleep(nanoseconds: 3_000_000_000)
-        
         let type = config.type
         
         guard let chartName = type.chartName,
@@ -86,37 +110,37 @@ final class OverviewViewModel: ObservableObject {
                 value: $0[safe: chartIndex] ?? 0
             ) }
             
-            var chart: OverviewItemChart?
             if let chartValues {
-                chart = .init(chartValues: chartValues, updatedAt: data?.lastComputedAt)
-            }
-            
-            switch type {
-            case .mrr,
-                    .subsciptions,
-                    .trials,
-                    .users,
-                    .installs:
-                items[config]?.set(chart: chart)
-            case .revenue:
-                if config.timePeriod == .last28Days {
-                    items[config]?.set(chart: chart)
-                } else {
-                    items[config]?.set(value: .revenue(data?.summary?["total"]?["Total Revenue"] ?? 0), chart: chart)
+                let chart = OverviewItemChart(chartValues: chartValues, updatedAt: data?.lastComputedAt)
+                switch type {
+                case .mrr,
+                        .subsciptions,
+                        .trials,
+                        .users,
+                        .installs:
+                    setItem(config: config, chart: chart)
+                case .revenue:
+                    if config.timePeriod == .last28Days {
+                        setItem(config: config, chart: chart)
+                    } else {
+                        setItem(config: config, value: .revenue(data?.summary?["total"]?["Total Revenue"] ?? 0), chart: chart)
+                    }
+                case .arr:
+                    setItem(config: config, value: .arr(chartValues.last?.value ?? 0), chart: chart)
+                case .proceeds:
+                    setItem(config: config, value: .proceeds(data?.summary?["total"]?["Proceeds"] ?? 0), chart: chart)
+                case .newUsers:
+                    setItem(config: config, value: .newUsers(Int(chartValues.last?.value ?? 0)), chart: chart)
+                case .churnRate:
+                    setItem(config: config, value: .churnRate(chartValues.last?.value ?? 0), chart: chart)
+                case .subsciptionsLost:
+                    setItem(config: config, value: .subsciptionsLost(Int(chartValues.last?.value ?? 0)), chart: chart)
                 }
-            case .arr:
-                items[config]?.set(value: .arr(chartValues?.last?.value ?? 0), chart: chart)
-            case .proceeds:
-                items[config]?.set(value: .proceeds(data?.summary?["total"]?["Proceeds"] ?? 0), chart: chart)
-            case .newUsers:
-                items[config]?.set(value: .newUsers(Int(chartValues?.last?.value ?? 0)), chart: chart)
-            case .churnRate:
-                items[config]?.set(value: .churnRate(chartValues?.last?.value ?? 0), chart: chart)
-            case .subsciptionsLost:
-                items[config]?.set(value: .subsciptionsLost(Int(chartValues?.last?.value ?? 0)), chart: chart)
+            } else {
+                items[config]?.set(valueState: .empty)
             }
         } catch {
-            print(error)
+            items[config]?.set(valueState: .error(error))
         }
     }
     
@@ -124,6 +148,11 @@ final class OverviewViewModel: ObservableObject {
         OverviewItemConfig.set(to: nil)
         isRestoreDefaultsDisabled = true
         configs = OverviewItemConfig.get()
+        items = .placeholder(configs: configs)
+        
+        Task {
+            await fetchAll()
+        }
     }
     
     func refresh() async {
@@ -149,14 +178,25 @@ final class OverviewViewModel: ObservableObject {
     
     private func setItem(
         config: OverviewItemConfig,
-        value: OverviewItemValue?,
-        chart: OverviewItemChart? = nil
+        value: OverviewItemValue
     ) {
-        if let value {
-            items[config]?.set(value: value, chart: chart)
-        } else {
-            items[config]?.set(chart: chart)
-        }
+        items[config]?.set(value: value)
+    }
+    
+    private func setItem(
+        config: OverviewItemConfig,
+        chart: OverviewItemChart?
+    ) {
+        items[config]?.set(chart: chart)
+    }
+    
+    private func setItem(
+        config: OverviewItemConfig,
+        value: OverviewItemValue,
+        chart: OverviewItemChart?
+    ) {
+        items[config]?.set(value: value)
+        items[config]?.set(chart: chart)
     }
     
     func addItem(config: OverviewItemConfig) {
@@ -170,7 +210,7 @@ final class OverviewViewModel: ObservableObject {
         isAddDisabled = configs.count >= 20
         
         Task {
-            await fetchChart(config: config)
+            await fetch(for: config)
         }
     }
     
@@ -183,7 +223,7 @@ final class OverviewViewModel: ObservableObject {
         }
         
         let newConfig = OverviewItemConfig(type: config.type, timePeriod: timePeriod)
-        let item = OverviewItem(config: config)
+        let item = OverviewItem(config: newConfig)
         
         configs[index].timePeriod = timePeriod
         items[config] = nil
@@ -193,7 +233,7 @@ final class OverviewViewModel: ObservableObject {
         isRestoreDefaultsDisabled = false
         
         Task {
-            await fetchChart(config: config)
+            await fetch(for: newConfig)
         }
     }
     

@@ -35,31 +35,45 @@ struct LineAndAreaMarkChartView: View {
     var foregroundColor: Color = .blue
     
     var body: some View {
-        Chart {
-            ForEach(values) { value in
-                LineMark(
+        if values.count == 1,
+           let value = values.first {
+            Chart {
+                PointMark(
                     x: .value("Date", value.date),
                     y: .value("Value", value.value)
                 )
+                .foregroundStyle(foregroundColor)
             }
-            .interpolationMethod(.cardinal)
-            .foregroundStyle(foregroundColor)
-            
-            ForEach(values) { value in
-                AreaMark(
-                    x: .value("Date", value.date),
-                    y: .value("Value", value.value)
-                )
+            .chartXAxis(.hidden)
+            .chartYAxis(.hidden)
+            .padding(.top)
+        } else {
+            Chart {
+                ForEach(values) { value in
+                    LineMark(
+                        x: .value("Date", value.date),
+                        y: .value("Value", value.value)
+                    )
+                }
+                .interpolationMethod(.cardinal)
+                .foregroundStyle(foregroundColor)
+                
+                ForEach(values) { value in
+                    AreaMark(
+                        x: .value("Date", value.date),
+                        y: .value("Value", value.value)
+                    )
+                }
+                .interpolationMethod(.cardinal)
+                .foregroundStyle(LinearGradient(
+                    gradient: .init(colors: [foregroundColor.opacity(0.5), foregroundColor.opacity(0)]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                ))
             }
-            .interpolationMethod(.cardinal)
-            .foregroundStyle(LinearGradient(
-                gradient: .init(colors: [foregroundColor.opacity(0.5), foregroundColor.opacity(0)]),
-                startPoint: .top,
-                endPoint: .bottom
-            ))
+            .chartXAxis(.hidden)
+            .chartYAxis(.hidden)
         }
-        .chartXAxis(.hidden)
-        .chartYAxis(.hidden)
     }
 }
 

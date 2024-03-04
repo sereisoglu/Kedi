@@ -28,8 +28,13 @@ struct OverviewItemView: View {
     @ViewBuilder
     private func makeBody() -> some View {
         switch item.valueState {
+        case .empty:
+            makeInfoView(description: "Empty")
+            
+        case .error(let error):
+            makeInfoView(description: error.localizedDescription)
+            
         case .loading,
-                .empty,
                 .data:
             VStack(alignment: .leading, spacing: 0) {
                 VStack(alignment: .leading) {
@@ -75,28 +80,30 @@ struct OverviewItemView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            
-        case .error(let error):
-            VStack(alignment: .leading) {
-                HStack(spacing: 2) {
-                    Image(systemName: item.icon)
-                    Text(item.title.uppercased())
-                }
-                .font(.subheadline)
-                .fontWeight(.medium)
-                .foregroundStyle(.secondary)
-                .lineLimit(1)
-                .minimumScaleFactor(0.5)
-                
-                Text(error.localizedDescription)
-                    .foregroundStyle(.red)
-                    .multilineTextAlignment(.leading)
-                
-                Spacer()
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding()
         }
+    }
+    
+    @ViewBuilder
+    private func makeInfoView(description: String) -> some View {
+        VStack(alignment: .leading) {
+            HStack(spacing: 2) {
+                Image(systemName: item.icon)
+                Text(item.title.uppercased())
+            }
+            .font(.subheadline)
+            .fontWeight(.medium)
+            .foregroundStyle(.secondary)
+            .lineLimit(1)
+            .minimumScaleFactor(0.5)
+            
+            Text(description)
+                .foregroundStyle(.red)
+                .multilineTextAlignment(.leading)
+            
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
     }
 }
 
