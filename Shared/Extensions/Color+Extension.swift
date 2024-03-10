@@ -42,7 +42,7 @@ extension Color {
 //    static let systemGray2 = Color(UIColor.systemGray2)
 //    static let systemGray3 = Color(UIColor.systemGray3)
 //    static let systemGray4 = Color(UIColor.systemGray4)
-//    static let systemGray5 = Color(UIColor.systemGray5)
+    static let systemGray5 = Color(UIColor.systemGray5)
 //    static let systemGray6 = Color(UIColor.systemGray6)
 //    
 //    // MARK: - Other Colors

@@ -16,6 +16,15 @@ struct OverviewItemDetailView: View {
     
     var body: some View {
         List {
+            if viewModel.configState == .notAvailable {
+                GeneralListView(
+                    imageAsset: .systemImage("exclamationmark.triangle"),
+                    title: viewModel.notAvailableMessage,
+                    accessoryImageSystemName: nil
+                )
+                .foregroundStyle(.red)
+            }
+            
             Section {
                 switch viewModel.action {
                 case .add:
@@ -69,7 +78,7 @@ struct OverviewItemDetailView: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.bottom)
-            .background(Color.systemGroupedBackground)
+            .background(Color.systemGray5)
         }
         .toolbarBackground(.hidden, for: .navigationBar)
         .toolbar {
@@ -77,16 +86,16 @@ struct OverviewItemDetailView: View {
                 switch viewModel.action {
                 case .add:
                     Button("Add") {
-                        if OverviewItemConfig.isAvailable(config: viewModel.configSelection) {
-                            superViewModel.addItem(config: viewModel.configSelection)
-                            dismiss()
-                        }
+                        superViewModel.addItem(config: viewModel.configSelection)
+                        dismiss()
                     }
+                    .disabled(viewModel.configState.disabled)
                 case .edit(let config):
                     Button("Save") {
                         superViewModel.updateItem(config: config, timePeriod: viewModel.configSelection.timePeriod)
                         dismiss()
                     }
+                    .disabled(viewModel.configState.disabled)
                 }
             }
             
