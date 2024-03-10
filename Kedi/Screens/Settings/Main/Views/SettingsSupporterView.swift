@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsSupporterView: View {
     
-    @ScaledMetric private var imageWidth: CGFloat = 80
+    private let emojiWidth: CGFloat = 80
     
     var title: String
     var subtitle: String
@@ -23,17 +23,21 @@ struct SettingsSupporterView: View {
             HStack(spacing: 0) {
                 Text("🚀")
                     .fixedSize(horizontal: false, vertical: true)
-                    .font(.system(size: imageWidth - 2))
-                    .frame(width: imageWidth, height: 0)
+                    .font(.system(size: emojiWidth - 2))
+                    .frame(width: emojiWidth, height: 0)
                 
                 VStack(alignment: .center) {
                     Text(title)
                         .multilineTextAlignment(.center)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                     
                     Text(subtitle)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                 }
                 .frame(maxWidth: .infinity)
                 
@@ -46,7 +50,7 @@ struct SettingsSupporterView: View {
                         .foregroundStyle(.secondary)
                 }
                 .padding(.trailing)
-                .frame(width: imageWidth)
+                .frame(width: emojiWidth)
             }
             .padding(.vertical, 10)
             .background {
@@ -61,10 +65,28 @@ struct SettingsSupporterView: View {
 }
 
 #Preview {
-    SettingsSupporterView(
-        title: "Become a Supporter",
-        subtitle: "Support indie development!",
-        isActive: true,
-        action: {}
-    )
+    Group {
+        SettingsSupporterView(
+            title: "You're a Super Supporter!",
+            subtitle: "Support indie development",
+            isActive: true,
+            action: {}
+        )
+        
+        SettingsSupporterView(
+            title: "You're a Super Supporter!",
+            subtitle: "Support indie development",
+            isActive: true,
+            action: {}
+        )
+        .environment(\.sizeCategory, .extraSmall)
+        
+        SettingsSupporterView(
+            title: "Become a Supporter",
+            subtitle: "Support indie development!",
+            isActive: true,
+            action: {}
+        )
+        .environment(\.sizeCategory, .extraExtraExtraLarge)
+    }
 }
