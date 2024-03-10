@@ -18,7 +18,7 @@ struct OverviewWidget: Widget {
                 .containerBackground(.clear, for: .widget)
         }
         .configurationDisplayName("Overview")
-        .description("Shows an overview of recent transactions.")
+        .description("Shows an overview of your stats.")
         .supportedFamilies([.systemSmall, .systemMedium])
         .contentMarginsDisabled()
     }

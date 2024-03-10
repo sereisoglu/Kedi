@@ -34,7 +34,6 @@ final class SessionManager {
         guard let url = URL(string: "https://api.revenuecat.com") else {
             return nil
         }
-        
         return cookieStorage.cookies(for: url)?.first
     }
     
@@ -42,7 +41,6 @@ final class SessionManager {
         guard let cookie = getGroupRevenueCatCookie() else {
             return
         }
-        
         cookieStorage.setCookie(cookie)
     }
     
@@ -50,7 +48,6 @@ final class SessionManager {
         guard let url = URL(string: "https://api.revenuecat.com") else {
             return nil
         }
-        
         return groupCookieStorage.cookies(for: url)?.first
     }
     
@@ -58,7 +55,11 @@ final class SessionManager {
         guard let cookie = getRevenueCatCookie() else {
             return
         }
-        
         groupCookieStorage.setCookie(cookie)
+    }
+    
+    func removeCookies() {
+        cookieStorage.cookies?.forEach { cookieStorage.deleteCookie($0) }
+        groupCookieStorage.cookies?.forEach { groupCookieStorage.deleteCookie($0) }
     }
 }

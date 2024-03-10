@@ -17,7 +17,7 @@ struct OverviewWidgetEntry: TimelineEntry {
     
     let date: Date
     let items: [OverviewItem]
-    var error: RCError?
+    var error: WidgetError?
 }
 
 struct OverviewItem: Hashable, Codable {

@@ -13,6 +13,18 @@ enum WidgetError: Error {
     case service(RCError)
 }
 
+extension WidgetError: LocalizedError {
+    
+    var errorDescription: String? {
+        switch self {
+        case .unauthorized:
+            return "Unauthorized"
+        case .service(let error):
+            return error.localizedDescription
+        }
+    }
+}
+
 extension WidgetError {
     
     var icon: String {
@@ -36,7 +48,7 @@ extension WidgetError {
     var message: String {
         switch self {
         case .unauthorized:
-            return "Sign in or create a new account\nto gain access to all features"
+            return "Sign in to access all features"
         case .service(let error):
             return error.localizedDescription
         }

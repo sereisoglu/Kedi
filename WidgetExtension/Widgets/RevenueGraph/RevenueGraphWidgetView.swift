@@ -1,5 +1,5 @@
 //
-//  DailyGraphWidgetView.swift
+//  RevenueGraphWidgetView.swift
 //  WidgetExtensionExtension
 //
 //  Created by Saffet Emin Reisoğlu on 2/8/24.
@@ -7,13 +7,23 @@
 
 import SwiftUI
 
-struct DailyGraphWidgetView: View {
+struct RevenueGraphWidgetView: View {
     
     @Environment(\.widgetFamily) private var widgetFamily
     
-    var entry: DailyGraphWidgetProvider.Entry
-
+    var entry: RevenueGraphWidgetProvider.Entry
+    
     var body: some View {
+        if let error = entry.error,
+           entry.items.isEmpty {
+            WidgetErrorView(error: error)
+                .padding()
+        } else {
+            makeWidgetView()
+        }
+    }
+    
+    private func makeWidgetView() -> some View {
         ZStack {
             switch widgetFamily {
             case .systemSmall:
@@ -47,5 +57,5 @@ struct DailyGraphWidgetView: View {
 }
 
 #Preview {
-    DailyGraphWidgetView(entry: .placeholder)
+    RevenueGraphWidgetView(entry: .placeholder)
 }

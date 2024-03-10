@@ -9,8 +9,6 @@ import SwiftUI
 
 struct AppIconView: View {
     
-//    @AppStorage("appIcon") private var appIcon: AppIcon = .default
-    
     @State private var appIconSelection: AppIcon {
         didSet {
             UserDefaults.standard.appIcon = appIconSelection.rawValue

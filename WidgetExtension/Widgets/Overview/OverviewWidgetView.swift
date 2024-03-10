@@ -14,6 +14,16 @@ struct OverviewWidgetView: View {
     var entry: OverviewWidgetProvider.Entry
 
     var body: some View {
+        if let error = entry.error,
+           entry.items.isEmpty {
+            WidgetErrorView(error: error)
+                .padding()
+        } else {
+            makeWidgetView()
+        }
+    }
+    
+    private func makeWidgetView() -> some View {
         ZStack {
             switch widgetFamily {
             case .systemSmall:

@@ -11,6 +11,7 @@ final class MeManager: ObservableObject {
     
     private let apiService = APIService.shared
     private let keychainManager = KeychainManager.shared
+    private let sessionManager = SessionManager.shared
     private let cacheManager = CacheManager.shared
     private let widgetsManager = WidgetsManager.shared
     
@@ -29,27 +30,44 @@ final class MeManager: ObservableObject {
     }
     
     func getAuthToken() -> String? {
+        let token = getAuthTokenFromKeychain() ?? getAuthTokenFromSession()
+        if token == nil {
+            signOut()
+        }
+        return token
+    }
+    
+    private func getAuthTokenFromKeychain() -> String? {
         guard let token = keychainManager.get(.rcAuthToken),
               let tokenExpiresAt = Int(keychainManager.get(.rcAuthTokenExpiresAt) ?? "") else {
             return nil
         }
-        
         let isExpired = Int(Date().timeIntervalSince1970) > tokenExpiresAt
-        
-        if isExpired {
-            signOut()
+        return isExpired ? nil : token
+    }
+    
+    private func getAuthTokenFromSession() -> String? {
+        guard let cookie = sessionManager.getRevenueCatCookie() else {
             return nil
-        } else {
-            return token
         }
+        let isExpired = Date.now > (cookie.expiresDate ?? .now)
+        return isExpired ? nil : cookie.value
     }
     
     func getAuthTokenExpiresDate() -> Date? {
-        guard let tokenExpiresAt = Int(keychainManager.get(.rcAuthTokenExpiresAt) ?? "") else {
+        getAuthTokenExpiresDateFromKeychain() ?? getAuthTokenExpiresDateFromSession()
+    }
+    
+    private func getAuthTokenExpiresDateFromKeychain() -> Date? {
+        guard let rcAuthTokenExpiresAt = keychainManager.get(.rcAuthTokenExpiresAt),
+              let tokenExpiresAt = TimeInterval(rcAuthTokenExpiresAt) else {
             return nil
         }
-        
-        return .init(timeIntervalSince1970: TimeInterval(tokenExpiresAt))
+        return .init(timeIntervalSince1970: tokenExpiresAt)
+    }
+    
+    private func getAuthTokenExpiresDateFromSession() -> Date? {
+        sessionManager.getRevenueCatCookie()?.expiresDate
     }
     
     @discardableResult
@@ -60,14 +78,12 @@ final class MeManager: ObservableObject {
         guard let tokenExpirationDate = tokenExpiration.format(to: .iso8601WithoutMilliseconds) else {
             return false
         }
-        
         keychainManager.set(token, forKey: .rcAuthToken)
         keychainManager.set("\(Int(tokenExpirationDate.timeIntervalSince1970))", forKey: .rcAuthTokenExpiresAt)
+        sessionManager.start()
         apiService.setAuthToken(token)
         widgetsManager.reloadAll()
         isSignedIn = true
-        SessionManager.shared.start()
-        
         return true
     }
     
@@ -77,9 +93,10 @@ final class MeManager: ObservableObject {
     }
     
     func signOut() {
-        cacheManager.remove(key: "me")
         keychainManager.delete(.rcAuthToken)
         keychainManager.delete(.rcAuthTokenExpiresAt)
+        sessionManager.removeCookies()
+        cacheManager.remove(key: "me")
         apiService.setAuthToken(nil)
         widgetsManager.reloadAll()
         isSignedIn = false

@@ -1,5 +1,5 @@
 //
-//  DailyGraphWidget.swift
+//  RevenueGraphWidget.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/8/24.
@@ -8,16 +8,16 @@
 import SwiftUI
 import WidgetKit
 
-struct DailyGraphWidget: Widget {
+struct RevenueGraphWidget: Widget {
     
-    let kind = WidgetKind.dailyGraph.rawValue
+    let kind = WidgetKind.revenueGraph.rawValue
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: DailyGraphWidgetProvider()) { entry in
-            DailyGraphWidgetView(entry: entry)
+        StaticConfiguration(kind: kind, provider: RevenueGraphWidgetProvider()) { entry in
+            RevenueGraphWidgetView(entry: entry)
                 .containerBackground(.clear, for: .widget)
         }
-        .configurationDisplayName("Daily Graph")
+        .configurationDisplayName("Revenue Graph")
         .description("Shows an overview of recent transactions.")
         .supportedFamilies([.systemSmall, .systemMedium])
         .contentMarginsDisabled()
@@ -25,7 +25,7 @@ struct DailyGraphWidget: Widget {
 }
 
 #Preview(as: .systemSmall) {
-    DailyGraphWidget()
+    RevenueGraphWidget()
 } timeline: {
-    DailyGraphWidgetEntry.placeholder
+    RevenueGraphWidgetEntry.placeholder
 }

@@ -1,5 +1,5 @@
 //
-//  DailyGraphWidgetEntry.swift
+//  RevenueGraphWidgetEntry.swift
 //  WidgetExtensionExtension
 //
 //  Created by Saffet Emin Reisoğlu on 2/8/24.
@@ -8,14 +8,14 @@
 import Foundation
 import WidgetKit
 
-struct DailyGraphWidgetEntry: TimelineEntry {
+struct RevenueGraphWidgetEntry: TimelineEntry {
     
     let date: Date
     let items: [RectangleMarkGraphValue]
-    var error: RCError?
+    var error: WidgetError?
 }
 
-extension DailyGraphWidgetEntry {
+extension RevenueGraphWidgetEntry {
     
     static let placeholder: Self = {
         let dates = RectangleMarkGraphView.getDates(weekCount: 17)

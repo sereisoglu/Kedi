@@ -250,7 +250,7 @@ extension RCTransactionDetailResponse {
                             "entitlements": [
                                 {
                                     "created_at": "2024-02-01T00:00:00Z",
-                                    "display_name": "Gain access to all features.",
+                                    "display_name": "Gain access to all Supporter features.",
                                     "id": "ent001",
                                     "identifier": "supporter",
                                     "products": [

@@ -28,6 +28,6 @@ final class WidgetsManager {
 enum WidgetKind: String {
     
     case overview = "OverviewWidget"
-    case dailyGraph = "DailyGraphWidget"
+    case revenueGraph = "RevenueGraphWidget"
     case payday = "PaydayWidget"
 }

@@ -1,12 +1,13 @@
 {
+  "originHash" : "f17a2eb430d7d83b68185a388eac25069d0d1e2ca9b57905e68223b833780593",
   "pins" : [
     {
       "identity" : "alamofire",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "3dc6a42c7727c49bf26508e29b0a0b35f9c7e1ad",
-        "version" : "5.8.1"
+        "revision" : "723fa5a6c65812aec4a0d7cc432ee198883b6e00",
+        "version" : "5.9.0"
       }
     },
     {
@@ -14,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hyperoslo/Cache.git",
       "state" : {
-        "revision" : "c7f4d633049c3bd649a353bad36f6c17e9df085f",
-        "version" : "6.0.0"
+        "revision" : "d048bf404a5c8362c6cf840c2096d5777975cd27",
+        "version" : "6.1.0"
       }
     },
     {
@@ -32,10 +33,10 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios.git",
       "state" : {
-        "revision" : "c598bfa60672881933d8945584cc327acd6f018a",
-        "version" : "4.36.3"
+        "revision" : "022748f79384035c0752602300e4e112018cd9c9",
+        "version" : "4.38.1"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

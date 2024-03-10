@@ -10,6 +10,8 @@ import WidgetKit
 
 struct PaydayWidgetProvider: TimelineProvider {
     
+    private let secondGranularity: Double = 3600 // 60 * 60 // 1 hour
+    
     typealias Entry = PaydayWidgetEntry
     
     func placeholder(in context: Context) -> Entry {
@@ -22,7 +24,7 @@ struct PaydayWidgetProvider: TimelineProvider {
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         guard let payday = AppStorePayday.upcomingPayday else {
-            completion(.init(entries: [.placeholder], policy: .after(Date().nearestDate(secondGranularity: 60 * 60))))
+            completion(.init(entries: [.placeholder], policy: .after(Date().nearestDate(secondGranularity: secondGranularity))))
             return
         }
         
@@ -52,10 +54,10 @@ struct PaydayWidgetProvider: TimelineProvider {
             ]
         case .future,
                 .past:
-            completion(.init(entries: [.placeholder], policy: .after(Date().nearestDate(secondGranularity: 60 * 60))))
+            completion(.init(entries: [.placeholder], policy: .after(Date().nearestDate(secondGranularity: secondGranularity))))
             return
         }
         
-        completion(.init(entries: entries, policy: .after(Date().nearestDate(secondGranularity: 60 * 60))))
+        completion(.init(entries: entries, policy: .after(Date().nearestDate(secondGranularity: secondGranularity))))
     }
 }
