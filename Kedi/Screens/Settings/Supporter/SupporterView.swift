@@ -172,7 +172,7 @@ struct SupporterView: View {
                         .padding(.horizontal)
                     }
 
-                    Text("[Restore Purchase](kedi://restore-purchase) • [Privacy Policy](https://github.com/sereisoglu/Kedi/blob/main/privacy-policy.md) • [Terms & Conditions](https://github.com/sereisoglu/Kedi/blob/main/terms-and-conditions.md)")
+                    Text("[Restore Purchase](kedi://restore-purchase) • [Privacy Policy](https://kediapp.com/privacy-policy) • [Terms & Conditions](https://kediapp.com/terms-and-conditions)")
                         .font(.footnote)
                         .frame(maxWidth: .infinity)
                         .padding(.top)

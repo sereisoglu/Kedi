@@ -78,7 +78,10 @@ struct OverviewItemDetailView: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.bottom)
-            .background(Color.systemGray5)
+            .background {
+                Color.systemGroupedBackground
+                    .overlay(Color.primary.opacity(0.1))
+            }
         }
         .toolbarBackground(.hidden, for: .navigationBar)
         .toolbar {

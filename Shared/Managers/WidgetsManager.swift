@@ -10,18 +10,20 @@ import WidgetKit
 
 final class WidgetsManager {
     
+    private let widgetCenter = WidgetCenter.shared
+    
     static let shared = WidgetsManager()
     
     private init() {}
     
     func reload(_ kinds: WidgetKind...) {
         kinds.forEach { kind in
-            WidgetCenter.shared.reloadTimelines(ofKind: kind.rawValue)
+            widgetCenter.reloadTimelines(ofKind: kind.rawValue)
         }
     }
     
     func reloadAll() {
-        WidgetCenter.shared.reloadAllTimelines()
+        widgetCenter.reloadAllTimelines()
     }
 }
 

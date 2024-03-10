@@ -68,8 +68,9 @@ struct SignInView: View {
                 .buttonStyle(.borderedProminent)
                 .disabled(!viewModel.isFormValid)
             } footer: {
-                Text("Use your RevenueCat account credentials to access. Your RevenueCat account credentials are used to create access tokens.")
+                Text("Use your [RevenueCat](https://www.revenuecat.com) account credentials to access. Your credentials are used to create access tokens.\n\nBy proceeding to sign in and using Kedi, you agree to our [Privacy Policy](https://kediapp.com/privacy-policy) and [Terms & Conditions](https://kediapp.com/terms-and-conditions).")
                     .padding()
+                    .openUrlInApp()
             }
             .listRowInsets(.zero)
             .listRowBackground(Color.clear)

@@ -746,7 +746,6 @@
 			children = (
 				4AB7212E2B738BA0001E2C76 /* WidgetsBundle.swift */,
 				4ADF0A032B7A3B1A002318B2 /* Shared */,
-				4AB7215B2B756E37001E2C76 /* Views */,
 				4AB7215A2B756E2B001E2C76 /* Widgets */,
 				4AB721322B738BA1001E2C76 /* Assets.xcassets */,
 				4AB721572B739F4B001E2C76 /* WidgetExtension.entitlements */,
@@ -784,14 +783,6 @@
 				4AEE72F52B8B53EA00F51548 /* Payday */,
 			);
 			path = Widgets;
-			sourceTree = "<group>";
-		};
-		4AB7215B2B756E37001E2C76 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				4ADF0A072B7A3B86002318B2 /* WidgetErrorView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		4ADF09D22B761CA5002318B2 /* Login */ = {
@@ -849,6 +840,7 @@
 		4ADF0A032B7A3B1A002318B2 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				4ADF0A072B7A3B86002318B2 /* WidgetErrorView.swift */,
 				4ADF0A042B7A3B3F002318B2 /* WidgetError.swift */,
 			);
 			path = Shared;

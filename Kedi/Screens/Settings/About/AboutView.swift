@@ -42,6 +42,12 @@ struct AboutView: View {
             }
             
             Section {
+                Text("Kedi is a Turkish word meaning cat.")
+            } header: {
+                Text("What does Kedi mean?")
+            }
+            
+            Section {
                 Link(destination: URL(string: "https://x.com/sereisoglu")!) {
                     GeneralListView(
                         imageAsset: .custom("x"),
@@ -55,20 +61,7 @@ struct AboutView: View {
             }
             
             Section {
-                Link(destination: URL(string: "https://github.com/twitter/twemoji")!) {
-                    GeneralListView(
-                        imageAsset: .custom("github"),
-                        title: "Twemoji",
-                        subtitle: "It was used when designing the app icon.",
-                        accessoryImageSystemName: "arrow.up.right"
-                    )
-                }
-            } header: {
-                Text("Resources")
-            }
-            
-            Section {
-                Link(destination: URL(string: "https://github.com/sereisoglu/Kedi/blob/main/privacy-policy.md")!) {
+                Link(destination: URL(string: "https://kediapp.com/privacy-policy")!) {
                     GeneralListView(
                         imageAsset: .systemImage("hand.raised"),
                         title: "Privacy Policy"
@@ -76,7 +69,7 @@ struct AboutView: View {
                 }
                 .openUrlInApp()
                 
-                Link(destination: URL(string: "https://github.com/sereisoglu/Kedi/blob/main/terms-of-service.md")!) {
+                Link(destination: URL(string: "https://kediapp.com/terms-and-conditions")!) {
                     GeneralListView(
                         imageAsset: .systemImage("doc.text"),
                         title: "Terms & Conditions"
@@ -86,9 +79,51 @@ struct AboutView: View {
             }
             
             Section {
-                Text("Kedi is a Turkish word meaning cat.")
+                Link(destination: URL(string: "https://github.com/twitter/twemoji/blob/master/LICENSE")!) {
+                    GeneralListView(
+                        imageAsset: .custom("github"),
+                        title: "Twemoji",
+                        subtitle: "Copyright 2021 Twitter\nIt was used when designing the app icon."
+                    )
+                }
+                .openUrlInApp()
+                
+                Link(destination: URL(string: "https://github.com/Alamofire/Alamofire/blob/master/LICENSE")!) {
+                    GeneralListView(
+                        imageAsset: .custom("github"),
+                        title: "Alamofire",
+                        subtitle: "Copyright 2014 Alamofire Software Foundation"
+                    )
+                }
+                .openUrlInApp()
+                
+                Link(destination: URL(string: "https://github.com/hyperoslo/Cache/blob/master/LICENSE.md")!) {
+                    GeneralListView(
+                        imageAsset: .custom("github"),
+                        title: "Cache",
+                        subtitle: "Copyright 2015 Hyper Interaktiv AS"
+                    )
+                }
+                .openUrlInApp()
+                
+                Link(destination: URL(string: "https://github.com/evgenyneu/keychain-swift/blob/master/LICENSE")!) {
+                    GeneralListView(
+                        imageAsset: .custom("github"),
+                        title: "KeychainSwift",
+                        subtitle: "Copyright 2015 Evgenii Neumerzhitckii"
+                    )
+                }
+                .openUrlInApp()
+                
+                Link(destination: URL(string: "https://github.com/RevenueCat/purchases-ios/blob/main/LICENSE")!) {
+                    GeneralListView(
+                        imageAsset: .custom("github"),
+                        title: "RevenueCat",
+                        subtitle: "Copyright 2017 Jacob Eiting"
+                    )
+                }
             } header: {
-                Text("What does Kedi mean?")
+                Text("Acknowledgments")
             }
         }
         .navigationTitle("About")

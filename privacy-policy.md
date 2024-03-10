@@ -59,4 +59,4 @@ This policy is effective as of 2024-02-15
 
 **Contact Us**
 
-If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at sereisoglu@gmail.com.
+If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at support@kediapp.com.
