@@ -78,6 +78,7 @@ enum OverviewItemTimePeriod: String, CaseIterable, Codable {
         case .allTime:
             return nil
         }
+        date = calendar.date(byAdding: .day, value: 1, to: date) ?? Date()
         
         return DateFormatter.yyy_MM_dd_GMT.string(from: date)
     }

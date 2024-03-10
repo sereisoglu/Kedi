@@ -106,7 +106,7 @@ final class OverviewViewModel: ObservableObject {
             )
             
             let chartValues: [LineAndAreaMarkChartValue]? = data?.values?.map { .init(
-                date: .init(timeIntervalSince1970: $0[safe: 0] ?? 0),
+                date: .init(timeIntervalSince1970: $0[safe: 0] ?? 0).withoutTime,
                 value: $0[safe: chartIndex] ?? 0
             ) }
             

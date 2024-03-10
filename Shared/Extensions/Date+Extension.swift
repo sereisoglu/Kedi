@@ -17,11 +17,22 @@ extension Date {
         calendar.isDateInToday(self)
     }
     
+    var isTomorrow: Bool {
+        calendar.isDateInTomorrow(self)
+    }
+    
     var isFuture: Bool {
         self > .now
     }
     
     var withoutTime: Date {
+        let dateComponents = calendar.dateComponents([.year, .month, .day], from: self)
+        return calendar.date(from: dateComponents) ?? self
+    }
+    
+    var withoutTimeGMT: Date {
+        var calendar = Calendar.current
+        calendar.timeZone = .gmt
         let dateComponents = calendar.dateComponents([.year, .month, .day], from: self)
         return calendar.date(from: dateComponents) ?? self
     }

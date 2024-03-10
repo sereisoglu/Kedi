@@ -20,16 +20,18 @@ struct SidebarView: View {
             }
             .navigationTitle("Kedi")
         } detail: {
-            switch selection {
-            case .overview:
-                OverviewView()
-            case .transactions:
-                TransactionsView()
-            case .settings:
-                SettingsView()
-                    .environmentObject(PurchaseManager.shared)
-            case .none:
-                Text("")
+            NavigationStack {
+                switch selection {
+                case .overview:
+                    OverviewView()
+                case .transactions:
+                    TransactionsView()
+                case .settings:
+                    SettingsView()
+                        .environmentObject(PurchaseManager.shared)
+                case .none:
+                    Text("")
+                }
             }
         }
     }

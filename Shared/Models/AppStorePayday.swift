@@ -29,13 +29,11 @@ struct AppStorePayday: Decodable, Identifiable, Hashable {
     }
     
     var isPaymentDateToday: Bool {
-        let calendar = Calendar.current
-        return calendar.isDateInToday(paymentDate)
+        paymentDate.isToday
     }
     
     var isPaymentDateTomorrow: Bool {
-        let calendar = Calendar.current
-        return calendar.isDateInTomorrow(paymentDate)
+        paymentDate.isTomorrow
     }
     
     var emoji: String {
