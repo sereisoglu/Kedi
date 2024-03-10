@@ -18,7 +18,7 @@ struct PaydayWidgetView: View {
                 .fontWeight(.semibold)
                 .foregroundStyle(.secondary)
                 .lineLimit(1)
-                .minimumScaleFactor(0.5)
+                .minimumScaleFactor(0.8)
             
             Spacer()
             
@@ -64,7 +64,6 @@ struct PaydayWidgetView: View {
             }
         }
         .padding()
-        .dynamicTypeSize(DynamicTypeSize.large)
         .widgetURL(DeepLink.make(host: .payday))
     }
     
@@ -73,11 +72,11 @@ struct PaydayWidgetView: View {
             Text(emoji)
                 .font(.title)
                 .multilineTextAlignment(.center)
+                .minimumScaleFactor(0.8)
             
             Text(title)
                 .font(.title2)
                 .fontWeight(.semibold)
-                .minimumScaleFactor(0.5)
                 .multilineTextAlignment(.center)
         }
     }
@@ -91,7 +90,6 @@ struct PaydayWidgetView: View {
             Text(date, style: .timer)
                 .font(.title2)
                 .fontWeight(.semibold)
-                .minimumScaleFactor(0.5)
                 .multilineTextAlignment(.center)
                 .monospacedDigit()
                 .contentTransition(.numericText(countsDown: true))

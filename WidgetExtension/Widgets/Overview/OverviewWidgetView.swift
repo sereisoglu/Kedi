@@ -19,79 +19,80 @@ struct OverviewWidgetView: View {
             WidgetErrorView(error: error)
                 .padding()
         } else {
-            makeWidgetView()
+            ZStack {
+                makeWidgetView()
+                
+                if let message = entry.error?.localizedDescription {
+                    VStack {
+                        Spacer()
+                        Text(message)
+                            .font(.caption2)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.red)
+                            .multilineTextAlignment(.center)
+                            .lineLimit(1)
+                            .dynamicTypeSize(DynamicTypeSize.large)
+                    }
+                    .padding(.horizontal)
+                    .padding(.bottom, 2)
+                }
+            }
         }
     }
     
+    @ViewBuilder
     private func makeWidgetView() -> some View {
-        ZStack {
-            switch widgetFamily {
-            case .systemSmall:
-                Grid {
-                    ForEach(Array(entry.items3.enumerated()), id: \.offset) { index, item in
+        switch widgetFamily {
+        case .systemSmall:
+            Grid {
+                ForEach(Array(entry.items3.enumerated()), id: \.offset) { index, item in
+                    GridRow {
+                        makeGridItem(item: item)
+                    }
+                    .frame(maxHeight: .infinity)
+                    
+                    if index != 2 {
+                        RoundedRectangle(cornerRadius: 1)
+                            .fill(Color.opaqueSeparator.opacity(0.5))
+                            .frame(height: 1)
+                    }
+                }
+            }
+            .padding()
+            
+        case .systemMedium:
+            ZStack {
+                Grid(horizontalSpacing: 30) {
+                    ForEach(Array(entry.items.chunked(by: 2).enumerated()), id: \.offset) { index, items in
                         GridRow {
-                            makeGridItem(item: item)
+                            ForEach(items, id: \.self) { item in
+                                makeGridItem(item: item)
+                            }
                         }
                         .frame(maxHeight: .infinity)
                         
                         if index != 2 {
-                            RoundedRectangle(cornerRadius: 1)
-                                .fill(Color.opaqueSeparator.opacity(0.5))
-                                .frame(height: 1)
-                        }
-                    }
-                }
-                .padding()
-                
-            case .systemMedium:
-                ZStack {
-                    Grid(horizontalSpacing: 30) {
-                        ForEach(Array(entry.items.chunked(by: 2).enumerated()), id: \.offset) { index, items in
-                            GridRow {
-                                ForEach(items, id: \.self) { item in
-                                    makeGridItem(item: item)
-                                }
-                            }
-                            .frame(maxHeight: .infinity)
-                            
-                            if index != 2 {
-                                HStack(spacing: 30) {
-                                    RoundedRectangle(cornerRadius: 1)
-                                        .fill(Color.opaqueSeparator.opacity(0.5))
-                                        .frame(height: 1)
-                                    
-                                    RoundedRectangle(cornerRadius: 1)
-                                        .fill(Color.opaqueSeparator.opacity(0.5))
-                                        .frame(height: 1)
-                                }
+                            HStack(spacing: 30) {
+                                RoundedRectangle(cornerRadius: 1)
+                                    .fill(Color.opaqueSeparator.opacity(0.5))
+                                    .frame(height: 1)
+                                
+                                RoundedRectangle(cornerRadius: 1)
+                                    .fill(Color.opaqueSeparator.opacity(0.5))
+                                    .frame(height: 1)
                             }
                         }
                     }
-                    
-                    RoundedRectangle(cornerRadius: 1)
-                        .fill(Color.opaqueSeparator.opacity(0.5))
-                        .frame(width: 1)
                 }
-                .padding()
                 
-            default:
-                Text("Unsupported widget family!")
+                RoundedRectangle(cornerRadius: 1)
+                    .fill(Color.opaqueSeparator.opacity(0.5))
+                    .frame(width: 1)
             }
+            .padding()
             
-            if let message = entry.error?.localizedDescription {
-                VStack {
-                    Spacer()
-                    Text(message)
-                        .font(.caption2)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.red)
-                        .multilineTextAlignment(.center)
-                        .lineLimit(1)
-                        .dynamicTypeSize(DynamicTypeSize.large)
-                }
-                .padding(.horizontal)
-                .padding(.bottom, 2)
-            }
+        default:
+            Text("Unsupported widget family!")
         }
     }
     

@@ -40,6 +40,7 @@ struct SupporterView: View {
             } message: {
                 Text(purchaseError?.localizedDescription ?? "An error has occurred.")
             }
+            .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
     }
     
     @ViewBuilder
