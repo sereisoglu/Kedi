@@ -13,6 +13,7 @@ struct SettingsView: View {
     @EnvironmentObject var purchaseManager: PurchaseManager
     
     @State private var showingSupporter = false
+    @State private var showingSignOutAlert = false
     
     var body: some View {
         makeBody()
@@ -172,13 +173,24 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    AsyncButton {
-                        viewModel.handleSignOutButton()
+                    Button {
+                        showingSignOutAlert = true
                     } label: {
                         Text("Sign Out")
                             .foregroundStyle(.red)
                             .frame(maxWidth: .infinity)
                             .multilineTextAlignment(.center)
+                    }
+                    .alert(
+                        "Sign Out",
+                        isPresented: $showingSignOutAlert
+                    ) {
+                        Button("Cancel", role: .cancel) {}
+                        Button("Sign Out", role: .destructive) {
+                            viewModel.handleSignOutButton()
+                        }
+                    } message: {
+                        Text("Are you sure you want to sign out?")
                     }
                 }
                 

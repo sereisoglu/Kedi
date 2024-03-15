@@ -31,7 +31,7 @@ final class TransactionsViewModel: ObservableObject {
             let data = try await apiService.request(
                 type: RCTransactionsResponse.self,
                 endpoint: .transactions(.init(
-                    limit: 100,
+                    limit: 20,
                     endDate: Date().byAdding(.day, value: 7).format(to: .yyy_MM_dd)
                 ))
             )
@@ -41,7 +41,7 @@ final class TransactionsViewModel: ObservableObject {
             
             transactionSections = getSections(transactions: transactions)
             
-            state = .data
+            state = transactions.isEmpty ? .empty : .data
         } catch {
             transactionSections = []
             state = .error(error)

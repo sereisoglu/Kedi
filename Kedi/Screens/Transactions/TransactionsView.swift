@@ -25,7 +25,7 @@ struct TransactionsView: View {
         switch viewModel.state {
         case .empty:
             ContentUnavailableView(
-                "No Data",
+                "Empty",
                 systemImage: "xmark.circle"
             )
             

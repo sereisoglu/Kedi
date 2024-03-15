@@ -54,22 +54,19 @@ struct LineAndAreaMarkChartView: View {
                         x: .value("Date", value.date),
                         y: .value("Value", value.value)
                     )
-                }
-                .interpolationMethod(.catmullRom)
-                .foregroundStyle(foregroundColor)
-                
-                ForEach(values) { value in
+                    .foregroundStyle(foregroundColor)
+                    
                     AreaMark(
                         x: .value("Date", value.date),
                         y: .value("Value", value.value)
                     )
+                    .foregroundStyle(LinearGradient(
+                        gradient: .init(colors: [foregroundColor.opacity(0.5), foregroundColor.opacity(0)]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    ))
                 }
                 .interpolationMethod(.catmullRom)
-                .foregroundStyle(LinearGradient(
-                    gradient: .init(colors: [foregroundColor.opacity(0.5), foregroundColor.opacity(0)]),
-                    startPoint: .top,
-                    endPoint: .bottom
-                ))
             }
             .chartXAxis(.hidden)
             .chartYAxis(.hidden)

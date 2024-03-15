@@ -208,6 +208,7 @@ final class OverviewViewModel: ObservableObject {
         OverviewItemConfig.set(to: configs)
         isRestoreDefaultsDisabled = false
         isAddDisabled = configs.count >= 20
+        state = configs.isEmpty ? .empty : .data
         
         Task {
             await fetch(for: config)
@@ -265,5 +266,6 @@ final class OverviewViewModel: ObservableObject {
         OverviewItemConfig.set(to: configs)
         isRestoreDefaultsDisabled = false
         isAddDisabled = configs.count >= 20
+        state = configs.isEmpty ? .empty : .data
     }
 }
