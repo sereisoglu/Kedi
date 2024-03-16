@@ -45,13 +45,12 @@ struct AppIconView: View {
             
             ForEach(AppIcon.sections, id: \.self) { section in
                 Section {
-                    Grid(horizontalSpacing: 10, verticalSpacing: 10) {
-                        ForEach(AppIcon.allCases.filter { $0.section == section }.chunked(by: 3), id: \.self) { appIcons in
-                            GridRow(alignment: .top) {
-                                ForEach(appIcons, id: \.self) { appIcon in
-                                    makeAppIcon(appIcon: appIcon)
-                                }
-                            }
+                    LazyVGrid(
+                        columns: [.init(.adaptive(minimum: 90), alignment: .top)],
+                        spacing: 12
+                    ) {
+                        ForEach(AppIcon.allCases.filter { $0.section == section }, id: \.self) { appIcon in
+                            makeAppIcon(appIcon: appIcon)
                         }
                     }
                 } header: {

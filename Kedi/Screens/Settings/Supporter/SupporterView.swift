@@ -93,10 +93,9 @@ struct SupporterView: View {
                             }
                         } label: {
                             Text("Manage Your Subscriptions")
-                                .foregroundStyle(.blue)
                         }
                     } header: {
-                        Text("Your Subsctiption")
+                        Text("Your Subscription")
                     } footer: {
                         Text("You are eligible to use alternative app icons.\n❤️ Thanks for your support!")
                     }
@@ -111,7 +110,7 @@ struct SupporterView: View {
                             .listRowInsets(.zero)
                             .listRowBackground(Color.clear)
                         } header: {
-                            Text("Upgrade")
+                            Text("Upgrade Your Subscription")
                         }
                     }
                 } else {
@@ -124,7 +123,7 @@ struct SupporterView: View {
                         .listRowInsets(.zero)
                         .listRowBackground(Color.clear)
                     } header: {
-                        Text("Subsctiptions")
+                        Text("Subscriptions")
                     } footer: {
                         Text("If you become a supporter, you are eligible to use alternative app icons.")
                     }
