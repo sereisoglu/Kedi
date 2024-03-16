@@ -10,7 +10,6 @@ import Charts
 
 struct OverviewDetailView: View {
     
-    @State private var selectedItem: OverviewItemCharValue?
     //    @State private var margin: CGFloat = .zero
     
     @StateObject var viewModel: OverviewDetailViewModel
@@ -19,48 +18,8 @@ struct OverviewDetailView: View {
         viewModel.item
     }
     
-    private var chartValues: [OverviewItemCharValue] {
-        item.chart?.values ?? []
-    }
-    
-    private var title: String {
-        if let selectedItem {
-            return OverviewItemValue(type: item.type, value: selectedItem.value).formatted
-        } else {
-            return item.value.formatted
-        }
-    }
-    
-    private var subtitle: String {
-        if let selectedItem {
-            return selectedItem.date.formatted(date: .abbreviated, time: .omitted)
-        } else {
-            guard let firstDate = chartValues.first?.date,
-                  let lastDate = chartValues.last?.date else {
-                return " "
-            }
-            return "\(firstDate.formatted(date: .abbreviated, time: .omitted)) - \(lastDate.formatted(date: .abbreviated, time: .omitted))"
-        }
-    }
-    
-    private var maxValue: Double {
-        let max = chartValues.map(\.value).max() ?? 0
-        return max.ceilToNearest(toNearest)
-    }
-    
-    private var minValue: Double {
-        let min = chartValues.map(\.value).min() ?? 0
-        return min >= 0 ? 0 : min.floorToNearest(toNearest)
-    }
-    
-    private var toNearest: Double {
-        let max = chartValues.map(\.value).max() ?? 0
-        return Double(Int(max).size)
-    }
-    
-    private var xValues: [Date] {
-        let dates = chartValues.map(\.date)
-        return stride(from: 0, to: dates.count, by: Int(dates.count / 3)).map { dates[$0] }
+    private var chartValues: [OverviewItemChartValue] {
+        viewModel.chartValues
     }
     
     var body: some View {
@@ -68,14 +27,14 @@ struct OverviewDetailView: View {
             Section {
                 VStack {
                     VStack(alignment: .leading) {
-                        Text(title)
+                        Text(viewModel.title)
                             .font(.title)
                             .fontWeight(.semibold)
                             .foregroundStyle(.primary)
                             .lineLimit(1)
                             .minimumScaleFactor(0.5)
                         
-                        Text(subtitle)
+                        Text(viewModel.subtitle)
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                     }
@@ -91,18 +50,20 @@ struct OverviewDetailView: View {
                     Spacer()
                     
                     Menu {
-                        Picker("Time Period", selection: $viewModel.configSelection.timePeriod) {
-                            ForEach(viewModel.configSelection.type.availableTimePeriods, id: \.self) { timePeriod in
+                        Picker("Time Period", selection: $viewModel.timePeriodSelection) {
+                            ForEach(item.type.availableTimePeriods, id: \.self) { timePeriod in
                                 Text(timePeriod.title)
                                     .textCase(nil)
                             }
                         }
-                        .onChange(of: viewModel.configSelection.timePeriod) { oldValue, newValue in
-                            viewModel.onTimePeriodChange()
+                        .onChange(of: viewModel.timePeriodSelection) { oldValue, newValue in
+                            if oldValue != newValue {
+                                viewModel.onTimePeriodChange()
+                            }
                         }
                     } label: {
                         HStack {
-                            Text(viewModel.configSelection.timePeriod.title)
+                            Text(viewModel.timePeriodSelection.title)
                             Image(systemName: "chevron.up.chevron.down")
                         }
                         .font(.footnote)
@@ -160,7 +121,7 @@ struct OverviewDetailView: View {
                     endPoint: .bottom
                 ))
                 
-                if selectedItem == value {
+                if viewModel.selectedChartValue == value {
                     RuleMark(x: .value("Selected Date", value.date))
                     //                        .annotation(position: .top, spacing: 0, overflowResolution: .init(x: .fit(to: .chart), y: .disabled)) {
                     //                            VStack(spacing: 0) {
@@ -188,9 +149,9 @@ struct OverviewDetailView: View {
                 }
             }
         }
-        .chartXScale(domain: (chartValues.first?.date ?? .now)...(chartValues.last?.date ?? .now))
-        .chartXAxis { AxisMarks(values: xValues) }
-        .chartYScale(domain: minValue...maxValue)
+        .chartXScale(domain: viewModel.chartXScale)
+        .chartXAxis { AxisMarks(values: viewModel.chartXValues) }
+        .chartYScale(domain: viewModel.chartYScale)
         .chartGesture { proxy in
             DragGesture()
                 .onChanged { value in
@@ -199,11 +160,11 @@ struct OverviewDetailView: View {
                     }
                     let timestamp = date.timeIntervalSince1970
                     if let item = chartValues.min(by: { abs($0.date.timeIntervalSince1970 - timestamp) < abs($1.date.timeIntervalSince1970 - timestamp) }) {
-                        selectedItem = item
+                        viewModel.selectedChartValue = item
                     }
                 }
                 .onEnded { value in
-                    selectedItem = nil
+                    viewModel.selectedChartValue = nil
                 }
         }
     }

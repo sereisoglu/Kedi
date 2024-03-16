@@ -10,7 +10,7 @@ import Charts
 
 struct OverviewItemChartView: View {
     
-    @State var values: [OverviewItemCharValue]
+    @State var values: [OverviewItemChartValue]
     var foregroundColor: Color = .blue
     
     var body: some View {
