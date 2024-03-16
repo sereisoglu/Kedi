@@ -105,13 +105,13 @@ final class OverviewViewModel: ObservableObject {
                 ))
             )
             
-            let chartValues: [LineAndAreaMarkChartValue]? = data?.values?.map { .init(
+            let chartValues: [OverviewItemCharValue]? = data?.values?.map { .init(
                 date: .init(timeIntervalSince1970: $0[safe: 0] ?? 0).withoutTime,
                 value: $0[safe: chartIndex] ?? 0
             ) }
             
             if let chartValues {
-                let chart = OverviewItemChart(chartValues: chartValues, updatedAt: data?.lastComputedAt)
+                let chart = OverviewItemChart(values: chartValues, updatedAt: data?.lastComputedAt)
                 switch type {
                 case .mrr,
                         .subsciptions,

@@ -74,8 +74,8 @@ struct OverviewItemView: View {
                         .zIndex(1)
                     }
                     
-                    if let chartValues = item.chart?.chartValues {
-                        LineAndAreaMarkChartView(values: chartValues)
+                    if let values = item.chart?.values {
+                        OverviewItemChartView(values: values)
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

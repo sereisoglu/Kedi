@@ -72,7 +72,7 @@ struct OverviewItemDetailView: View {
                     config: viewModel.configSelection,
                     value: .placeholder(type: viewModel.configSelection.type),
                     valueState: .data,
-                    chart: .init(chartValues: .placeholder)
+                    chart: .init(values: .placeholder)
                 ))
                 .frame(width: 200)
             }
