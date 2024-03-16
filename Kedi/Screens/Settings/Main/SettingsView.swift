@@ -134,26 +134,48 @@ struct SettingsView: View {
                     Text("Customization")
                 }
                 
-//                Section {
-//                    Button {
-//                        WidgetsManager.shared.reloadAll()
-//                    } label: {
-//                        Text("Force Update")
-//                    }
-//                } header: {
-//                    Text("Widgets")
-//                }
+                //                Section {
+                //                    Button {
+                //                        WidgetsManager.shared.reloadAll()
+                //                    } label: {
+                //                        Text("Force Update")
+                //                    }
+                //                } header: {
+                //                    Text("Widgets")
+                //                }
                 
                 Section {
+                    Link(destination: URL(string: "https://x.com/kedi_app")!) {
+                        GeneralListView(
+                            imageAsset: .custom("x"),
+                            title: "X / Twitter",
+                            subtitle: "@kedi_app",
+                            accessoryImageSystemName: "arrow.up.right"
+                        )
+                    }
+                    
                     Link(destination: URL(string: "mailto:support@kediapp.com")!) {
                         GeneralListView(
                             imageAsset: .systemImage("envelope"),
-                            title: "Support",
+                            title: "Email",
                             subtitle: "support@kediapp.com",
                             accessoryImageSystemName: "arrow.up.right"
                         )
                     }
                     
+                    Link(destination: URL(string: "https://kediapp.com")!) {
+                        GeneralListView(
+                            imageAsset: .systemImage("globe"),
+                            title: "Website",
+                            subtitle: "kediapp.com"
+                        )
+                    }
+                    .openUrlInApp()
+                } header: {
+                    Text("Contact")
+                }
+                
+                Section {
                     Link(destination: URL(string: "https://github.com/sereisoglu/Kedi")!) {
                         GeneralListView(
                             imageAsset: .systemImage("star"),
