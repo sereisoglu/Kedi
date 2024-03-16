@@ -9,6 +9,8 @@ import Foundation
 
 final class OverviewDetailViewModel: ObservableObject {
     
+    private let apiService = APIService.shared
+    
     let item: OverviewItem
     @Published private(set) var value: OverviewItemValue
     @Published private(set) var chartValues: [OverviewItemChartValue]
@@ -48,13 +50,14 @@ final class OverviewDetailViewModel: ObservableObject {
     }
     
     var chartYScale: ClosedRange<Double> {
-        var max = chartValues.map(\.value).max() ?? 0
+        let values = chartValues.map(\.value)
+        var max = values.max() ?? 0
         let toNearest = Double(Int(max).size)
         
-        var min = chartValues.map(\.value).min() ?? 0
-        min = min >= 0 ? 0 : min.floorToNearest(toNearest)
+        max = max.ceilToNearest(toNearest)
         
-        max =  max.ceilToNearest(toNearest)
+        var min = values.min() ?? 0
+        min = min >= 0 ? 0 : min.floorToNearest(toNearest)
         
         return min...max
     }
@@ -67,6 +70,66 @@ final class OverviewDetailViewModel: ObservableObject {
     }
     
     func onTimePeriodChange() {
+        Task {
+            await fetchChart(config: .init(type: item.type, timePeriod: timePeriodSelection))
+        }
+    }
+    
+    @MainActor
+    private func fetchChart(config: OverviewItemConfig) async {
+        let type = config.type
         
+        guard let chartName = type.chartName,
+              let chartIndex = type.chartIndex else {
+            return
+        }
+        
+        state = .loading
+        
+        do {
+            let data = try await apiService.request(
+                type: RCChartResponse.self,
+                endpoint: .charts(.init(
+                    name: chartName,
+                    resolution: config.timePeriod.resolution,
+                    startDate: config.timePeriod.startDate,
+                    endDate: config.timePeriod.endDate
+                ))
+            )
+            
+            chartValues = data?.values?.map { .init(
+                date: .init(timeIntervalSince1970: $0[safe: 0] ?? 0).withoutTime,
+                value: $0[safe: chartIndex] ?? 0
+            ) } ?? []
+            
+            switch type {
+            case .mrr,
+                    .subsciptions,
+                    .trials,
+                    .users,
+                    .installs:
+                break
+            case .revenue:
+                if config.timePeriod == .last28Days {
+                    break
+                } else {
+                    value = .revenue(data?.summary?["total"]?["Total Revenue"] ?? 0)
+                }
+            case .arr:
+                value = .arr(chartValues.last?.value ?? 0)
+            case .proceeds:
+                value = .proceeds(data?.summary?["total"]?["Proceeds"] ?? 0)
+            case .newUsers:
+                value = .newUsers(Int(chartValues.last?.value ?? 0))
+            case .churnRate:
+                value = .churnRate(chartValues.last?.value ?? 0)
+            case .subsciptionsLost:
+                value = .subsciptionsLost(Int(chartValues.last?.value ?? 0))
+            }
+            
+            state = chartValues.isEmpty ? .empty : .data
+        } catch {
+            state = .error(error)
+        }
     }
 }

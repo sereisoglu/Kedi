@@ -23,81 +23,107 @@ struct OverviewDetailView: View {
     }
     
     var body: some View {
-        List {
-            Section {
-                VStack {
-                    VStack(alignment: .leading) {
-                        Text(viewModel.title)
-                            .font(.title)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.primary)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.5)
-                        
-                        Text(viewModel.subtitle)
-                            .font(.footnote)
-                            .foregroundStyle(.secondary)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                    makeChart()
-                }
-                .frame(height: 200)
-            } header: {
-                HStack {
-                    Label(item.title, systemImage: item.icon)
-                    
-                    Spacer()
-                    
-                    Menu {
-                        Picker("Time Period", selection: $viewModel.timePeriodSelection) {
-                            ForEach(item.type.availableTimePeriods, id: \.self) { timePeriod in
-                                Text(timePeriod.title)
-                                    .textCase(nil)
-                            }
-                        }
-                        .onChange(of: viewModel.timePeriodSelection) { oldValue, newValue in
-                            if oldValue != newValue {
-                                viewModel.onTimePeriodChange()
-                            }
-                        }
-                    } label: {
-                        HStack {
-                            Text(viewModel.timePeriodSelection.title)
-                            Image(systemName: "chevron.up.chevron.down")
-                        }
-                        .font(.footnote)
-                        .textCase(nil)
-                    }
-                }
-            }
+        makeBody()
+            .navigationTitle(item.title)
+            .navigationBarTitleDisplayMode(.inline)
+            .background(Color.systemGroupedBackground)
+        //            .getSize { size in
+        //                let width = min(size.width, 500)
+        //                margin = (size.width - width) / 2
+        //            }
+        //            .if(margin > 0) { view in
+        //                view.contentMargins(.horizontal, margin, for: .scrollContent)
+        //            }
+    }
+    
+    @ViewBuilder
+    private func makeBody() -> some View {
+        switch viewModel.state {
+        case .loading:
+            ProgressView()
+                .controlSize(.large)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             
-            Section {
-                ForEach(Array(chartValues.reversed().enumerated()), id: \.offset) { index, value in
+        case .empty:
+            ContentUnavailableView(
+                "No Data",
+                systemImage: "xmark.circle"
+            )
+            
+        case .error(let error):
+            ContentUnavailableView(
+                "Error",
+                systemImage: "exclamationmark.triangle",
+                description: Text(error.localizedDescription)
+            )
+            
+        case .data:
+            List {
+                Section {
+                    VStack {
+                        VStack(alignment: .leading) {
+                            Text(viewModel.title)
+                                .font(.title)
+                                .fontWeight(.semibold)
+                                .foregroundStyle(.primary)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.5)
+                            
+                            Text(viewModel.subtitle)
+                                .font(.footnote)
+                                .foregroundStyle(.secondary)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        makeChart()
+                    }
+                    .frame(height: 200)
+                } header: {
                     HStack {
-                        Text(OverviewItemValue(type: item.type, value: value.value).formatted)
-                            .font(.callout)
-                            .foregroundStyle(.primary)
+                        Label(item.title, systemImage: item.icon)
                         
                         Spacer()
                         
-                        Text(value.date.formatted(date: .abbreviated, time: .omitted))
-                            .foregroundStyle(.secondary)
-                            .font(.callout)
+                        Menu {
+                            Picker("Time Period", selection: $viewModel.timePeriodSelection) {
+                                ForEach(item.type.availableTimePeriods, id: \.self) { timePeriod in
+                                    Text(timePeriod.title)
+                                        .textCase(nil)
+                                }
+                            }
+                            .onChange(of: viewModel.timePeriodSelection) { oldValue, newValue in
+                                if oldValue != newValue {
+                                    viewModel.onTimePeriodChange()
+                                }
+                            }
+                        } label: {
+                            HStack {
+                                Text(viewModel.timePeriodSelection.title)
+                                Image(systemName: "chevron.up.chevron.down")
+                            }
+                            .font(.footnote)
+                            .textCase(nil)
+                        }
+                    }
+                }
+                
+                Section {
+                    ForEach(Array(chartValues.reversed().enumerated()), id: \.offset) { index, value in
+                        HStack {
+                            Text(OverviewItemValue(type: item.type, value: value.value).formatted)
+                                .font(.callout)
+                                .foregroundStyle(.primary)
+                            
+                            Spacer()
+                            
+                            Text(value.date.formatted(date: .abbreviated, time: .omitted))
+                                .foregroundStyle(.secondary)
+                                .font(.callout)
+                        }
                     }
                 }
             }
         }
-        .navigationTitle(item.title)
-        .navigationBarTitleDisplayMode(.inline)
-        .background(Color.systemGroupedBackground)
-        //        .getSize { size in
-        //            let width = min(size.width, 500)
-        //            margin = (size.width - width) / 2
-        //        }
-        //        .if(margin > 0) { view in
-        //            view.contentMargins(.horizontal, margin, for: .scrollContent)
-        //        }
     }
     
     private func makeChart() -> some View {
