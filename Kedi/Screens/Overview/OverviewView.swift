@@ -113,7 +113,6 @@ struct OverviewView: View {
         }
     }
     
-    @ViewBuilder
     private func makeItem(item: OverviewItem) -> some View {
         OverviewItemView(item: item)
             .contextMenu {

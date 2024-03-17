@@ -83,7 +83,6 @@ struct OverviewItemView: View {
         }
     }
     
-    @ViewBuilder
     private func makeInfoView(description: String) -> some View {
         VStack(alignment: .leading) {
             HStack(spacing: 2) {

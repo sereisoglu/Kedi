@@ -47,10 +47,12 @@ struct RevenueGraphWidgetView: View {
             RectangleMarkGraphView(values: entry.items, weekCount: 7)
                 .clipShape(ContainerRelativeShape())
                 .padding()
+            
         case .systemMedium:
             RectangleMarkGraphView(values: entry.items, weekCount: 17)
                 .clipShape(ContainerRelativeShape())
                 .padding()
+            
         default:
             Text("Unsupported widget family!")
         }
