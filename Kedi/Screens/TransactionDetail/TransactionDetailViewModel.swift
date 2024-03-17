@@ -139,7 +139,7 @@ final class TransactionDetailViewModel: ObservableObject {
                 if spentDollars > 0 {
                     insightItems?.append(.init(
                         type: .spentDollarsSinceLastSeen,
-                        text: "The user spent **\(spentDollars.formatted(.currency(code: "USD")))** after the last seen."
+                        text: "The user spent **\(spentDollars.formatted(.currency(code: "USD")))** after the last seen. (\(filteredItems.count) transaction\(filteredItems.count > 1 ? "s" : ""))"
                     ))
                 }
             }
