@@ -1,4 +1,7 @@
-<img src="Images/header.png" alt="Header" width="100%">
+<p align="center">
+  <img src="https://github.com/sereisoglu/Kedi/assets/29237103/49268ad3-a16b-4f86-b4d9-f0a42daa2c44" height="128">
+  <h1 align="center">Kedi for RevenueCat</h1>
+</p>
 
 <p align="center">
   <a href="https://apps.apple.com/app/id6478032635?itsct=apps_box_badge&amp;itscg=30200" style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;">
@@ -6,9 +9,17 @@
   </a>
 </p>
 
-# Kedi for RevenueCat
+<p align="center">
+  <a aria-label="Follow Kedi on X/Twitter" href="https://x.com/kedi_app" target="_blank">
+    <img alt="Follow Kedi on X/Twitter" src="https://img.shields.io/badge/Follow%20@kedi_app-black.svg?style=for-the-badge&logo=X">
+  </a>
+</p>
 
 A free and open-source RevenueCat client.
+
+<img src="Images/header.png" alt="Header" width="100%">
+
+## Screenshots
 
 | ![Screenshot 1](Images/screenshot1.png) | ![Screenshot 2](Images/screenshot2.png) | ![Screenshot 3](Images/screenshot3.png) |
 |-|-|-|
