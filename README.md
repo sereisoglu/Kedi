@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/sereisoglu/Kedi/assets/29237103/49268ad3-a16b-4f86-b4d9-f0a42daa2c44" height="128">
+  <img src="Images/AppIcon.svg" height="128">
   <h1 align="center">Kedi for RevenueCat</h1>
 </p>
 
