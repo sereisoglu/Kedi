@@ -97,7 +97,7 @@ struct OverviewWidgetProvider: TimelineProvider {
             
             return [
                 .init(type: .mrr, value: "\(data?.mrr?.formatted(.currency(code: "USD")) ?? "")"),
-                .init(type: .subsciptions, value: "\(data?.activeSubscribersCount?.formatted() ?? "")"),
+                .init(type: .subscriptions, value: "\(data?.activeSubscribersCount?.formatted() ?? "")"),
                 .init(type: .trials, value: "\(data?.activeTrialsCount?.formatted() ?? "")"),
                 .init(type: .revenue, value: "\(data?.revenue?.formatted(.currency(code: "USD")) ?? "")"),
                 .init(type: .users, value: "\(data?.activeUsersCount?.formatted() ?? "")"),

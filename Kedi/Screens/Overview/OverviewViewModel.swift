@@ -47,8 +47,8 @@ final class OverviewViewModel: ObservableObject {
         switch config.type {
         case .mrr:
             setItem(type: .mrr, value: .mrr(overviewData?.mrr ?? 0))
-        case .subsciptions:
-            setItem(type: .subsciptions, value: .subsciptions(overviewData?.activeSubscribersCount ?? 0))
+        case .subscriptions:
+            setItem(type: .subscriptions, value: .subscriptions(overviewData?.activeSubscribersCount ?? 0))
         case .trials:
             setItem(type: .trials, value: .trials(overviewData?.activeTrialsCount ?? 0))
         case .revenue:
@@ -75,7 +75,7 @@ final class OverviewViewModel: ObservableObject {
             )
             
             setItem(type: .mrr, value: .mrr(overviewData?.mrr ?? 0))
-            setItem(type: .subsciptions, value: .subsciptions(overviewData?.activeSubscribersCount ?? 0))
+            setItem(type: .subscriptions, value: .subscriptions(overviewData?.activeSubscribersCount ?? 0))
             setItem(type: .trials, value: .trials(overviewData?.activeTrialsCount ?? 0))
             setItem(config: .init(type: .revenue, timePeriod: .last28Days), value: .revenue(overviewData?.revenue ?? 0))
             setItem(config: .init(type: .users, timePeriod: .last28Days), value: .users(overviewData?.activeUsersCount ?? 0))
@@ -114,7 +114,7 @@ final class OverviewViewModel: ObservableObject {
                 let chart = OverviewItemChart(values: chartValues, updatedAt: data?.lastComputedAt)
                 switch type {
                 case .mrr,
-                        .subsciptions,
+                        .subscriptions,
                         .trials,
                         .users,
                         .installs:
@@ -133,8 +133,8 @@ final class OverviewViewModel: ObservableObject {
                     setItem(config: config, value: .newUsers(Int(chartValues.last?.value ?? 0)), chart: chart)
                 case .churnRate:
                     setItem(config: config, value: .churnRate(chartValues.last?.value ?? 0), chart: chart)
-                case .subsciptionsLost:
-                    setItem(config: config, value: .subsciptionsLost(Int(chartValues.last?.value ?? 0)), chart: chart)
+                case .subscriptionsLost:
+                    setItem(config: config, value: .subscriptionsLost(Int(chartValues.last?.value ?? 0)), chart: chart)
                 }
             } else {
                 items[config]?.set(valueState: .empty)

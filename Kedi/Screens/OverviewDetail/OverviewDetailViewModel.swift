@@ -104,7 +104,7 @@ final class OverviewDetailViewModel: ObservableObject {
             
             switch type {
             case .mrr,
-                    .subsciptions,
+                    .subscriptions,
                     .trials,
                     .users,
                     .installs:
@@ -123,8 +123,8 @@ final class OverviewDetailViewModel: ObservableObject {
                 value = .newUsers(Int(chartValues.last?.value ?? 0))
             case .churnRate:
                 value = .churnRate(chartValues.last?.value ?? 0)
-            case .subsciptionsLost:
-                value = .subsciptionsLost(Int(chartValues.last?.value ?? 0))
+            case .subscriptionsLost:
+                value = .subscriptionsLost(Int(chartValues.last?.value ?? 0))
             }
             
             state = chartValues.isEmpty ? .empty : .data

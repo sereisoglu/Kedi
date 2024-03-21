@@ -10,7 +10,7 @@ import Foundation
 enum OverviewItemType: String, Codable, CaseIterable {
     
     case mrr
-    case subsciptions
+    case subscriptions
     case trials
     case revenue
     case users
@@ -19,12 +19,12 @@ enum OverviewItemType: String, Codable, CaseIterable {
     case proceeds
     case newUsers
     case churnRate
-    case subsciptionsLost
+    case subscriptionsLost
     
     var icon: String {
         switch self {
         case .mrr: "dollarsign.arrow.circlepath"
-        case .subsciptions: "repeat"
+        case .subscriptions: "repeat"
         case .trials: "clock"
         case .revenue: "dollarsign.circle"
         case .users: "person.2"
@@ -33,14 +33,14 @@ enum OverviewItemType: String, Codable, CaseIterable {
         case .proceeds: "dollarsign.circle"
         case .newUsers: "person.2"
         case .churnRate: "person.2.slash"
-        case .subsciptionsLost: "person.2.slash"
+        case .subscriptionsLost: "person.2.slash"
         }
     }
     
     var title: String {
         switch self {
         case .mrr: "MRR"
-        case .subsciptions: "Subsciptions"
+        case .subscriptions: "Subscriptions"
         case .trials: "Trials"
         case .revenue: "Revenue"
         case .users: "Users"
@@ -49,20 +49,20 @@ enum OverviewItemType: String, Codable, CaseIterable {
         case .proceeds: "Proceeds"
         case .newUsers: "New Users"
         case .churnRate: "Churn Rate"
-        case .subsciptionsLost: "Subs. Lost"
+        case .subscriptionsLost: "Subs. Lost"
         }
     }
     
     var availableTimePeriods: [OverviewItemTimePeriod] {
         switch self {
         case .mrr,
-                .subsciptions,
+                .subscriptions,
                 .trials,
                 .arr,
                 .proceeds,
                 .newUsers,
                 .churnRate,
-                .subsciptionsLost:
+                .subscriptionsLost:
             return [
                 .last7Days,
                 .last30Days,
@@ -100,7 +100,7 @@ enum OverviewItemType: String, Codable, CaseIterable {
     var valueType: OverviewItemValueType {
         switch self {
         case .mrr: .live
-        case .subsciptions: .live
+        case .subscriptions: .live
         case .trials: .live
         case .revenue: .total
         case .users: .total
@@ -109,14 +109,14 @@ enum OverviewItemType: String, Codable, CaseIterable {
         case .proceeds: .total
         case .newUsers: .last
         case .churnRate: .last
-        case .subsciptionsLost: .last
+        case .subscriptionsLost: .last
         }
     }
     
     var chartName: RCChartName? {
         switch self {
         case .mrr: .mrr
-        case .subsciptions: .actives
+        case .subscriptions: .actives
         case .trials: .trials
         case .revenue: .revenue
         case .users: nil
@@ -125,14 +125,14 @@ enum OverviewItemType: String, Codable, CaseIterable {
         case .proceeds: .revenue
         case .newUsers: .conversionToPaying
         case .churnRate: .churn
-        case .subsciptionsLost: .churn
+        case .subscriptionsLost: .churn
         }
     }
     
     var chartIndex: Int? {
         switch self {
         case .mrr: 1
-        case .subsciptions: 1
+        case .subscriptions: 1
         case .trials: 1
         case .revenue: 3
         case .users: nil
@@ -141,7 +141,7 @@ enum OverviewItemType: String, Codable, CaseIterable {
         case .proceeds: 6
         case .newUsers: 1
         case .churnRate: 3
-        case .subsciptionsLost: 2
+        case .subscriptionsLost: 2
         }
     }
 }
