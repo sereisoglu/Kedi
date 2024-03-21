@@ -51,6 +51,7 @@ final class SettingsViewModel: ObservableObject {
             
             if let me {
                 meManager.set(me: me)
+                self.me = me
                 state = .data
             } else {
                 state = .error(RCError.internal(.nilResponse))
