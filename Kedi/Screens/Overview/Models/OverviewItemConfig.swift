@@ -25,7 +25,7 @@ extension OverviewItemConfig {
     static let defaults: [Self] = {
         return [
             .init(type: .mrr, timePeriod: .allTime),
-            .init(type: .subsciptions, timePeriod: .allTime),
+            .init(type: .subscriptions, timePeriod: .allTime),
             .init(type: .trials, timePeriod: .allTime),
             .init(type: .revenue, timePeriod: .last28Days),
             .init(type: .users, timePeriod: .last28Days),
@@ -34,7 +34,7 @@ extension OverviewItemConfig {
             .init(type: .proceeds, timePeriod: .allTime),
             .init(type: .newUsers, timePeriod: .allTime),
             .init(type: .churnRate, timePeriod: .allTime),
-            .init(type: .subsciptionsLost, timePeriod: .allTime)
+            .init(type: .subscriptionsLost, timePeriod: .allTime)
         ]
     }()
     

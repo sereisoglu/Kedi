@@ -10,7 +10,7 @@ import Foundation
 enum OverviewItemValue: Hashable, Equatable {
     
     case mrr(Double)
-    case subsciptions(Int)
+    case subscriptions(Int)
     case trials(Int)
     case revenue(Double)
     case users(Int)
@@ -19,12 +19,12 @@ enum OverviewItemValue: Hashable, Equatable {
     case proceeds(Double)
     case newUsers(Int)
     case churnRate(Double)
-    case subsciptionsLost(Int)
+    case subscriptionsLost(Int)
     
     var type: OverviewItemType {
         switch self {
         case .mrr: .mrr
-        case .subsciptions: .subsciptions
+        case .subscriptions: .subscriptions
         case .trials: .trials
         case .revenue: .revenue
         case .users: .users
@@ -33,7 +33,7 @@ enum OverviewItemValue: Hashable, Equatable {
         case .proceeds: .proceeds
         case .newUsers: .newUsers
         case .churnRate: .churnRate
-        case .subsciptionsLost: .subsciptionsLost
+        case .subscriptionsLost: .subscriptionsLost
         }
     }
     
@@ -44,12 +44,12 @@ enum OverviewItemValue: Hashable, Equatable {
                 .arr(let double),
                 .proceeds(let double):
             return double.formatted(.currency(code: "USD"))
-        case .subsciptions(let int),
+        case .subscriptions(let int),
                 .trials(let int),
                 .users(let int),
                 .installs(let int),
                 .newUsers(let int),
-                .subsciptionsLost(let int):
+                .subscriptionsLost(let int):
             return int.formatted()
         case .churnRate(let double):
             return (double / 100).formatted(.percent)
@@ -60,8 +60,8 @@ enum OverviewItemValue: Hashable, Equatable {
         switch type {
         case .mrr:
             self = .mrr(value)
-        case .subsciptions:
-            self = .subsciptions(Int(value))
+        case .subscriptions:
+            self = .subscriptions(Int(value))
         case .trials:
             self = .trials(Int(value))
         case .revenue:
@@ -78,8 +78,8 @@ enum OverviewItemValue: Hashable, Equatable {
             self = .newUsers(Int(value))
         case .churnRate:
             self = .churnRate(value)
-        case .subsciptionsLost:
-            self = .subsciptionsLost(Int(value))
+        case .subscriptionsLost:
+            self = .subscriptionsLost(Int(value))
         }
     }
 }
@@ -91,8 +91,8 @@ extension OverviewItemValue {
         switch type {
         case .mrr:
             return .mrr(data.mrr ?? 0)
-        case .subsciptions:
-            return.subsciptions(data.activeSubscribersCount ?? 0)
+        case .subscriptions:
+            return.subscriptions(data.activeSubscribersCount ?? 0)
         case .trials:
             return .trials(data.activeTrialsCount ?? 0)
         case .revenue:
@@ -109,8 +109,8 @@ extension OverviewItemValue {
             return .newUsers(23433)
         case .churnRate:
             return .churnRate(23)
-        case .subsciptionsLost:
-            return .subsciptionsLost(433)
+        case .subscriptionsLost:
+            return .subscriptionsLost(433)
         }
     }
 }

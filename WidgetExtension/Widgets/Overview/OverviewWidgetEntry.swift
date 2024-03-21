@@ -11,7 +11,7 @@ import WidgetKit
 struct OverviewWidgetEntry: TimelineEntry {
     
     var items3: [OverviewItem] {
-        let types: [OverviewItemType] = [.mrr, .subsciptions, .revenue]
+        let types: [OverviewItemType] = [.mrr, .subscriptions, .revenue]
         return items.filter { types.contains($0.type) }
     }
     
@@ -29,7 +29,7 @@ struct OverviewItem: Hashable, Codable {
 enum OverviewItemType: String, CaseIterable, Codable {
     
     case mrr
-    case subsciptions
+    case subscriptions
     case trials
     case revenue
     case users
@@ -38,7 +38,7 @@ enum OverviewItemType: String, CaseIterable, Codable {
     var icon: String {
         switch self {
         case .mrr: "dollarsign.arrow.circlepath"
-        case .subsciptions: "repeat"
+        case .subscriptions: "repeat"
         case .trials: "clock"
         case .revenue: "dollarsign.circle"
         case .users: "person.2"
@@ -49,7 +49,7 @@ enum OverviewItemType: String, CaseIterable, Codable {
     var name: String {
         switch self {
         case .mrr: "MRR"
-        case .subsciptions: "Subsciptions"
+        case .subscriptions: "Subscriptions"
         case .trials: "Trials"
         case .revenue: "Revenue"
         case .users: "Users"
@@ -60,7 +60,7 @@ enum OverviewItemType: String, CaseIterable, Codable {
     var color: Color {
         switch self {
         case .mrr: .green
-        case .subsciptions: .blue
+        case .subscriptions: .blue
         case .trials: .orange
         case .revenue: .green
         case .users: .secondary
@@ -78,7 +78,7 @@ extension OverviewWidgetEntry {
             date: Date(),
             items:  [
                 .init(type: .mrr, value: "\(data.mrr?.formatted(.currency(code: "USD")) ?? "")"),
-                .init(type: .subsciptions, value: "\(data.activeSubscribersCount?.formatted() ?? "")"),
+                .init(type: .subscriptions, value: "\(data.activeSubscribersCount?.formatted() ?? "")"),
                 .init(type: .trials, value: "\(data.activeTrialsCount?.formatted() ?? "")"),
                 .init(type: .revenue, value: "\(data.revenue?.formatted(.currency(code: "USD")) ?? "")"),
                 .init(type: .users, value: "\(data.activeUsersCount?.formatted() ?? "")"),
