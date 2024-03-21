@@ -176,7 +176,7 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    Link(destination: URL(string: "https://github.com/sereisoglu/Kedi")!) {
+                    Link(destination: URL(string: "https://apps.apple.com/app/id6478032635?action=write-review")!) {
                         GeneralListView(
                             imageAsset: .systemImage("star"),
                             title: "Rate Kedi",
