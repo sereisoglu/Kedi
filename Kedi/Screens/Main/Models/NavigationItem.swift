@@ -11,6 +11,7 @@ enum NavigationItem: String, Identifiable, Hashable, CaseIterable {
     
     case overview
     case transactions
+    case notifications
     case settings
     
     var id: String { rawValue }
@@ -19,6 +20,7 @@ enum NavigationItem: String, Identifiable, Hashable, CaseIterable {
         switch self {
         case .overview: "square.grid.2x2"
         case .transactions: "arrow.left.arrow.right.circle"
+        case .notifications: "bell"
         case .settings: "gearshape"
         }
     }
@@ -27,6 +29,7 @@ enum NavigationItem: String, Identifiable, Hashable, CaseIterable {
         switch self {
         case .overview: "Overview"
         case .transactions: "Transactions"
+        case .notifications: "Notifications"
         case .settings: "Settings"
         }
     }

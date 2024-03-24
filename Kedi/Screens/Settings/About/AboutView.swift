@@ -115,6 +115,15 @@ struct AboutView: View {
                 }
                 .openUrlInApp()
                 
+                Link(destination: URL(string: "https://github.com/OneSignal/OneSignal-XCFramework/blob/main/LICENSE")!) {
+                    GeneralListView(
+                        imageAsset: .custom("github"),
+                        title: "OneSignal-XCFramework",
+                        subtitle: "Copyright 2020 OneSignal"
+                    )
+                }
+                .openUrlInApp()
+                
                 Link(destination: URL(string: "https://github.com/RevenueCat/purchases-ios/blob/main/LICENSE")!) {
                     GeneralListView(
                         imageAsset: .custom("github"),

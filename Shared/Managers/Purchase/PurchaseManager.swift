@@ -31,6 +31,10 @@ final class PurchaseManager: NSObject, ObservableObject {
     @Published private(set) var state: GeneralState = .loading
     @Published private(set) var isPurchasing = false
     
+    var userId: String {
+        revenueCat.appUserID
+    }
+    
     static let shared = PurchaseManager()
     
     private override init() {}

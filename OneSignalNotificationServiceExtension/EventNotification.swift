@@ -1,0 +1,165 @@
+//
+//  EventNotification.swift
+//  OneSignalNotificationServiceExtension
+//
+//  Created by Saffet Emin Reisoğlu on 3/25/24.
+//
+
+import Foundation
+
+struct EventNotification {
+    
+    let id: String
+    let appId: String
+    var type: EventNotificationType
+    var date: Date?
+    var timestamp: TimeInterval?
+    var price: Double?
+    var productIdentifier: String?
+    var store: String?
+    var countryFlag: String?
+    var country: String?
+    var environment: String?
+    var offerCode: String?
+    
+    var title: String {
+        [
+            "\(type.emoji) \(type.text)",
+            price?.formatted(.currency(code: "USD"))
+        ].compactMap {$0}.joined(separator: " • ")
+    }
+    
+    var body: String {
+        [
+            [countryFlag, country].compactMap { $0 }.joined(separator: " "),
+            productIdentifier,
+            appId,
+            store,
+            offerCode,
+            environment
+        ].compactMap { $0 }.joined(separator: " • ")
+    }
+    
+    init(data: RCEvent) {
+        id = data.id ?? ""
+        appId = data.appId ?? ""
+        
+        switch data.type {
+        case "INITIAL_PURCHASE":
+            if data.periodType == "TRIAL" {
+                type = .trial
+            } else { // NORMAL
+                type = .initialPurchase
+            }
+        case "NON_RENEWING_PURCHASE":
+            type = .oneTimePurchase
+        case "RENEWAL":
+            if data.isTrialConversion ?? false {
+                type = .conversion
+            } else {
+                type = .renewal
+            }
+        case "CANCELLATION":
+            if data.cancelReason == "CUSTOMER_SUPPORT" {
+                type = .refund
+            } else { // UNSUBSCRIBE
+                type = .unsubscribed
+            }
+        case "UNCANCELLATION":
+            type = .resubscribed
+        case "EXPIRATION":
+            //            if data.expirationReason == "BILLING_ERROR" {
+            //                type = .billingIssue
+            //            } else { // UNSUBSCRIBE
+            type = .expiration
+            //            }
+        case "PRODUCT_CHANGE":
+            type = .productChange
+        case "BILLING_ISSUE":
+            type = .billingIssue
+        case "TRANSFER":
+            type = .transfer
+        case "TEST":
+            type = .test
+        case "SUBSCRIPTION_PAUSED":
+            type = .unknown
+        case "SUBSCRIPTION_EXTENDED":
+            type = .unknown
+        case "INVOICE_ISSUANCE":
+            type = .unknown
+        case "TEMPORARY_ENTITLEMENT_GRANT":
+            type = .unknown
+        default:
+            type = .unknown
+        }
+        
+        if let timestamp = data.eventTimestampMs {
+            date = Date(timeIntervalSince1970: Double(timestamp) / 1000)
+            self.timestamp = date?.timeIntervalSince1970
+        }
+        
+        price = data.price
+        productIdentifier = data.productId
+        store = data.store?.replacingOccurrences(of: "_", with: " ").capitalized
+        countryFlag = data.countryCode?.countryFlag
+        country = data.countryCode?.countryName
+        environment = data.environment == "PRODUCTION" ? nil : data.environment?.capitalized
+        offerCode = data.offerCode
+    }
+}
+
+enum EventNotificationType {
+    
+    case initialPurchase
+    case oneTimePurchase
+    case renewal
+    case trial
+    case conversion
+    case resubscribed
+    case unsubscribed
+    case expiration
+    case billingIssue
+    case refund
+    case transfer
+    case productChange
+    case test
+    case unknown
+    
+    var emoji: String {
+        switch self {
+        case .initialPurchase: "🔵"
+        case .oneTimePurchase: "🟣"
+        case .renewal: "🟢"
+        case .trial: "🟠"
+        case .conversion: "🔵"
+        case .resubscribed: "🟢"
+        case .unsubscribed: "🔴"
+        case .expiration: "🔴"
+        case .billingIssue: "🔴"
+        case .refund: "🔴"
+        case .transfer: "⚪"
+        case .productChange: "⚪"
+        case .test: "⚪"
+        case .unknown: "⚪"
+        }
+    }
+    
+    var text: String {
+        switch self {
+        case .initialPurchase: "Initial Purchase"
+        case .oneTimePurchase: "One-Time Purchase"
+        case .renewal: "Renewal"
+        case .trial: "Trial"
+        case .conversion: "Conversion"
+        case .resubscribed: "Resubscribed"
+        case .unsubscribed: "Unsubscribed"
+        case .expiration: "Expiration"
+        case .billingIssue: "Billing Issue"
+        case .refund: "Refund"
+        case .transfer: "Transfer"
+        case .productChange: "Product Change"
+        case .test: "Test"
+        case .unknown: "Unknown"
+        }
+    }
+}

@@ -26,9 +26,13 @@ struct SidebarView: View {
                     OverviewView()
                 case .transactions:
                     TransactionsView()
+                case .notifications:
+                    NotificationsView()
+                        .environmentObject(PushNotificationsManager.shared)
                 case .settings:
                     SettingsView()
                         .environmentObject(PurchaseManager.shared)
+                        .environmentObject(PushNotificationsManager.shared)
                 case .none:
                     Text("")
                 }

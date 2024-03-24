@@ -11,6 +11,9 @@ struct SettingsView: View {
     
     @StateObject private var viewModel = SettingsViewModel()
     @EnvironmentObject var purchaseManager: PurchaseManager
+    @EnvironmentObject var pushNotificationsManager: PushNotificationsManager
+    
+    @State private var isNotificationsAllowed = false
     
     @State private var showingSupporter = false
     @State private var showingSignOutAlert = false
@@ -19,6 +22,12 @@ struct SettingsView: View {
         makeBody()
             .navigationTitle("Settings")
             .background(Color.systemGroupedBackground)
+//            .onAppear {
+//                isNotificationsAllowed = pushNotificationsManager.permissionStatus == .allowed
+//            }
+            .onReceive(pushNotificationsManager.$permissionStatus) { output in
+                isNotificationsAllowed = pushNotificationsManager.permissionStatus == .allowed
+            }
             .refreshable {
                 await viewModel.refresh()
             }
@@ -130,6 +139,17 @@ struct SettingsView: View {
                         title: "App Icon"
                     )
                     .overlay { NavigationLink(value: "appIcon") { EmptyView() }.opacity(0) }
+                    
+                    Toggle(
+                        "Notifications",
+                        systemImage: "bell.badge",
+                        isOn: $isNotificationsAllowed
+                    )
+                    .onChange(of: isNotificationsAllowed) { oldValue, newValue in
+                        if oldValue != newValue {
+                            pushNotificationsManager.setPermissionStatus()
+                        }
+                    }
                 } header: {
                     Text("Customization")
                 }
@@ -217,12 +237,19 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    Text("Version \(Bundle.main.versionNumber ?? "1.0") (\(Bundle.main.buildNumber ?? "1"))")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .frame(maxWidth: .infinity)
-                        .multilineTextAlignment(.center)
-                        .listRowBackground(Color.clear)
+                    VStack {
+                        Text("RevenueCat Id: \(purchaseManager.userId)")
+                        
+                        Text("OneSignal Id: \(pushNotificationsManager.userId ?? "")")
+                        
+                        Text("Version \(Bundle.main.versionNumber ?? "1.0") (\(Bundle.main.buildNumber ?? "1"))")
+                    }
+                    .font(.footnote)
+                    .fontDesign(.monospaced)
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
+                    .listRowBackground(Color.clear)
                 }
                 .listSectionSpacing(.compact)
             }
@@ -254,4 +281,5 @@ struct SettingsView: View {
 #Preview {
     SettingsView()
         .environmentObject(PurchaseManager.shared)
+        .environmentObject(PushNotificationsManager.shared)
 }
