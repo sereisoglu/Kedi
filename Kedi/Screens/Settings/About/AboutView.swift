@@ -34,7 +34,7 @@ struct AboutView: View {
                         .listRowSeparator(.hidden)
                         .listRowBackground(Color.clear)
                     
-                    Text("Free and [open-source \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://github.com/sereisoglu/Kedi) RevenueCat client")
+                    Text("A free and [open-source \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://github.com/sereisoglu/Kedi) RevenueCat client")
                 }
                 .frame(maxWidth: .infinity)
                 .listRowInsets(.zero)

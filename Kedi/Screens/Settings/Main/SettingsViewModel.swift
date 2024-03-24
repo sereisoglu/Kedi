@@ -71,9 +71,7 @@ final class SettingsViewModel: ObservableObject {
             
             var imageDatas = [String: Data]()
             for await (urlString, data) in group {
-                if let data {
-                    imageDatas[urlString] = data
-                }
+                imageDatas[urlString] = data
             }
             return imageDatas
         }
