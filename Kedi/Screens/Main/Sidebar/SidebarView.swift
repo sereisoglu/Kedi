@@ -29,6 +29,7 @@ struct SidebarView: View {
                 case .settings:
                     SettingsView()
                         .environmentObject(PurchaseManager.shared)
+                        .environmentObject(PushNotificationsManager.shared)
                 case .none:
                     Text("")
                 }

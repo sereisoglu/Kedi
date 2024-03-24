@@ -36,6 +36,7 @@ struct TabBarView: View {
             NavigationStack {
                 SettingsView()
                     .environmentObject(PurchaseManager.shared)
+                    .environmentObject(PushNotificationsManager.shared)
             }
             .tag(NavigationItem.settings)
             .tabItem {
