@@ -237,12 +237,19 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    Text("Version \(Bundle.main.versionNumber ?? "1.0") (\(Bundle.main.buildNumber ?? "1"))")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .frame(maxWidth: .infinity)
-                        .multilineTextAlignment(.center)
-                        .listRowBackground(Color.clear)
+                    VStack {
+                        Text("RevenueCat Id: \(purchaseManager.userId)")
+                        
+                        Text("OneSignal Id: \(pushNotificationsManager.userId ?? "")")
+                        
+                        Text("Version \(Bundle.main.versionNumber ?? "1.0") (\(Bundle.main.buildNumber ?? "1"))")
+                    }
+                    .font(.footnote)
+                    .fontDesign(.monospaced)
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
+                    .listRowBackground(Color.clear)
                 }
                 .listSectionSpacing(.compact)
             }

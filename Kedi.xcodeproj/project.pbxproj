@@ -37,6 +37,8 @@
 		4A90387E2B8C89B7006FAC7F /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90387D2B8C89B7006FAC7F /* DeepLink.swift */; };
 		4A90387F2B8C89B7006FAC7F /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90387D2B8C89B7006FAC7F /* DeepLink.swift */; };
 		4A97D5A82B83D70A0073C11E /* OverviewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97D5A72B83D70A0073C11E /* OverviewDetailView.swift */; };
+		4AB6D1D12BAFAF7A00059F66 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6D1D02BAFAF7A00059F66 /* NotificationsView.swift */; };
+		4AB6D1D52BAFAFE400059F66 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6D1D42BAFAFE400059F66 /* NotificationsViewModel.swift */; };
 		4AB7205C2B6BAC8D001E2C76 /* KediApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7205B2B6BAC8D001E2C76 /* KediApp.swift */; };
 		4AB7205E2B6BAC8D001E2C76 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7205D2B6BAC8D001E2C76 /* SignInView.swift */; };
 		4AB720602B6BAC8E001E2C76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AB7205F2B6BAC8E001E2C76 /* Assets.xcassets */; };
@@ -231,6 +233,8 @@
 		4A90387C2B8C853F006FAC7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A90387D2B8C89B7006FAC7F /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		4A97D5A72B83D70A0073C11E /* OverviewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewDetailView.swift; sourceTree = "<group>"; };
+		4AB6D1D02BAFAF7A00059F66 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
+		4AB6D1D42BAFAFE400059F66 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
 		4AB720582B6BAC8D001E2C76 /* Kedi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kedi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AB7205B2B6BAC8D001E2C76 /* KediApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KediApp.swift; sourceTree = "<group>"; };
 		4AB7205D2B6BAC8D001E2C76 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -441,6 +445,15 @@
 			path = OverviewDetail;
 			sourceTree = "<group>";
 		};
+		4AB6D1CF2BAFAF5500059F66 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				4AB6D1D02BAFAF7A00059F66 /* NotificationsView.swift */,
+				4AB6D1D42BAFAFE400059F66 /* NotificationsViewModel.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		4AB7204F2B6BAC8D001E2C76 = {
 			isa = PBXGroup;
 			children = (
@@ -500,6 +513,7 @@
 				4A97D5A62B83D6FC0073C11E /* OverviewDetail */,
 				4AB720E32B70C8BA001E2C76 /* Transactions */,
 				4AB721002B722DF1001E2C76 /* TransactionDetail */,
+				4AB6D1CF2BAFAF5500059F66 /* Notifications */,
 				4AB720902B6C6888001E2C76 /* Settings */,
 			);
 			path = Screens;
@@ -1204,6 +1218,7 @@
 				4AB720A92B6DB3A0001E2C76 /* AsyncButton.swift in Sources */,
 				4AB721092B726C62001E2C76 /* TransactionDetailInfoItem.swift in Sources */,
 				4AEE72E82B8A1EC800F51548 /* OverviewItemTimePeriod.swift in Sources */,
+				4AB6D1D12BAFAF7A00059F66 /* NotificationsView.swift in Sources */,
 				4AB720CE2B6EB36C001E2C76 /* OverviewItemType.swift in Sources */,
 				4A04F7872B8368EA00C9D1EB /* SettingsSupporterView.swift in Sources */,
 				4AB720C02B6E4A62001E2C76 /* RCChartResponse.swift in Sources */,
@@ -1211,6 +1226,7 @@
 				4A044E6E2B94C221000DACBF /* OverviewDropDelegate.swift in Sources */,
 				4AB720AE2B6DB698001E2C76 /* OverviewItem.swift in Sources */,
 				4ADF09E82B7780D6002318B2 /* PaginationState.swift in Sources */,
+				4AB6D1D52BAFAFE400059F66 /* NotificationsViewModel.swift in Sources */,
 				4AEE72F12B8A31E500F51548 /* OverviewItemDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

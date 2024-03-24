@@ -34,6 +34,15 @@ struct TabBarView: View {
             }
             
             NavigationStack {
+                NotificationsView()
+                    .environmentObject(PushNotificationsManager.shared)
+            }
+            .tag(NavigationItem.notifications)
+            .tabItem {
+                makeTabItem(item: .notifications)
+            }
+            
+            NavigationStack {
                 SettingsView()
                     .environmentObject(PurchaseManager.shared)
                     .environmentObject(PushNotificationsManager.shared)
