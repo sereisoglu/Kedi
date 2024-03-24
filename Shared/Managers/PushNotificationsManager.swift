@@ -120,6 +120,10 @@ extension PushNotificationsManager: OSNotificationPermissionObserver {
 extension PushNotificationsManager: OSNotificationClickListener {
     
     func onClick(event: OSNotificationClickEvent) {
-        print("ocClick:", event)
+        guard let additionalData = event.notification.additionalData,
+              let urlString = additionalData["url"] as? String else {
+            return
+        }
+        BrowserUtility.openUrlOutsideApp(urlString: urlString)
     }
 }
