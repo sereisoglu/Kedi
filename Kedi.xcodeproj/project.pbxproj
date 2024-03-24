@@ -170,6 +170,9 @@
 		4AEE73002B8BC28700F51548 /* PaydayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEE72FF2B8BC28700F51548 /* PaydayView.swift */; };
 		4AEE73032B8BC2BD00F51548 /* AppStorePayday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEE73022B8BC2BD00F51548 /* AppStorePayday.swift */; };
 		4AEE73042B8BC2BD00F51548 /* AppStorePayday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEE73022B8BC2BD00F51548 /* AppStorePayday.swift */; };
+		4AEFFCBA2BB0CD9E00FCA073 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720F02B70E399001E2C76 /* String+Extension.swift */; };
+		4AEFFCBC2BB0D57500FCA073 /* RCEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEFFCBB2BB0D57500FCA073 /* RCEvent.swift */; };
+		4AEFFCBE2BB0D5B600FCA073 /* EventNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEFFCBD2BB0D5B600FCA073 /* EventNotification.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -339,6 +342,8 @@
 		4AEE72FC2B8B545200F51548 /* PaydayWidgetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaydayWidgetEntry.swift; sourceTree = "<group>"; };
 		4AEE72FF2B8BC28700F51548 /* PaydayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaydayView.swift; sourceTree = "<group>"; };
 		4AEE73022B8BC2BD00F51548 /* AppStorePayday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorePayday.swift; sourceTree = "<group>"; };
+		4AEFFCBB2BB0D57500FCA073 /* RCEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCEvent.swift; sourceTree = "<group>"; };
+		4AEFFCBD2BB0D5B600FCA073 /* EventNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventNotification.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -800,9 +805,9 @@
 				4AB7212E2B738BA0001E2C76 /* WidgetsBundle.swift */,
 				4ADF0A032B7A3B1A002318B2 /* Shared */,
 				4AB7215A2B756E2B001E2C76 /* Widgets */,
+				4AB721342B738BA1001E2C76 /* Info.plist */,
 				4AB721322B738BA1001E2C76 /* Assets.xcassets */,
 				4AB721572B739F4B001E2C76 /* WidgetExtension.entitlements */,
-				4AB721342B738BA1001E2C76 /* Info.plist */,
 			);
 			path = WidgetExtension;
 			sourceTree = "<group>";
@@ -921,9 +926,11 @@
 		4ADFB9D22BADE20000BDAA58 /* OneSignalNotificationServiceExtension */ = {
 			isa = PBXGroup;
 			children = (
-				4ADFB9DC2BADE29700BDAA58 /* OneSignalNotificationServiceExtension.entitlements */,
 				4ADFB9D32BADE20000BDAA58 /* NotificationService.swift */,
+				4AEFFCBB2BB0D57500FCA073 /* RCEvent.swift */,
+				4AEFFCBD2BB0D5B600FCA073 /* EventNotification.swift */,
 				4ADFB9D52BADE20000BDAA58 /* Info.plist */,
+				4ADFB9DC2BADE29700BDAA58 /* OneSignalNotificationServiceExtension.entitlements */,
 			);
 			path = OneSignalNotificationServiceExtension;
 			sourceTree = "<group>";
@@ -1285,7 +1292,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AEFFCBC2BB0D57500FCA073 /* RCEvent.swift in Sources */,
+				4AEFFCBA2BB0CD9E00FCA073 /* String+Extension.swift in Sources */,
 				4ADFB9D42BADE20000BDAA58 /* NotificationService.swift in Sources */,
+				4AEFFCBE2BB0D5B600FCA073 /* EventNotification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

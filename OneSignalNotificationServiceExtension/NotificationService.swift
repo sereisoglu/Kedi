@@ -19,6 +19,15 @@ final class NotificationService: UNNotificationServiceExtension {
         self.contentHandler = contentHandler
         self.bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         
+        if let userInfo = self.bestAttemptContent?.userInfo,
+           let dataString = ((userInfo["custom"] as? [String: Any])?["a"] as? [String: Any])?["event"] as? String,
+           let event = try? JSONDecoder().decode(RCEvent.self, from: .init(dataString.utf8)) {
+            let notification = EventNotification(data: event)
+            
+            self.bestAttemptContent?.title = notification.title
+            self.bestAttemptContent?.body = notification.body
+        }
+        
         if let bestAttemptContent {
             /* DEBUGGING: Uncomment the 2 lines below to check this extension is executing
              Note, this extension only runs when mutable-content is set
