@@ -1,0 +1,8 @@
+
+*.xcuserstate
+
+.DS_Store
+
+Kedi.xcodeproj/xcuserdata/emre.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+
+Kedi.xcodeproj/xcuserdata/emre.xcuserdatad/xcschemes/xcschememanagement.plist

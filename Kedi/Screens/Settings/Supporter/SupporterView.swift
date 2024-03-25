@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import RevenueCat
 
 struct SupporterView: View {
     
     @State private var subscriptionSelection: PurchaseProductType?
     @State private var showingAlert = false
     @State private var purchaseError: Error?
+    @State private var alertTitle = "Purchase Error"
     @Environment(\.dismiss) private var dismiss
     
     @EnvironmentObject var purchaseManager: PurchaseManager
@@ -33,7 +35,7 @@ struct SupporterView: View {
                 subscriptionSelection = Self.getDefaultSubscriptionSelection(productType: output?.productType)
             }
             .alert(
-                "Purchase Error",
+                alertTitle,
                 isPresented: $showingAlert
             ) {
                 Button("OK!", role: .cancel) {}
@@ -179,10 +181,18 @@ struct SupporterView: View {
                         .environment(\.openURL, OpenURLAction(handler: { url in
                             if url.absoluteString == "kedi://restore-purchase" {
                                 Task {
-                                    do {
-                                        try await purchaseManager.restorePurchase()
-                                    } catch {
-                                        purchaseError = error
+                                    Purchases.shared.restorePurchases { (customerInfo, error) in
+                                        if let error {
+                                            purchaseError = error
+                                            showingAlert = true
+                                            return
+                                        }
+                                        
+                                        if let customerInfo = customerInfo,
+                                           !customerInfo.activeSubscriptions.isEmpty {
+                                            return
+                                        }
+                                        alertTitle = "No Active Subscriptions"
                                         showingAlert = true
                                     }
                                 }
