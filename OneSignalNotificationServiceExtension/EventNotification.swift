@@ -22,6 +22,15 @@ struct EventNotification {
     var environment: String?
     var offerCode: String?
     
+    var countryWithFlag: String? {
+        if let countryFlag,
+           let country {
+            return "\(countryFlag) \(country)"
+        } else {
+            return nil
+        }
+    }
+    
     var title: String {
         [
             "\(type.emoji) \(type.text)",
@@ -31,9 +40,8 @@ struct EventNotification {
     
     var body: String {
         [
-            [countryFlag, country].compactMap { $0 }.joined(separator: " "),
+            countryWithFlag,
             productIdentifier,
-            appId,
             store,
             offerCode,
             environment
@@ -63,10 +71,10 @@ struct EventNotification {
             if data.cancelReason == "CUSTOMER_SUPPORT" {
                 type = .refund
             } else { // UNSUBSCRIBE
-                type = .unsubscribed
+                type = .unsubscription
             }
         case "UNCANCELLATION":
-            type = .resubscribed
+            type = .resubscription
         case "EXPIRATION":
             //            if data.expirationReason == "BILLING_ERROR" {
             //                type = .billingIssue
@@ -98,7 +106,7 @@ struct EventNotification {
             self.timestamp = date?.timeIntervalSince1970
         }
         
-        price = data.price
+        price = data.price != 0 ? data.price : nil
         productIdentifier = data.productId
         store = data.store?.replacingOccurrences(of: "_", with: " ").capitalized
         countryFlag = data.countryCode?.countryFlag
@@ -115,8 +123,8 @@ enum EventNotificationType {
     case renewal
     case trial
     case conversion
-    case resubscribed
-    case unsubscribed
+    case resubscription
+    case unsubscription
     case expiration
     case billingIssue
     case refund
@@ -132,8 +140,8 @@ enum EventNotificationType {
         case .renewal: "🟢"
         case .trial: "🟠"
         case .conversion: "🔵"
-        case .resubscribed: "🟢"
-        case .unsubscribed: "🔴"
+        case .resubscription: "🟢"
+        case .unsubscription: "🔴"
         case .expiration: "🔴"
         case .billingIssue: "🔴"
         case .refund: "🔴"
@@ -151,8 +159,8 @@ enum EventNotificationType {
         case .renewal: "Renewal"
         case .trial: "Trial"
         case .conversion: "Conversion"
-        case .resubscribed: "Resubscribed"
-        case .unsubscribed: "Unsubscribed"
+        case .resubscription: "Resubscription"
+        case .unsubscription: "Unsubscription"
         case .expiration: "Expiration"
         case .billingIssue: "Billing Issue"
         case .refund: "Refund"

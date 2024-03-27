@@ -34,7 +34,7 @@ struct RCEvent: Decodable {
     var store: String?
     var subscriberAttributes: [String: RCEventSubscriberAttribute]?
     var takehomePercentage: Double?
-    var taxPercentage: Int?
+    var taxPercentage: Double?
     var transactionId: String?
     var type: String?
     var expirationReason: String?
