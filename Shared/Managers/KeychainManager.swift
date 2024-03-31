@@ -11,12 +11,15 @@ import KeychainSwift
 final class KeychainManager {
     
     enum Key: String {
+        
+        case id
         case rcAuthToken
         case rcAuthTokenExpiresAt
     }
     
     let keychain: KeychainSwift = {
         let keychain = KeychainSwift()
+//        keychain.synchronizable = true
         keychain.accessGroup = "4K634X2CUP.keychain.com.sereisoglu.kedi"
         return keychain
     }()

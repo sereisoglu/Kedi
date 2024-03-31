@@ -238,14 +238,9 @@ struct SettingsView: View {
                 
                 Section {
                     VStack {
-                        Text("RevenueCat Id: \(purchaseManager.userId)")
-                        
-                        Text("OneSignal Id: \(pushNotificationsManager.userId ?? "")")
-                        
                         Text("Version \(Bundle.main.versionNumber ?? "1.0") (\(Bundle.main.buildNumber ?? "1"))")
                     }
                     .font(.footnote)
-                    .fontDesign(.monospaced)
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity)
                     .multilineTextAlignment(.center)

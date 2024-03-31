@@ -18,15 +18,19 @@ final class PushNotificationsManager: NSObject, ObservableObject {
         case disabled
     }
     
-    @Published private(set) var permissionStatus: PermissionStatus = .disabled
+    @Published private(set) var permissionStatus: PermissionStatus = .notPrompted
     
     var isPrompted: Bool {
         UserDefaults.standard.isNotificationsPermissionOpened || permissionStatus != .notPrompted
     }
     
-    var userId: String? {
-        OneSignal.User.onesignalId
-    }
+//    var userId: String? {
+//        OneSignal.User.onesignalId
+//    }
+//    
+//    var userExternalId: String? {
+//        OneSignal.User.externalId
+//    }
     
     static let shared = PushNotificationsManager()
     
@@ -52,8 +56,8 @@ final class PushNotificationsManager: NSObject, ObservableObject {
     
     // MARK: - attribution
     
-    func signIn() {
-        OneSignal.login("")
+    func signIn(id: String) {
+        OneSignal.login(id)
     }
     
     func signOut() {

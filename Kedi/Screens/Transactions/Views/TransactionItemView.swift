@@ -38,7 +38,7 @@ struct TransactionItemView: View {
             }
             
             HStack(alignment: .center, spacing: 10) {
-                CacheAsyncImage(urlString: transaction.appIconUrl) { image in
+                ImageWithPlaceholder(data: transaction.appIconData) { image in
                     image.resizable()
                 } placeholder: {
                     Rectangle()

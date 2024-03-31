@@ -9,11 +9,13 @@ import UIKit
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
     
+    private let pushNotificationsManager = PushNotificationsManager.shared
+    
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
-        PushNotificationsManager.shared.start(launchOptions: launchOptions)
+        pushNotificationsManager.start(launchOptions: launchOptions)
         
 //       // Remove this method to stop OneSignal Debugging
 //       OneSignal.Debug.setLogLevel(.LL_VERBOSE)
@@ -34,10 +36,10 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        PushNotificationsManager.shared.updateIconBadgeNumber()
+        pushNotificationsManager.updateIconBadgeNumber()
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
-        PushNotificationsManager.shared.updateIconBadgeNumber()
+        pushNotificationsManager.updateIconBadgeNumber()
     }
 }

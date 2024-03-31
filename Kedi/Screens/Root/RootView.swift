@@ -11,10 +11,10 @@ struct RootView: View {
     
     @State private var showingDeepLink: DeepLink?
     
-    @EnvironmentObject var meManager: MeManager
+    @EnvironmentObject var authManager: AuthManager
     
     var body: some View {
-        if meManager.isSignedIn {
+        if authManager.isSignedIn {
             MainView()
                 .onOpenURL { url in
                     handleDeepLink(url: url)

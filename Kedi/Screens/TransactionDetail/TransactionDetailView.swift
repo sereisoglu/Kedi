@@ -19,7 +19,7 @@ struct TransactionDetailView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        BrowserUtility.openUrlOutsideApp(urlString: "https://app.revenuecat.com/customers/\(viewModel.appId)/\(viewModel.subscriberId)")
+                        BrowserUtility.openUrlOutsideApp(urlString: "https://app.revenuecat.com/customers/\(viewModel.projectId)/\(viewModel.subscriberId)")
                     } label: {
                         Image(systemName: "arrow.up.forward")
                     }
@@ -103,5 +103,5 @@ struct TransactionDetailView: View {
 }
 
 #Preview {
-    TransactionDetailView(viewModel: .init(appId: "", subscriberId: ""))
+    TransactionDetailView(viewModel: .init(projectId: "", subscriberId: ""))
 }

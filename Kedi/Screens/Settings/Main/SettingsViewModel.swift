@@ -11,12 +11,14 @@ final class SettingsViewModel: ObservableObject {
     
     private let apiService = APIService.shared
     private let meManager = MeManager.shared
+    private let authManager = AuthManager.shared
     
     @Published private(set) var state: GeneralState = .loading
+    
     @Published private(set) var me: RCMeResponse?
     
     var authTokenExpiresDate: Date? {
-        meManager.getAuthTokenExpiresDate()
+        authManager.getAuthTokenExpiresDate()
     }
     
     init() {
@@ -36,26 +38,41 @@ final class SettingsViewModel: ObservableObject {
     @MainActor
     private func fetchMe() async {
         do {
-            let me = try await apiService.request(
+            async let meRequest = apiService.request(
                 type: RCMeResponse.self,
                 endpoint: .me
             )
             
-            if let imageUrlStrings = me?.apps?.compactMap(\.bundleId).map({ "https://www.appatar.io/\($0)/small" }) {
-                let images = await fetchImages(urlStrings: imageUrlStrings)
-                
-                images.forEach { urlString, data in
-                    CacheManager.shared.set(key: urlString, data: data, expiry: .never)
-                }
-            }
+            async let projectsRequest = apiService.request(
+                type: RCProjectsResponse.self,
+                endpoint: .projects
+            )
             
-            if let me {
-                meManager.set(me: me)
-                self.me = me
-                state = .data
-            } else {
-                state = .error(RCError.internal(.nilResponse))
-            }
+            let (me, rcProjects) = try await (meRequest, projectsRequest)
+            
+            let imageDatas = await fetchImages(urlStrings: rcProjects?.compactMap(\.iconUrl) ?? [])
+            
+            let projects: [Project] = rcProjects?.compactMap { project in
+                guard let projectId = project.id,
+                      let name = project.name,
+                      let app = me?.apps?.first(where: { $0.name == name }),
+                      let appId = app.id else {
+                    return nil
+                }
+                return .init(
+                    iconUrl: project.iconUrl,
+                    icon: imageDatas[project.iconUrl ?? ""],
+                    projectId: projectId,
+                    appId: appId,
+                    name: name
+                )
+            } ?? []
+            
+            meManager.set(me: me, projects: projects)
+            
+            self.me = me
+            
+            state = me != nil ? .data : .error(RCError.internal(.nilResponse))
         } catch {
             state = .error(error)
         }

@@ -20,7 +20,7 @@ struct KediApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
-                .environmentObject(MeManager.shared)
+                .environmentObject(AuthManager.shared)
                 .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
         }
     }

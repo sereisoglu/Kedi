@@ -90,7 +90,7 @@ struct TransactionsView: View {
                 }
             }
             .navigationDestination(for: TransactionItem.self) { transaction in
-                TransactionDetailView(viewModel: .init(appId: transaction.appId, subscriberId: transaction.subscriberId))
+                TransactionDetailView(viewModel: .init(projectId: transaction.projectId, subscriberId: transaction.subscriberId))
             }
             .redacted(reason: viewModel.state == .loading ? .placeholder : [])
             .disabled(viewModel.state == .loading)

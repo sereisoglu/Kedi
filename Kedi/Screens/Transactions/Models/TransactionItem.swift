@@ -24,13 +24,13 @@ struct TransactionSection: Identifiable, Hashable {
 struct TransactionItem: Identifiable, Hashable {
     
     let id: String
-    let appId: String
+    let projectId: String
     let subscriberId: String
     
     var type: TransactionType
     var price: Double
     var store: TransactionStore?
-    var appIconUrl: String?
+    var appIconData: Data?
     var appName: String
     var productIdentifier: String
     var countryFlag: String
@@ -39,7 +39,7 @@ struct TransactionItem: Identifiable, Hashable {
     
     init(data: RCTransaction) {
         id = data.storeTransactionIdentifier ?? UUID().uuidString
-        appId = data.app?.id ?? ""
+        projectId = data.app?.id ?? ""
         subscriberId = data.subscriberId ?? ""
         
         if data.wasRefunded ?? false {
@@ -62,9 +62,7 @@ struct TransactionItem: Identifiable, Hashable {
             self.store = .init(store: store)
         }
         
-        if let bundleId = data.app?.bundleId {
-            appIconUrl = "https://www.appatar.io/\(bundleId)/small"
-        }
+        appIconData = MeManager.shared.projects?.first(where: { $0.projectId == data.app?.id })?.icon
         
         appName = data.app?.name ?? ""
         

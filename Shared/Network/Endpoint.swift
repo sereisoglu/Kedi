@@ -12,11 +12,12 @@ enum Endpoint {
     
     case login(RCLoginRequest)
     case me
+    case projects
     case overview
     case charts(RCChartRequest)
     case transactions(RCTransactionsRequest)
-    case transactionDetail(appId: String, subscriberId: String)
-    case transactionDetailActivity(appId: String, subscriberId: String)
+    case transactionDetail(projectId: String, subscriberId: String)
+    case transactionDetailActivity(projectId: String, subscriberId: String)
 }
 
 extension Endpoint {
@@ -29,7 +30,8 @@ extension Endpoint {
     
     var baseUrl: String {
         switch self {
-        case .transactionDetailActivity:
+        case .projects,
+                .transactionDetailActivity:
             return "https://api.revenuecat.com/internal/v1/developers"
         default:
             return "https://api.revenuecat.com/v1/developers"
@@ -42,16 +44,18 @@ extension Endpoint {
             return "login"
         case .me:
             return "me"
+        case .projects:
+            return "me/projects"
         case .overview:
             return "me/overview"
         case .charts(let request):
             return "me/charts_v2/\(request.name.rawValue)"
         case .transactions:
             return "me/transactions"
-        case .transactionDetail(let appId, let subscriberId):
-            return "me/apps/\(appId)/subscribers/\(subscriberId)"
-        case .transactionDetailActivity(let appId, let subscriberId):
-            return "me/apps/\(appId)/subscribers/\(subscriberId)/activity"
+        case .transactionDetail(let projectId, let subscriberId):
+            return "me/apps/\(projectId)/subscribers/\(subscriberId)"
+        case .transactionDetailActivity(let projectId, let subscriberId):
+            return "me/apps/\(projectId)/subscribers/\(subscriberId)/activity"
         }
     }
     

@@ -12,7 +12,7 @@ struct TabBarView: View {
     @State private var selection: NavigationItem
     
     init() {
-        selection = MeManager.shared.me == nil ? .settings : .overview
+        selection = (MeManager.shared.me == nil || MeManager.shared.projects == nil) ? .settings : .overview
     }
     
     var body: some View {

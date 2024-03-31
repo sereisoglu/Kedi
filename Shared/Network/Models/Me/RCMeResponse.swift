@@ -41,11 +41,8 @@ struct RCMeBillingInfo: Codable {
 
 struct RCMeApp: Codable {
     
-    var bundleId: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case bundleId = "bundle_id"
-    }
+    var id: String?
+    var name: String?
 }
 
 extension RCMeResponse {

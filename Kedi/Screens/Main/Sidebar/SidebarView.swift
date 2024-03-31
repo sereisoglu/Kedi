@@ -10,7 +10,7 @@ import SwiftUI
 struct SidebarView: View {
     
     @State private var selection: NavigationItem? = {
-        MeManager.shared.me == nil ? .settings : .overview
+        (MeManager.shared.me == nil || MeManager.shared.projects == nil) ? .settings : .overview
     }()
     
     var body: some View {
