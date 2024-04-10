@@ -14,8 +14,8 @@ final class SettingsViewModel: ObservableObject {
     private let authManager = AuthManager.shared
     
     @Published private(set) var state: GeneralState = .loading
-    
     @Published private(set) var me: RCMeResponse?
+    @Published var errorAlert: Error?
     
     var authTokenExpiresDate: Date? {
         authManager.getAuthTokenExpiresDate()
@@ -120,17 +120,17 @@ final class SettingsViewModel: ObservableObject {
         }
     }
     
+    @MainActor
+    func signOut() async {
+        do {
+            try await apiService.request(type: RCLogoutResponse.self, endpoint: .logout)
+            meManager.signOut()
+        } catch {
+            errorAlert = error
+        }
+    }
+    
     func refresh() async {
         await fetchMe()
-    }
-}
-
-// MARK: - Actions
-
-extension SettingsViewModel {
-    
-    @MainActor
-    func handleSignOutButton() {
-        meManager.signOut()
     }
 }

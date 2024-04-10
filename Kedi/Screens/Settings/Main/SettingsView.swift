@@ -23,6 +23,7 @@ struct SettingsView: View {
             .refreshable {
                 await viewModel.refresh()
             }
+            .errorAlert(error: $viewModel.errorAlert)
     }
     
     @ViewBuilder
@@ -222,7 +223,9 @@ struct SettingsView: View {
                     ) {
                         Button("Cancel", role: .cancel) {}
                         Button("Sign Out", role: .destructive) {
-                            viewModel.handleSignOutButton()
+                            Task {
+                                await viewModel.signOut()
+                            }
                         }
                     } message: {
                         Text("Are you sure you want to sign out?")

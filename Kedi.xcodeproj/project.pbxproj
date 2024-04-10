@@ -41,6 +41,7 @@
 		4A8B56A72BC6EA84004AD736 /* AllWebhooksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56A62BC6EA84004AD736 /* AllWebhooksView.swift */; };
 		4A8B56A92BC6EA8D004AD736 /* AllWebhooksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56A82BC6EA8D004AD736 /* AllWebhooksViewModel.swift */; };
 		4A8B56AC2BC70EF7004AD736 /* AllWebhookItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56AB2BC70EF7004AD736 /* AllWebhookItem.swift */; };
+		4A8B56AF2BC7125C004AD736 /* RCLogoutResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56AE2BC7125C004AD736 /* RCLogoutResponse.swift */; };
 		4A90387B2B8BF4EB006FAC7F /* PaydayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90387A2B8BF4EB006FAC7F /* PaydayViewModel.swift */; };
 		4A90387E2B8C89B7006FAC7F /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90387D2B8C89B7006FAC7F /* DeepLink.swift */; };
 		4A90387F2B8C89B7006FAC7F /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90387D2B8C89B7006FAC7F /* DeepLink.swift */; };
@@ -266,6 +267,7 @@
 		4A8B56A62BC6EA84004AD736 /* AllWebhooksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWebhooksView.swift; sourceTree = "<group>"; };
 		4A8B56A82BC6EA8D004AD736 /* AllWebhooksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWebhooksViewModel.swift; sourceTree = "<group>"; };
 		4A8B56AB2BC70EF7004AD736 /* AllWebhookItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWebhookItem.swift; sourceTree = "<group>"; };
+		4A8B56AE2BC7125C004AD736 /* RCLogoutResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCLogoutResponse.swift; sourceTree = "<group>"; };
 		4A90387A2B8BF4EB006FAC7F /* PaydayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaydayViewModel.swift; sourceTree = "<group>"; };
 		4A90387C2B8C853F006FAC7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A90387D2B8C89B7006FAC7F /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
@@ -558,6 +560,15 @@
 			path = AllWebhookItem;
 			sourceTree = "<group>";
 		};
+		4A8B56AD2BC71227004AD736 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				4AEFFCC02BB19F4E00FCA073 /* RCProjectsResponse.swift */,
+				4AADB9152BC4306300EEA8C2 /* RCProjectDetailResponse.swift */,
+			);
+			path = Projects;
+			sourceTree = "<group>";
+		};
 		4A97D5A62B83D6FC0073C11E /* OverviewDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -703,11 +714,11 @@
 		4AB720782B6C1791001E2C76 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4ADF09D22B761CA5002318B2 /* Login */,
+				4ADF09D22B761CA5002318B2 /* Auth */,
 				4AB7209C2B6C71AD001E2C76 /* Me */,
+				4A8B56AD2BC71227004AD736 /* Projects */,
 				4AB720BB2B6E49C7001E2C76 /* Charts */,
 				4ADF09D92B761D63002318B2 /* Transactions */,
-				4AEFFCBF2BB19F1000FCA073 /* TransactionDetail */,
 				4AADB8F72BBF725F00EEA8C2 /* Webhooks */,
 				4AB7209B2B6C719B001E2C76 /* Error */,
 			);
@@ -784,8 +795,6 @@
 			isa = PBXGroup;
 			children = (
 				4AB720C92B6E6341001E2C76 /* RCMeResponse.swift */,
-				4AEFFCC02BB19F4E00FCA073 /* RCProjectsResponse.swift */,
-				4AADB9152BC4306300EEA8C2 /* RCProjectDetailResponse.swift */,
 				4AB720882B6C5826001E2C76 /* RCOverviewResponse.swift */,
 			);
 			path = Me;
@@ -996,13 +1005,14 @@
 			path = Widgets;
 			sourceTree = "<group>";
 		};
-		4ADF09D22B761CA5002318B2 /* Login */ = {
+		4ADF09D22B761CA5002318B2 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
 				4ADF09D32B761CD1002318B2 /* RCLoginRequest.swift */,
 				4AB7207A2B6C17A0001E2C76 /* RCLoginResponse.swift */,
+				4A8B56AE2BC7125C004AD736 /* RCLogoutResponse.swift */,
 			);
-			path = Login;
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		4ADF09D92B761D63002318B2 /* Transactions */ = {
@@ -1010,6 +1020,8 @@
 			children = (
 				4ADF09DA2B761D88002318B2 /* RCTransactionsRequest.swift */,
 				4AB720EC2B70CA2D001E2C76 /* RCTransactionsResponse.swift */,
+				4AB721052B72371E001E2C76 /* RCTransactionDetailResponse.swift */,
+				4AB7211B2B73751F001E2C76 /* RCTransactionDetailActivityResponse.swift */,
 			);
 			path = Transactions;
 			sourceTree = "<group>";
@@ -1131,15 +1143,6 @@
 				4A90387D2B8C89B7006FAC7F /* DeepLink.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		4AEFFCBF2BB19F1000FCA073 /* TransactionDetail */ = {
-			isa = PBXGroup;
-			children = (
-				4AB721052B72371E001E2C76 /* RCTransactionDetailResponse.swift */,
-				4AB7211B2B73751F001E2C76 /* RCTransactionDetailActivityResponse.swift */,
-			);
-			path = TransactionDetail;
 			sourceTree = "<group>";
 		};
 		4AEFFCC22BB1A99000FCA073 /* Models */ = {
@@ -1333,6 +1336,7 @@
 				4A04F7822B827E6800C9D1EB /* MePurchaseModel.swift in Sources */,
 				4A044E492B9082DA000DACBF /* TransactionDetailInsightItemView.swift in Sources */,
 				4AADB9012BC1970600EEA8C2 /* RCCreateWebhookResponse.swift in Sources */,
+				4A8B56AF2BC7125C004AD736 /* RCLogoutResponse.swift in Sources */,
 				4A1DFC902B80B9290094BAA0 /* SupporterView.swift in Sources */,
 				4AADB8F12BB9A75900EEA8C2 /* WebhooksViewModel.swift in Sources */,
 				4AADB9032BC1971300EEA8C2 /* RCUpdateWebhookResponse.swift in Sources */,
