@@ -18,10 +18,15 @@ final class PushNotificationsManager: NSObject, ObservableObject {
         case disabled
     }
     
-    @Published private(set) var permissionStatus: PermissionStatus = .notPrompted
+    private var isToggleAllowed = false
     
-    var isPrompted: Bool {
-        UserDefaults.standard.isNotificationsPermissionOpened || permissionStatus != .notPrompted
+    @Published private(set) var permissionStatus: PermissionStatus = .notPrompted
+    @Published var isNotificationsAllowed: Bool = false {
+        didSet {
+            if isToggleAllowed {
+                togglePermissionStatus()
+            }
+        }
     }
     
 //    var userId: String? {
@@ -50,6 +55,7 @@ final class PushNotificationsManager: NSObject, ObservableObject {
         OneSignal.Notifications.addClickListener(self)
         
         permissionStatus = getPermissionStatus()
+        setIsNotificationsAllowed()
         
         updateIconBadgeNumber()
     }
@@ -82,7 +88,7 @@ final class PushNotificationsManager: NSObject, ObservableObject {
         }
     }
     
-    func setPermissionStatus() {
+    private func togglePermissionStatus() {
         switch permissionStatus {
         case .notPrompted:
             OneSignal.Notifications.requestPermission { [weak self] accepted in
@@ -102,6 +108,12 @@ final class PushNotificationsManager: NSObject, ObservableObject {
         }
     }
     
+    private func setIsNotificationsAllowed() {
+        isToggleAllowed = false
+        isNotificationsAllowed = permissionStatus == .allowed
+        isToggleAllowed = true
+    }
+    
     func updateIconBadgeNumber() {
         UNUserNotificationCenter.current().getDeliveredNotifications { notifications in
             DispatchQueue.main.async {
@@ -118,6 +130,7 @@ extension PushNotificationsManager: OSNotificationPermissionObserver {
             OneSignal.User.pushSubscription.optIn()
         }
         permissionStatus = permission ? .allowed : .notAllowed
+        setIsNotificationsAllowed()
     }
 }
 

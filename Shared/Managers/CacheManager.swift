@@ -8,15 +8,30 @@
 import Foundation
 import Cache
 
+extension URL {
+    
+    static func storeUrl(for appGroup: String, databaseName: String) -> URL {
+        guard let fileContainer = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup) else {
+            fatalError("Shared file container could not be created.")
+        }
+        return fileContainer.appendingPathComponent(databaseName)
+    }
+}
+
+
 final class CacheManager {
     
     private let storage: Storage<String, Data>? = {
         try? Storage<String, Data>(
-            diskConfig: DiskConfig(name: "Floppy", expiry: .seconds(60 * 60 * 24 * 15)),
+            diskConfig: DiskConfig(name: "Floppy", expiry: .seconds(60 * 60 * 24 * 15), directory: .storeUrl(for: "group.com.sereisoglu.kedi", databaseName: "Cache")),
             memoryConfig: MemoryConfig(expiry: .never, countLimit: 1000, totalCostLimit: 1000),
             transformer: TransformerFactory.forCodable(ofType: Data.self)
         )
     }()
+    
+    
+    // FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.bundle.id")
+//    try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("MyPreferences")
     
     static let shared = CacheManager()
     

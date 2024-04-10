@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MeManager {
+final class MeManager: ObservableObject {
     
     private let apiService = APIService.shared
     private let authManager = AuthManager.shared
@@ -18,6 +18,8 @@ final class MeManager {
     private let purchaseManager = PurchaseManager.shared
     private let pushNotificationsManager = PushNotificationsManager.shared
     
+    @Published private(set) var isSignedIn: Bool = false
+    
     private(set) var id: String?
     private(set) var me: RCMeResponse?
     private(set) var projects: [Project]?
@@ -26,6 +28,9 @@ final class MeManager {
     
     private init() {
         id = keychainManager.get(.id)
+        if id == nil {
+            generateId()
+        }
         
         guard let id,
               let authToken = authManager.getAuthToken() else {
@@ -41,9 +46,7 @@ final class MeManager {
             try? await purchaseManager.signIn(id: id)
         }
         pushNotificationsManager.signIn(id: id)
-        Task {
-            await authManager.setIsSignedIn(true)
-        }
+        isSignedIn = true
     }
     
     @discardableResult
@@ -51,11 +54,6 @@ final class MeManager {
         token: String,
         tokenExpiration: String
     ) -> Bool {
-        if id == nil {
-            id = UUID().uuidString
-            keychainManager.set(id ?? "", forKey: .id)
-        }
-        
         guard let id,
               let tokenExpirationDate = tokenExpiration.format(to: .iso8601WithoutMilliseconds) else {
             return false
@@ -69,17 +67,8 @@ final class MeManager {
             try? await purchaseManager.signIn(id: id)
         }
         pushNotificationsManager.signIn(id: id)
-        Task {
-            await authManager.setIsSignedIn(true)
-        }
+        isSignedIn = true
         return true
-    }
-    
-    func set(me: RCMeResponse?, projects: [Project]?) {
-        self.me = me
-        self.projects = projects
-        cacheManager.setWithEncode(key: "me", data: me, expiry: .never)
-        cacheManager.setWithEncode(key: "projects", data: projects, expiry: .never)
     }
     
     func signOut() {
@@ -94,8 +83,32 @@ final class MeManager {
             try? await purchaseManager.signOut()
         }
         pushNotificationsManager.signOut()
-        Task {
-            await authManager.setIsSignedIn(false)
+        isSignedIn = false
+    }
+    
+    func generateId() {
+        let hasId = id != nil
+        
+        id = UUID().uuidString
+        keychainManager.set(id ?? "", forKey: .id)
+        
+        if hasId,
+           let id {
+            Task {
+                try? await purchaseManager.signIn(id: id)
+            }
+            pushNotificationsManager.signIn(id: id)
         }
+    }
+    
+    func set(me: RCMeResponse?, projects: [Project]?) {
+        self.me = me
+        self.projects = projects
+        cacheManager.setWithEncode(key: "me", data: me, expiry: .never)
+        cacheManager.setWithEncode(key: "projects", data: projects, expiry: .never)
+    }
+    
+    func getProject(appId: String) -> Project? {
+        projects?.first(where: { $0.apps?.contains(where: { $0.id == id }) ?? false })
     }
 }

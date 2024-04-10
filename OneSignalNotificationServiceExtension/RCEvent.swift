@@ -42,6 +42,7 @@ struct RCEvent: Decodable {
     var cancelReason: String?
     var transferredFrom: [String]?
     var transferredTo: [String]?
+    var newProductId: String?
     
     enum CodingKeys: String, CodingKey {
         case aliases
@@ -77,6 +78,7 @@ struct RCEvent: Decodable {
         case cancelReason = "cancel_reason"
         case transferredFrom = "transferred_from"
         case transferredTo = "transferred_to"
+        case newProductId = "new_product_id"
     }
 }
 

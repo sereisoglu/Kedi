@@ -30,14 +30,14 @@ struct TransactionItem: Identifiable, Hashable {
     var type: TransactionType
     var price: Double
     var store: TransactionStore?
-    var appIconData: Data?
+    var icon: Data?
     var appName: String
     var productIdentifier: String
     var countryFlag: String
     var country: String
     var date: String
     
-    init(data: RCTransaction) {
+    init(data: RCTransaction, icon: Data?) {
         id = data.storeTransactionIdentifier ?? UUID().uuidString
         projectId = data.app?.id ?? ""
         subscriberId = data.subscriberId ?? ""
@@ -62,7 +62,7 @@ struct TransactionItem: Identifiable, Hashable {
             self.store = .init(store: store)
         }
         
-        appIconData = MeManager.shared.projects?.first(where: { $0.projectId == data.app?.id })?.icon
+        self.icon = icon
         
         appName = data.app?.name ?? ""
         
@@ -157,7 +157,18 @@ extension Array where Element == TransactionSection {
                 guard let date else {
                     return nil
                 }
-                return .init(date: date, transactions: transactions.map { .init(data: $0) })
+                return .init(
+                    date: date,
+                    transactions: transactions.compactMap { transaction in
+                        guard let projectId = transaction.app?.id else {
+                            return nil
+                        }
+                        return .init(
+                            data: transaction,
+                            icon: nil
+                        )
+                    }
+                )
             }
             .sorted(by: { $0.date > $1.date })
     }()

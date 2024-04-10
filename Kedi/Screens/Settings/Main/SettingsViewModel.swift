@@ -50,23 +50,31 @@ final class SettingsViewModel: ObservableObject {
             
             let (me, rcProjects) = try await (meRequest, projectsRequest)
             
-            let imageDatas = await fetchImages(urlStrings: rcProjects?.compactMap(\.iconUrl) ?? [])
+            async let projectDetailRequests = fetchProjectDetails(ids: rcProjects?.compactMap(\.id) ?? [])
             
-            let projects: [Project] = rcProjects?.compactMap { project in
-                guard let projectId = project.id,
-                      let name = project.name,
-                      let app = me?.apps?.first(where: { $0.name == name }),
-                      let appId = app.id else {
+            async let imageRequests = fetchImages(urlStrings: rcProjects?.compactMap(\.iconUrl) ?? [])
+            
+            let (rcProjectDetails, icons) = await (projectDetailRequests, imageRequests)
+            
+            let projects: [Project] = rcProjectDetails.compactMap { projectDetail in
+                guard let id = projectDetail.id,
+                      let name = projectDetail.name else {
                     return nil
                 }
                 return .init(
-                    iconUrl: project.iconUrl,
-                    icon: imageDatas[project.iconUrl ?? ""],
-                    projectId: projectId,
-                    appId: appId,
-                    name: name
+                    id: id,
+                    iconUrl: projectDetail.iconUrl,
+                    icon: icons[projectDetail.iconUrl ?? ""],
+                    name: name,
+                    apps: projectDetail.apps?.compactMap { app in
+                        guard let id = app.id,
+                              let store = app.type else {
+                            return nil
+                        }
+                        return .init(id: id, store: store)
+                    }
                 )
-            } ?? []
+            }
             
             meManager.set(me: me, projects: projects)
             
@@ -78,6 +86,24 @@ final class SettingsViewModel: ObservableObject {
         }
     }
     
+    private func fetchProjectDetails(ids: [String]) async -> [RCProjectDetailResponse] {
+        await withTaskGroup(of: RCProjectDetailResponse?.self) { group in
+            ids.forEach { id in
+                group.addTask { [weak self] in
+                    try? await self?.apiService.request(type: RCProjectDetailResponse.self, endpoint: .projectDetail(id: id))
+                }
+            }
+            
+            var projectDetails = [RCProjectDetailResponse]()
+            for await projectDetail in group {
+                if let projectDetail {
+                    projectDetails.append(projectDetail)
+                }
+            }
+            return projectDetails
+        }
+    }
+    
     private func fetchImages(urlStrings: [String]) async -> [String: Data] {
         await withTaskGroup(of: (String, Data?).self) { group in
             urlStrings.forEach { urlString in
@@ -86,11 +112,11 @@ final class SettingsViewModel: ObservableObject {
                 }
             }
             
-            var imageDatas = [String: Data]()
-            for await (urlString, data) in group {
-                imageDatas[urlString] = data
+            var images = [String: Data]()
+            for await (urlString, image) in group {
+                images[urlString] = image
             }
-            return imageDatas
+            return images
         }
     }
     

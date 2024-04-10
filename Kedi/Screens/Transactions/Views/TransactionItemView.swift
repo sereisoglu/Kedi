@@ -38,7 +38,7 @@ struct TransactionItemView: View {
             }
             
             HStack(alignment: .center, spacing: 10) {
-                ImageWithPlaceholder(data: transaction.appIconData) { image in
+                ImageWithPlaceholder(data: transaction.icon) { image in
                     image.resizable()
                 } placeholder: {
                     Rectangle()
@@ -81,5 +81,5 @@ struct TransactionItemView: View {
 }
 
 #Preview {
-    TransactionItemView(transaction: .init(data: .init()))
+    TransactionItemView(transaction: .init(data: .init(), icon: nil))
 }

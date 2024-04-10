@@ -13,8 +13,6 @@ struct SettingsView: View {
     @EnvironmentObject var purchaseManager: PurchaseManager
     @EnvironmentObject var pushNotificationsManager: PushNotificationsManager
     
-    @State private var isNotificationsAllowed = false
-    
     @State private var showingSupporter = false
     @State private var showingSignOutAlert = false
     
@@ -22,12 +20,6 @@ struct SettingsView: View {
         makeBody()
             .navigationTitle("Settings")
             .background(Color.systemGroupedBackground)
-//            .onAppear {
-//                isNotificationsAllowed = pushNotificationsManager.permissionStatus == .allowed
-//            }
-            .onReceive(pushNotificationsManager.$permissionStatus) { output in
-                isNotificationsAllowed = pushNotificationsManager.permissionStatus == .allowed
-            }
             .refreshable {
                 await viewModel.refresh()
             }
@@ -140,16 +132,17 @@ struct SettingsView: View {
                     )
                     .overlay { NavigationLink(value: "appIcon") { EmptyView() }.opacity(0) }
                     
+                    GeneralListView(
+                        imageAsset: .systemImage("link"),
+                        title: "Webhooks"
+                    )
+                    .overlay { NavigationLink(value: "webhooks") { EmptyView() }.opacity(0) }
+                    
                     Toggle(
                         "Notifications",
                         systemImage: "bell.badge",
-                        isOn: $isNotificationsAllowed
+                        isOn: $pushNotificationsManager.isNotificationsAllowed
                     )
-                    .onChange(of: isNotificationsAllowed) { oldValue, newValue in
-                        if oldValue != newValue {
-                            pushNotificationsManager.setPermissionStatus()
-                        }
-                    }
                 } header: {
                     Text("Customization")
                 }
@@ -255,8 +248,14 @@ struct SettingsView: View {
                 case "appIcon":
                     AppIconView()
                         .environmentObject(purchaseManager)
+                case "webhooks":
+                    WebhooksView()
+                        .environmentObject(pushNotificationsManager)
                 case "about":
                     AboutView()
+                case "webhooksManualSetup":
+                    WebhooksManualSetupView()
+                        .environmentObject(pushNotificationsManager)
                 default:
                     Text("Unknown destination!")
                 }

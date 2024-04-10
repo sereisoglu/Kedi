@@ -7,11 +7,17 @@
 
 import Foundation
 
-struct Project: Codable {
+struct Project: Codable, Identifiable, Hashable {
     
+    var id: String
     var iconUrl: String?
     var icon: Data?
-    var projectId: String
-    var appId: String
     var name: String
+    var apps: [ProjectApp]?
+}
+
+struct ProjectApp: Codable, Identifiable, Hashable {
+    
+    var id: String
+    var store: String
 }

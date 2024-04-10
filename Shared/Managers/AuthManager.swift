@@ -7,21 +7,14 @@
 
 import Foundation
 
-final class AuthManager: ObservableObject {
+final class AuthManager {
     
     private let keychainManager = KeychainManager.shared
     private let sessionManager = SessionManager.shared
     
-    @Published private(set) var isSignedIn: Bool = false
-    
     static let shared = AuthManager()
     
     private init() {}
-    
-    @MainActor
-    func setIsSignedIn(_ value: Bool) {
-        isSignedIn = value
-    }
     
     // Auth Token
     

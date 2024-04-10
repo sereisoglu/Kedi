@@ -37,7 +37,7 @@ final class TransactionDetailViewModel: ObservableObject {
     }
     
     init(appId: String, subscriberId: String) {
-        guard let projectId = meManager.projects?.first(where: { $0.appId == appId })?.projectId else {
+        guard let projectId = meManager.getProject(appId: appId)?.id else {
             self.projectId = ""
             self.subscriberId = ""
             self.state = .empty

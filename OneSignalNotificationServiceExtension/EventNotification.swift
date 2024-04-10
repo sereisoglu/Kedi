@@ -15,6 +15,7 @@ struct EventNotification {
     var date: Date?
     var timestamp: TimeInterval?
     var price: Double?
+    var projectName: String?
     var productIdentifier: String?
     var store: String?
     var countryFlag: String?
@@ -41,6 +42,7 @@ struct EventNotification {
     var body: String {
         [
             countryWithFlag,
+            projectName,
             productIdentifier,
             store,
             offerCode,
@@ -48,7 +50,7 @@ struct EventNotification {
         ].compactMap { $0 }.joined(separator: " • ")
     }
     
-    init(data: RCEvent) {
+    init(data: RCEvent, project: Project?) {
         id = data.id ?? ""
         appId = data.appId ?? ""
         
@@ -107,7 +109,13 @@ struct EventNotification {
         }
         
         price = data.price != 0 ? data.price : nil
-        productIdentifier = data.productId
+        projectName = project?.name
+        if let productId = data.productId,
+           let newProductId = data.newProductId {
+            productIdentifier = "\(productId) → \(newProductId)"
+        } else {
+            productIdentifier = data.productId
+        }
         store = data.store?.replacingOccurrences(of: "_", with: " ").capitalized
         countryFlag = data.countryCode?.countryFlag
         country = data.countryCode?.countryName
