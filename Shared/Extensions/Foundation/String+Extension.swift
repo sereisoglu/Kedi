@@ -30,19 +30,13 @@ extension String {
 
 extension String {
     
-    func toDate(formatter: DateFormatter) -> Date? {
-        formatter.date(from: self)
-    }
-    
     func format(to dateFormatter: DateFormatter) -> Date? {
         dateFormatter.date(from: self)
     }
     
     func relativeDate(from dateFormatter: DateFormatter) -> String? {
-        guard let date = dateFormatter.date(from: self) else {
-            return nil
-        }
-        return date.formatted(.relative(presentation: .named))
+        let date = dateFormatter.date(from: self)
+        return date?.formatted(.relative(presentation: .named))
     }
 }
 

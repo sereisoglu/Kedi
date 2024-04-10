@@ -34,6 +34,13 @@
 		4A41460B2B85EC0800489D9C /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4146092B85EC0800489D9C /* SessionManager.swift */; };
 		4A8B56982BC6B333004AD736 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56972BC6B333004AD736 /* String+Extension.swift */; };
 		4A8B569B2BC6B362004AD736 /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B569A2BC6B362004AD736 /* Image+Extension.swift */; };
+		4A8B569D2BC6D148004AD736 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56972BC6B333004AD736 /* String+Extension.swift */; };
+		4A8B569E2BC6D16C004AD736 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56972BC6B333004AD736 /* String+Extension.swift */; };
+		4A8B56A02BC6E47F004AD736 /* DeviceUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B569F2BC6E47F004AD736 /* DeviceUtility.swift */; };
+		4A8B56A42BC6E4D9004AD736 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56A32BC6E4D9004AD736 /* UIDevice+Extension.swift */; };
+		4A8B56A72BC6EA84004AD736 /* AllWebhooksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56A62BC6EA84004AD736 /* AllWebhooksView.swift */; };
+		4A8B56A92BC6EA8D004AD736 /* AllWebhooksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56A82BC6EA8D004AD736 /* AllWebhooksViewModel.swift */; };
+		4A8B56AC2BC70EF7004AD736 /* AllWebhookItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56AB2BC70EF7004AD736 /* AllWebhookItem.swift */; };
 		4A90387B2B8BF4EB006FAC7F /* PaydayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90387A2B8BF4EB006FAC7F /* PaydayViewModel.swift */; };
 		4A90387E2B8C89B7006FAC7F /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90387D2B8C89B7006FAC7F /* DeepLink.swift */; };
 		4A90387F2B8C89B7006FAC7F /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90387D2B8C89B7006FAC7F /* DeepLink.swift */; };
@@ -254,6 +261,11 @@
 		4A4146092B85EC0800489D9C /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		4A8B56972BC6B333004AD736 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		4A8B569A2BC6B362004AD736 /* Image+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+Extension.swift"; sourceTree = "<group>"; };
+		4A8B569F2BC6E47F004AD736 /* DeviceUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceUtility.swift; sourceTree = "<group>"; };
+		4A8B56A32BC6E4D9004AD736 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
+		4A8B56A62BC6EA84004AD736 /* AllWebhooksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWebhooksView.swift; sourceTree = "<group>"; };
+		4A8B56A82BC6EA8D004AD736 /* AllWebhooksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWebhooksViewModel.swift; sourceTree = "<group>"; };
+		4A8B56AB2BC70EF7004AD736 /* AllWebhookItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWebhookItem.swift; sourceTree = "<group>"; };
 		4A90387A2B8BF4EB006FAC7F /* PaydayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaydayViewModel.swift; sourceTree = "<group>"; };
 		4A90387C2B8C853F006FAC7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A90387D2B8C89B7006FAC7F /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
@@ -477,6 +489,7 @@
 			isa = PBXGroup;
 			children = (
 				4A1DFC992B815CD30094BAA0 /* BrowserUtility.swift */,
+				4A8B569F2BC6E47F004AD736 /* DeviceUtility.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -517,6 +530,32 @@
 				4AEE72E92B8A1F0700F51548 /* UserDefaults+Standard.swift */,
 			);
 			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		4A8B56A22BC6E4CA004AD736 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				4A8B56A32BC6E4D9004AD736 /* UIDevice+Extension.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		4A8B56A52BC6EA31004AD736 /* AllWebhooks */ = {
+			isa = PBXGroup;
+			children = (
+				4A8B56AA2BC70EED004AD736 /* AllWebhookItem */,
+				4A8B56A62BC6EA84004AD736 /* AllWebhooksView.swift */,
+				4A8B56A82BC6EA8D004AD736 /* AllWebhooksViewModel.swift */,
+			);
+			path = AllWebhooks;
+			sourceTree = "<group>";
+		};
+		4A8B56AA2BC70EED004AD736 /* AllWebhookItem */ = {
+			isa = PBXGroup;
+			children = (
+				4A8B56AB2BC70EF7004AD736 /* AllWebhookItem.swift */,
+			);
+			path = AllWebhookItem;
 			sourceTree = "<group>";
 		};
 		4A97D5A62B83D6FC0073C11E /* OverviewDetail */ = {
@@ -700,6 +739,7 @@
 			children = (
 				4A8B56962BC6B2F5004AD736 /* Foundation */,
 				4A8B56992BC6B349004AD736 /* SwiftUI */,
+				4A8B56A22BC6E4CA004AD736 /* UIKit */,
 				4A8B569C2BC6B394004AD736 /* UserDefaults */,
 			);
 			path = Extensions;
@@ -724,6 +764,7 @@
 				4AEE72FE2B8BC27200F51548 /* Payday */,
 				4ADF0A0A2B7BB6A3002318B2 /* AppIcon */,
 				4AEFFCD02BB9993600FCA073 /* Webhooks */,
+				4A8B56A52BC6EA31004AD736 /* AllWebhooks */,
 				4AADB8F22BBE18EC00EEA8C2 /* WebhooksManualSetup */,
 				4A1DFC822B7CD7380094BAA0 /* About */,
 			);
@@ -1278,6 +1319,7 @@
 				4AB720922B6C6893001E2C76 /* SettingsView.swift in Sources */,
 				4A1DFC9E2B8200BB0094BAA0 /* PurchaseManager.swift in Sources */,
 				4AADB9052BC1971F00EEA8C2 /* RCDeleteWebhookResponse.swift in Sources */,
+				4A8B56A92BC6EA8D004AD736 /* AllWebhooksViewModel.swift in Sources */,
 				4AB720C22B6E4DFD001E2C76 /* Collection+Extension.swift in Sources */,
 				4A90387B2B8BF4EB006FAC7F /* PaydayViewModel.swift in Sources */,
 				4AEE73002B8BC28700F51548 /* PaydayView.swift in Sources */,
@@ -1315,6 +1357,7 @@
 				4AB7207D2B6C17A9001E2C76 /* RCErrorResponse.swift in Sources */,
 				4ABCF59F2BA5E03000B43D63 /* Double+Extension.swift in Sources */,
 				4ABCF59D2BA5E00800B43D63 /* Int+Extension.swift in Sources */,
+				4A8B56A02BC6E47F004AD736 /* DeviceUtility.swift in Sources */,
 				4AB721022B722DFF001E2C76 /* TransactionDetailViewModel.swift in Sources */,
 				4ADF0A082B7A3B86002318B2 /* WidgetErrorView.swift in Sources */,
 				4ADF0A052B7A3B3F002318B2 /* WidgetError.swift in Sources */,
@@ -1330,6 +1373,7 @@
 				4AADB9142BC2D63C00EEA8C2 /* LocalizedAlertError.swift in Sources */,
 				4ADF09EB2B7783FB002318B2 /* EdgeInsets+Extension.swift in Sources */,
 				4A1DFC812B7C93C80094BAA0 /* Bundle+Extension.swift in Sources */,
+				4A8B56A42BC6E4D9004AD736 /* UIDevice+Extension.swift in Sources */,
 				4AB7207B2B6C17A0001E2C76 /* RCLoginResponse.swift in Sources */,
 				4A044E702B96843E000DACBF /* OverviewDetailViewModel.swift in Sources */,
 				4AB720872B6C56E7001E2C76 /* RootView.swift in Sources */,
@@ -1372,6 +1416,7 @@
 				4AADB9162BC4306300EEA8C2 /* RCProjectDetailResponse.swift in Sources */,
 				4ADF0A0C2B7BB6C5002318B2 /* AppIconView.swift in Sources */,
 				4AB720CC2B6EAECD001E2C76 /* Array+Extension.swift in Sources */,
+				4A8B56AC2BC70EF7004AD736 /* AllWebhookItem.swift in Sources */,
 				4AB7207F2B6C17B3001E2C76 /* RCError.swift in Sources */,
 				4ADF0A002B7934B8002318B2 /* SettingsAccountItemView.swift in Sources */,
 				4AB720822B6C4FEA001E2C76 /* OverviewViewModel.swift in Sources */,
@@ -1381,6 +1426,7 @@
 				4AB720A92B6DB3A0001E2C76 /* AsyncButton.swift in Sources */,
 				4AEFFCD22BB9995600FCA073 /* WebhooksView.swift in Sources */,
 				4AB721092B726C62001E2C76 /* TransactionDetailInfoItem.swift in Sources */,
+				4A8B56A72BC6EA84004AD736 /* AllWebhooksView.swift in Sources */,
 				4AEE72E82B8A1EC800F51548 /* OverviewItemTimePeriod.swift in Sources */,
 				4AB6D1D12BAFAF7A00059F66 /* NotificationsView.swift in Sources */,
 				4AB720CE2B6EB36C001E2C76 /* OverviewItemType.swift in Sources */,
@@ -1427,6 +1473,7 @@
 				4ADF09D52B761CD6002318B2 /* RCLoginRequest.swift in Sources */,
 				4AB721542B739D30001E2C76 /* RCError.swift in Sources */,
 				4A41460B2B85EC0800489D9C /* SessionManager.swift in Sources */,
+				4A8B569E2BC6D16C004AD736 /* String+Extension.swift in Sources */,
 				4AEE73042B8BC2BD00F51548 /* AppStorePayday.swift in Sources */,
 				4AB7215E2B756E9C001E2C76 /* RevenueGraphWidget.swift in Sources */,
 				4AB721532B739C6D001E2C76 /* RCChartResponse.swift in Sources */,
@@ -1454,6 +1501,7 @@
 				4ADFB9D42BADE20000BDAA58 /* NotificationService.swift in Sources */,
 				4AADB9172BC59B6100EEA8C2 /* Project.swift in Sources */,
 				4AADB9182BC59B7600EEA8C2 /* CacheManager.swift in Sources */,
+				4A8B569D2BC6D148004AD736 /* String+Extension.swift in Sources */,
 				4AEFFCBE2BB0D5B600FCA073 /* EventNotification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

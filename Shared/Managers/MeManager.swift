@@ -86,6 +86,8 @@ final class MeManager: ObservableObject {
         isSignedIn = false
     }
     
+    // MARK: - id
+    
     func generateId() {
         let hasId = id != nil
         
@@ -100,6 +102,8 @@ final class MeManager: ObservableObject {
             pushNotificationsManager.signIn(id: id)
         }
     }
+    
+    // MARK: - me, projects
     
     func set(me: RCMeResponse?, projects: [Project]?) {
         self.me = me

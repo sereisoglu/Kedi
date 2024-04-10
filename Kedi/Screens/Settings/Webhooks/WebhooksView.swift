@@ -38,6 +38,10 @@ struct WebhooksView: View {
                 }
                 
                 Section {
+                    NavigationLink("All Webhooks", value: "allWebhooks")
+                }
+                
+                Section {
                     NavigationLink("Webhooks Manual Setup", value: "webhooksManualSetup")
                 }
                 
@@ -50,13 +54,15 @@ struct WebhooksView: View {
                             .frame(maxWidth: .infinity)
                             .multilineTextAlignment(.center)
                     }
-                    .alert(
+                    .confirmationDialog(
                         "Reset Webhooks",
                         isPresented: $showingResetWebhooksAlert
                     ) {
                         Button("Cancel", role: .cancel) {}
                         Button("Reset", role: .destructive) {
-                            viewModel.resetWebhooks()
+                            Task {
+                                await viewModel.resetWebhooks()
+                            }
                         }
                     } message: {
                         Text("Are you sure you want to reset webhooks?")
@@ -65,7 +71,7 @@ struct WebhooksView: View {
                 
                 Section {
                     VStack(spacing: 5) {
-                        Text("ID (Please do not share it with anyone!):")
+                        Text("ID is unique for this device. Please do not share it with anyone!")
                         
                         Text(viewModel.id)
                             .fontDesign(.monospaced)
@@ -96,6 +102,16 @@ struct WebhooksView: View {
                     Image(systemName: "info.circle")
                 }
             }
+        }
+        .onAppear {
+            if viewModel.isFetched {
+                Task {
+                    await viewModel.refresh()
+                }
+            }
+        }
+        .refreshable {
+            await viewModel.refresh()
         }
         .errorAlert(error: $viewModel.errorAlert)
     }

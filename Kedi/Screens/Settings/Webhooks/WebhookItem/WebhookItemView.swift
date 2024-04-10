@@ -39,17 +39,21 @@ struct WebhookItemView: View {
                 }
                 
             case .inactive:
-                Text(webhook.project.name)
-                Spacer()
-                Toggle("", isOn: $webhook.isActive)
-                    .onChange(of: webhook.isActive) { oldValue, newValue in
-                        viewModel.toggleWebhook(projectId: webhook.project.id)
-                    }
+                HStack {
+                    Text(webhook.project.name)
+                    Spacer()
+                    Toggle("", isOn: $webhook.isActive)
+                        .onChange(of: webhook.isActive) { oldValue, newValue in
+                            viewModel.toggleWebhook(projectId: webhook.project.id)
+                        }
+                }
                 
             case .loading:
-                Text(webhook.project.name)
-                Spacer()
-                ProgressView()
+                HStack {
+                    Text(webhook.project.name)
+                    Spacer()
+                    ProgressView()
+                }
                 
             case .error(let error):
                 VStack(alignment: .leading, spacing: 2) {

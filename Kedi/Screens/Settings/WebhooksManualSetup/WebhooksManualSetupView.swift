@@ -49,7 +49,7 @@ struct WebhooksManualSetupView: View {
             } header: {
                 Text("Step 2 – Copy Webhook URL")
             } footer : {
-                Text("Please do not share it with anyone!")
+                Text("ID is unique for this device. Please do not share it with anyone!")
             }
             .alignmentGuide(.listRowSeparatorLeading) { viewDimensions in
                 0

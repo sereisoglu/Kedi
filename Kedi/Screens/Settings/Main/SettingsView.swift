@@ -216,7 +216,7 @@ struct SettingsView: View {
                             .frame(maxWidth: .infinity)
                             .multilineTextAlignment(.center)
                     }
-                    .alert(
+                    .confirmationDialog(
                         "Sign Out",
                         isPresented: $showingSignOutAlert
                     ) {
@@ -253,6 +253,8 @@ struct SettingsView: View {
                         .environmentObject(pushNotificationsManager)
                 case "about":
                     AboutView()
+                case "allWebhooks":
+                    AllWebhooksView()
                 case "webhooksManualSetup":
                     WebhooksManualSetupView()
                         .environmentObject(pushNotificationsManager)

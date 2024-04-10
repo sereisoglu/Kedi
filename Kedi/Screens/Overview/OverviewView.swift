@@ -69,7 +69,7 @@ struct OverviewView: View {
                         .font(.subheadline)
                 }
                 .disabled(viewModel.isRestoreDefaultsDisabled)
-                .alert(
+                .confirmationDialog(
                     "Restore Defaults",
                     isPresented: $showingRestoreDefaultsAlert
                 ) {
