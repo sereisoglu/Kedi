@@ -19,7 +19,7 @@ final class TransactionsViewModel: ObservableObject {
         meManager.projects
     }
     
-    @Published private(set) var state: GeneralState = .loading
+    @Published private(set) var state: ViewState = .loading
     @Published private(set) var paginationState: PaginationState = .idle
     
     @Published private(set) var transactionSections: [TransactionSection] = .stub

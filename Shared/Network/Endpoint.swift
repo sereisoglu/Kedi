@@ -25,6 +25,7 @@ enum Endpoint {
     case updateWebhook(projectId: String, webhookId: String, request: RCUpdateWebhookRequest)
     case deleteWebhook(projectId: String, webhookId: String)
     case testWebhook(projectId: String, webhookId: String)
+    case latestEvents(projectId: String, webhookId: String)
 }
 
 extension Endpoint {
@@ -44,7 +45,8 @@ extension Endpoint {
                 .createWebhook,
                 .updateWebhook,
                 .deleteWebhook,
-                .testWebhook:
+                .testWebhook,
+                .latestEvents:
             return "https://api.revenuecat.com/internal/v1/developers"
         default:
             return "https://api.revenuecat.com/v1/developers"
@@ -83,6 +85,8 @@ extension Endpoint {
             return "me/projects/\(projectId)/integrations/webhooks/\(webhookId)"
         case .testWebhook(let projectId, let webhookId):
             return "me/projects/\(projectId)/integrations/webhooks/\(webhookId)/test_webhook"
+        case .latestEvents(let projectId, let webhookId):
+            return "me/projects/\(projectId)/integrations/webhooks/\(webhookId)/test_webhook/latest_events"
         }
     }
     
@@ -126,6 +130,10 @@ extension Endpoint {
             return request.dict
         case .updateWebhook(_, _, let request):
             return request.dict
+        case .latestEvents:
+            return [
+                "limit": 30
+            ]
         default:
             return nil
         }

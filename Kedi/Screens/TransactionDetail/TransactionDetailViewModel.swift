@@ -12,7 +12,7 @@ final class TransactionDetailViewModel: ObservableObject {
     private let apiService = APIService.shared
     private let meManager = MeManager.shared
     
-    @Published private(set) var state: GeneralState = .loading
+    @Published private(set) var state: ViewState = .loading
     
     @Published private(set) var navigationTitle: String = ""
     @Published private(set) var detailItems: [TransactionDetailInfoItem]?

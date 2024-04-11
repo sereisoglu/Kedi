@@ -27,7 +27,7 @@ final class PurchaseManager: NSObject, ObservableObject {
     @Published private(set) var meSubscription: MeSubscriptionModel?
     @Published private(set) var meNonSubscriptions: [MeNonSubscriptionModel]?
     
-    @Published private(set) var state: GeneralState = .loading
+    @Published private(set) var state: ViewState = .loading
     @Published private(set) var isPurchasing = false
     
 //    var userId: String {

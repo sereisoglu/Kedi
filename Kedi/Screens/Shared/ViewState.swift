@@ -1,5 +1,5 @@
 //
-//  GeneralState.swift
+//  ViewState.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/7/24.
@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum GeneralState: Equatable, Hashable {
+enum ViewState: Equatable, Hashable {
     
     case loading
     case empty
     case error(Error)
     case data
     
-    static func == (lhs: GeneralState, rhs: GeneralState) -> Bool {
+    static func == (lhs: ViewState, rhs: ViewState) -> Bool {
         switch (lhs, rhs) {
         case (.loading, .loading),
             (.empty, .empty),

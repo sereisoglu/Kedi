@@ -103,11 +103,9 @@ struct WebhooksView: View {
                 }
             }
         }
-        .onAppear {
-            if viewModel.isFetched {
-                Task {
-                    await viewModel.refresh()
-                }
+        .onReceive(NotificationCenter.default.publisher(for: .webhooksChange)) { _ in
+            Task {
+                await viewModel.refresh()
             }
         }
         .refreshable {

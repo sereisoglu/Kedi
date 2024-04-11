@@ -15,7 +15,7 @@ final class OverviewViewModel: ObservableObject {
     
     private var overviewData: RCOverviewResponse?
     
-    @Published private(set) var state: GeneralState = .data
+    @Published private(set) var state: ViewState = .data
     
     @Published private(set) var configs: [OverviewItemConfig] = OverviewItemConfig.get()
     @Published private(set) var items: [OverviewItemConfig: OverviewItem] = .placeholder(configs: OverviewItemConfig.get())

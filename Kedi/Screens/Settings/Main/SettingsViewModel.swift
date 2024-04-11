@@ -13,7 +13,7 @@ final class SettingsViewModel: ObservableObject {
     private let meManager = MeManager.shared
     private let authManager = AuthManager.shared
     
-    @Published private(set) var state: GeneralState = .loading
+    @Published private(set) var state: ViewState = .loading
     @Published private(set) var me: RCMeResponse?
     @Published var errorAlert: Error?
     

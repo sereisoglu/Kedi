@@ -12,7 +12,6 @@ final class WebhooksViewModel: ObservableObject {
     private let apiService = APIService.shared
     private let meManager = MeManager.shared
     
-    private(set) var isFetched = false
     @Published var webhooks = [WebhookItem]()
     @Published var errorAlert: Error?
     
@@ -34,10 +33,6 @@ final class WebhooksViewModel: ObservableObject {
     
     @MainActor
     private func fetchWebhooks() async {
-        if isFetched {
-            webhooks = projects.map { .init(state: .loading, project: $0) }
-        }
-        
         let states = await withTaskGroup(of: (String, WebhookState?).self) { group in
             projects.forEach { project in
                 group.addTask { [weak self] in
@@ -58,7 +53,6 @@ final class WebhooksViewModel: ObservableObject {
             }
             return .init(state: state, project: webhook.project)
         }
-        isFetched = true
     }
     
     private func fetchWebhook(projectId: String) async -> WebhookState {
@@ -202,7 +196,9 @@ final class WebhooksViewModel: ObservableObject {
         }
     }
     
+    @MainActor
     func refresh() async {
+        webhooks = projects.map { .init(state: .loading, project: $0) }
         await fetchWebhooks()
     }
 }

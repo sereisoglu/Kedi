@@ -127,23 +127,27 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    GeneralListView(
-                        imageAsset: .systemImage("app"),
-                        title: "App Icon"
+                    Toggle(
+                        "Notifications",
+                        systemImage: "bell.badge",
+                        isOn: $pushNotificationsManager.isNotificationsAllowed
                     )
-                    .overlay { NavigationLink(value: "appIcon") { EmptyView() }.opacity(0) }
                     
                     GeneralListView(
                         imageAsset: .systemImage("link"),
                         title: "Webhooks"
                     )
                     .overlay { NavigationLink(value: "webhooks") { EmptyView() }.opacity(0) }
-                    
-                    Toggle(
-                        "Notifications",
-                        systemImage: "bell.badge",
-                        isOn: $pushNotificationsManager.isNotificationsAllowed
+                } header: {
+                    Text("Notifications")
+                }
+                
+                Section {
+                    GeneralListView(
+                        imageAsset: .systemImage("app"),
+                        title: "App Icon"
                     )
+                    .overlay { NavigationLink(value: "appIcon") { EmptyView() }.opacity(0) }
                 } header: {
                     Text("Customization")
                 }

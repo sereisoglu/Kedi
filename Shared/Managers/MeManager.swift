@@ -113,6 +113,6 @@ final class MeManager: ObservableObject {
     }
     
     func getProject(appId: String) -> Project? {
-        projects?.first(where: { $0.apps?.contains(where: { $0.id == id }) ?? false })
+        projects?.first(where: { $0.apps?.contains(where: { $0.id == appId }) ?? false })
     }
 }

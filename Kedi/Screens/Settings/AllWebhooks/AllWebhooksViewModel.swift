@@ -12,7 +12,7 @@ final class AllWebhooksViewModel: ObservableObject {
     private let apiService = APIService.shared
     private let meManager = MeManager.shared
     
-    @Published private(set) var state: GeneralState = .loading
+    @Published private(set) var state: ViewState = .loading
     @Published private(set) var items = [AllWebhookItem]()
     @Published var errorAlert: Error?
     
@@ -96,6 +96,7 @@ final class AllWebhooksViewModel: ObservableObject {
             
             if error == nil {
                 items[itemIndex].webhooks.remove(at: index)
+                NotificationCenter.default.post(name: .webhooksChange, object: nil)
             } else {
                 errorAlert = error
             }

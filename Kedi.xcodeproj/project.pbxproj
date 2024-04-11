@@ -42,6 +42,9 @@
 		4A8B56A92BC6EA8D004AD736 /* AllWebhooksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56A82BC6EA8D004AD736 /* AllWebhooksViewModel.swift */; };
 		4A8B56AC2BC70EF7004AD736 /* AllWebhookItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56AB2BC70EF7004AD736 /* AllWebhookItem.swift */; };
 		4A8B56AF2BC7125C004AD736 /* RCLogoutResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56AE2BC7125C004AD736 /* RCLogoutResponse.swift */; };
+		4A8B56B02BC74167004AD736 /* RCEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEFFCBB2BB0D57500FCA073 /* RCEvent.swift */; };
+		4A8B56B22BC7546F004AD736 /* RCLatestEventsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56B12BC7546F004AD736 /* RCLatestEventsResponse.swift */; };
+		4A8B56B52BC75ED1004AD736 /* NotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56B42BC75ED1004AD736 /* NotificationName+Extension.swift */; };
 		4A90387B2B8BF4EB006FAC7F /* PaydayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90387A2B8BF4EB006FAC7F /* PaydayViewModel.swift */; };
 		4A90387E2B8C89B7006FAC7F /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90387D2B8C89B7006FAC7F /* DeepLink.swift */; };
 		4A90387F2B8C89B7006FAC7F /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90387D2B8C89B7006FAC7F /* DeepLink.swift */; };
@@ -116,7 +119,7 @@
 		4AB721162B72DD8B001E2C76 /* TransactionDetailEntitlementItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721152B72DD8B001E2C76 /* TransactionDetailEntitlementItem.swift */; };
 		4AB7211A2B736FEC001E2C76 /* TransactionDetailEntitlementItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721192B736FEC001E2C76 /* TransactionDetailEntitlementItemView.swift */; };
 		4AB7211C2B73751F001E2C76 /* RCTransactionDetailActivityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7211B2B73751F001E2C76 /* RCTransactionDetailActivityResponse.swift */; };
-		4AB7211F2B7378EF001E2C76 /* GeneralState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7211E2B7378EF001E2C76 /* GeneralState.swift */; };
+		4AB7211F2B7378EF001E2C76 /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7211E2B7378EF001E2C76 /* ViewState.swift */; };
 		4AB721222B73881B001E2C76 /* OverviewItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721212B73881B001E2C76 /* OverviewItemView.swift */; };
 		4AB7212A2B738BA0001E2C76 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB721292B738BA0001E2C76 /* WidgetKit.framework */; };
 		4AB7212C2B738BA0001E2C76 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB7212B2B738BA0001E2C76 /* SwiftUI.framework */; };
@@ -268,6 +271,8 @@
 		4A8B56A82BC6EA8D004AD736 /* AllWebhooksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWebhooksViewModel.swift; sourceTree = "<group>"; };
 		4A8B56AB2BC70EF7004AD736 /* AllWebhookItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWebhookItem.swift; sourceTree = "<group>"; };
 		4A8B56AE2BC7125C004AD736 /* RCLogoutResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCLogoutResponse.swift; sourceTree = "<group>"; };
+		4A8B56B12BC7546F004AD736 /* RCLatestEventsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCLatestEventsResponse.swift; sourceTree = "<group>"; };
+		4A8B56B42BC75ED1004AD736 /* NotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extension.swift"; sourceTree = "<group>"; };
 		4A90387A2B8BF4EB006FAC7F /* PaydayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaydayViewModel.swift; sourceTree = "<group>"; };
 		4A90387C2B8C853F006FAC7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A90387D2B8C89B7006FAC7F /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
@@ -337,7 +342,7 @@
 		4AB721152B72DD8B001E2C76 /* TransactionDetailEntitlementItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailEntitlementItem.swift; sourceTree = "<group>"; };
 		4AB721192B736FEC001E2C76 /* TransactionDetailEntitlementItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailEntitlementItemView.swift; sourceTree = "<group>"; };
 		4AB7211B2B73751F001E2C76 /* RCTransactionDetailActivityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTransactionDetailActivityResponse.swift; sourceTree = "<group>"; };
-		4AB7211E2B7378EF001E2C76 /* GeneralState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralState.swift; sourceTree = "<group>"; };
+		4AB7211E2B7378EF001E2C76 /* ViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		4AB721212B73881B001E2C76 /* OverviewItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewItemView.swift; sourceTree = "<group>"; };
 		4AB721272B738BA0001E2C76 /* WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AB721292B738BA0001E2C76 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -509,6 +514,7 @@
 				4AB720F72B70FBF1001E2C76 /* Date+Extension.swift */,
 				4AB720A52B6DAC81001E2C76 /* DateFormatter+Extension.swift */,
 				4A044E4A2B908931000DACBF /* RelativeDateTimeFormatter+Extension.swift */,
+				4A8B56B42BC75ED1004AD736 /* NotificationName+Extension.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -596,6 +602,8 @@
 				4AADB9022BC1971300EEA8C2 /* RCUpdateWebhookResponse.swift */,
 				4AADB9042BC1971F00EEA8C2 /* RCDeleteWebhookResponse.swift */,
 				4AADB9062BC1981F00EEA8C2 /* RCTestWebhookResponse.swift */,
+				4A8B56B12BC7546F004AD736 /* RCLatestEventsResponse.swift */,
+				4AEFFCBB2BB0D57500FCA073 /* RCEvent.swift */,
 			);
 			path = Webhooks;
 			sourceTree = "<group>";
@@ -936,7 +944,7 @@
 		4AB7211D2B7378E5001E2C76 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				4AB7211E2B7378EF001E2C76 /* GeneralState.swift */,
+				4AB7211E2B7378EF001E2C76 /* ViewState.swift */,
 				4ADF09E72B7780D6002318B2 /* PaginationState.swift */,
 			);
 			path = Shared;
@@ -1091,7 +1099,6 @@
 			isa = PBXGroup;
 			children = (
 				4ADFB9D32BADE20000BDAA58 /* NotificationService.swift */,
-				4AEFFCBB2BB0D57500FCA073 /* RCEvent.swift */,
 				4AEFFCBD2BB0D5B600FCA073 /* EventNotification.swift */,
 				4ADFB9D52BADE20000BDAA58 /* Info.plist */,
 				4ADFB9DC2BADE29700BDAA58 /* OneSignalNotificationServiceExtension.entitlements */,
@@ -1339,13 +1346,14 @@
 				4A8B56AF2BC7125C004AD736 /* RCLogoutResponse.swift in Sources */,
 				4A1DFC902B80B9290094BAA0 /* SupporterView.swift in Sources */,
 				4AADB8F12BB9A75900EEA8C2 /* WebhooksViewModel.swift in Sources */,
+				4A8B56B52BC75ED1004AD736 /* NotificationName+Extension.swift in Sources */,
 				4AADB9032BC1971300EEA8C2 /* RCUpdateWebhookResponse.swift in Sources */,
 				4AB720F82B70FBF1001E2C76 /* Date+Extension.swift in Sources */,
 				4AB721222B73881B001E2C76 /* OverviewItemView.swift in Sources */,
 				4ADFB9E32BAE38D800BDAA58 /* PushNotificationsManager.swift in Sources */,
 				4AB7205C2B6BAC8D001E2C76 /* KediApp.swift in Sources */,
 				4AB7208F2B6C6842001E2C76 /* MainView.swift in Sources */,
-				4AB7211F2B7378EF001E2C76 /* GeneralState.swift in Sources */,
+				4AB7211F2B7378EF001E2C76 /* ViewState.swift in Sources */,
 				4AB720E52B70C8D3001E2C76 /* TransactionsViewModel.swift in Sources */,
 				4AEE72F42B8A37F000F51548 /* StandardButtonStyle.swift in Sources */,
 				4AB720712B6BF497001E2C76 /* APIService.swift in Sources */,
@@ -1392,6 +1400,7 @@
 				4AEE73032B8BC2BD00F51548 /* AppStorePayday.swift in Sources */,
 				4ADF09DB2B761D88002318B2 /* RCTransactionsRequest.swift in Sources */,
 				4ADF09D42B761CD1002318B2 /* RCLoginRequest.swift in Sources */,
+				4A8B56B02BC74167004AD736 /* RCEvent.swift in Sources */,
 				4AB720742B6BF4A9001E2C76 /* Endpoint.swift in Sources */,
 				4AB720E92B70C8EC001E2C76 /* TransactionsView.swift in Sources */,
 				4AEFFCC12BB19F4E00FCA073 /* RCProjectsResponse.swift in Sources */,
@@ -1428,6 +1437,7 @@
 				4AEE72EC2B8A1F1100F51548 /* UserDefaults+Shared.swift in Sources */,
 				4AB720B62B6E3E16001E2C76 /* SidebarView.swift in Sources */,
 				4AB720A92B6DB3A0001E2C76 /* AsyncButton.swift in Sources */,
+				4A8B56B22BC7546F004AD736 /* RCLatestEventsResponse.swift in Sources */,
 				4AEFFCD22BB9995600FCA073 /* WebhooksView.swift in Sources */,
 				4AB721092B726C62001E2C76 /* TransactionDetailInfoItem.swift in Sources */,
 				4A8B56A72BC6EA84004AD736 /* AllWebhooksView.swift in Sources */,

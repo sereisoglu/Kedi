@@ -15,7 +15,7 @@ final class OverviewDetailViewModel: ObservableObject {
     @Published private(set) var value: OverviewItemValue
     @Published private(set) var chartValues: [OverviewItemChartValue]
     
-    @Published private(set) var state: GeneralState = .data
+    @Published private(set) var state: ViewState = .data
     
     @Published var timePeriodSelection: OverviewItemTimePeriod
     @Published var selectedChartValue: OverviewItemChartValue?
