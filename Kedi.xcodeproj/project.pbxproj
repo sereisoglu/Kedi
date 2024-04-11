@@ -45,6 +45,7 @@
 		4A8B56B02BC74167004AD736 /* RCEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEFFCBB2BB0D57500FCA073 /* RCEvent.swift */; };
 		4A8B56B22BC7546F004AD736 /* RCLatestEventsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56B12BC7546F004AD736 /* RCLatestEventsResponse.swift */; };
 		4A8B56B52BC75ED1004AD736 /* NotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56B42BC75ED1004AD736 /* NotificationName+Extension.swift */; };
+		4A8B56B62BC764B1004AD736 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABCF59E2BA5E03000B43D63 /* Double+Extension.swift */; };
 		4A90387B2B8BF4EB006FAC7F /* PaydayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90387A2B8BF4EB006FAC7F /* PaydayViewModel.swift */; };
 		4A90387E2B8C89B7006FAC7F /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90387D2B8C89B7006FAC7F /* DeepLink.swift */; };
 		4A90387F2B8C89B7006FAC7F /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90387D2B8C89B7006FAC7F /* DeepLink.swift */; };
@@ -1497,6 +1498,7 @@
 				4AB721562B739D74001E2C76 /* DateFormatter+Extension.swift in Sources */,
 				4ADF09DC2B761D88002318B2 /* RCTransactionsRequest.swift in Sources */,
 				4AB721462B739BAB001E2C76 /* RectangleMarkGraphView.swift in Sources */,
+				4A8B56B62BC764B1004AD736 /* Double+Extension.swift in Sources */,
 				4ADF09F72B77CFAD002318B2 /* OverviewWidgetProvider.swift in Sources */,
 				4A90387F2B8C89B7006FAC7F /* DeepLink.swift in Sources */,
 				4AEE72FD2B8B545200F51548 /* PaydayWidgetEntry.swift in Sources */,

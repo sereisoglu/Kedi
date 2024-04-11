@@ -15,7 +15,7 @@ enum Endpoint {
     case me
     case projects
     case projectDetail(id: String)
-    case overview
+    case overview(projectIds: [String]?)
     case charts(RCChartRequest)
     case transactions(RCTransactionsRequest)
     case transactionDetail(projectId: String, subscriberId: String)
@@ -66,7 +66,7 @@ extension Endpoint {
         case .projectDetail(let id):
             return "me/projects/\(id)"
         case .overview:
-            return "me/overview"
+            return "me/charts_v2/overview"
         case .charts(let request):
             return "me/charts_v2/\(request.name.rawValue)"
         case .transactions:
@@ -110,10 +110,13 @@ extension Endpoint {
         switch self {
         case .login(let request):
             return request.dict
-        case .overview:
-            return [
-                "sandbox_mode": false
-            ]
+        case .overview(let projectIds):
+            if let projectIds {
+                return [
+                    "app_uuid": projectIds.joined(separator: "%2C")
+                ]
+            }
+            return nil
         case .charts(let request):
             return request.dict
         case .transactions(let request):

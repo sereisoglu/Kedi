@@ -9,6 +9,10 @@ import Foundation
 
 extension Double {
     
+    var toInt: Int {
+        Int(self)
+    }
+    
     func floorToNearest(_ value: Self) -> Self {
         floor(self / value) * value
     }

@@ -48,17 +48,17 @@ final class OverviewViewModel: ObservableObject {
         case .mrr:
             setItem(type: .mrr, value: .mrr(overviewData?.mrr ?? 0))
         case .subscriptions:
-            setItem(type: .subscriptions, value: .subscriptions(overviewData?.activeSubscribersCount ?? 0))
+            setItem(type: .subscriptions, value: .subscriptions(overviewData?.subscriptions ?? 0))
         case .trials:
-            setItem(type: .trials, value: .trials(overviewData?.activeTrialsCount ?? 0))
+            setItem(type: .trials, value: .trials(overviewData?.trials ?? 0))
         case .revenue:
             if config.timePeriod == .last28Days {
                 setItem(config: .init(type: .revenue, timePeriod: .last28Days), value: .revenue(overviewData?.revenue ?? 0))
             }
         case .users:
-            setItem(config: .init(type: .users, timePeriod: .last28Days), value: .users(overviewData?.activeUsersCount ?? 0))
+            setItem(config: .init(type: .users, timePeriod: .last28Days), value: .users(overviewData?.users ?? 0))
         case .installs:
-            setItem(config: .init(type: .installs, timePeriod: .last28Days), value: .installs(overviewData?.installsCount ?? 0))
+            setItem(config: .init(type: .installs, timePeriod: .last28Days), value: .installs(overviewData?.installs ?? 0))
         default:
             break
         }
@@ -71,15 +71,15 @@ final class OverviewViewModel: ObservableObject {
         do {
             overviewData = try await apiService.request(
                 type: RCOverviewResponse.self,
-                endpoint: .overview
+                endpoint: .overview(projectIds: nil)
             )
             
             setItem(type: .mrr, value: .mrr(overviewData?.mrr ?? 0))
-            setItem(type: .subscriptions, value: .subscriptions(overviewData?.activeSubscribersCount ?? 0))
-            setItem(type: .trials, value: .trials(overviewData?.activeTrialsCount ?? 0))
+            setItem(type: .subscriptions, value: .subscriptions(overviewData?.subscriptions ?? 0))
+            setItem(type: .trials, value: .trials(overviewData?.trials ?? 0))
             setItem(config: .init(type: .revenue, timePeriod: .last28Days), value: .revenue(overviewData?.revenue ?? 0))
-            setItem(config: .init(type: .users, timePeriod: .last28Days), value: .users(overviewData?.activeUsersCount ?? 0))
-            setItem(config: .init(type: .installs, timePeriod: .last28Days), value: .installs(overviewData?.installsCount ?? 0))
+            setItem(config: .init(type: .users, timePeriod: .last28Days), value: .users(overviewData?.users ?? 0))
+            setItem(config: .init(type: .installs, timePeriod: .last28Days), value: .installs(overviewData?.installs ?? 0))
         } catch {
             state = .error(error)
         }
