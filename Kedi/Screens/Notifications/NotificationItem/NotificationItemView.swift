@@ -1,20 +1,20 @@
 //
-//  TransactionItemView.swift
+//  NotificationItemView.swift
 //  Kedi
 //
-//  Created by Saffet Emin Reisoğlu on 2/5/24.
+//  Created by Saffet Emin Reisoğlu on 4/14/24.
 //
 
 import SwiftUI
 
-struct TransactionItemView: View {
+struct NotificationItemView: View {
     
-    let transaction: TransactionItem
+    let notification: NotificationItem
     
     var body: some View {
         VStack(alignment: .leading, spacing: 3) {
             HStack(alignment: .center, spacing: 10) {
-                if let imageName = transaction.store?.imageName {
+                if let imageName = notification.store?.imageName {
                     Image(imageName)
                         .resizable()
                         .frame(width: 22, height: 22)
@@ -26,19 +26,21 @@ struct TransactionItemView: View {
                         .clipShape(Circle())
                 }
                 
-                Text(transaction.type.text)
+                Text(notification.type.text)
                     .font(.system(.body, weight: .semibold))
-                    .foregroundStyle(transaction.type.color)
+                    .foregroundStyle(notification.type.color)
                 
                 Spacer()
                 
-                Text(transaction.price.formatted(.currency(code: "USD")))
-                    .font(.system(.body, weight: .semibold))
-                    .foregroundStyle(transaction.type.color)
+                if let price = notification.price {
+                    Text(price.formatted(.currency(code: "USD")))
+                        .font(.system(.body, weight: .semibold))
+                        .foregroundStyle(notification.type.color)
+                }
             }
             
             HStack(alignment: .center, spacing: 10) {
-                ImageWithPlaceholder(data: transaction.projectIcon) { image in
+                ImageWithPlaceholder(data: notification.projectIcon) { image in
                     image.resizable()
                 } placeholder: {
                     Rectangle()
@@ -47,29 +49,43 @@ struct TransactionItemView: View {
                 .frame(width: 22, height: 22)
                 .clipShape(RoundedRectangle(cornerRadius: 22 * (2 / 9), style: .continuous))
                 
-                Text(transaction.projectName)
+                Text(notification.projectName)
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                 
                 Spacer()
                 
-                Text(transaction.productIdentifier)
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
+                if let productIdentifier = notification.productIdentifier {
+                    Text(productIdentifier)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            
+            if let subscriberAttributes = notification.subscriberAttributes {
+                HStack(alignment: .center, spacing: 10) {
+                    Image(systemName: "person")
+                        .font(.body)
+                        .frame(width: 22, height: 22)
+                    
+                    Text(subscriberAttributes)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
             }
             
             HStack(alignment: .center, spacing: 10) {
-                Text(transaction.countryFlag)
+                Text(notification.countryFlag)
                     .font(.body)
                     .frame(width: 22, height: 22)
                 
-                Text(transaction.country)
+                Text(notification.country)
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                 
                 Spacer()
                 
-                Text(transaction.date)
+                Text(notification.formattedDate)
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             }
@@ -81,5 +97,5 @@ struct TransactionItemView: View {
 }
 
 #Preview {
-    TransactionItemView(transaction: .init(data: .init(), projectIcon: nil))
+    NotificationItemView(notification: .init(data: .init(), project: .init(id: "", name: "")))
 }

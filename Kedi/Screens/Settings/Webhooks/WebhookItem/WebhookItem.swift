@@ -10,7 +10,11 @@ import Foundation
 struct WebhookItem: Identifiable, Hashable {
     
     var id: String { project.id }
-    var state: WebhookState
+    var state: WebhookState {
+        didSet {
+            setProject()
+        }
+    }
     var project: Project
     var isActive: Bool = false
     
@@ -18,6 +22,18 @@ struct WebhookItem: Identifiable, Hashable {
         self.state = state
         self.project = project
         self.isActive = state.isActive
+    }
+    
+    private mutating func setProject() {
+        switch state {
+        case .active(let webhookId):
+            project.webhookId = webhookId
+        case .inactive:
+            project.webhookId = nil
+        case .loading,
+                .error:
+            break
+        }
     }
 }
 

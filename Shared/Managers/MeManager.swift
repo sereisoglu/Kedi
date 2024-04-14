@@ -112,6 +112,11 @@ final class MeManager: ObservableObject {
         cacheManager.setWithEncode(key: "projects", data: projects, expiry: .never)
     }
     
+    func set(projects: [Project]?) {
+        self.projects = projects
+        cacheManager.setWithEncode(key: "projects", data: projects, expiry: .never)
+    }
+    
     func getProject(appId: String) -> Project? {
         projects?.first(where: { $0.apps?.contains(where: { $0.id == appId }) ?? false })
     }

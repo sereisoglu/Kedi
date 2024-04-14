@@ -56,8 +56,8 @@ struct TransactionDetailHistoryItemView: View {
                 .renewal(let price, let currency, let productIdentifier),
                 .trial(let price, let currency, let productIdentifier),
                 .conversion(let price, let currency, let productIdentifier),
-                .resubscribed(let price, let currency, let productIdentifier),
-                .unsubscribed(let price, let currency, let productIdentifier),
+                .resubscription(let price, let currency, let productIdentifier),
+                .unsubscription(let price, let currency, let productIdentifier),
                 .expiration(let price, let currency, let productIdentifier),
                 .billingIssue(let price, let currency, let productIdentifier),
                 .refund(let price, let currency, let productIdentifier):

@@ -90,7 +90,10 @@ final class SettingsViewModel: ObservableObject {
         await withTaskGroup(of: RCProjectDetailResponse?.self) { group in
             ids.forEach { id in
                 group.addTask { [weak self] in
-                    try? await self?.apiService.request(type: RCProjectDetailResponse.self, endpoint: .projectDetail(id: id))
+                    try? await self?.apiService.request(
+                        type: RCProjectDetailResponse.self,
+                        endpoint: .projectDetail(id: id)
+                    )
                 }
             }
             

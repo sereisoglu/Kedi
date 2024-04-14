@@ -25,7 +25,6 @@ final class WebhooksViewModel: ObservableObject {
     
     init() {
         webhooks = projects.map { .init(state: .loading, project: $0) }
-        
         Task {
             await fetchWebhooks()
         }
@@ -53,6 +52,8 @@ final class WebhooksViewModel: ObservableObject {
             }
             return .init(state: state, project: webhook.project)
         }
+        
+        updateProjects()
     }
     
     private func fetchWebhook(projectId: String) async -> WebhookState {
@@ -121,6 +122,26 @@ final class WebhooksViewModel: ObservableObject {
         }
     }
     
+    private func updateProjects() {
+        var newProjects = projects
+        webhooks.forEach { webhook in
+            if let index = newProjects.firstIndex(where: { $0.id == webhook.project.id }) {
+                switch webhook.state {
+                case .active(let webhookId):
+                    newProjects[index].webhookId = webhookId
+                case .inactive:
+                    newProjects[index].webhookId = nil
+                case .loading,
+                        .error:
+                    break
+                }
+            }
+        }
+        if projects != newProjects {
+            meManager.set(projects: newProjects)
+        }
+    }
+    
     @MainActor
     func toggleWebhook(projectId: String) {
         guard let index = webhooks.firstIndex(where: { $0.project.id == projectId }),
@@ -145,6 +166,8 @@ final class WebhooksViewModel: ObservableObject {
                 .error:
             return
         }
+        
+        updateProjects()
     }
     
     @MainActor
@@ -194,6 +217,8 @@ final class WebhooksViewModel: ObservableObject {
             }
             return .init(state: state, project: webhook.project)
         }
+        
+        updateProjects()
     }
     
     @MainActor

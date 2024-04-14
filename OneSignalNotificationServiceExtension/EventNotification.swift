@@ -36,7 +36,7 @@ struct EventNotification {
         [
             "\(type.emoji) \(type.text)",
             price?.formatted(.currency(code: "USD"))
-        ].compactMap {$0}.joined(separator: " • ")
+        ].compactMap { $0 }.joined(separator: " • ")
     }
     
     var body: String {
@@ -149,7 +149,7 @@ enum EventNotificationType {
         case .trial: "🟠"
         case .conversion: "🔵"
         case .resubscription: "🟢"
-        case .unsubscription: "🔴"
+        case .unsubscription: "🟡"
         case .expiration: "🔴"
         case .billingIssue: "🔴"
         case .refund: "🔴"

@@ -125,14 +125,14 @@ struct TransactionDetailHistoryItem: Identifiable, Hashable {
                     productIdentifier: data.productId ?? "n/a"
                 )
             } else { // UNSUBSCRIBE
-                type = .unsubscribed(
+                type = .unsubscription(
                     price: price,
                     currency: currency,
                     productIdentifier: data.productId ?? "n/a"
                 )
             }
         case "PURCHASES_UNCANCELLATION":
-            type = .resubscribed(
+            type = .resubscription(
                 price: price,
                 currency: currency,
                 productIdentifier: data.productId ?? "n/a"
@@ -200,8 +200,8 @@ enum TransactionDetailHistoryType: Hashable {
     case renewal(price: Double, currency: String, productIdentifier: String)
     case trial(price: Double, currency: String, productIdentifier: String)
     case conversion(price: Double, currency: String, productIdentifier: String)
-    case resubscribed(price: Double, currency: String, productIdentifier: String)
-    case unsubscribed(price: Double, currency: String, productIdentifier: String)
+    case resubscription(price: Double, currency: String, productIdentifier: String)
+    case unsubscription(price: Double, currency: String, productIdentifier: String)
     case expiration(price: Double, currency: String, productIdentifier: String)
     case billingIssue(price: Double, currency: String, productIdentifier: String)
     case refund(price: Double, currency: String, productIdentifier: String)
@@ -221,8 +221,8 @@ enum TransactionDetailHistoryType: Hashable {
         case .renewal: "Renewal"
         case .trial: "Trial"
         case .conversion: "Conversion"
-        case .resubscribed: "Resubscribed"
-        case .unsubscribed: "Unsubscribed"
+        case .resubscription: "Resubscription"
+        case .unsubscription: "Unsubscription"
         case .expiration: "Expiration"
         case .billingIssue: "Billing Issue"
         case .refund: "Refund"
@@ -244,8 +244,8 @@ enum TransactionDetailHistoryType: Hashable {
         case .renewal: .green
         case .trial: .orange
         case .conversion: .blue
-        case .resubscribed: .green
-        case .unsubscribed: .red
+        case .resubscription: .green
+        case .unsubscription: .yellow
         case .expiration: .red
         case .billingIssue: .red
         case .refund: .red

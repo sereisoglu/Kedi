@@ -14,6 +14,7 @@ struct Project: Codable, Identifiable, Hashable {
     var icon: Data?
     var name: String
     var apps: [ProjectApp]?
+    var webhookId: String?
 }
 
 struct ProjectApp: Codable, Identifiable, Hashable {

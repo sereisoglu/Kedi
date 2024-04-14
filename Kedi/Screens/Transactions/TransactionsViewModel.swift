@@ -105,7 +105,7 @@ final class TransactionsViewModel: ObservableObject {
                         }
                         return .init(
                             data: transaction,
-                            icon: projects?.first(where: { $0.id == projectId })?.icon
+                            projectIcon: projects?.first(where: { $0.id == projectId })?.icon
                         )
                     }
                 )

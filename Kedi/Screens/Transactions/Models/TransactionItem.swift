@@ -30,14 +30,14 @@ struct TransactionItem: Identifiable, Hashable {
     var type: TransactionType
     var price: Double
     var store: TransactionStore?
-    var icon: Data?
-    var appName: String
+    var projectIcon: Data?
+    var projectName: String
     var productIdentifier: String
     var countryFlag: String
     var country: String
     var date: String
     
-    init(data: RCTransaction, icon: Data?) {
+    init(data: RCTransaction, projectIcon: Data?) {
         id = data.storeTransactionIdentifier ?? UUID().uuidString
         projectId = data.app?.id ?? ""
         subscriberId = data.subscriberId ?? ""
@@ -57,21 +57,12 @@ struct TransactionItem: Identifiable, Hashable {
         }
         
         price = data.revenue ?? 0
-        
-        if let store = data.store {
-            self.store = .init(store: store)
-        }
-        
-        self.icon = icon
-        
-        appName = data.app?.name ?? ""
-        
+        store = .init(store: data.store ?? "")
+        self.projectIcon = projectIcon
+        projectName = data.app?.name ?? ""
         productIdentifier = data.productIdentifier ?? ""
-        
         countryFlag = data.subscriberCountryCode?.countryFlag ?? ""
-        
         country = data.subscriberCountryCode?.countryName ?? ""
-        
         if let date = data.purchaseDate?.format(to: .iso8601WithoutMilliseconds) {
             if date.isToday || date.isFuture {
                 self.date = date.formatted(.relative(presentation: .named))
@@ -165,7 +156,7 @@ extension Array where Element == TransactionSection {
                         }
                         return .init(
                             data: transaction,
-                            icon: nil
+                            projectIcon: nil
                         )
                     }
                 )

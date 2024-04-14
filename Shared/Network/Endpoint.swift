@@ -86,7 +86,7 @@ extension Endpoint {
         case .testWebhook(let projectId, let webhookId):
             return "me/projects/\(projectId)/integrations/webhooks/\(webhookId)/test_webhook"
         case .latestEvents(let projectId, let webhookId):
-            return "me/projects/\(projectId)/integrations/webhooks/\(webhookId)/test_webhook/latest_events"
+            return "me/projects/\(projectId)/integrations/webhooks/\(webhookId)/latest_events"
         }
     }
     
