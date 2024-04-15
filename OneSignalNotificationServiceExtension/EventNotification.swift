@@ -50,7 +50,7 @@ struct EventNotification {
         ].compactMap { $0 }.joined(separator: " • ")
     }
     
-    init(data: RCEvent, project: Project?) {
+    init(data: RCEvent) {
         id = data.id ?? ""
         appId = data.appId ?? ""
         
@@ -109,7 +109,6 @@ struct EventNotification {
         }
         
         price = data.price != 0 ? data.price : nil
-        projectName = project?.name
         if let productId = data.productId,
            let newProductId = data.newProductId {
             productIdentifier = "\(productId) → \(newProductId)"
