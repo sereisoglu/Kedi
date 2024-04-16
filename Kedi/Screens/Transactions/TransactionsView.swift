@@ -46,6 +46,7 @@ struct TransactionsView: View {
                         .multilineTextAlignment(.trailing)
                 }
             }
+            .listSectionSpacing(.compact)
         }
         
         if viewModel.state == .data {

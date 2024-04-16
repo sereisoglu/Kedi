@@ -105,14 +105,15 @@ final class MeManager: ObservableObject {
     
     // MARK: - me, projects
     
-    func set(me: RCMeResponse?, projects: [Project]?) {
+    func set(me: RCMeResponse?) {
         self.me = me
-        self.projects = projects
         cacheManager.setWithEncode(key: "me", data: me, expiry: .never)
-        cacheManager.setWithEncode(key: "projects", data: projects, expiry: .never)
     }
     
     func set(projects: [Project]?) {
+        guard self.projects != projects else {
+            return
+        }
         self.projects = projects
         cacheManager.setWithEncode(key: "projects", data: projects, expiry: .never)
     }

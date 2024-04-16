@@ -54,7 +54,7 @@ struct NotificationsView: View {
             } footer: {
                 Text("You need to allow notifications for webhook integration.")
             }
-        } else {
+        } else if viewModel.state == .data {
             ForEach(viewModel.notificationSections) { section in
                 Section {
                     ForEach(section.notifications) { notification in
@@ -65,7 +65,15 @@ struct NotificationsView: View {
                 } header: {
                     Text(section.date.format(to: .EEE_MMM_d_yyyy))
                 }
+                .listSectionSpacing(.compact)
             }
+            
+            Text("You can view the last 30 events for each project since the date you added the webhook.")
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+                .listRowInsets(.zero)
+                .listRowBackground(Color.clear)
+                .padding(.horizontal)
         }
     }
     

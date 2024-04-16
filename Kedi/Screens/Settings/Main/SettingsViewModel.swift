@@ -17,6 +17,10 @@ final class SettingsViewModel: ObservableObject {
     @Published private(set) var me: RCMeResponse?
     @Published var errorAlert: Error?
     
+    var projects: [Project] {
+        meManager.projects ?? []
+    }
+    
     var authTokenExpiresDate: Date? {
         authManager.getAuthTokenExpiresDate()
     }
@@ -72,11 +76,13 @@ final class SettingsViewModel: ObservableObject {
                             return nil
                         }
                         return .init(id: id, store: store)
-                    }
+                    },
+                    webhookId: self.projects.first(where: { $0.id == id })?.webhookId
                 )
             }
             
-            meManager.set(me: me, projects: projects)
+            meManager.set(me: me)
+            meManager.set(projects: projects)
             
             self.me = me
             

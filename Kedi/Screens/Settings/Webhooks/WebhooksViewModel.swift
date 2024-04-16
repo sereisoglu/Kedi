@@ -137,9 +137,7 @@ final class WebhooksViewModel: ObservableObject {
                 }
             }
         }
-        if projects != newProjects {
-            meManager.set(projects: newProjects)
-        }
+        meManager.set(projects: newProjects)
     }
     
     @MainActor
