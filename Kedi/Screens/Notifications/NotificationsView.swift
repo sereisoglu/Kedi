@@ -14,33 +14,87 @@ struct NotificationsView: View {
     
     var body: some View {
         List {
-            if !pushNotificationsManager.isNotificationsAllowed {
-                Section {
-                    Toggle(
-                        "Notifications",
-                        systemImage: "bell.badge",
-                        isOn: $pushNotificationsManager.isNotificationsAllowed
-                    )
-                } footer: {
-                    Text("You need to allow notifications for webhook integration.")
-                }
-            } else {
-                ForEach(viewModel.notificationSections) { section in
-                    Section {
-                        ForEach(section.notifications) { notification in
-                            NavigationLink(value: notification) {
-                                NotificationItemView(notification: notification)
-                            }
-                        }
-                    } header: {
-                        Text(section.date.format(to: .EEE_MMM_d_yyyy))
-                    }
-                }
-            }
+            makeBody()
         }
         .navigationTitle("Notifications")
         .navigationDestination(for: NotificationItem.self) { notification in
             TransactionDetailView(viewModel: .init(appId: notification.appId, subscriberId: notification.subscriberId))
+        }
+        .navigationDestination(for: String.self) { screen in
+            switch screen {
+            case "webhooks":
+                WebhooksView()
+                    .environmentObject(pushNotificationsManager)
+            case "allWebhooks":
+                AllWebhooksView()
+            case "webhooksManualSetup":
+                WebhooksManualSetupView()
+                    .environmentObject(pushNotificationsManager)
+            default:
+                Text("Unknown destination!")
+            }
+        }
+        .overlay(content: makeStateView)
+        .scrollContentBackground(viewModel.state == .data ? .automatic : .hidden)
+        .background(Color.systemGroupedBackground)
+        .refreshable {
+            await viewModel.refresh()
+        }
+    }
+    
+    @ViewBuilder
+    private func makeBody() -> some View {
+        if !pushNotificationsManager.isNotificationsAllowed {
+            Section {
+                Toggle(
+                    "Notifications",
+                    systemImage: "bell.badge",
+                    isOn: $pushNotificationsManager.isNotificationsAllowed
+                )
+            } footer: {
+                Text("You need to allow notifications for webhook integration.")
+            }
+        } else {
+            ForEach(viewModel.notificationSections) { section in
+                Section {
+                    ForEach(section.notifications) { notification in
+                        NavigationLink(value: notification) {
+                            NotificationItemView(notification: notification)
+                        }
+                    }
+                } header: {
+                    Text(section.date.format(to: .EEE_MMM_d_yyyy))
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func makeStateView() -> some View {
+        switch viewModel.state {
+        case .loading:
+            ProgressView()
+                .controlSize(.large)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
+        case .empty:
+            ContentUnavailableView {
+                Label("Empty", systemImage: "xmark.circle")
+            } description: {
+                Text("No notifications")
+            } actions: {
+                NavigationLink("Setup Webhooks", value: "webhooks")
+            }
+            
+        case .error(let error):
+            ContentUnavailableView(
+                "Error",
+                systemImage: "exclamationmark.triangle",
+                description: Text(error.localizedDescription)
+            )
+            
+        case .data:
+            EmptyView()
         }
     }
 }

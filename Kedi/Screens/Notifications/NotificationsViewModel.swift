@@ -54,11 +54,13 @@ final class NotificationsViewModel: ObservableObject {
                 return .init(date: date, notifications: notifications)
             }
             .sorted(by: { $0.date > $1.date })
+        
+        state = notifications.isEmpty ? .empty : .data
     }
     
-    private func fetchEvents(project: Project) async -> [NotificationItem] {
+    private func fetchEvents(project: Project) async -> [NotificationItem]? {
         guard let webhookId = project.webhookId else {
-            return []
+            return nil
         }
         do {
             let data = try await apiService.request(
@@ -67,7 +69,11 @@ final class NotificationsViewModel: ObservableObject {
             )
             return data?.events?.map { .init(data: $0, project: project) } ?? []
         } catch {
-            return []
+            return nil
         }
+    }
+    
+    func refresh() async {
+        await fetchAllEvents()
     }
 }

@@ -47,10 +47,8 @@ struct OverviewView: View {
                     .environmentObject(viewModel)
             }
         }
+        .overlay(content: makeStateView)
         .scrollContentBackground(viewModel.state == .data ? .automatic : .hidden)
-        .background {
-            makeBackground()
-        }
         .background(Color.systemGroupedBackground)
         .refreshable {
             await viewModel.refresh()
@@ -141,7 +139,7 @@ struct OverviewView: View {
     }
     
     @ViewBuilder
-    private func makeBackground() -> some View {
+    private func makeStateView() -> some View {
         switch viewModel.state {
         case .empty:
             ContentUnavailableView(

@@ -22,7 +22,7 @@ struct AboutView: View {
                                 .strokeBorder(Color.primary.opacity(0.2), lineWidth: 1)
                         )
                     
-                    Text("Kedi")
+                    Text("Kedi for RevenueCat")
                         .font(.title)
                         .fontWeight(.bold)
                     

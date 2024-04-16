@@ -20,11 +20,9 @@ struct AllWebhooksView: View {
         }
         .navigationTitle("All Webhooks")
         .navigationBarTitleDisplayMode(.inline)
+        .overlay(content: makeStateView)
         .scrollContentBackground(viewModel.state == .data ? .automatic : .hidden)
-        .background {
-            makeBackground()
-                .background(Color.systemGroupedBackground)
-        }
+        .background(Color.systemGroupedBackground)
         .refreshable {
             await viewModel.refresh()
         }
@@ -98,7 +96,7 @@ struct AllWebhooksView: View {
     }
     
     @ViewBuilder
-    private func makeBackground() -> some View {
+    private func makeStateView() -> some View {
         switch viewModel.state {
         case .loading:
             ProgressView()
@@ -110,7 +108,6 @@ struct AllWebhooksView: View {
                 "Empty",
                 systemImage: "xmark.circle"
             )
-            .listRowBackground(Color.clear)
             
         case .error(let error):
             ContentUnavailableView(
@@ -118,7 +115,6 @@ struct AllWebhooksView: View {
                 systemImage: "exclamationmark.triangle",
                 description: Text(error.localizedDescription)
             )
-            .listRowBackground(Color.clear)
             
         case .data:
             EmptyView()

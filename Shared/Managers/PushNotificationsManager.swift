@@ -47,7 +47,7 @@ final class PushNotificationsManager: NSObject, ObservableObject {
         OneSignal.setConsentRequired(true)
         OneSignal.setConsentGiven(true)
         
-        OneSignal.Debug.setLogLevel(.LL_VERBOSE)
+//        OneSignal.Debug.setLogLevel(.LL_VERBOSE)
         
         OneSignal.initialize("1b5dfd0b-e893-48b4-9f39-ac61653d49f9", withLaunchOptions: launchOptions)
         
