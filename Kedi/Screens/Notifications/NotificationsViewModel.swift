@@ -12,13 +12,13 @@ final class NotificationsViewModel: ObservableObject {
     private let apiService = APIService.shared
     private let meManager = MeManager.shared
     
-    var projects: [Project] {
+    private var projects: [Project] {
         meManager.projects ?? []
     }
     
     @Published private(set) var state: ViewState = .loading
     
-    @Published private(set) var notificationSections: [NotificationSection] = []
+    @Published private(set) var notificationSections: [NotificationSection] = .stub
     
     init() {
         Task {

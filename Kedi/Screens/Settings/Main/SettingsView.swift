@@ -156,6 +156,8 @@ struct SettingsView: View {
             .overlay { NavigationLink(value: "webhooks") { EmptyView() }.opacity(0) }
         } header: {
             Text("Notifications")
+        } footer: {
+            Text("Add a webhook with **just one tap** to receive notifications of transactions in your projects ✨")
         }
         
         Section {

@@ -12,11 +12,6 @@ struct NotificationSection: Identifiable, Hashable {
     var id: String { date.format(to: .iso8601WithoutMilliseconds) }
     var date: Date
     var notifications: [NotificationItem]
-    
-    init(date: Date, notifications: [NotificationItem]) {
-        self.date = date
-        self.notifications = notifications
-    }
 }
 
 struct NotificationItem: Identifiable, Hashable {
@@ -211,4 +206,25 @@ enum NotificationStore {
             return nil
         }
     }
+}
+
+extension Array where Element == NotificationSection {
+    
+    static let stub: Self = {
+        let project = Project(id: "p0001", name: "Kedi")
+        let notifications: [NotificationItem] = RCLatestEventsResponse.stub.events?.map { NotificationItem(data: $0, project: project) } ?? []
+        
+        let groupedNotifications = Dictionary(grouping: notifications) { notification in
+            notification.date?.withoutTime
+        }
+        
+        return groupedNotifications
+            .compactMap { date, notifications in
+                guard let date else {
+                    return nil
+                }
+                return .init(date: date, notifications: notifications)
+            }
+            .sorted(by: { $0.date > $1.date })
+    }()
 }

@@ -278,7 +278,6 @@ extension RCTransactionDetailResponse {
             }
         }
         """#
-        
         return try! JSONDecoder().decode(Self.self, from: .init(string.utf8))
     }()
 }

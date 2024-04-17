@@ -19,7 +19,7 @@ final class WebhooksViewModel: ObservableObject {
         meManager.id ?? ""
     }
     
-    var projects: [Project] {
+    private var projects: [Project] {
         meManager.projects ?? []
     }
     

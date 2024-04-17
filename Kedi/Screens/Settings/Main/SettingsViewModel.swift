@@ -17,7 +17,7 @@ final class SettingsViewModel: ObservableObject {
     @Published private(set) var me: RCMeResponse?
     @Published var errorAlert: Error?
     
-    var projects: [Project] {
+    private var projects: [Project] {
         meManager.projects ?? []
     }
     

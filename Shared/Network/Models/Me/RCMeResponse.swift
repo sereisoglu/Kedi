@@ -68,7 +68,6 @@ extension RCMeResponse {
             "name": "Saffet Emin Reisoğlu",
         }
         """#
-        
         return try! JSONDecoder().decode(Self.self, from: .init(string.utf8))
     }()
 }

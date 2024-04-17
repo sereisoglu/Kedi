@@ -37,6 +37,8 @@ struct NotificationsView: View {
         .overlay(content: makeStateView)
         .scrollContentBackground(viewModel.state == .data ? .automatic : .hidden)
         .background(Color.systemGroupedBackground)
+        .redacted(reason: viewModel.state == .loading ? .placeholder : [])
+        .disabled(viewModel.state == .loading)
         .refreshable {
             await viewModel.refresh()
         }
@@ -54,7 +56,7 @@ struct NotificationsView: View {
             } footer: {
                 Text("You need to allow notifications for webhook integration.")
             }
-        } else if viewModel.state == .data {
+        } else {
             ForEach(viewModel.notificationSections) { section in
                 Section {
                     ForEach(section.notifications) { notification in
@@ -80,11 +82,6 @@ struct NotificationsView: View {
     @ViewBuilder
     private func makeStateView() -> some View {
         switch viewModel.state {
-        case .loading:
-            ProgressView()
-                .controlSize(.large)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                
         case .empty:
             ContentUnavailableView {
                 Label("Empty", systemImage: "xmark.circle")
@@ -101,7 +98,8 @@ struct NotificationsView: View {
                 description: Text(error.localizedDescription)
             )
             
-        case .data:
+        case .loading,
+                .data:
             EmptyView()
         }
     }

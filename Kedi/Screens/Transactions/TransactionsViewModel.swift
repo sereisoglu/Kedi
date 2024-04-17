@@ -15,8 +15,8 @@ final class TransactionsViewModel: ObservableObject {
     private var transactions = [RCTransaction]()
     private var startFrom: Int?
     
-    private var projects: [Project]? {
-        meManager.projects
+    private var projects: [Project] {
+        meManager.projects ?? []
     }
     
     @Published private(set) var state: ViewState = .loading
@@ -105,7 +105,7 @@ final class TransactionsViewModel: ObservableObject {
                         }
                         return .init(
                             data: transaction,
-                            projectIcon: projects?.first(where: { $0.id == projectId })?.icon
+                            projectIcon: projects.first(where: { $0.id == projectId })?.icon
                         )
                     }
                 )
