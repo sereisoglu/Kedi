@@ -10,6 +10,7 @@ import UIKit
 final class AppDelegate: NSObject, UIApplicationDelegate {
     
     private let pushNotificationsManager = PushNotificationsManager.shared
+    private let purchaseManager = PurchaseManager.shared
     
     func application(
         _ application: UIApplication,
@@ -25,5 +26,12 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         pushNotificationsManager.updateIconBadgeNumber()
+    }
+    
+    func application(
+        _ application: UIApplication,
+        didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+    ) {
+        purchaseManager.setPushDeviceToken(deviceToken)
     }
 }

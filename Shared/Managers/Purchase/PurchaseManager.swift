@@ -42,7 +42,7 @@ final class PurchaseManager: NSObject, ObservableObject {
     
     func start() {
         Purchases.logLevel = .error
-        Purchases.configure(withAPIKey: "appl_cOuJUpHbyDbiNsEACaSKfqXwKlq")
+        Purchases.configure(withAPIKey: EnvVars.revenueCat)
         
         revenueCat.delegate = self
         
@@ -57,7 +57,6 @@ final class PurchaseManager: NSObject, ObservableObject {
                         try await self?.fetchMePurchases()
                     }
                 }
-                
                 state = .data
             } catch {
                 state = .error(error)
@@ -70,6 +69,18 @@ final class PurchaseManager: NSObject, ObservableObject {
     func signIn(id: String) async throws {
         let info = try await revenueCat.logIn(id)
         await processInfo(info: info.customerInfo)
+    }
+    
+    func setKid(_ kid: String) {
+        revenueCat.attribution.setAttributes(["kid": kid])
+    }
+    
+    func setOneSignalId(_ id: String?) {
+        revenueCat.attribution.setOnesignalUserID(id)
+    }
+    
+    func setPushDeviceToken(_ token: Data) {
+        revenueCat.attribution.setPushToken(token)
     }
     
     func signOut() async throws {
@@ -98,6 +109,11 @@ final class PurchaseManager: NSObject, ObservableObject {
         
         if !data.userCancelled {
             await processInfo(info: data.customerInfo)
+            
+            NotificationCenter.default.post(
+                name: .purchase,
+                object: purchase.productType.rawValue
+            )
         }
     }
     
@@ -132,7 +148,6 @@ final class PurchaseManager: NSObject, ObservableObject {
                   let level = purchase.productType.level else {
                 return false
             }
-            
             return level > (meSubscription?.productType.level ?? 0)
         }
     }
@@ -141,17 +156,17 @@ final class PurchaseManager: NSObject, ObservableObject {
         purchases.filter { $0.productType.entitlement == .tip }
     }
     
-    func getTotalSpentForTips() -> String {
+    func getTotalSpentForTips() -> String? {
         let totalSpent: Decimal = meNonSubscriptions?.reduce(0, { partialResult, nonSubscription in
             partialResult + nonSubscription.price
         }) ?? 0
         
         guard totalSpent > 0,
               let localizedPriceString = purchases.first?.package.storeProduct.priceFormatter?.string(from: totalSpent as NSNumber) else {
-            return "You haven't made a tip."
+            return nil
         }
         
-        return "You've tipped \(localizedPriceString) so far.\n❤️ Thanks for your support!"
+        return localizedPriceString
     }
     
     // MARK: - processInfo
@@ -163,7 +178,6 @@ final class PurchaseManager: NSObject, ObservableObject {
                   let purchase = purchases.first(where: { $0.productType == productType }) else {
                 return nil
             }
-            
             return .init(
                 productType: productType,
                 purchaseDate: nonSubscription.purchaseDate,
@@ -179,7 +193,6 @@ final class PurchaseManager: NSObject, ObservableObject {
                       let expirationDate = entitlement.expirationDate else {
                     return nil
                 }
-                
                 return .init(
                     productType: productType,
                     purchaseDate: purchaseDate,
@@ -197,24 +210,29 @@ final class PurchaseManager: NSObject, ObservableObject {
 extension PurchaseManager: PurchasesDelegate {
     
     @MainActor
-    func purchases(_ purchases: Purchases, receivedUpdated customerInfo: CustomerInfo) {
+    func purchases(
+        _ purchases: Purchases,
+        receivedUpdated customerInfo: CustomerInfo
+    ) {
         print("purchases: receivedUpdated:", customerInfo)
-        
         guard !isPurchasing else {
             return
         }
-        
         processInfo(info: customerInfo)
     }
     
     // itms-services://?action=purchaseIntent&bundleId=com.sereisoglu.kedi&productIdentifier=kedi.supporter.monthly
-    func purchases(_ purchases: Purchases, readyForPromotedProduct product: StoreProduct, purchase startPurchase: @escaping StartPurchaseBlock) {
+    func purchases(
+        _ purchases: Purchases,
+        readyForPromotedProduct product: StoreProduct,
+        purchase startPurchase: @escaping StartPurchaseBlock
+    ) {
         guard !isPurchasing else {
             return
         }
         isPurchasing = true
         
-        startPurchase { [weak self] (_, info, _, _) in
+        startPurchase { [weak self] _, info, _, _ in
             guard let self else {
                 return
             }

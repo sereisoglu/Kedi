@@ -18,19 +18,9 @@ struct EventNotification {
     var projectName: String?
     var productIdentifier: String?
     var store: String?
-    var countryFlag: String?
-    var country: String?
+    var countryWithFlag: String?
     var environment: String?
     var offerCode: String?
-    
-    var countryWithFlag: String? {
-        if let countryFlag,
-           let country {
-            return "\(countryFlag) \(country)"
-        } else {
-            return nil
-        }
-    }
     
     var title: String {
         [
@@ -116,8 +106,7 @@ struct EventNotification {
             productIdentifier = data.productId
         }
         store = data.store?.replacingOccurrences(of: "_", with: " ").capitalized
-        countryFlag = data.countryCode?.countryFlag
-        country = data.countryCode?.countryName
+        countryWithFlag = data.countryCode?.countryFlagAndName
         environment = data.environment == "PRODUCTION" ? nil : data.environment?.capitalized
         offerCode = data.offerCode
     }

@@ -49,6 +49,9 @@
 		4A8B56BB2BCC01D3004AD736 /* NotificationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56BA2BCC01D3004AD736 /* NotificationItem.swift */; };
 		4A8B56BD2BCC01DB004AD736 /* NotificationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56BC2BCC01DB004AD736 /* NotificationItemView.swift */; };
 		4A8B56BE2BCC0A9A004AD736 /* EventNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEFFCBD2BB0D5B600FCA073 /* EventNotification.swift */; };
+		4A8B56C22BD01CCE004AD736 /* TelemetryClient in Frameworks */ = {isa = PBXBuildFile; productRef = 4A8B56C12BD01CCE004AD736 /* TelemetryClient */; };
+		4A8B56C42BD01CFF004AD736 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56C32BD01CFF004AD736 /* AnalyticsManager.swift */; };
+		4A8B56C72BD03077004AD736 /* EnvVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56C62BD03077004AD736 /* EnvVars.swift */; };
 		4A90387B2B8BF4EB006FAC7F /* PaydayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90387A2B8BF4EB006FAC7F /* PaydayViewModel.swift */; };
 		4A90387E2B8C89B7006FAC7F /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90387D2B8C89B7006FAC7F /* DeepLink.swift */; };
 		4A90387F2B8C89B7006FAC7F /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A90387D2B8C89B7006FAC7F /* DeepLink.swift */; };
@@ -278,6 +281,8 @@
 		4A8B56B42BC75ED1004AD736 /* NotificationName+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extension.swift"; sourceTree = "<group>"; };
 		4A8B56BA2BCC01D3004AD736 /* NotificationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationItem.swift; sourceTree = "<group>"; };
 		4A8B56BC2BCC01DB004AD736 /* NotificationItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationItemView.swift; sourceTree = "<group>"; };
+		4A8B56C32BD01CFF004AD736 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
+		4A8B56C62BD03077004AD736 /* EnvVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvVars.swift; sourceTree = "<group>"; };
 		4A90387A2B8BF4EB006FAC7F /* PaydayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaydayViewModel.swift; sourceTree = "<group>"; };
 		4A90387C2B8C853F006FAC7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4A90387D2B8C89B7006FAC7F /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
@@ -419,6 +424,7 @@
 				4A1DFC952B8115C30094BAA0 /* StoreKit.framework in Frameworks */,
 				4AB7209F2B6C74FE001E2C76 /* KeychainSwift in Frameworks */,
 				4ADFB9E12BADE31F00BDAA58 /* OneSignalFramework in Frameworks */,
+				4A8B56C22BD01CCE004AD736 /* TelemetryClient in Frameworks */,
 				4AB720772B6C1202001E2C76 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -834,6 +840,7 @@
 				4ADF09F82B792998002318B2 /* WidgetsManager.swift */,
 				4A4146092B85EC0800489D9C /* SessionManager.swift */,
 				4ADFB9E22BAE38D800BDAA58 /* PushNotificationsManager.swift */,
+				4A8B56C32BD01CFF004AD736 /* AnalyticsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1161,8 +1168,9 @@
 		4AEE73012B8BC2A200F51548 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4AEE73022B8BC2BD00F51548 /* AppStorePayday.swift */,
+				4A8B56C62BD03077004AD736 /* EnvVars.swift */,
 				4A90387D2B8C89B7006FAC7F /* DeepLink.swift */,
+				4AEE73022B8BC2BD00F51548 /* AppStorePayday.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1210,6 +1218,7 @@
 				4ADF09DF2B763CB7002318B2 /* Cache */,
 				4A1DFC922B8115B80094BAA0 /* RevenueCat */,
 				4ADFB9E02BADE31F00BDAA58 /* OneSignalFramework */,
+				4A8B56C12BD01CCE004AD736 /* TelemetryClient */,
 			);
 			productName = Kedi;
 			productReference = 4AB720582B6BAC8D001E2C76 /* Kedi.app */;
@@ -1294,6 +1303,7 @@
 				4ADF09DE2B763CB7002318B2 /* XCRemoteSwiftPackageReference "Cache" */,
 				4A1DFC912B8115B80094BAA0 /* XCRemoteSwiftPackageReference "purchases-ios" */,
 				4ADFB9DD2BADE31E00BDAA58 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
+				4A8B56C02BD01CCE004AD736 /* XCRemoteSwiftPackageReference "SwiftClient" */,
 			);
 			productRefGroup = 4AB720592B6BAC8D001E2C76 /* Products */;
 			projectDirPath = "";
@@ -1404,6 +1414,7 @@
 				4A1DFC812B7C93C80094BAA0 /* Bundle+Extension.swift in Sources */,
 				4A8B56A42BC6E4D9004AD736 /* UIDevice+Extension.swift in Sources */,
 				4AB7207B2B6C17A0001E2C76 /* RCLoginResponse.swift in Sources */,
+				4A8B56C72BD03077004AD736 /* EnvVars.swift in Sources */,
 				4A044E702B96843E000DACBF /* OverviewDetailViewModel.swift in Sources */,
 				4AB720872B6C56E7001E2C76 /* RootView.swift in Sources */,
 				4AADB8FF2BBF72BE00EEA8C2 /* RCUpdateWebhookRequest.swift in Sources */,
@@ -1455,6 +1466,7 @@
 				4AB720B62B6E3E16001E2C76 /* SidebarView.swift in Sources */,
 				4AB720A92B6DB3A0001E2C76 /* AsyncButton.swift in Sources */,
 				4A8B56B22BC7546F004AD736 /* RCLatestEventsResponse.swift in Sources */,
+				4A8B56C42BD01CFF004AD736 /* AnalyticsManager.swift in Sources */,
 				4AEFFCD22BB9995600FCA073 /* WebhooksView.swift in Sources */,
 				4AB721092B726C62001E2C76 /* TransactionDetailInfoItem.swift in Sources */,
 				4A8B56A72BC6EA84004AD736 /* AllWebhooksView.swift in Sources */,
@@ -1932,6 +1944,14 @@
 				minimumVersion = 4.36.3;
 			};
 		};
+		4A8B56C02BD01CCE004AD736 /* XCRemoteSwiftPackageReference "SwiftClient" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TelemetryDeck/SwiftClient.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.1;
+			};
+		};
 		4AB720752B6C1202001E2C76 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -1971,6 +1991,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4A1DFC912B8115B80094BAA0 /* XCRemoteSwiftPackageReference "purchases-ios" */;
 			productName = RevenueCat;
+		};
+		4A8B56C12BD01CCE004AD736 /* TelemetryClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4A8B56C02BD01CCE004AD736 /* XCRemoteSwiftPackageReference "SwiftClient" */;
+			productName = TelemetryClient;
 		};
 		4AADB9192BC59B8500EEA8C2 /* Cache */ = {
 			isa = XCSwiftPackageProductDependency;
