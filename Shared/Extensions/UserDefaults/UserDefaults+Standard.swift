@@ -26,4 +26,24 @@ extension UserDefaults {
             set(newValue, forKey: #function)
         }
     }
+    
+    var numberOfVisits: Int {
+        get {
+            register(defaults: [#function: 0])
+            return integer(forKey: #function)
+        }
+        set {
+            set(newValue, forKey: #function)
+        }
+    }
+    
+    var isRequestReviewRequested: Bool {
+        get {
+            register(defaults: [#function: false])
+            return bool(forKey: #function)
+        }
+        set {
+            set(newValue, forKey: #function)
+        }
+    }
 }

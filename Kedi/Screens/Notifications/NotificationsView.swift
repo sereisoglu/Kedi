@@ -70,12 +70,14 @@ struct NotificationsView: View {
                 .listSectionSpacing(.compact)
             }
             
-            Text("You can view the last 30 events for each project since the date you added the webhook.")
-                .font(.footnote)
-                .foregroundStyle(.secondary)
-                .listRowInsets(.zero)
-                .listRowBackground(Color.clear)
-                .padding(.horizontal)
+            if viewModel.state == .data {
+                Text("You can view the last 30 events for each project since the date you added the webhook.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .listRowInsets(.zero)
+                    .listRowBackground(Color.clear)
+                    .padding(.horizontal)
+            }
         }
     }
     
