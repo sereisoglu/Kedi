@@ -10,11 +10,16 @@ import Foundation
 final class TransactionsViewModel: ObservableObject {
     
     private let apiService = APIService.shared
+    private let meManager = MeManager.shared
     
     private var transactions = [RCTransaction]()
     private var startFrom: Int?
     
-    @Published private(set) var state: GeneralState = .loading
+    private var projects: [Project] {
+        meManager.projects ?? []
+    }
+    
+    @Published private(set) var state: ViewState = .loading
     @Published private(set) var paginationState: PaginationState = .idle
     
     @Published private(set) var transactionSections: [TransactionSection] = .stub
@@ -92,7 +97,18 @@ final class TransactionsViewModel: ObservableObject {
                 guard let date else {
                     return nil
                 }
-                return .init(date: date, transactions: transactions.map { .init(data: $0) })
+                return .init(
+                    date: date, 
+                    transactions: transactions.compactMap { transaction in
+                        guard let projectId = transaction.app?.id else {
+                            return nil
+                        }
+                        return .init(
+                            data: transaction,
+                            projectIcon: projects.first(where: { $0.id == projectId })?.icon
+                        )
+                    }
+                )
             }
             .sorted(by: { $0.date > $1.date })
     }

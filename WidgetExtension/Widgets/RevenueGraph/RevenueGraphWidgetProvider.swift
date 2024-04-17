@@ -12,9 +12,9 @@ struct RevenueGraphWidgetProvider: TimelineProvider {
     
     typealias Entry = RevenueGraphWidgetEntry
     
-    private let meManager = MeManager.shared
-    private let sessionManager = SessionManager.shared
     private let apiService = APIService.shared
+    private let authManager = AuthManager.shared
+    private let sessionManager = SessionManager.shared
     private let cacheManager = CacheManager.shared
     
     func placeholder(in context: Context) -> Entry {
@@ -31,14 +31,12 @@ struct RevenueGraphWidgetProvider: TimelineProvider {
         Task {
             await getEntry(context: context) { entry in
                 let policy: TimelineReloadPolicy
-                if let error = entry.error {
-                    switch error {
-                    case .unauthorized:
-                        policy = .never
-                    case .service:
-                        policy = .after(Date().byAdding(.minute, value: 2))
-                    }
-                } else {
+                switch entry.error {
+                case .unauthorized:
+                    policy = .after(Date().byAdding(.minute, value: 15))
+                case .service:
+                    policy = .after(Date().byAdding(.minute, value: 2))
+                case .none: // success
                     policy = .after(Date().nearestDate(secondGranularity: 60 * 30))
                 }
                 
@@ -53,7 +51,7 @@ struct RevenueGraphWidgetProvider: TimelineProvider {
         completion: @escaping (Entry) -> Void
     ) async {
         sessionManager.startWidgetExtension()
-        guard let authToken = meManager.getAuthToken() else {
+        guard let authToken = authManager.getAuthToken() else {
             completion(.init(date: .now, items: [], error: .unauthorized))
             return
         }

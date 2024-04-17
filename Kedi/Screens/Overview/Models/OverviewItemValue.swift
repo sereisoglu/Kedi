@@ -92,15 +92,15 @@ extension OverviewItemValue {
         case .mrr:
             return .mrr(data.mrr ?? 0)
         case .subscriptions:
-            return.subscriptions(data.activeSubscribersCount ?? 0)
+            return.subscriptions(data.subscriptions ?? 0)
         case .trials:
-            return .trials(data.activeTrialsCount ?? 0)
+            return .trials(data.trials ?? 0)
         case .revenue:
             return .revenue(data.revenue ?? 0)
         case .users:
-            return .users(data.activeUsersCount ?? 0)
+            return .users(data.users ?? 0)
         case .installs:
-            return .installs(data.installsCount ?? 0)
+            return .installs(data.installs ?? 0)
         case .arr:
             return .arr(5234.342)
         case .proceeds:

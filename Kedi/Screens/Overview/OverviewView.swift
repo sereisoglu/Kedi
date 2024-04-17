@@ -17,99 +17,88 @@ struct OverviewView: View {
     @State private var showingRestoreDefaultsAlert = false
     
     var body: some View {
-        makeBody()
-            .navigationTitle("Overview")
-            .background(Color.systemGroupedBackground)
-            .refreshable {
-                await viewModel.refresh()
+        ScrollView {
+            makeBody()
+        }
+        .navigationTitle("Overview")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    withAnimation {
+                        showingAddItem = true
+                    }
+                } label: {
+                    Image(systemName: "plus.square")
+                }
             }
+        }
+        .navigationDestination(for: OverviewItem.self) { item in
+            OverviewDetailView(viewModel: .init(item: item))
+        }
+        .sheet(isPresented: $showingAddItem) {
+            NavigationStack {
+                OverviewItemDetailView(viewModel: .init(config: nil))
+                    .environmentObject(viewModel)
+            }
+        }
+        .sheet(item: $contextMenuItem) { item in
+            NavigationStack {
+                OverviewItemDetailView(viewModel: .init(config: item.config))
+                    .environmentObject(viewModel)
+            }
+        }
+        .overlay(content: makeStateView)
+        .scrollContentBackground(viewModel.state == .data ? .automatic : .hidden)
+        .background(Color.systemGroupedBackground)
+        .refreshable {
+            await viewModel.refresh()
+        }
     }
     
     @ViewBuilder
     private func makeBody() -> some View {
-        switch viewModel.state {
-        case .empty:
-            ContentUnavailableView(
-                "Empty",
-                systemImage: "xmark.circle"
-            )
-            
-        case .error(let error):
-            ContentUnavailableView(
-                "Error",
-                systemImage: "exclamationmark.triangle",
-                description: Text(error.localizedDescription)
-            )
-            
-        case .loading,
-                .data:
-            ScrollView {
-                LazyVGrid(
-                    columns: [.init(.adaptive(minimum: 165), alignment: .top)],
-                    spacing: 12
-                ) {
-                    ForEach(viewModel.getItems()) { item in
-                        if item.chart == nil {
+        if viewModel.state == .data {
+            LazyVGrid(
+                columns: [.init(.adaptive(minimum: 165), alignment: .top)],
+                spacing: 12
+            ) {
+                ForEach(viewModel.getItems()) { item in
+                    if item.chart == nil {
+                        makeItem(item: item)
+                    } else {
+                        NavigationLink(value: item) {
                             makeItem(item: item)
-                        } else {
-                            NavigationLink(value: item) {
-                                makeItem(item: item)
-                            }
-                            .buttonStyle(StandardButtonStyle())
                         }
-                    }
-                }
-                .padding(.horizontal)
-                .padding(.bottom)
-                
-                Button {
-                    showingRestoreDefaultsAlert = true
-                } label: {
-                    Label("Restore Defaults", systemImage: "clock.arrow.circlepath")
-                        .font(.subheadline)
-                }
-                .disabled(viewModel.isRestoreDefaultsDisabled)
-                .alert(
-                    "Restore Defaults",
-                    isPresented: $showingRestoreDefaultsAlert
-                ) {
-                    Button("Cancel", role: .cancel) {}
-                    Button("Yes", role: .destructive) {
-                        withAnimation {
-                            viewModel.restoreDefaults()
-                        }
-                    }
-                } message: {
-                    Text("Are you sure you want to restore the default settings?")
-                }
-                .padding(.bottom)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        withAnimation {
-                            showingAddItem = true
-                        }
-                    } label: {
-                        Image(systemName: "plus.square")
+                        .buttonStyle(StandardButtonStyle())
                     }
                 }
             }
-            .navigationDestination(for: OverviewItem.self) { item in
-                OverviewDetailView(viewModel: .init(item: item))
+            .padding(.horizontal)
+            .padding(.bottom)
+            
+            Button {
+                showingRestoreDefaultsAlert = true
+            } label: {
+                Label("Restore Defaults", systemImage: "clock.arrow.circlepath")
+                    .font(.subheadline)
             }
-            .sheet(isPresented: $showingAddItem) {
-                NavigationStack {
-                    OverviewItemDetailView(viewModel: .init(config: nil))
-                        .environmentObject(viewModel)
+            .disabled(viewModel.isRestoreDefaultsDisabled)
+            .confirmationDialog(
+                "Restore Defaults",
+                isPresented: $showingRestoreDefaultsAlert
+            ) {
+                Button("Cancel", role: .cancel) {}
+                Button("Yes", role: .destructive) {
+                    withAnimation {
+                        viewModel.restoreDefaults()
+                    }
                 }
+            } message: {
+                Text("Are you sure you want to restore the default settings?")
             }
-            .sheet(item: $contextMenuItem) { item in
-                NavigationStack {
-                    OverviewItemDetailView(viewModel: .init(config: item.config))
-                        .environmentObject(viewModel)
-                }
-            }
+            .padding(.bottom)
+        }  else {
+            Color.clear
         }
     }
     
@@ -147,6 +136,28 @@ struct OverviewView: View {
                     draggingItem: $draggingItem
                 )
             )
+    }
+    
+    @ViewBuilder
+    private func makeStateView() -> some View {
+        switch viewModel.state {
+        case .empty:
+            ContentUnavailableView(
+                "Empty",
+                systemImage: "xmark.circle"
+            )
+            
+        case .error(let error):
+            ContentUnavailableView(
+                "Error",
+                systemImage: "exclamationmark.triangle",
+                description: Text(error.localizedDescription)
+            )
+            
+        case .loading,
+                .data:
+            EmptyView()
+        }
     }
 }
 

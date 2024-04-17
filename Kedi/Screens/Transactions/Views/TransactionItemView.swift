@@ -38,7 +38,7 @@ struct TransactionItemView: View {
             }
             
             HStack(alignment: .center, spacing: 10) {
-                CacheAsyncImage(urlString: transaction.appIconUrl) { image in
+                ImageWithPlaceholder(data: transaction.projectIcon) { image in
                     image.resizable()
                 } placeholder: {
                     Rectangle()
@@ -47,7 +47,7 @@ struct TransactionItemView: View {
                 .frame(width: 22, height: 22)
                 .clipShape(RoundedRectangle(cornerRadius: 22 * (2 / 9), style: .continuous))
                 
-                Text(transaction.appName)
+                Text(transaction.projectName)
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                 
@@ -81,5 +81,5 @@ struct TransactionItemView: View {
 }
 
 #Preview {
-    TransactionItemView(transaction: .init(data: .init()))
+    TransactionItemView(transaction: .init(data: .init(), projectIcon: nil))
 }

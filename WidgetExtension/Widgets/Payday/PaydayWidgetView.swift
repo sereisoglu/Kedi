@@ -64,7 +64,7 @@ struct PaydayWidgetView: View {
             }
         }
         .padding()
-        .widgetURL(DeepLink.make(host: .payday))
+        .widgetURL(DeepLink.make(item: .payday))
     }
     
     private func makeItem(emoji: String, title: String) -> some View {

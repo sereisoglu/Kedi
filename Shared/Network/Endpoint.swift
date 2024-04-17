@@ -11,12 +11,21 @@ import Alamofire
 enum Endpoint {
     
     case login(RCLoginRequest)
+    case logout
     case me
-    case overview
+    case projects
+    case projectDetail(id: String)
+    case overview(projectIds: [String]?)
     case charts(RCChartRequest)
     case transactions(RCTransactionsRequest)
-    case transactionDetail(appId: String, subscriberId: String)
-    case transactionDetailActivity(appId: String, subscriberId: String)
+    case transactionDetail(projectId: String, subscriberId: String)
+    case transactionDetailActivity(projectId: String, subscriberId: String)
+    case webhooks(projectId: String)
+    case createWebhook(projectId: String, request: RCCreateWebhookRequest)
+    case updateWebhook(projectId: String, webhookId: String, request: RCUpdateWebhookRequest)
+    case deleteWebhook(projectId: String, webhookId: String)
+    case testWebhook(projectId: String, webhookId: String)
+    case latestEvents(projectId: String, webhookId: String)
 }
 
 extension Endpoint {
@@ -29,7 +38,15 @@ extension Endpoint {
     
     var baseUrl: String {
         switch self {
-        case .transactionDetailActivity:
+        case .projects,
+                .projectDetail,
+                .transactionDetailActivity,
+                .webhooks,
+                .createWebhook,
+                .updateWebhook,
+                .deleteWebhook,
+                .testWebhook,
+                .latestEvents:
             return "https://api.revenuecat.com/internal/v1/developers"
         default:
             return "https://api.revenuecat.com/v1/developers"
@@ -40,25 +57,52 @@ extension Endpoint {
         switch self {
         case .login:
             return "login"
+        case .logout:
+            return "logout"
         case .me:
             return "me"
+        case .projects:
+            return "me/projects"
+        case .projectDetail(let id):
+            return "me/projects/\(id)"
         case .overview:
-            return "me/overview"
+            return "me/charts_v2/overview"
         case .charts(let request):
             return "me/charts_v2/\(request.name.rawValue)"
         case .transactions:
             return "me/transactions"
-        case .transactionDetail(let appId, let subscriberId):
-            return "me/apps/\(appId)/subscribers/\(subscriberId)"
-        case .transactionDetailActivity(let appId, let subscriberId):
-            return "me/apps/\(appId)/subscribers/\(subscriberId)/activity"
+        case .transactionDetail(let projectId, let subscriberId):
+            return "me/apps/\(projectId)/subscribers/\(subscriberId)"
+        case .transactionDetailActivity(let projectId, let subscriberId):
+            return "me/apps/\(projectId)/subscribers/\(subscriberId)/activity"
+        case .webhooks(let projectId):
+            return "me/projects/\(projectId)/integrations/webhooks"
+        case .createWebhook(let projectId, _):
+            return "me/projects/\(projectId)/integrations/webhooks"
+        case .updateWebhook(let projectId, let webhookId, _):
+            return "me/projects/\(projectId)/integrations/webhooks/\(webhookId)"
+        case .deleteWebhook(let projectId, let webhookId):
+            return "me/projects/\(projectId)/integrations/webhooks/\(webhookId)"
+        case .testWebhook(let projectId, let webhookId):
+            return "me/projects/\(projectId)/integrations/webhooks/\(webhookId)/test_webhook"
+        case .latestEvents(let projectId, let webhookId):
+            return "me/projects/\(projectId)/integrations/webhooks/\(webhookId)/latest_events"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .login: .post
-        default: .get
+        case .login,
+                .logout,
+                .createWebhook,
+                .testWebhook:
+            return .post
+        case .updateWebhook:
+            return .put
+        case .deleteWebhook:
+            return .delete
+        default:
+            return .get
         }
     }
     
@@ -66,10 +110,13 @@ extension Endpoint {
         switch self {
         case .login(let request):
             return request.dict
-        case .overview:
-            return [
-                "sandbox_mode": false
-            ]
+        case .overview(let projectIds):
+            if let projectIds {
+                return [
+                    "app_uuid": projectIds.joined(separator: "%2C")
+                ]
+            }
+            return nil
         case .charts(let request):
             return request.dict
         case .transactions(let request):
@@ -82,6 +129,14 @@ extension Endpoint {
             return [
                 "sandbox_mode": false
             ]
+        case .createWebhook(_, let request):
+            return request.dict
+        case .updateWebhook(_, _, let request):
+            return request.dict
+        case .latestEvents:
+            return [
+                "limit": 30
+            ]
         default:
             return nil
         }
@@ -89,8 +144,12 @@ extension Endpoint {
     
     var encoding: ParameterEncoding {
         switch self {
-        case .login: JSONEncoding.default
-        default: URLEncoding.default
+        case .login,
+                .createWebhook,
+                .updateWebhook:
+            return JSONEncoding.default
+        default:
+            return URLEncoding.default
         }
     }
     
@@ -99,13 +158,17 @@ extension Endpoint {
             .init(name: "X-Requested-With", value: "XMLHttpRequest")
         ]
         
+        if let authToken = Self.AUTH_TOKEN {
+            headers.append(.authorization(bearerToken: authToken))
+        }
+        
         switch self {
-        case .login:
-            break
+        case .logout,
+                .deleteWebhook,
+                .testWebhook:
+            headers.append(.contentType("application/json"))
         default:
-            if let authToken = Self.AUTH_TOKEN {
-                headers.append(.authorization(bearerToken: authToken))
-            }
+            break
         }
         
         return .init(headers)

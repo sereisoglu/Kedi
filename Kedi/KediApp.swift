@@ -10,6 +10,8 @@ import SwiftUI
 @main
 struct KediApp: App {
     
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     init() {
         PurchaseManager.shared.start()
         SessionManager.shared.start()

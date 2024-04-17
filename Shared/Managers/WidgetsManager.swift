@@ -8,6 +8,13 @@
 import Foundation
 import WidgetKit
 
+enum WidgetKind: String {
+    
+    case overview = "OverviewWidget"
+    case revenueGraph = "RevenueGraphWidget"
+    case payday = "PaydayWidget"
+}
+
 final class WidgetsManager {
     
     private let widgetCenter = WidgetCenter.shared
@@ -25,11 +32,4 @@ final class WidgetsManager {
     func reloadAll() {
         widgetCenter.reloadAllTimelines()
     }
-}
-
-enum WidgetKind: String {
-    
-    case overview = "OverviewWidget"
-    case revenueGraph = "RevenueGraphWidget"
-    case payday = "PaydayWidget"
 }

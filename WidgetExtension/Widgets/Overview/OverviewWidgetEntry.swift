@@ -78,11 +78,11 @@ extension OverviewWidgetEntry {
             date: Date(),
             items:  [
                 .init(type: .mrr, value: "\(data.mrr?.formatted(.currency(code: "USD")) ?? "")"),
-                .init(type: .subscriptions, value: "\(data.activeSubscribersCount?.formatted() ?? "")"),
-                .init(type: .trials, value: "\(data.activeTrialsCount?.formatted() ?? "")"),
+                .init(type: .subscriptions, value: "\(data.subscriptions?.formatted() ?? "")"),
+                .init(type: .trials, value: "\(data.trials?.formatted() ?? "")"),
                 .init(type: .revenue, value: "\(data.revenue?.formatted(.currency(code: "USD")) ?? "")"),
-                .init(type: .users, value: "\(data.activeUsersCount?.formatted() ?? "")"),
-                .init(type: .installs, value: "\(data.installsCount?.formatted() ?? "")")
+                .init(type: .users, value: "\(data.users?.formatted() ?? "")"),
+                .init(type: .installs, value: "\(data.installs?.formatted() ?? "")")
             ]
         )
     }()

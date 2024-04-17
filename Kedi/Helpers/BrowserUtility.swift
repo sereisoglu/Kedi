@@ -32,6 +32,18 @@ final class BrowserUtility {
         
         UIApplication.shared.open(url)
     }
+    
+    static func openAppStore() {
+        openUrlOutsideApp(urlString: "https://apps.apple.com/app/id6478032635")
+    }
+    
+    static func openAppStoreForReview() {
+        openUrlOutsideApp(urlString: "https://apps.apple.com/app/id6478032635?action=write-review")
+    }
+    
+    static func openSettings() {
+        openUrlOutsideApp(urlString: UIApplication.openSettingsURLString)
+    }
 }
 
 extension UIApplication {

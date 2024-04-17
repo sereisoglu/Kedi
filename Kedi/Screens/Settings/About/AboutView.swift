@@ -22,7 +22,7 @@ struct AboutView: View {
                                 .strokeBorder(Color.primary.opacity(0.2), lineWidth: 1)
                         )
                     
-                    Text("Kedi")
+                    Text("Kedi for RevenueCat")
                         .font(.title)
                         .fontWeight(.bold)
                     
@@ -111,6 +111,15 @@ struct AboutView: View {
                         imageAsset: .custom("github"),
                         title: "KeychainSwift",
                         subtitle: "Copyright 2015 Evgenii Neumerzhitckii"
+                    )
+                }
+                .openUrlInApp()
+                
+                Link(destination: URL(string: "https://github.com/OneSignal/OneSignal-XCFramework/blob/main/LICENSE")!) {
+                    GeneralListView(
+                        imageAsset: .custom("github"),
+                        title: "OneSignal-XCFramework",
+                        subtitle: "Copyright 2020 OneSignal"
                     )
                 }
                 .openUrlInApp()

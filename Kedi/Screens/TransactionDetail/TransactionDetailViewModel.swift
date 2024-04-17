@@ -10,8 +10,9 @@ import Foundation
 final class TransactionDetailViewModel: ObservableObject {
     
     private let apiService = APIService.shared
+    private let meManager = MeManager.shared
     
-    @Published private(set) var state: GeneralState = .loading
+    @Published private(set) var state: ViewState = .loading
     
     @Published private(set) var navigationTitle: String = ""
     @Published private(set) var detailItems: [TransactionDetailInfoItem]?
@@ -20,11 +21,29 @@ final class TransactionDetailViewModel: ObservableObject {
     @Published private(set) var attributeItems: [TransactionDetailInfoItem]?
     @Published private(set) var historyItems: [TransactionDetailHistoryItem]?
     
-    let appId: String
+    let projectId: String
     let subscriberId: String
     
+    init(projectId: String, subscriberId: String) {
+        self.projectId = projectId
+        self.subscriberId = subscriberId
+        
+        set(detailData: .stub, activityData: .stub)
+        navigationTitle = ""
+        
+        Task {
+            await fetchDetail()
+        }
+    }
+    
     init(appId: String, subscriberId: String) {
-        self.appId = appId
+        guard let projectId = meManager.getProject(appId: appId)?.id else {
+            self.projectId = ""
+            self.subscriberId = ""
+            self.state = .empty
+            return
+        }
+        self.projectId = projectId
         self.subscriberId = subscriberId
         
         set(detailData: .stub, activityData: .stub)
@@ -38,15 +57,17 @@ final class TransactionDetailViewModel: ObservableObject {
     @MainActor
     private func fetchDetail() async {
         do {
-            let detailData = try await apiService.request(
+            async let detailRequest = apiService.request(
                 type: RCTransactionDetailResponse.self,
-                endpoint: .transactionDetail(appId: appId, subscriberId: subscriberId)
+                endpoint: .transactionDetail(projectId: projectId, subscriberId: subscriberId)
             )
             
-            let activityData = try await apiService.request(
+            async let activityRequest = apiService.request(
                 type: RCTransactionDetailActivityResponse.self,
-                endpoint: .transactionDetailActivity(appId: appId, subscriberId: subscriberId)
+                endpoint: .transactionDetailActivity(projectId: projectId, subscriberId: subscriberId)
             )
+            
+            let (detailData, activityData) = try await (detailRequest, activityRequest)
             
             set(detailData: detailData, activityData: activityData)
             
@@ -131,7 +152,7 @@ final class TransactionDetailViewModel: ObservableObject {
             }
             
             if refundCount == 0,
-               let lastSeenTimestamp = detailData.lastSeen?.toDate(formatter: .iso8601WithoutMilliseconds)?.timeIntervalSince1970 {
+               let lastSeenTimestamp = detailData.lastSeen?.format(to: .iso8601WithoutMilliseconds)?.timeIntervalSince1970 {
                 let filteredItems = items.filter { ($0.timestamp ?? 0) > lastSeenTimestamp && [.oneTimePurchase, .renewal, .conversion].contains($0.type.transactionType) }
                 let spentDollars = filteredItems.reduce(0.0) { partialResult, item in
                     partialResult + (item.priceInUsd ?? 0)

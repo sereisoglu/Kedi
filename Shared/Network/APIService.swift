@@ -18,6 +18,7 @@ final class APIService {
         Endpoint.AUTH_TOKEN = token
     }
     
+    @discardableResult
     func request<Success: Decodable>(
         type: Success.Type,
         endpoint: Endpoint

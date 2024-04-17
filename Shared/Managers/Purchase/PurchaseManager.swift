@@ -8,7 +8,6 @@
 import Foundation
 import RevenueCat
 
-@MainActor
 final class PurchaseManager: NSObject, ObservableObject {
     
     enum PurchaseError: Error {
@@ -28,8 +27,12 @@ final class PurchaseManager: NSObject, ObservableObject {
     @Published private(set) var meSubscription: MeSubscriptionModel?
     @Published private(set) var meNonSubscriptions: [MeNonSubscriptionModel]?
     
-    @Published private(set) var state: GeneralState = .loading
+    @Published private(set) var state: ViewState = .loading
     @Published private(set) var isPurchasing = false
+    
+//    var userId: String {
+//        revenueCat.appUserID
+//    }
     
     static let shared = PurchaseManager()
     
@@ -64,9 +67,14 @@ final class PurchaseManager: NSObject, ObservableObject {
     
     // MARK: - attribution
     
+    func signIn(id: String) async throws {
+        let info = try await revenueCat.logIn(id)
+        await processInfo(info: info.customerInfo)
+    }
+    
     func signOut() async throws {
         let info = try await revenueCat.logOut()
-        processInfo(info: info)
+        await processInfo(info: info)
     }
     
     // MARK: - actions
@@ -89,13 +97,13 @@ final class PurchaseManager: NSObject, ObservableObject {
         let data = try await revenueCat.purchase(package: purchase.package)
         
         if !data.userCancelled {
-            processInfo(info: data.customerInfo)
+            await processInfo(info: data.customerInfo)
         }
     }
     
     func restorePurchase() async throws {
         let info = try await revenueCat.restorePurchases()
-        processInfo(info: info)
+        await processInfo(info: info)
     }
     
     func redeemCode() {
@@ -115,7 +123,7 @@ final class PurchaseManager: NSObject, ObservableObject {
     
     private func fetchMePurchases() async throws {
         let info = try await revenueCat.customerInfo()
-        processInfo(info: info)
+        await processInfo(info: info)
     }
     
     func getSubscriptions() -> [PurchaseModel] {
@@ -148,6 +156,7 @@ final class PurchaseManager: NSObject, ObservableObject {
     
     // MARK: - processInfo
     
+    @MainActor
     private func processInfo(info: CustomerInfo) {
         meNonSubscriptions = info.nonSubscriptions.compactMap { nonSubscription in
             guard let productType = PurchaseProductType(rawValue: nonSubscription.productIdentifier),
@@ -187,6 +196,7 @@ final class PurchaseManager: NSObject, ObservableObject {
 
 extension PurchaseManager: PurchasesDelegate {
     
+    @MainActor
     func purchases(_ purchases: Purchases, receivedUpdated customerInfo: CustomerInfo) {
         print("purchases: receivedUpdated:", customerInfo)
         

@@ -12,7 +12,7 @@ struct TabBarView: View {
     @State private var selection: NavigationItem
     
     init() {
-        selection = MeManager.shared.me == nil ? .settings : .overview
+        selection = (MeManager.shared.me == nil || MeManager.shared.projects == nil) ? .settings : .overview
     }
     
     var body: some View {
@@ -34,8 +34,18 @@ struct TabBarView: View {
             }
             
             NavigationStack {
+                NotificationsView()
+                    .environmentObject(PushNotificationsManager.shared)
+            }
+            .tag(NavigationItem.notifications)
+            .tabItem {
+                makeTabItem(item: .notifications)
+            }
+            
+            NavigationStack {
                 SettingsView()
                     .environmentObject(PurchaseManager.shared)
+                    .environmentObject(PushNotificationsManager.shared)
             }
             .tag(NavigationItem.settings)
             .tabItem {

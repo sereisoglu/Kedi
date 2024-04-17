@@ -11,12 +11,18 @@ final class SettingsViewModel: ObservableObject {
     
     private let apiService = APIService.shared
     private let meManager = MeManager.shared
+    private let authManager = AuthManager.shared
     
-    @Published private(set) var state: GeneralState = .loading
+    @Published private(set) var state: ViewState = .loading
     @Published private(set) var me: RCMeResponse?
+    @Published var errorAlert: Error?
+    
+    private var projects: [Project] {
+        meManager.projects ?? []
+    }
     
     var authTokenExpiresDate: Date? {
-        meManager.getAuthTokenExpiresDate()
+        authManager.getAuthTokenExpiresDate()
     }
     
     init() {
@@ -36,28 +42,74 @@ final class SettingsViewModel: ObservableObject {
     @MainActor
     private func fetchMe() async {
         do {
-            let me = try await apiService.request(
+            async let meRequest = apiService.request(
                 type: RCMeResponse.self,
                 endpoint: .me
             )
             
-            if let imageUrlStrings = me?.apps?.compactMap(\.bundleId).map({ "https://www.appatar.io/\($0)/small" }) {
-                let images = await fetchImages(urlStrings: imageUrlStrings)
-                
-                images.forEach { urlString, data in
-                    CacheManager.shared.set(key: urlString, data: data, expiry: .never)
+            async let projectsRequest = apiService.request(
+                type: RCProjectsResponse.self,
+                endpoint: .projects
+            )
+            
+            let (me, rcProjects) = try await (meRequest, projectsRequest)
+            
+            async let projectDetailRequests = fetchProjectDetails(ids: rcProjects?.compactMap(\.id) ?? [])
+            
+            async let imageRequests = fetchImages(urlStrings: rcProjects?.compactMap(\.iconUrl) ?? [])
+            
+            let (rcProjectDetails, icons) = await (projectDetailRequests, imageRequests)
+            
+            let projects: [Project] = rcProjectDetails.compactMap { projectDetail in
+                guard let id = projectDetail.id,
+                      let name = projectDetail.name else {
+                    return nil
+                }
+                return .init(
+                    id: id,
+                    iconUrl: projectDetail.iconUrl,
+                    icon: icons[projectDetail.iconUrl ?? ""],
+                    name: name,
+                    apps: projectDetail.apps?.compactMap { app in
+                        guard let id = app.id,
+                              let store = app.type else {
+                            return nil
+                        }
+                        return .init(id: id, store: store)
+                    },
+                    webhookId: self.projects.first(where: { $0.id == id })?.webhookId
+                )
+            }
+            
+            meManager.set(me: me)
+            meManager.set(projects: projects)
+            
+            self.me = me
+            
+            state = me != nil ? .data : .error(RCError.internal(.nilResponse))
+        } catch {
+            state = .error(error)
+        }
+    }
+    
+    private func fetchProjectDetails(ids: [String]) async -> [RCProjectDetailResponse] {
+        await withTaskGroup(of: RCProjectDetailResponse?.self) { group in
+            ids.forEach { id in
+                group.addTask { [weak self] in
+                    try? await self?.apiService.request(
+                        type: RCProjectDetailResponse.self,
+                        endpoint: .projectDetail(id: id)
+                    )
                 }
             }
             
-            if let me {
-                meManager.set(me: me)
-                self.me = me
-                state = .data
-            } else {
-                state = .error(RCError.internal(.nilResponse))
+            var projectDetails = [RCProjectDetailResponse]()
+            for await projectDetail in group {
+                if let projectDetail {
+                    projectDetails.append(projectDetail)
+                }
             }
-        } catch {
-            state = .error(error)
+            return projectDetails
         }
     }
     
@@ -69,25 +121,25 @@ final class SettingsViewModel: ObservableObject {
                 }
             }
             
-            var imageDatas = [String: Data]()
-            for await (urlString, data) in group {
-                imageDatas[urlString] = data
+            var images = [String: Data]()
+            for await (urlString, image) in group {
+                images[urlString] = image
             }
-            return imageDatas
+            return images
+        }
+    }
+    
+    @MainActor
+    func signOut() async {
+        do {
+            try await apiService.request(type: RCLogoutResponse.self, endpoint: .logout)
+            meManager.signOut()
+        } catch {
+            errorAlert = error
         }
     }
     
     func refresh() async {
         await fetchMe()
-    }
-}
-
-// MARK: - Actions
-
-extension SettingsViewModel {
-    
-    @MainActor
-    func handleSignOutButton() {
-        meManager.signOut()
     }
 }

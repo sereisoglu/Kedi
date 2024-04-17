@@ -11,7 +11,7 @@ struct OverviewItem: Identifiable, Hashable {
     
     private(set) var config: OverviewItemConfig
     private(set) var value: OverviewItemValue
-    private(set) var valueState: GeneralState = .loading
+    private(set) var valueState: ViewState = .loading
     private(set) var chart: OverviewItemChart?
     
     var id: String { "\(type.rawValue)-\(config.timePeriod)" }
@@ -41,7 +41,7 @@ struct OverviewItem: Identifiable, Hashable {
     init(
         config: OverviewItemConfig,
         value: OverviewItemValue,
-        valueState: GeneralState = .loading,
+        valueState: ViewState = .loading,
         chart: OverviewItemChart? = nil
     ) {
         self.config = config
@@ -64,7 +64,7 @@ struct OverviewItem: Identifiable, Hashable {
         self.chart = chart
     }
     
-    mutating func set(valueState: GeneralState) {
+    mutating func set(valueState: ViewState) {
         guard self.valueState != .data else {
             return
         }

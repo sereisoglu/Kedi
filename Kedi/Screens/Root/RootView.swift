@@ -37,11 +37,16 @@ struct RootView: View {
         showingDeepLink = deepLink
     }
     
+    @ViewBuilder
     private func makeView(deepLink: DeepLink) -> some View {
-        switch deepLink.host {
+        switch deepLink.item {
         case .payday:
             NavigationStack {
                 PaydayView(isPresented: true)
+            }
+        case .transaction(let appId, let subscriberId):
+            NavigationStack {
+                TransactionDetailView(viewModel: .init(appId: appId, subscriberId: subscriberId))
             }
         }
     }

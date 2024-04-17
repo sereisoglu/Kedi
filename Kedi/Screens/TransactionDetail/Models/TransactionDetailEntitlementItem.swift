@@ -62,12 +62,12 @@ enum TransactionDetailEntitlementType: Int {
     var status: String {
         switch self {
         case .subscription: "🟢"
-        case .oneTimePurchase: "🟢"
+        case .oneTimePurchase: "🟣"
         case .trial: "🟠"
-        case .unsubscribed: "🔴"
+        case .unsubscribed: "🟡"
         case .billingIssue: "🔴"
-        case .expired: "❌"
-        case .refunded: "❌"
+        case .expired: "🔴"
+        case .refunded: "🔴"
         }
     }
 }

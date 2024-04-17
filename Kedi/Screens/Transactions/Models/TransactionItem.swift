@@ -24,22 +24,22 @@ struct TransactionSection: Identifiable, Hashable {
 struct TransactionItem: Identifiable, Hashable {
     
     let id: String
-    let appId: String
+    let projectId: String
     let subscriberId: String
     
     var type: TransactionType
     var price: Double
     var store: TransactionStore?
-    var appIconUrl: String?
-    var appName: String
+    var projectIcon: Data?
+    var projectName: String
     var productIdentifier: String
     var countryFlag: String
     var country: String
     var date: String
     
-    init(data: RCTransaction) {
+    init(data: RCTransaction, projectIcon: Data?) {
         id = data.storeTransactionIdentifier ?? UUID().uuidString
-        appId = data.app?.id ?? ""
+        projectId = data.app?.id ?? ""
         subscriberId = data.subscriberId ?? ""
         
         if data.wasRefunded ?? false {
@@ -57,23 +57,12 @@ struct TransactionItem: Identifiable, Hashable {
         }
         
         price = data.revenue ?? 0
-        
-        if let store = data.store {
-            self.store = .init(store: store)
-        }
-        
-        if let bundleId = data.app?.bundleId {
-            appIconUrl = "https://www.appatar.io/\(bundleId)/small"
-        }
-        
-        appName = data.app?.name ?? ""
-        
+        store = .init(store: data.store ?? "")
+        self.projectIcon = projectIcon
+        projectName = data.app?.name ?? ""
         productIdentifier = data.productIdentifier ?? ""
-        
         countryFlag = data.subscriberCountryCode?.countryFlag ?? ""
-        
         country = data.subscriberCountryCode?.countryName ?? ""
-        
         if let date = data.purchaseDate?.format(to: .iso8601WithoutMilliseconds) {
             if date.isToday || date.isFuture {
                 self.date = date.formatted(.relative(presentation: .named))
@@ -159,7 +148,18 @@ extension Array where Element == TransactionSection {
                 guard let date else {
                     return nil
                 }
-                return .init(date: date, transactions: transactions.map { .init(data: $0) })
+                return .init(
+                    date: date,
+                    transactions: transactions.compactMap { transaction in
+                        guard let projectId = transaction.app?.id else {
+                            return nil
+                        }
+                        return .init(
+                            data: transaction,
+                            projectIcon: nil
+                        )
+                    }
+                )
             }
             .sorted(by: { $0.date > $1.date })
     }()
