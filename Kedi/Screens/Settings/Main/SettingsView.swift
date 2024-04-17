@@ -212,6 +212,15 @@ struct SettingsView: View {
         }
         
         Section {
+            Link(destination: URL(string: "https://kediapp.com/version-history")!) {
+                GeneralListView(
+                    imageAsset: .systemImage("clock.arrow.circlepath"),
+                    title: "What's New!",
+                    subtitle: "Show version history"
+                )
+            }
+            .openUrlInApp()
+            
             Link(destination: URL(string: "https://apps.apple.com/app/id6478032635?action=write-review")!) {
                 GeneralListView(
                     imageAsset: .systemImage("star"),
