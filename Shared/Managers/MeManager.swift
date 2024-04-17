@@ -17,6 +17,7 @@ final class MeManager: ObservableObject {
     private let widgetsManager = WidgetsManager.shared
     private let purchaseManager = PurchaseManager.shared
     private let pushNotificationsManager = PushNotificationsManager.shared
+    private let analyticsManager = AnalyticsManager.shared
     
     @Published private(set) var isSignedIn: Bool = false
     
@@ -42,19 +43,22 @@ final class MeManager: ObservableObject {
         projects = cacheManager.getWithDecode(key: "projects", type: [Project].self)
         
         apiService.setAuthToken(authToken)
-        Task {
-            try? await purchaseManager.signIn(id: id)
+        if let id = me?.distinctId {
+            Task {
+                try? await purchaseManager.signIn(id: id)
+            }
         }
         pushNotificationsManager.signIn(id: id)
+        analyticsManager.signIn(id: me?.distinctId)
+        purchaseManager.setKid(id)
         isSignedIn = true
     }
     
     @discardableResult
-    func signIn(
-        token: String,
-        tokenExpiration: String
-    ) -> Bool {
+    func signIn(data: RCLoginResponse?) -> Bool {
         guard let id,
+              let token = data?.authenticationToken,
+              let tokenExpiration = data?.authenticationTokenExpiration,
               let tokenExpirationDate = tokenExpiration.format(to: .iso8601WithoutMilliseconds) else {
             return false
         }
@@ -63,10 +67,15 @@ final class MeManager: ObservableObject {
         sessionManager.start()
         apiService.setAuthToken(token)
         widgetsManager.reloadAll()
-        Task {
-            try? await purchaseManager.signIn(id: id)
+        if let id = data?.distinctId {
+            Task {
+                try? await purchaseManager.signIn(id: id)
+            }
         }
         pushNotificationsManager.signIn(id: id)
+        analyticsManager.signIn(id: data?.distinctId)
+        purchaseManager.setKid(id)
+        purchaseManager.setOneSignalId(pushNotificationsManager.userId)
         isSignedIn = true
         return true
     }
@@ -83,6 +92,7 @@ final class MeManager: ObservableObject {
             try? await purchaseManager.signOut()
         }
         pushNotificationsManager.signOut()
+        analyticsManager.signOut()
         isSignedIn = false
     }
     
@@ -96,9 +106,7 @@ final class MeManager: ObservableObject {
         
         if hasId,
            let id {
-            Task {
-                try? await purchaseManager.signIn(id: id)
-            }
+            purchaseManager.setKid(id)
             pushNotificationsManager.signIn(id: id)
         }
     }

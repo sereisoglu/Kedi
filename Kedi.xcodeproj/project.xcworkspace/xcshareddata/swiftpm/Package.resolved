@@ -1,5 +1,5 @@
 {
-  "originHash" : "c4e765867c31faebc195f11c0ae274cb6e78917729826c70f7840c7a9d7ded90",
+  "originHash" : "30024f51caaca88834c54c679b608668daccd91766610147bed39baa2b4f6070",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -44,6 +44,15 @@
       "state" : {
         "revision" : "a9763ca482d52ea3d59aa2dfd2fc23427b02dada",
         "version" : "4.40.1"
+      }
+    },
+    {
+      "identity" : "swiftclient",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/TelemetryDeck/SwiftClient.git",
+      "state" : {
+        "revision" : "d20ccc4b8266cf739eede58cdfc7e9c6ffb41cda",
+        "version" : "1.5.1"
       }
     }
   ],

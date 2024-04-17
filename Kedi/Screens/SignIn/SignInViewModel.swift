@@ -97,7 +97,7 @@ final class SignInViewModel: ObservableObject {
     @MainActor
     private func postSignIn() async throws {
         do {
-            let loginData = try await apiService.request(
+            let data = try await apiService.request(
                 type: RCLoginResponse.self,
                 endpoint: .login(.init(
                     email: email,
@@ -106,14 +106,9 @@ final class SignInViewModel: ObservableObject {
                 ))
             )
             
-            if let token = loginData?.authenticationToken,
-               let tokenExpiration = loginData?.authenticationTokenExpiration {
-                let isSignedIn = meManager.signIn(token: token, tokenExpiration: tokenExpiration)
-                
-                if !isSignedIn {
-                    throw RCError.internal(.nilResponse)
-                }
-            } else {
+            let isSignedIn = meManager.signIn(data: data)
+            
+            if !isSignedIn {
                 throw RCError.internal(.nilResponse)
             }
         } catch RCError.oneTimePasswordNeeded {

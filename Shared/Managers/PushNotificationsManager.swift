@@ -29,10 +29,10 @@ final class PushNotificationsManager: NSObject, ObservableObject {
         }
     }
     
-//    var userId: String? {
-//        OneSignal.User.onesignalId
-//    }
-//    
+    var userId: String? {
+        OneSignal.User.onesignalId
+    }
+    
 //    var userExternalId: String? {
 //        OneSignal.User.externalId
 //    }
@@ -49,7 +49,7 @@ final class PushNotificationsManager: NSObject, ObservableObject {
         
 //        OneSignal.Debug.setLogLevel(.LL_VERBOSE)
         
-        OneSignal.initialize("1b5dfd0b-e893-48b4-9f39-ac61653d49f9", withLaunchOptions: launchOptions)
+        OneSignal.initialize(EnvVars.oneSignal, withLaunchOptions: launchOptions)
         
         OneSignal.Notifications.addPermissionObserver(self)
         OneSignal.Notifications.addClickListener(self)

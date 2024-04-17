@@ -14,7 +14,10 @@ struct KediApp: App {
     
     init() {
         PurchaseManager.shared.start()
+        AnalyticsManager.shared.start()
         SessionManager.shared.start()
+        
+        AnalyticsManager.shared.send(event: .`init`)
     }
     
     var body: some Scene {

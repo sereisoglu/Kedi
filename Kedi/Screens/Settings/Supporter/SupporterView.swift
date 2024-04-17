@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SupporterView: View {
     
+    private let analyticsManager = AnalyticsManager.shared
+    
     @State private var subscriptionSelection: PurchaseProductType?
     @State private var showingAlert = false
     @State private var purchaseError: Error?
@@ -27,10 +29,15 @@ struct SupporterView: View {
             }
             .sensoryFeedback(.selection, trigger: purchaseManager.isPurchasing)
             .onAppear {
-                subscriptionSelection = Self.getDefaultSubscriptionSelection(productType: purchaseManager.meSubscription?.productType)
+                subscriptionSelection = getDefaultSubscriptionSelection(productType: purchaseManager.meSubscription?.productType)
             }
             .onReceive(purchaseManager.$meSubscription) { output in
-                subscriptionSelection = Self.getDefaultSubscriptionSelection(productType: output?.productType)
+                subscriptionSelection = getDefaultSubscriptionSelection(productType: output?.productType)
+            }
+            .onReceive(NotificationCenter.default.publisher(for: .purchase)) { output in
+                if let productId = output.object as? String {
+                    analyticsManager.send(event: .purchase(productId: productId))
+                }
             }
             .alert(
                 "Purchase Error",
@@ -134,9 +141,15 @@ struct SupporterView: View {
                         makeTipView(nonSubscription: nonSubscription)
                     }
                     
-                    Text(purchaseManager.getTotalSpentForTips())
-                        .frame(maxWidth: .infinity)
-                        .multilineTextAlignment(.center)
+                    if let totalSpentForTips = purchaseManager.getTotalSpentForTips() {
+                        Text("You've tipped \(totalSpentForTips) so far.\n❤️ Thanks for your support!")
+                            .frame(maxWidth: .infinity)
+                            .multilineTextAlignment(.center)
+                    } else {
+                        Text("You haven't made a tip.")
+                            .frame(maxWidth: .infinity)
+                            .multilineTextAlignment(.center)
+                    }
                 } header: {
                     Text("Tips")
                 }
@@ -267,7 +280,7 @@ struct SupporterView: View {
         .buttonStyle(.plain)
     }
     
-    static private func getDefaultSubscriptionSelection(
+    private func getDefaultSubscriptionSelection(
         productType: PurchaseProductType?
     ) -> PurchaseProductType? {
         switch productType {
