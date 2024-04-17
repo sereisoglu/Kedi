@@ -1,13 +1,13 @@
 {
-  "originHash" : "3e747d08829a67c8c1c59417d255d793ce90b53f30d9aa66e9774b537ed689e6",
+  "originHash" : "c4e765867c31faebc195f11c0ae274cb6e78917729826c70f7840c7a9d7ded90",
   "pins" : [
     {
       "identity" : "alamofire",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "723fa5a6c65812aec4a0d7cc432ee198883b6e00",
-        "version" : "5.9.0"
+        "revision" : "f455c2975872ccd2d9c81594c658af65716e9b9a",
+        "version" : "5.9.1"
       }
     },
     {
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/OneSignal/OneSignal-XCFramework.git",
       "state" : {
-        "revision" : "68685956124c710cdc9112bc696ad30e2f58538b",
-        "version" : "5.1.3"
+        "revision" : "7df02482c94bff385890111e2f09ffe024fcf7e7",
+        "version" : "5.1.5"
       }
     },
     {
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios.git",
       "state" : {
-        "revision" : "12240d045cfad9f281bc21e9f09d0c33ff09b74f",
-        "version" : "4.39.0"
+        "revision" : "a9763ca482d52ea3d59aa2dfd2fc23427b02dada",
+        "version" : "4.40.1"
       }
     }
   ],
