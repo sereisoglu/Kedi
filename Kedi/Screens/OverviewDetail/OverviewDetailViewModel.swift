@@ -13,12 +13,16 @@ final class OverviewDetailViewModel: ObservableObject {
     
     let item: OverviewItem
     @Published private(set) var value: OverviewItemValue
-    @Published private(set) var chartValues: [OverviewItemChartValue]
+    @Published private(set) var chartValues = [OverviewItemChartValue]()
     
     @Published private(set) var state: GeneralState = .data
     
     @Published var timePeriodSelection: OverviewItemTimePeriod
     @Published var selectedChartValue: OverviewItemChartValue?
+    
+    @Published private(set) var chartXScale: ClosedRange<Date> = Date.now...Date.now
+    @Published private(set) var chartXValues = [Date]()
+    @Published private(set) var chartYScale: ClosedRange<Double> = 0...0
     
     var title: String {
         if let selectedChartValue {
@@ -40,33 +44,11 @@ final class OverviewDetailViewModel: ObservableObject {
         }
     }
     
-    var chartXScale: ClosedRange<Date> {
-        (chartValues.first?.date ?? .now)...(chartValues.last?.date ?? .now)
-    }
-    
-    var chartXValues: [Date] {
-        let dates = chartValues.map(\.date)
-        return stride(from: 0, to: dates.count, by: Int(dates.count / 3)).map { dates[$0] }
-    }
-    
-    var chartYScale: ClosedRange<Double> {
-        let values = chartValues.map(\.value)
-        var max = values.max() ?? 0
-        let toNearest = Double(Int(max).size)
-        
-        max = max.ceilToNearest(toNearest)
-        
-        var min = values.min() ?? 0
-        min = min >= 0 ? 0 : min.floorToNearest(toNearest)
-        
-        return min...max
-    }
-    
     init(item: OverviewItem) {
         self.item = item
         value = item.value
-        chartValues = item.chart?.values ?? []
         timePeriodSelection = item.config.timePeriod
+        set(chartValues: item.chart?.values ?? [])
     }
     
     func onTimePeriodChange() {
@@ -97,10 +79,11 @@ final class OverviewDetailViewModel: ObservableObject {
                 ))
             )
             
-            chartValues = data?.values?.map { .init(
+            let chartValues = data?.values?.map { OverviewItemChartValue(
                 date: .init(timeIntervalSince1970: $0[safe: 0] ?? 0).withoutTime,
                 value: $0[safe: chartIndex] ?? 0
             ) } ?? []
+            set(chartValues: chartValues)
             
             switch type {
             case .mrr,
@@ -131,5 +114,24 @@ final class OverviewDetailViewModel: ObservableObject {
         } catch {
             state = .error(error)
         }
+    }
+    
+    private func set(chartValues: [OverviewItemChartValue]) {
+        self.chartValues = chartValues
+        
+        chartXScale = (chartValues.first?.date ?? .now)...(chartValues.last?.date ?? .now)
+        
+        let dates = chartValues.map(\.date)
+        var by = Int(dates.count / 3)
+        by = (by == 0 ? 1 : by)
+        chartXValues = stride(from: 0, to: dates.count, by: by).map { dates[$0] }
+        
+        let values = chartValues.map(\.value)
+        var max = values.max() ?? 0
+        let toNearest = Double(Int(max).size)
+        max = max.ceilToNearest(toNearest)
+        var min = values.min() ?? 0
+        min = min >= 0 ? 0 : min.floorToNearest(toNearest)
+        chartYScale = min...max
     }
 }
