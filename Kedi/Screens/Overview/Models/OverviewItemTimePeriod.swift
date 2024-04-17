@@ -47,16 +47,16 @@ enum OverviewItemTimePeriod: String, CaseIterable, Codable {
         switch self {
         case .last7Days:
             date = calendar.date(from: calendar.dateComponents([.year, .month, .day], from: Date())) ?? Date()
-            date = calendar.date(byAdding: .day, value: -7, to: date) ?? Date()
+            date = calendar.date(byAdding: .day, value: -6, to: date) ?? Date()
         case .last28Days:
             date = calendar.date(from: calendar.dateComponents([.year, .month, .day], from: Date())) ?? Date()
-            date = calendar.date(byAdding: .day, value: -28, to: date) ?? Date()
+            date = calendar.date(byAdding: .day, value: -27, to: date) ?? Date()
         case .last30Days:
             date = calendar.date(from: calendar.dateComponents([.year, .month, .day], from: Date())) ?? Date()
-            date = calendar.date(byAdding: .day, value: -30, to: date) ?? Date()
+            date = calendar.date(byAdding: .day, value: -29, to: date) ?? Date()
         case .last90Days:
             date = calendar.date(from: calendar.dateComponents([.year, .month, .day], from: Date())) ?? Date()
-            date = calendar.date(byAdding: .day, value: -90, to: date) ?? Date()
+            date = calendar.date(byAdding: .day, value: -89, to: date) ?? Date()
         case .last12Months:
             date = calendar.date(from: calendar.dateComponents([.year, .month, .day], from: Date())) ?? Date()
             date = calendar.date(byAdding: .month, value: -12, to: date) ?? Date()
@@ -78,7 +78,6 @@ enum OverviewItemTimePeriod: String, CaseIterable, Codable {
         case .allTime:
             return nil
         }
-        date = calendar.date(byAdding: .day, value: 1, to: date) ?? Date()
         
         return DateFormatter.yyy_MM_dd_GMT.string(from: date)
     }
