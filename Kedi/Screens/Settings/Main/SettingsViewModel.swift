@@ -65,10 +65,11 @@ final class SettingsViewModel: ObservableObject {
                       let name = projectDetail.name else {
                     return nil
                 }
+                let oldProject = self.projects.first(where: { $0.id == id })
                 return .init(
                     id: id,
                     iconUrl: projectDetail.iconUrl,
-                    icon: icons[projectDetail.iconUrl ?? ""],
+                    icon: icons[projectDetail.iconUrl ?? ""] ?? oldProject?.icon,
                     name: name,
                     apps: projectDetail.apps?.compactMap { app in
                         guard let id = app.id,
@@ -77,7 +78,7 @@ final class SettingsViewModel: ObservableObject {
                         }
                         return .init(id: id, store: store)
                     },
-                    webhookId: self.projects.first(where: { $0.id == id })?.webhookId
+                    webhookId: oldProject?.webhookId
                 )
             }
             
