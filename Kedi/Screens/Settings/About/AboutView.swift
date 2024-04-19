@@ -83,7 +83,7 @@ struct AboutView: View {
                     GeneralListView(
                         imageAsset: .custom("github"),
                         title: "Twemoji",
-                        subtitle: "Copyright 2021 Twitter\nIt was used when designing the app icon."
+                        subtitle: "It was used when designing the app icon.\nCopyright 2021 Twitter"
                     )
                 }
                 .openUrlInApp()
@@ -118,7 +118,7 @@ struct AboutView: View {
                 Link(destination: URL(string: "https://github.com/OneSignal/OneSignal-XCFramework/blob/main/LICENSE")!) {
                     GeneralListView(
                         imageAsset: .custom("github"),
-                        title: "OneSignal-XCFramework",
+                        title: "OneSignalXCFramework",
                         subtitle: "Copyright 2020 OneSignal"
                     )
                 }
@@ -129,6 +129,14 @@ struct AboutView: View {
                         imageAsset: .custom("github"),
                         title: "RevenueCat",
                         subtitle: "Copyright 2017 Jacob Eiting"
+                    )
+                }
+                
+                Link(destination: URL(string: "https://github.com/TelemetryDeck/SwiftClient/blob/main/LICENSE")!) {
+                    GeneralListView(
+                        imageAsset: .custom("github"),
+                        title: "TelemetryClient",
+                        subtitle: "Copyright (c) 2020 Daniel Jilg"
                     )
                 }
             } header: {
