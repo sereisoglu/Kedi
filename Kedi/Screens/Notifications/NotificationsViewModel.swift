@@ -28,7 +28,7 @@ final class NotificationsViewModel: ObservableObject {
     
     @MainActor
     private func fetchAllEvents() async {
-        let notifications = await withTaskGroup(of: [NotificationItem].self) { group in
+        var notifications = await withTaskGroup(of: [NotificationItem].self) { group in
             projects.forEach { project in
                 group.addTask { [weak self] in
                     await self?.fetchEvents(project: project) ?? []
@@ -41,6 +41,8 @@ final class NotificationsViewModel: ObservableObject {
             }
             return allNotifications
         }
+        
+        notifications.sort(by: { ($0.date ?? .distantPast) > ($1.date ?? .distantPast) })
         
         let groupedNotifications = Dictionary(grouping: notifications) { notification in
             notification.date?.withoutTime
