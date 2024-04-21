@@ -32,6 +32,13 @@ enum RCError: Error {
         default: self = .unknown(error)
         }
     }
+
+    var signOutAutomatically: Bool {
+        switch self {
+        case .expiredAuthorizationToken: true
+        default: false
+        }
+    }
 }
 
 extension RCError: LocalizedError {

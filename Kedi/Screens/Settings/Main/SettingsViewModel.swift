@@ -137,6 +137,10 @@ final class SettingsViewModel: ObservableObject {
             meManager.signOut()
         } catch {
             errorAlert = error
+
+            if let rcError = error as? RCError, rcError.signOutAutomatically {
+                meManager.signOut()
+            }
         }
     }
     
