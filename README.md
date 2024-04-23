@@ -40,7 +40,9 @@ Requires iOS 17.0 or later. Compatible with iPhone and iPad.
 - [Alamofire](https://github.com/Alamofire/Alamofire)
 - [Cache](https://github.com/hyperoslo/Cache)
 - [KeychainSwift](https://github.com/evgenyneu/keychain-swift)
+- [OneSignal-XCFramework](https://github.com/OneSignal/OneSignal-XCFramework)
 - [RevenueCat](https://github.com/RevenueCat/purchases-ios)
+- [TelemetryClient](https://github.com/TelemetryDeck/SwiftClient)
 
 ## License
 
