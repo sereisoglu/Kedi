@@ -73,6 +73,8 @@ final class APIService {
                             print("Request Error:", endpoint.urlString, String(decoding: data, as: UTF8.self))
                             let decodedData = try JSONDecoder().decode(RCErrorResponse.self, from: data)
                             continuation.resume(throwing: RCError(error: decodedData))
+                            
+                            NotificationCenter.default.post(name: .apiServiceRequestError, object: RCError(error: decodedData))
                         } catch {
                             print("Request Error:", endpoint.urlString, error)
                             continuation.resume(throwing: RCError.internal(.decodeFailure(error)))

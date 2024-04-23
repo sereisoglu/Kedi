@@ -52,6 +52,30 @@ final class MeManager: ObservableObject {
         analyticsManager.signIn(id: me?.distinctId)
         purchaseManager.setKid(id)
         isSignedIn = true
+        
+        setupObservers()
+    }
+    
+    private func setupObservers() {
+        NotificationCenter.default.addObserver(
+            forName: .apiServiceRequestError,
+            object: nil,
+            queue: .main,
+            using: { [weak self] notification in
+                guard let self,
+                      let error = notification.object as? RCError else {
+                    return
+                }
+                
+                switch error {
+                case .invalidAuthorizationToken,
+                        .expiredAuthorizationToken:
+                    self.signOut()
+                default:
+                    return
+                }
+            }
+        )
     }
     
     @discardableResult

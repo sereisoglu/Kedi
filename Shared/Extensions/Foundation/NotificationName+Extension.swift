@@ -11,4 +11,5 @@ extension Notification.Name {
     
     static let purchase = Notification.Name("purchase")
     static let webhooksChange = Notification.Name("webhooksChange")
+    static let apiServiceRequestError = Notification.Name("apiServiceRequestError")
 }
