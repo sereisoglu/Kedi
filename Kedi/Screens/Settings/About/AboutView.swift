@@ -118,7 +118,7 @@ struct AboutView: View {
                 Link(destination: URL(string: "https://github.com/OneSignal/OneSignal-XCFramework/blob/main/LICENSE")!) {
                     GeneralListView(
                         imageAsset: .custom("github"),
-                        title: "OneSignalXCFramework",
+                        title: "OneSignal-XCFramework",
                         subtitle: "Copyright 2020 OneSignal"
                     )
                 }

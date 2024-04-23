@@ -40,7 +40,7 @@ struct TransactionDetailView: View {
             ContentUnavailableView(
                 "Error",
                 systemImage: "exclamationmark.triangle",
-                description: Text(error.localizedDescription)
+                description: Text(error.displayableLocalizedDescription)
             )
             
         case .loading,

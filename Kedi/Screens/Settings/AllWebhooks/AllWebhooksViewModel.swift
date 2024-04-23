@@ -96,6 +96,7 @@ final class AllWebhooksViewModel: ObservableObject {
             
             if error == nil {
                 items[itemIndex].webhooks.remove(at: index)
+                
                 NotificationCenter.default.post(name: .webhooksChange, object: nil)
             } else {
                 errorAlert = error

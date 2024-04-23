@@ -45,7 +45,7 @@ struct SupporterView: View {
             ) {
                 Button("OK!", role: .cancel) {}
             } message: {
-                Text(purchaseError?.localizedDescription ?? "An error has occurred.")
+                Text(purchaseError?.displayableLocalizedDescription ?? "An error has occurred.")
             }
             .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
     }
@@ -68,7 +68,7 @@ struct SupporterView: View {
             ContentUnavailableView(
                 "Error",
                 systemImage: "exclamationmark.triangle",
-                description: Text(error.localizedDescription)
+                description: Text(error.displayableLocalizedDescription)
             )
             
         case .data:

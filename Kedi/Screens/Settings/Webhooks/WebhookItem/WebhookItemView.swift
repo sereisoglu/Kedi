@@ -59,7 +59,7 @@ struct WebhookItemView: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(webhook.project.name)
                     
-                    Label(error.localizedDescription, systemImage: "exclamationmark.triangle")
+                    Label(error.displayableLocalizedDescription, systemImage: "exclamationmark.triangle")
                         .font(.subheadline)
                         .foregroundStyle(.red)
                 }

@@ -71,7 +71,7 @@ struct TransactionsView: View {
                 ContentUnavailableView {
                     Text("Error")
                 } description: {
-                    Text(error.localizedDescription)
+                    Text(error.displayableLocalizedDescription)
                 }
                 .listRowInsets(.zero)
                 .listRowBackground(Color.clear)
@@ -96,7 +96,7 @@ struct TransactionsView: View {
             ContentUnavailableView(
                 "Error",
                 systemImage: "exclamationmark.triangle",
-                description: Text(error.localizedDescription)
+                description: Text(error.displayableLocalizedDescription)
             )
             
         case .loading,

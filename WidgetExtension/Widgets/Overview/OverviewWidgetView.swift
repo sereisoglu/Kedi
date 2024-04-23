@@ -12,7 +12,7 @@ struct OverviewWidgetView: View {
     @Environment(\.widgetFamily) private var widgetFamily
     
     var entry: OverviewWidgetProvider.Entry
-
+    
     var body: some View {
         if let error = entry.error,
            entry.items.isEmpty {
@@ -22,7 +22,7 @@ struct OverviewWidgetView: View {
             ZStack {
                 makeWidgetView()
                 
-                if let message = entry.error?.localizedDescription {
+                if let message = entry.error?.displayableLocalizedDescription {
                     VStack {
                         Spacer()
                         Text(message)

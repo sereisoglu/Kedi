@@ -54,7 +54,7 @@ final class SignInViewModel: ObservableObject {
     }
     
     var alertMessage: String? {
-        signInError?.localizedDescription
+        signInError?.displayableLocalizedDescription
     }
     
     init() {

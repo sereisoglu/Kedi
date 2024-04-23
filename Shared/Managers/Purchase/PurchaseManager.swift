@@ -110,10 +110,7 @@ final class PurchaseManager: NSObject, ObservableObject {
         if !data.userCancelled {
             await processInfo(info: data.customerInfo)
             
-            NotificationCenter.default.post(
-                name: .purchase,
-                object: purchase.productType.rawValue
-            )
+            NotificationCenter.default.post(name: .purchase, object: purchase.productType.rawValue)
         }
     }
     

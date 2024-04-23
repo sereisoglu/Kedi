@@ -22,7 +22,7 @@ struct RevenueGraphWidgetView: View {
             ZStack {
                 makeWidgetView()
                 
-                if let message = entry.error?.localizedDescription {
+                if let message = entry.error?.displayableLocalizedDescription {
                     VStack {
                         Spacer()
                         Text(message)

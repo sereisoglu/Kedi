@@ -32,7 +32,7 @@ struct OverviewItemView: View {
             makeInfoView(description: "Empty")
             
         case .error(let error):
-            makeInfoView(description: error.localizedDescription)
+            makeInfoView(description: error.displayableLocalizedDescription)
             
         case .loading,
                 .data:
