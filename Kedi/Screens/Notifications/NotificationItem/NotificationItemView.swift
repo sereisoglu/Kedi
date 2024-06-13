@@ -14,8 +14,8 @@ struct NotificationItemView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 3) {
             HStack(alignment: .center, spacing: 10) {
-                if let imageName = notification.store?.imageName {
-                    Image(imageName)
+                if let image = notification.store?.image {
+                    Image(image)
                         .resizable()
                         .frame(width: 22, height: 22)
                         .clipShape(Circle())

@@ -29,10 +29,10 @@ struct SupporterView: View {
             }
             .sensoryFeedback(.selection, trigger: purchaseManager.isPurchasing)
             .onAppear {
-                subscriptionSelection = getDefaultSubscriptionSelection(productType: purchaseManager.meSubscription?.productType)
+                setSubscriptionSelection(productType: purchaseManager.meSubscription?.productType)
             }
             .onReceive(purchaseManager.$meSubscription) { output in
-                subscriptionSelection = getDefaultSubscriptionSelection(productType: output?.productType)
+                setSubscriptionSelection(productType: output?.productType)
             }
             .onReceive(NotificationCenter.default.publisher(for: .purchase)) { output in
                 if let productId = output.object as? String {
@@ -280,20 +280,11 @@ struct SupporterView: View {
         .buttonStyle(.plain)
     }
     
-    private func getDefaultSubscriptionSelection(
-        productType: PurchaseProductType?
-    ) -> PurchaseProductType? {
-        switch productType {
-        case .supporterMonthly:
-            return .fullSupporterMonthly
-        case .fullSupporterMonthly:
-            return .superSupporterMonthly
-        case .superSupporterMonthly:
-            return nil
-        case .none:
-            fallthrough
-        default:
-            return .supporterMonthly
+    private func setSubscriptionSelection(productType: PurchaseProductType?) {
+        if let productType {
+            subscriptionSelection = productType.next
+        } else {
+            subscriptionSelection = .supporterMonthly
         }
     }
 }

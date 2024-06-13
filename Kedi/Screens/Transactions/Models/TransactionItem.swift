@@ -114,11 +114,11 @@ enum TransactionStore {
     case stripe
     // amazonStore?
     
-    var imageName: String {
+    var image: ImageResource {
         switch self {
-        case .appStore: "app-store"
-        case .playStore: "play-store"
-        case .stripe: "stripe"
+        case .appStore: .appStore
+        case .playStore: .playStore
+        case .stripe: .stripe
         }
     }
     

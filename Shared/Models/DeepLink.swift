@@ -7,6 +7,8 @@
 
 import Foundation
 
+// xcrun simctl openurl booted 'kedi://payday'
+
 struct DeepLink: Identifiable {
     
     enum Item {

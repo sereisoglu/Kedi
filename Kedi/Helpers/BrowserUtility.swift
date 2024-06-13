@@ -19,7 +19,6 @@ final class BrowserUtility {
               let topController = UIApplication.topController() else {
             return
         }
-        
         let safariController = SFSafariViewController(url: url)
         safariController.modalPresentationStyle = modalPresentationStyle
         topController.present(safariController, animated: true, completion: nil)
@@ -29,7 +28,6 @@ final class BrowserUtility {
         guard let url = URL(string: urlString) else {
             return
         }
-        
         UIApplication.shared.open(url)
     }
     
@@ -63,16 +61,13 @@ extension UIApplication {
         if let navigationController = controller as? UINavigationController {
             return topController(controller: navigationController.visibleViewController)
         }
-        
         if let tabController = controller as? UITabBarController,
            let selected = tabController.selectedViewController {
             return topController(controller: selected)
         }
-        
         if let presented = controller?.presentedViewController {
             return topController(controller: presented)
         }
-        
         return controller
     }
 }

@@ -83,25 +83,29 @@ struct NotificationsView: View {
     
     @ViewBuilder
     private func makeStateView() -> some View {
-        switch viewModel.state {
-        case .empty:
-            ContentUnavailableView {
-                Label("Empty", systemImage: "xmark.circle")
-            } description: {
-                Text("No notifications")
-            } actions: {
-                NavigationLink("Setup Webhooks", value: "webhooks")
+        if pushNotificationsManager.isNotificationsAllowed {
+            switch viewModel.state {
+            case .empty:
+                ContentUnavailableView {
+                    Label("Empty", systemImage: "xmark.circle")
+                } description: {
+                    Text("No notifications")
+                } actions: {
+                    NavigationLink("Setup Webhooks", value: "webhooks")
+                }
+                
+            case .error(let error):
+                ContentUnavailableView(
+                    "Error",
+                    systemImage: "exclamationmark.triangle",
+                    description: Text(error.displayableLocalizedDescription)
+                )
+                
+            case .loading,
+                    .data:
+                EmptyView()
             }
-            
-        case .error(let error):
-            ContentUnavailableView(
-                "Error",
-                systemImage: "exclamationmark.triangle",
-                description: Text(error.displayableLocalizedDescription)
-            )
-            
-        case .loading,
-                .data:
+        } else {
             EmptyView()
         }
     }

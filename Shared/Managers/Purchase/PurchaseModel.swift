@@ -101,6 +101,18 @@ enum PurchaseProductType: String {
             return .tip
         }
     }
+    
+    var next: Self? {
+        switch self {
+        case .supporterMonthly: .fullSupporterMonthly
+        case .fullSupporterMonthly: .superSupporterMonthly
+        case .superSupporterMonthly: nil
+        case .smallTip: nil
+        case .niceTip: nil
+        case .generousTip: nil
+        case .hugeTip: nil
+        }
+    }
 }
 
 enum PurchaseEntitlement: String {
