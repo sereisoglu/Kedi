@@ -20,6 +20,7 @@ enum OverviewItemType: String, Codable, CaseIterable {
     case newUsers
     case churnRate
     case subscriptionsLost
+    case transactions
     
     var icon: String {
         switch self {
@@ -34,6 +35,7 @@ enum OverviewItemType: String, Codable, CaseIterable {
         case .newUsers: "person.2"
         case .churnRate: "person.2.slash"
         case .subscriptionsLost: "person.2.slash"
+        case .transactions: "arrow.left.arrow.right.circle"
         }
     }
     
@@ -50,6 +52,7 @@ enum OverviewItemType: String, Codable, CaseIterable {
         case .newUsers: "New Users"
         case .churnRate: "Churn Rate"
         case .subscriptionsLost: "Subs. Lost"
+        case .transactions: "Transactions"
         }
     }
     
@@ -62,7 +65,8 @@ enum OverviewItemType: String, Codable, CaseIterable {
                 .proceeds,
                 .newUsers,
                 .churnRate,
-                .subscriptionsLost:
+                .subscriptionsLost,
+                .transactions:
             return [
                 .last7Days,
                 .last30Days,
@@ -110,6 +114,7 @@ enum OverviewItemType: String, Codable, CaseIterable {
         case .newUsers: .last
         case .churnRate: .last
         case .subscriptionsLost: .last
+        case .transactions: .total
         }
     }
     
@@ -126,6 +131,7 @@ enum OverviewItemType: String, Codable, CaseIterable {
         case .newUsers: .conversionToPaying
         case .churnRate: .churn
         case .subscriptionsLost: .churn
+        case .transactions: .revenue
         }
     }
     
@@ -134,14 +140,32 @@ enum OverviewItemType: String, Codable, CaseIterable {
         case .mrr: 1
         case .subscriptions: 1
         case .trials: 1
-        case .revenue: 3
+        case .revenue: 1
         case .users: nil
         case .installs: nil
         case .arr: 1
-        case .proceeds: 6
+        case .proceeds: 1
         case .newUsers: 1
         case .churnRate: 3
         case .subscriptionsLost: 2
+        case .transactions: 2
+        }
+    }
+    
+    var chartRevenueType: RCChartRevenueType? {
+        switch self {
+        case .mrr: nil
+        case .subscriptions: nil
+        case .trials: nil
+        case .revenue: .revenue
+        case .users: nil
+        case .installs: nil
+        case .arr: nil
+        case .proceeds: .proceeds
+        case .newUsers: nil
+        case .churnRate: nil
+        case .subscriptionsLost: nil
+        case .transactions: .revenue
         }
     }
 }

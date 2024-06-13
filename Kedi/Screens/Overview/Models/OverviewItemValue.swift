@@ -20,6 +20,7 @@ enum OverviewItemValue: Hashable, Equatable {
     case newUsers(Int)
     case churnRate(Double)
     case subscriptionsLost(Int)
+    case transactions(Int)
     
     var type: OverviewItemType {
         switch self {
@@ -34,6 +35,7 @@ enum OverviewItemValue: Hashable, Equatable {
         case .newUsers: .newUsers
         case .churnRate: .churnRate
         case .subscriptionsLost: .subscriptionsLost
+        case .transactions: .transactions
         }
     }
     
@@ -49,7 +51,8 @@ enum OverviewItemValue: Hashable, Equatable {
                 .users(let int),
                 .installs(let int),
                 .newUsers(let int),
-                .subscriptionsLost(let int):
+                .subscriptionsLost(let int),
+                .transactions(let int):
             return int.formatted()
         case .churnRate(let double):
             return (double / 100).formatted(.percent)
@@ -80,6 +83,8 @@ enum OverviewItemValue: Hashable, Equatable {
             self = .churnRate(value)
         case .subscriptionsLost:
             self = .subscriptionsLost(Int(value))
+        case .transactions:
+            self = .transactions(Int(value))
         }
     }
 }
@@ -111,6 +116,8 @@ extension OverviewItemValue {
             return .churnRate(23)
         case .subscriptionsLost:
             return .subscriptionsLost(433)
+        case .transactions:
+            return .transactions(1345)
         }
     }
 }

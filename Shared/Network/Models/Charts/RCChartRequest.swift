@@ -13,12 +13,14 @@ struct RCChartRequest: Encodable {
     let resolution: RCChartResolution
     var startDate: String? = nil
     var endDate: String? = nil
+    var revenueType: RCChartRevenueType? = nil
     
     enum CodingKeys: String, CodingKey {
         case name
         case resolution
         case startDate = "start_date"
         case endDate = "end_date"
+        case revenueType = "revenue_type"
     }
 }
 
@@ -49,4 +51,11 @@ enum RCChartResolution: Int, Encodable {
     case month
     case quarter
     case year
+}
+
+enum RCChartRevenueType: String, Encodable {
+    
+    case revenue
+    case revenueNetOfTaxes = "revenue_net_of_taxes"
+    case proceeds
 }

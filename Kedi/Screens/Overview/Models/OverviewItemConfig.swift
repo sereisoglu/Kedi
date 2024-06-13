@@ -32,6 +32,7 @@ extension OverviewItemConfig {
             .init(type: .installs, timePeriod: .last28Days),
             .init(type: .arr, timePeriod: .allTime),
             .init(type: .proceeds, timePeriod: .allTime),
+            .init(type: .transactions, timePeriod: .last30Days),
             .init(type: .newUsers, timePeriod: .allTime),
             .init(type: .churnRate, timePeriod: .allTime),
             .init(type: .subscriptionsLost, timePeriod: .allTime)

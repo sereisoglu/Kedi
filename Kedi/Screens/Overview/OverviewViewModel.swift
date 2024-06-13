@@ -101,7 +101,8 @@ final class OverviewViewModel: ObservableObject {
                     name: chartName,
                     resolution: config.timePeriod.resolution,
                     startDate: config.timePeriod.startDate,
-                    endDate: config.timePeriod.endDate
+                    endDate: config.timePeriod.endDate,
+                    revenueType: type.chartRevenueType
                 ))
             )
             
@@ -123,7 +124,7 @@ final class OverviewViewModel: ObservableObject {
                     if config.timePeriod == .last28Days {
                         setItem(config: config, chart: chart)
                     } else {
-                        setItem(config: config, value: .revenue(data?.summary?["total"]?["Total Revenue"] ?? 0), chart: chart)
+                        setItem(config: config, value: .revenue(data?.summary?["total"]?["Revenue"] ?? 0), chart: chart)
                     }
                 case .arr:
                     setItem(config: config, value: .arr(chartValues.last?.value ?? 0), chart: chart)
@@ -135,6 +136,8 @@ final class OverviewViewModel: ObservableObject {
                     setItem(config: config, value: .churnRate(chartValues.last?.value ?? 0), chart: chart)
                 case .subscriptionsLost:
                     setItem(config: config, value: .subscriptionsLost(Int(chartValues.last?.value ?? 0)), chart: chart)
+                case .transactions:
+                    setItem(config: config, value: .transactions(Int(data?.summary?["total"]?["Transactions"] ?? 0)), chart: chart)
                 }
             } else {
                 items[config]?.set(valueState: .empty)
