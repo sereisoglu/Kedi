@@ -177,7 +177,7 @@ struct TransactionDetailHistoryItem: Identifiable, Hashable {
             type = .unknown(type: data.type)
         }
         
-        if let timestamp = data.purchasedAtMs ?? data.eventTimestampMs {
+        if let timestamp = data.eventTimestampMs {
             date = Date(timeIntervalSince1970: Double(timestamp) / 1000)
             self.timestamp = date?.timeIntervalSince1970
         }

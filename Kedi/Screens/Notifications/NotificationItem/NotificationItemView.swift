@@ -62,18 +62,6 @@ struct NotificationItemView: View {
                 }
             }
             
-            if let subscriberAttributes = notification.subscriberAttributes {
-                HStack(alignment: .center, spacing: 10) {
-                    Image(systemName: "person")
-                        .font(.body)
-                        .frame(width: 22, height: 22)
-                    
-                    Text(subscriberAttributes)
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                }
-            }
-            
             HStack(alignment: .center, spacing: 10) {
                 Text(notification.countryFlag)
                     .font(.body)
@@ -88,6 +76,18 @@ struct NotificationItemView: View {
                 Text(notification.formattedDate)
                     .font(.footnote)
                     .foregroundStyle(.secondary)
+            }
+            
+            if let subscriberAttributes = notification.subscriberAttributes {
+                HStack(alignment: .center, spacing: 10) {
+                    Image(systemName: "person")
+                        .font(.body)
+                        .frame(width: 22, height: 22)
+                    
+                    Text(subscriberAttributes)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
             }
         }
         .alignmentGuide(.listRowSeparatorLeading) { viewDimensions in
