@@ -120,6 +120,16 @@ enum AppStorePaydayState {
         }
     }
     
+    var title: String {
+        switch self {
+        case .today: "Today"
+        case .tomorrow: "Tomorrow"
+        case .upcoming: "Upcoming"
+        case .future: "Future"
+        case .past: "Past"
+        }
+    }
+    
     var isUpcoming: Bool {
         [.today, .tomorrow, .upcoming].contains(self)
     }

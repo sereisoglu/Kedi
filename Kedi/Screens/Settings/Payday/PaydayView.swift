@@ -43,7 +43,7 @@ struct PaydayView: View {
                         )
                     }
                 } header: {
-                    Text("Upcoming")
+                    Text(payday.state.title)
                 } footer: {
                     Text("Earnings from the \(payday.fiscalMonthFormatted) fiscal month will be deposited \(payday.paymentDateFormatted).")
                 }
