@@ -96,7 +96,7 @@ final class OverviewDetailViewModel: ObservableObject {
                 if config.timePeriod == .last28Days {
                     break
                 } else {
-                    value = .revenue(data?.summary?["total"]?["Total Revenue"] ?? 0)
+                    value = .revenue(data?.summary?["total"]?["Revenue"] ?? 0)
                 }
             case .arr:
                 value = .arr(chartValues.last?.value ?? 0)
@@ -108,6 +108,8 @@ final class OverviewDetailViewModel: ObservableObject {
                 value = .churnRate(chartValues.last?.value ?? 0)
             case .subscriptionsLost:
                 value = .subscriptionsLost(Int(chartValues.last?.value ?? 0))
+            case .transactions:
+                value = .transactions(Int(data?.summary?["total"]?["Transactions"] ?? 0))
             }
             
             state = chartValues.isEmpty ? .empty : .data

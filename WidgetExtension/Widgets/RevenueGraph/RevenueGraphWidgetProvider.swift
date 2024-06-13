@@ -93,14 +93,15 @@ struct RevenueGraphWidgetProvider: TimelineProvider {
                 endpoint: .charts(.init(
                     name: .revenue,
                     resolution: .day,
-                    startDate: Date().byAdding(.weekOfYear, value: -18).format(to: .yyy_MM_dd)
+                    startDate: Date().byAdding(.weekOfYear, value: -18).format(to: .yyy_MM_dd),
+                    revenueType: .revenue
                 ))
             )
             
             return data?.values?.map {
                 .init(
                     date: .init(timeIntervalSince1970: $0[safe: 0] ?? 0).startOfDay,
-                    value: $0[safe: 3] ?? 0
+                    value: $0[safe: 1] ?? 0
                 )
             } ?? []
         } catch {
