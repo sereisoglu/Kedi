@@ -24,6 +24,8 @@ struct KediApp: App {
         WindowGroup {
             RootView()
                 .environmentObject(MeManager.shared)
+                .environmentObject(PurchaseManager.shared)
+                .environmentObject(PushNotificationsManager.shared)
                 .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
         }
     }

@@ -24,12 +24,10 @@ struct NotificationsView: View {
             switch screen {
             case "webhooks":
                 WebhooksView()
-                    .environmentObject(pushNotificationsManager)
             case "allWebhooks":
                 AllWebhooksView()
             case "webhooksManualSetup":
                 WebhooksManualSetupView()
-                    .environmentObject(pushNotificationsManager)
             default:
                 Text("Unknown destination!")
             }

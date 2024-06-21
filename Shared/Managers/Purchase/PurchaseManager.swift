@@ -30,9 +30,9 @@ final class PurchaseManager: NSObject, ObservableObject {
     @Published private(set) var state: ViewState = .loading
     @Published private(set) var isPurchasing = false
     
-//    var userId: String {
-//        revenueCat.appUserID
-//    }
+    var userId: String {
+        revenueCat.appUserID
+    }
     
     static let shared = PurchaseManager()
     
@@ -52,14 +52,17 @@ final class PurchaseManager: NSObject, ObservableObject {
                     group.addTask { [weak self] in
                         try await self?.fetchPurchases()
                     }
-                    
                     group.addTask { [weak self] in
                         try await self?.fetchMePurchases()
                     }
                 }
-                state = .data
+                await MainActor.run {
+                    state = .data
+                }
             } catch {
-                state = .error(error)
+                await MainActor.run {
+                    state = .error(error)
+                }
             }
         }
     }
@@ -97,6 +100,7 @@ final class PurchaseManager: NSObject, ObservableObject {
         try await makePurchase(purchase)
     }
     
+    @MainActor
     func makePurchase(_ purchase: PurchaseModel) async throws {
         guard !isPurchasing else {
             throw PurchaseError.isPurchasing
@@ -108,8 +112,7 @@ final class PurchaseManager: NSObject, ObservableObject {
         let data = try await revenueCat.purchase(package: purchase.package)
         
         if !data.userCancelled {
-            await processInfo(info: data.customerInfo)
-            
+            processInfo(info: data.customerInfo)
             NotificationCenter.default.post(name: .purchase, object: purchase.productType.rawValue)
         }
     }

@@ -29,13 +29,10 @@ struct AppIconView: View {
             if purchaseManager.state == .data,
                purchaseManager.meSubscriptionType == .normal {
                 Section {
-                    SettingsSupporterView(
+                    BecomeSupporterView(
                         title: "Become a Supporter!",
                         subtitle: "Support indie development",
-                        isActive: true,
-                        action: {
-                            showingSupporter.toggle()
-                        }
+                        isActive: true
                     )
                 }
                 .listRowInsets(.zero)
@@ -63,7 +60,6 @@ struct AppIconView: View {
         .sheet(isPresented: $showingSupporter) {
             NavigationStack {
                 SupporterView()
-                    .environmentObject(purchaseManager)
             }
         }
     }

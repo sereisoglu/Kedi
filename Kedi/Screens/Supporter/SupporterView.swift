@@ -9,14 +9,14 @@ import SwiftUI
 
 struct SupporterView: View {
     
+    @EnvironmentObject var purchaseManager: PurchaseManager
+    
     private let analyticsManager = AnalyticsManager.shared
     
     @State private var subscriptionSelection: PurchaseProductType?
     @State private var showingAlert = false
     @State private var purchaseError: Error?
     @Environment(\.dismiss) private var dismiss
-    
-    @EnvironmentObject var purchaseManager: PurchaseManager
     
     var body: some View {
         makeBody()
@@ -156,7 +156,7 @@ struct SupporterView: View {
                 
                 Section {
                 } footer: {
-                    Text("Kedi is a free and [open-source \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://github.com/sereisoglu/Kedi) RevenueCat client. Kedi was build by a solo [developer \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://x.com/sereisoglu).\n\nSubscription renews automatically, unless turned off in settings at least 24 hours before end of current period. Payment is charged to your Apple ID account.")
+                    Text("Subscription renews automatically, unless turned off in settings at least 24 hours before end of current period. Payment is charged to your Apple ID account.")
                 }
             }
             .safeAreaInset(edge: .bottom) {
@@ -184,7 +184,7 @@ struct SupporterView: View {
                         .padding(.top)
                         .padding(.horizontal)
                     }
-
+                    
                     Text("[Restore Purchase](kedi://restore-purchase) • [Privacy Policy](https://kediapp.com/privacy-policy) • [Terms & Conditions](https://kediapp.com/terms-and-conditions)")
                         .font(.footnote)
                         .frame(maxWidth: .infinity)
@@ -291,4 +291,5 @@ struct SupporterView: View {
 
 #Preview {
     SupporterView()
+        .environmentObject(PurchaseManager.shared)
 }

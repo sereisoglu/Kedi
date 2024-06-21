@@ -13,7 +13,6 @@ struct SettingsView: View {
     @EnvironmentObject var purchaseManager: PurchaseManager
     @EnvironmentObject var pushNotificationsManager: PushNotificationsManager
     
-    @State private var showingSupporter = false
     @State private var showingSignOutAlert = false
     
     var body: some View {
@@ -27,25 +26,16 @@ struct SettingsView: View {
                 PaydayView()
             case "appIcon":
                 AppIconView()
-                    .environmentObject(purchaseManager)
             case "webhooks":
                 WebhooksView()
-                    .environmentObject(pushNotificationsManager)
             case "about":
                 AboutView()
             case "allWebhooks":
                 AllWebhooksView()
             case "webhooksManualSetup":
                 WebhooksManualSetupView()
-                    .environmentObject(pushNotificationsManager)
             default:
                 Text("Unknown destination!")
-            }
-        }
-        .sheet(isPresented: $showingSupporter) {
-            NavigationStack {
-                SupporterView()
-                    .environmentObject(purchaseManager)
             }
         }
         .overlay(content: makeStateView)
@@ -64,13 +54,10 @@ struct SettingsView: View {
         if purchaseManager.state == .data {
             if let meSubscription = purchaseManager.meSubscription {
                 Section {
-                    SettingsSupporterView(
+                    BecomeSupporterView(
                         title: "You're a \(meSubscription.productType.distinctName)!",
                         subtitle: "Thanks for your support",
-                        isActive: false,
-                        action: {
-                            showingSupporter.toggle()
-                        }
+                        isActive: false
                     )
                 }
                 .listRowInsets(.zero)
@@ -78,16 +65,13 @@ struct SettingsView: View {
                 .listSectionSpacing(.custom(.zero))
             } else {
                 Section {
-                    SettingsSupporterView(
+                    BecomeSupporterView(
                         title: "Become a Supporter!",
                         subtitle: "Support indie development",
-                        isActive: true,
-                        action: {
-                            showingSupporter.toggle()
-                        }
+                        isActive: true
                     )
                 } footer: {
-                    Text("Kedi is a free and [open-source \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://github.com/sereisoglu/Kedi) RevenueCat client. Kedi was build by a solo [developer \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://x.com/sereisoglu). If Kedi has made your life easier and you want to support development, you can become a supporter!")
+                    Text("Kedi is a free and [open-source \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://github.com/sereisoglu/Kedi) RevenueCat client. Kedi was build by a solo [developer \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://x.com/sereisoglu). If Kedi has made your life easier and you want to support future development, you can become a supporter!")
                         .padding(.horizontal)
                 }
                 .listRowInsets(.zero)

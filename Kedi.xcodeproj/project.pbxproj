@@ -17,7 +17,7 @@
 		4A04F7802B827E3200C9D1EB /* PurchaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F77F2B827E3200C9D1EB /* PurchaseModel.swift */; };
 		4A04F7822B827E6800C9D1EB /* MePurchaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F7812B827E6800C9D1EB /* MePurchaseModel.swift */; };
 		4A04F7842B82B8B900C9D1EB /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 4A04F7832B82B8B900C9D1EB /* Configuration.storekit */; };
-		4A04F7872B8368EA00C9D1EB /* SettingsSupporterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F7862B8368EA00C9D1EB /* SettingsSupporterView.swift */; };
+		4A04F7872B8368EA00C9D1EB /* BecomeSupporterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A04F7862B8368EA00C9D1EB /* BecomeSupporterView.swift */; };
 		4A1DFC7B2B7BEDAF0094BAA0 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC7A2B7BEDAF0094BAA0 /* View+Extension.swift */; };
 		4A1DFC7D2B7BEDD90094BAA0 /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC7C2B7BEDD90094BAA0 /* AppIcon.swift */; };
 		4A1DFC812B7C93C80094BAA0 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC802B7C93C80094BAA0 /* Bundle+Extension.swift */; };
@@ -259,7 +259,7 @@
 		4A04F77F2B827E3200C9D1EB /* PurchaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseModel.swift; sourceTree = "<group>"; };
 		4A04F7812B827E6800C9D1EB /* MePurchaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MePurchaseModel.swift; sourceTree = "<group>"; };
 		4A04F7832B82B8B900C9D1EB /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
-		4A04F7862B8368EA00C9D1EB /* SettingsSupporterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSupporterView.swift; sourceTree = "<group>"; };
+		4A04F7862B8368EA00C9D1EB /* BecomeSupporterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BecomeSupporterView.swift; sourceTree = "<group>"; };
 		4A1DFC7A2B7BEDAF0094BAA0 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		4A1DFC7C2B7BEDD90094BAA0 /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
 		4A1DFC802B7C93C80094BAA0 /* Bundle+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
@@ -722,6 +722,7 @@
 				4AB721002B722DF1001E2C76 /* TransactionDetail */,
 				4AB6D1CF2BAFAF5500059F66 /* Notifications */,
 				4AB720902B6C6888001E2C76 /* Settings */,
+				4A1DFC8E2B80B91E0094BAA0 /* Supporter */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -805,7 +806,6 @@
 			isa = PBXGroup;
 			children = (
 				4ADF0A102B7BB6E4002318B2 /* Main */,
-				4A1DFC8E2B80B91E0094BAA0 /* Supporter */,
 				4AEE72FE2B8BC27200F51548 /* Payday */,
 				4ADF0A0A2B7BB6A3002318B2 /* AppIcon */,
 				4AEFFCD02BB9993600FCA073 /* Webhooks */,
@@ -973,6 +973,7 @@
 			children = (
 				4AB7211E2B7378EF001E2C76 /* ViewState.swift */,
 				4ADF09E72B7780D6002318B2 /* PaginationState.swift */,
+				4A04F7862B8368EA00C9D1EB /* BecomeSupporterView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1087,7 +1088,6 @@
 		4ADF0A022B7934BE002318B2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4A04F7862B8368EA00C9D1EB /* SettingsSupporterView.swift */,
 				4ADF09FF2B7934B8002318B2 /* SettingsAccountItemView.swift */,
 			);
 			path = Views;
@@ -1479,7 +1479,7 @@
 				4AEE72E82B8A1EC800F51548 /* OverviewItemTimePeriod.swift in Sources */,
 				4AB6D1D12BAFAF7A00059F66 /* NotificationsView.swift in Sources */,
 				4AB720CE2B6EB36C001E2C76 /* OverviewItemType.swift in Sources */,
-				4A04F7872B8368EA00C9D1EB /* SettingsSupporterView.swift in Sources */,
+				4A04F7872B8368EA00C9D1EB /* BecomeSupporterView.swift in Sources */,
 				4AB720C02B6E4A62001E2C76 /* RCChartResponse.swift in Sources */,
 				4AB7208C2B6C642D001E2C76 /* Color+Extension.swift in Sources */,
 				4A044E6E2B94C221000DACBF /* OverviewDropDelegate.swift in Sources */,

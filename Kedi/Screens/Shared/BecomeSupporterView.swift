@@ -1,5 +1,5 @@
 //
-//  SettingsSupporterView.swift
+//  BecomeSupporterView.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/19/24.
@@ -7,18 +7,21 @@
 
 import SwiftUI
 
-struct SettingsSupporterView: View {
+struct BecomeSupporterView: View {
+    
+    @State private var showingSupporter = false
     
     private let emojiWidth: CGFloat = 80
     
     var title: String
     var subtitle: String
     var isActive: Bool
-    var action: () -> Void
+//    var action: () -> Void
     
     var body: some View {
         Button {
-            action()
+//            action()
+            showingSupporter.toggle()
         } label: {
             HStack(spacing: 0) {
                 Text("🚀")
@@ -61,31 +64,33 @@ struct SettingsSupporterView: View {
         }
         .buttonStyle(.plain)
         .padding(.vertical)
+        .sheet(isPresented: $showingSupporter) {
+            NavigationStack {
+                SupporterView()
+            }
+        }
     }
 }
 
 #Preview {
     Group {
-        SettingsSupporterView(
+        BecomeSupporterView(
             title: "You're a Super Supporter!",
             subtitle: "Support indie development",
-            isActive: true,
-            action: {}
+            isActive: true
         )
         
-        SettingsSupporterView(
+        BecomeSupporterView(
             title: "You're a Super Supporter!",
             subtitle: "Support indie development",
-            isActive: true,
-            action: {}
+            isActive: true
         )
         .environment(\.sizeCategory, .extraSmall)
         
-        SettingsSupporterView(
+        BecomeSupporterView(
             title: "Become a Supporter",
             subtitle: "Support indie development!",
-            isActive: true,
-            action: {}
+            isActive: true
         )
         .environment(\.sizeCategory, .extraExtraExtraLarge)
     }
