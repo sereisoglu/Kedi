@@ -9,14 +9,12 @@ import Foundation
 
 struct RCChartRequest: Encodable {
     
-    let name: RCChartName
     let resolution: RCChartResolution
     var startDate: String? = nil
     var endDate: String? = nil
     var revenueType: RCChartRevenueType? = nil
     
     enum CodingKeys: String, CodingKey {
-        case name
         case resolution
         case startDate = "start_date"
         case endDate = "end_date"

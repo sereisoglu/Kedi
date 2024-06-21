@@ -16,7 +16,7 @@ enum Endpoint {
     case projects
     case projectDetail(id: String)
     case overview(projectIds: [String]?)
-    case charts(RCChartRequest)
+    case charts(name: RCChartName, RCChartRequest)
     case transactions(RCTransactionsRequest)
     case transactionDetail(projectId: String, subscriberId: String)
     case transactionDetailActivity(projectId: String, subscriberId: String)
@@ -67,8 +67,8 @@ extension Endpoint {
             return "me/projects/\(id)"
         case .overview:
             return "me/charts_v2/overview"
-        case .charts(let request):
-            return "me/charts_v2/\(request.name.rawValue)"
+        case .charts(let name, _):
+            return "me/charts_v2/\(name.rawValue)"
         case .transactions:
             return "me/transactions"
         case .transactionDetail(let projectId, let subscriberId):
@@ -117,7 +117,7 @@ extension Endpoint {
                 ]
             }
             return nil
-        case .charts(let request):
+        case .charts(_, let request):
             return request.dict
         case .transactions(let request):
             return request.dict

@@ -90,14 +90,15 @@ struct RevenueGraphWidgetProvider: TimelineProvider {
         do {
             let data = try await apiService.request(
                 type: RCChartResponse.self,
-                endpoint: .charts(.init(
+                endpoint: .charts(
                     name: .revenue,
-                    resolution: .day,
-                    startDate: Date().byAdding(.weekOfYear, value: -18).format(to: .yyy_MM_dd),
-                    revenueType: .revenue
-                ))
+                    .init(
+                        resolution: .day,
+                        startDate: Date().byAdding(.weekOfYear, value: -18).format(to: .yyy_MM_dd),
+                        revenueType: .revenue
+                    )
+                )
             )
-            
             return data?.values?.map {
                 .init(
                     date: .init(timeIntervalSince1970: $0[safe: 0] ?? 0).startOfDay,

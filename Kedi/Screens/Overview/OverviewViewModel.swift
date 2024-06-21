@@ -97,13 +97,15 @@ final class OverviewViewModel: ObservableObject {
         do {
             let data = try await apiService.request(
                 type: RCChartResponse.self,
-                endpoint: .charts(.init(
+                endpoint: .charts(
                     name: chartName,
-                    resolution: config.timePeriod.resolution,
-                    startDate: config.timePeriod.startDate,
-                    endDate: config.timePeriod.endDate,
-                    revenueType: type.chartRevenueType
-                ))
+                    .init(
+                        resolution: config.timePeriod.resolution,
+                        startDate: config.timePeriod.startDate,
+                        endDate: config.timePeriod.endDate,
+                        revenueType: type.chartRevenueType
+                    )
+                )
             )
             
             let chartValues: [OverviewItemChartValue]? = data?.values?.map { .init(
