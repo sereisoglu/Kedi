@@ -10,16 +10,17 @@ import SwiftUI
 // https://www.swiftbysundell.com/articles/building-an-async-swiftui-button
 
 struct AsyncButton<Label: View>: View {
+    
     var action: () async -> Void
     @ViewBuilder var label: () -> Label
-
+    
     @State private var isPerformingTask = false
-
+    
     var body: some View {
         Button(
             action: {
                 isPerformingTask = true
-            
+                
                 Task {
                     await action()
                     isPerformingTask = false
@@ -31,7 +32,7 @@ struct AsyncButton<Label: View>: View {
                     // to zero, since we don't want the button's
                     // size to change while its task is performed:
                     label().opacity(isPerformingTask ? 0 : 1)
-
+                    
                     if isPerformingTask {
                         ProgressView()
                     }

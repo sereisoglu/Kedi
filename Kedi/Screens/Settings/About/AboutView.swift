@@ -12,7 +12,7 @@ struct AboutView: View {
     var body: some View {
         List {
             Section {
-                VStack(alignment: .center) {
+                VStack {
                     Image(uiImage: AppIcon.default.uiImage)
                         .resizable()
                         .frame(width: 120, height: 120)
@@ -26,6 +26,8 @@ struct AboutView: View {
                         .font(.title)
                         .fontWeight(.bold)
                     
+                    Text("A free and [open-source \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://github.com/sereisoglu/Kedi) RevenueCat client")
+                    
                     Text("Version \(Bundle.main.versionNumber ?? "1.0") (\(Bundle.main.buildNumber ?? "1"))")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
@@ -33,8 +35,6 @@ struct AboutView: View {
                         .multilineTextAlignment(.center)
                         .listRowSeparator(.hidden)
                         .listRowBackground(Color.clear)
-                    
-                    Text("A free and [open-source \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://github.com/sereisoglu/Kedi) RevenueCat client")
                 }
                 .frame(maxWidth: .infinity)
                 .listRowInsets(.zero)

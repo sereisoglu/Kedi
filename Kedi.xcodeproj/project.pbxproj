@@ -30,6 +30,7 @@
 		4A1DFC9A2B815CD30094BAA0 /* BrowserUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC992B815CD30094BAA0 /* BrowserUtility.swift */; };
 		4A1DFC9C2B81FA6C0094BAA0 /* Text+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC9B2B81FA6C0094BAA0 /* Text+Extension.swift */; };
 		4A1DFC9E2B8200BB0094BAA0 /* PurchaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A1DFC9D2B8200BA0094BAA0 /* PurchaseManager.swift */; };
+		4A36216C2C2806FE001E9D2D /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A36216B2C2806FE001E9D2D /* CloseButton.swift */; };
 		4A41460A2B85EC0800489D9C /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4146092B85EC0800489D9C /* SessionManager.swift */; };
 		4A41460B2B85EC0800489D9C /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4146092B85EC0800489D9C /* SessionManager.swift */; };
 		4A85DC532BD7E6B0001A2F4D /* NotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56B42BC75ED1004AD736 /* NotificationName+Extension.swift */; };
@@ -271,6 +272,7 @@
 		4A1DFC992B815CD30094BAA0 /* BrowserUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserUtility.swift; sourceTree = "<group>"; };
 		4A1DFC9B2B81FA6C0094BAA0 /* Text+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Extension.swift"; sourceTree = "<group>"; };
 		4A1DFC9D2B8200BA0094BAA0 /* PurchaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseManager.swift; sourceTree = "<group>"; };
+		4A36216B2C2806FE001E9D2D /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		4A4146092B85EC0800489D9C /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		4A85DC582BD82860001A2F4D /* Error+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Extension.swift"; sourceTree = "<group>"; };
 		4A8B56972BC6B333004AD736 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -489,14 +491,6 @@
 				4A1DFC832B7CD7460094BAA0 /* AboutView.swift */,
 			);
 			path = About;
-			sourceTree = "<group>";
-		};
-		4A1DFC8B2B80A55B0094BAA0 /* LabelStyle */ = {
-			isa = PBXGroup;
-			children = (
-				4A1DFC8C2B80A57A0094BAA0 /* CenterAlignedLabelStyle.swift */,
-			);
-			path = LabelStyle;
 			sourceTree = "<group>";
 		};
 		4A1DFC8E2B80B91E0094BAA0 /* Supporter */ = {
@@ -853,11 +847,11 @@
 		4AB720A72B6DB396001E2C76 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				4AEE72F22B8A37DE00F51548 /* ButtonStyle */,
-				4A1DFC8B2B80A55B0094BAA0 /* LabelStyle */,
+				4AEE72F22B8A37DE00F51548 /* Style */,
 				4AB720A82B6DB3A0001E2C76 /* AsyncButton.swift */,
 				4A1DFC852B7E13420094BAA0 /* GeneralListView.swift */,
 				4AEFFCC82BB4E3D000FCA073 /* ImageWithPlaceholder.swift */,
+				4A36216B2C2806FE001E9D2D /* CloseButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1142,12 +1136,13 @@
 			path = OverviewItemDetail;
 			sourceTree = "<group>";
 		};
-		4AEE72F22B8A37DE00F51548 /* ButtonStyle */ = {
+		4AEE72F22B8A37DE00F51548 /* Style */ = {
 			isa = PBXGroup;
 			children = (
+				4A1DFC8C2B80A57A0094BAA0 /* CenterAlignedLabelStyle.swift */,
 				4AEE72F32B8A37F000F51548 /* StandardButtonStyle.swift */,
 			);
-			path = ButtonStyle;
+			path = Style;
 			sourceTree = "<group>";
 		};
 		4AEE72F52B8B53EA00F51548 /* Payday */ = {
@@ -1374,6 +1369,7 @@
 				4A8B56BB2BCC01D3004AD736 /* NotificationItem.swift in Sources */,
 				4A044E492B9082DA000DACBF /* TransactionDetailInsightItemView.swift in Sources */,
 				4AADB9012BC1970600EEA8C2 /* RCCreateWebhookResponse.swift in Sources */,
+				4A36216C2C2806FE001E9D2D /* CloseButton.swift in Sources */,
 				4A8B56AF2BC7125C004AD736 /* RCLogoutResponse.swift in Sources */,
 				4A1DFC902B80B9290094BAA0 /* SupporterView.swift in Sources */,
 				4AADB8F12BB9A75900EEA8C2 /* WebhooksViewModel.swift in Sources */,

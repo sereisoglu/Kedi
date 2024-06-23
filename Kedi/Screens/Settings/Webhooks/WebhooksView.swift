@@ -79,8 +79,8 @@ struct WebhooksView: View {
                             .onTapGesture {
                                 isIdHidden.toggle()
                             }
-                            .onLongPressGesture {
-                                UIPasteboard.general.setValue(viewModel.id, forPasteboardType: "public.plain-text")
+                            .if(!isIdHidden) { view in
+                                view.textSelection(.enabled)
                             }
                     }
                     .font(.footnote)

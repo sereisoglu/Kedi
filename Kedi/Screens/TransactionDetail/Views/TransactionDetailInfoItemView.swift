@@ -20,24 +20,13 @@ struct TransactionDetailInfoItemView: View {
             
             Spacer()
             
-            if item.copyable {
-                Text(item.value)
-                    .font(.callout)
-                    .foregroundStyle(.primary)
-                    .lineLimit(1)
-                    .contextMenu {
-                        Button {
-                            UIPasteboard.general.setValue(item.value, forPasteboardType: "public.plain-text")
-                        } label: {
-                            Label("Copy", systemImage: "doc.on.doc")
-                        }
-                    }
-            } else {
-                Text(item.value)
-                    .font(.callout)
-                    .foregroundStyle(.primary)
-                    .lineLimit(1)
-            }
+            Text(item.value)
+                .font(.callout)
+                .foregroundStyle(.primary)
+                .lineLimit(1)
+                .if(item.copyable) { view in
+                    view.textSelection(.enabled)
+                }
         }
     }
 }

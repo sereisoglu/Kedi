@@ -23,8 +23,10 @@ struct SupporterView: View {
             .navigationTitle("Supporter")
             .background(Color.systemGroupedBackground)
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Dismiss", role: .cancel) { dismiss() }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    CloseButton {
+                        dismiss()
+                    }
                 }
             }
             .sensoryFeedback(.selection, trigger: purchaseManager.isPurchasing)
@@ -185,12 +187,12 @@ struct SupporterView: View {
                         .padding(.horizontal)
                     }
                     
-                    Text("[Restore Purchase](kedi://restore-purchase) • [Privacy Policy](https://kediapp.com/privacy-policy) • [Terms & Conditions](https://kediapp.com/terms-and-conditions)")
+                    Text("[Restore Purchase](restore-purchase) • [Privacy Policy](https://kediapp.com/privacy-policy) • [Terms & Conditions](https://kediapp.com/terms-and-conditions)")
                         .font(.footnote)
                         .frame(maxWidth: .infinity)
                         .padding(.top)
                         .environment(\.openURL, OpenURLAction(handler: { url in
-                            if url.absoluteString == "kedi://restore-purchase" {
+                            if url.absoluteString == "restore-purchase" {
                                 Task {
                                     do {
                                         try await purchaseManager.restorePurchase()

@@ -248,8 +248,11 @@ struct SettingsView: View {
         }
         
         Section {
-            VStack {
+            VStack(spacing: 10) {
                 Text("Version \(Bundle.main.versionNumber ?? "1.0") (\(Bundle.main.buildNumber ?? "1"))")
+                
+                Text(purchaseManager.userId)
+                    .textSelection(.enabled)
             }
             .font(.footnote)
             .foregroundStyle(.secondary)
