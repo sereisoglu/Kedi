@@ -148,7 +148,7 @@ final class PurchaseManager: NSObject, ObservableObject {
         purchases.filter { $0.productType.entitlement == .tip }
     }
     
-    func getTotalSpentForTips() -> String? {
+    func getNonSubscriptionsTotalSpent() -> String? {
         let totalSpent: Decimal = meNonSubscriptions?.reduce(0, { partialResult, nonSubscription in
             partialResult + nonSubscription.price
         }) ?? 0

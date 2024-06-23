@@ -82,7 +82,8 @@ struct SettingsView: View {
         Section {
             SettingsAccountItemView(
                 key: "Id",
-                value: viewModel.me?.distinctId ?? "n/a"
+                value: viewModel.me?.distinctId ?? "n/a",
+                copyable: true
             )
             SettingsAccountItemView(
                 key: "Name",
@@ -248,11 +249,8 @@ struct SettingsView: View {
         }
         
         Section {
-            VStack(spacing: 10) {
+            VStack {
                 Text("Version \(Bundle.main.versionNumber ?? "1.0") (\(Bundle.main.buildNumber ?? "1"))")
-                
-                Text(purchaseManager.userId)
-                    .textSelection(.enabled)
             }
             .font(.footnote)
             .foregroundStyle(.secondary)

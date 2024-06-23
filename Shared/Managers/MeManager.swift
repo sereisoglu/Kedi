@@ -18,8 +18,10 @@ final class MeManager: ObservableObject {
     private let purchaseManager = PurchaseManager.shared
     private let pushNotificationsManager = PushNotificationsManager.shared
     private let analyticsManager = AnalyticsManager.shared
+    private let userDefaults = UserDefaults.standard
     
     @Published private(set) var isSignedIn: Bool = false
+    @Published private(set) var isRequestReviewClosed: Bool = false
     
     private(set) var id: String?
     private(set) var me: RCMeResponse?
@@ -52,6 +54,9 @@ final class MeManager: ObservableObject {
         analyticsManager.signIn(id: me?.distinctId)
         purchaseManager.setKid(id)
         isSignedIn = true
+        isRequestReviewClosed = userDefaults.isRequestReviewClosed
+        
+        setRequestReviewClosed(false)
         
         setupObservers()
     }
@@ -152,5 +157,12 @@ final class MeManager: ObservableObject {
     
     func getProject(appId: String) -> Project? {
         projects?.first(where: { $0.apps?.contains(where: { $0.id == appId }) ?? false })
+    }
+    
+    // MARK: - isRequestReviewClosed
+    
+    func setRequestReviewClosed(_ value: Bool) {
+        userDefaults.isRequestReviewClosed = value
+        isRequestReviewClosed = value
     }
 }

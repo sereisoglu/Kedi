@@ -181,8 +181,8 @@ struct SupporterView: View {
                     makeTipView(nonSubscription: nonSubscription)
                 }
                 
-                if let totalSpentForTips = purchaseManager.getTotalSpentForTips() {
-                    Text("You've tipped \(totalSpentForTips) so far.\n❤️ Thanks for your support!")
+                if let totalSpent = purchaseManager.getNonSubscriptionsTotalSpent() {
+                    Text("You've tipped \(totalSpent) so far.\n❤️ Thanks for your support!")
                         .frame(maxWidth: .infinity)
                         .multilineTextAlignment(.center)
                 } else {

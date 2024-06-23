@@ -11,6 +11,7 @@ struct SettingsAccountItemView: View {
     
     let key: String
     let value: String
+    var copyable: Bool = false
     
     var body: some View {
         HStack {
@@ -23,6 +24,9 @@ struct SettingsAccountItemView: View {
             Text(value)
                 .font(.callout)
                 .foregroundStyle(.primary)
+                .if(copyable) { view in
+                    view.textSelection(.enabled)
+                }
         }
     }
 }
