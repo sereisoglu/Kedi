@@ -26,7 +26,6 @@ struct PurchaseModel: Identifiable, Hashable {
         guard let productType = PurchaseProductType(rawValue: package.storeProduct.productIdentifier) else {
             return nil
         }
-        
         self.package = package
         self.productType = productType
     }

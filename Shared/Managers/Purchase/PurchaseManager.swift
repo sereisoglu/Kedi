@@ -10,13 +10,6 @@ import RevenueCat
 
 final class PurchaseManager: NSObject, ObservableObject {
     
-    enum PurchaseError: Error {
-        
-        case isPurchasing
-        case packageNotFound
-        case unknown(Error)
-    }
-    
     private var revenueCat: Purchases {
         Purchases.shared
     }
@@ -115,6 +108,9 @@ final class PurchaseManager: NSObject, ObservableObject {
     
     func restorePurchase() async throws {
         let info = try await revenueCat.restorePurchases()
+        if info.activeSubscriptions.isEmpty && info.nonSubscriptions.isEmpty {
+            throw PurchaseError.purchaseNotFound
+        }
         await process(info: info)
     }
     
