@@ -5,7 +5,7 @@
 //  Created by Saffet Emin Reisoğlu on 2/18/24.
 //
 
-import Foundation
+import SwiftUI
 import RevenueCat
 
 final class PurchaseManager: NSObject, ObservableObject {
@@ -56,13 +56,9 @@ final class PurchaseManager: NSObject, ObservableObject {
                         try await self?.fetchMePurchases()
                     }
                 }
-                await MainActor.run {
-                    state = .data
-                }
+                await MainActor.run { withAnimation { state = .data } }
             } catch {
-                await MainActor.run {
-                    state = .error(error)
-                }
+                await MainActor.run { withAnimation { state = .error(error) } }
             }
         }
     }
@@ -71,7 +67,7 @@ final class PurchaseManager: NSObject, ObservableObject {
     
     func signIn(id: String) async throws {
         let info = try await revenueCat.logIn(id)
-        await processInfo(info: info.customerInfo)
+        await process(info: info.customerInfo)
     }
     
     func setKid(_ kid: String) {
@@ -88,7 +84,7 @@ final class PurchaseManager: NSObject, ObservableObject {
     
     func signOut() async throws {
         let info = try await revenueCat.logOut()
-        await processInfo(info: info)
+        await process(info: info)
     }
     
     // MARK: - actions
@@ -112,14 +108,14 @@ final class PurchaseManager: NSObject, ObservableObject {
         let data = try await revenueCat.purchase(package: purchase.package)
         
         if !data.userCancelled {
-            processInfo(info: data.customerInfo)
+            process(info: data.customerInfo)
             NotificationCenter.default.post(name: .purchase, object: purchase.productType.rawValue)
         }
     }
     
     func restorePurchase() async throws {
         let info = try await revenueCat.restorePurchases()
-        await processInfo(info: info)
+        await process(info: info)
     }
     
     func redeemCode() {
@@ -139,7 +135,7 @@ final class PurchaseManager: NSObject, ObservableObject {
     
     private func fetchMePurchases() async throws {
         let info = try await revenueCat.customerInfo()
-        await processInfo(info: info)
+        await process(info: info)
     }
     
     func getSubscriptions() -> [PurchaseModel] {
@@ -172,7 +168,7 @@ final class PurchaseManager: NSObject, ObservableObject {
     // MARK: - processInfo
     
     @MainActor
-    private func processInfo(info: CustomerInfo) {
+    private func process(info: CustomerInfo) {
         meNonSubscriptions = info.nonSubscriptions.compactMap { nonSubscription in
             guard let productType = PurchaseProductType(rawValue: nonSubscription.productIdentifier),
                   let purchase = purchases.first(where: { $0.productType == productType }) else {
@@ -218,7 +214,7 @@ extension PurchaseManager: PurchasesDelegate {
         guard !isPurchasing else {
             return
         }
-        processInfo(info: customerInfo)
+        process(info: customerInfo)
     }
     
     // itms-services://?action=purchaseIntent&bundleId=com.sereisoglu.kedi&productIdentifier=kedi.supporter.monthly
@@ -239,7 +235,7 @@ extension PurchaseManager: PurchasesDelegate {
             isPurchasing = false
             
             if let info {
-                processInfo(info: info)
+                process(info: info)
             }
         }
     }

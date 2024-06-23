@@ -19,149 +19,20 @@ struct SupporterView: View {
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        makeBody()
-            .navigationTitle("Supporter")
-            .background(Color.systemGroupedBackground)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    CloseButton {
-                        dismiss()
-                    }
+        List {
+            makeBody()
+        }
+        .navigationTitle("Supporter")
+        .background(Color.systemGroupedBackground)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                CloseButton {
+                    dismiss()
                 }
             }
-            .sensoryFeedback(.selection, trigger: purchaseManager.isPurchasing)
-            .onAppear {
-                setSubscriptionSelection(productType: purchaseManager.meSubscription?.productType)
-            }
-            .onReceive(purchaseManager.$meSubscription) { output in
-                setSubscriptionSelection(productType: output?.productType)
-            }
-            .onReceive(NotificationCenter.default.publisher(for: .purchase)) { output in
-                if let productId = output.object as? String {
-                    analyticsManager.send(event: .purchase(productId: productId))
-                }
-            }
-            .alert(
-                "Purchase Error",
-                isPresented: $showingAlert
-            ) {
-                Button("OK!", role: .cancel) {}
-            } message: {
-                Text(purchaseError?.displayableLocalizedDescription ?? "An error has occurred.")
-            }
-            .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
-    }
-    
-    @ViewBuilder
-    private func makeBody() -> some View {
-        switch purchaseManager.state {
-        case .loading:
-            ProgressView()
-                .controlSize(.large)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            
-        case .empty:
-            ContentUnavailableView(
-                "No Data",
-                systemImage: "xmark.circle"
-            )
-            
-        case .error(let error):
-            ContentUnavailableView(
-                "Error",
-                systemImage: "exclamationmark.triangle",
-                description: Text(error.displayableLocalizedDescription)
-            )
-            
-        case .data:
-            List {
-                if let meSubscription = purchaseManager.meSubscription {
-                    Section {
-                        GeneralListView(
-                            imageAsset: .systemImage("person"),
-                            title: meSubscription.productType.name,
-                            subtitle: meSubscription.purchaseDate.formatted(date: .abbreviated, time: .shortened),
-                            accessoryImageSystemName: nil
-                        )
-                        
-                        GeneralListView(
-                            imageAsset: .systemImage("calendar"),
-                            title: meSubscription.willRenew ? "Renews" : "Expires",
-                            subtitle: meSubscription.expirationDate.formatted(date: .abbreviated, time: .shortened),
-                            accessoryImageSystemName: nil
-                        )
-                        
-                        Button {
-                            Task {
-                                do {
-                                    try await purchaseManager.showManageSubscriptions()
-                                } catch {
-                                    purchaseError = error
-                                    showingAlert = true
-                                }
-                            }
-                        } label: {
-                            Text("Manage Your Subscriptions")
-                        }
-                    } header: {
-                        Text("Your Subscription")
-                    } footer: {
-                        Text("You are eligible to use alternative app icons.\n❤️ Thanks for your support!")
-                    }
-                    
-                    if !purchaseManager.getSubscriptions().isEmpty {
-                        Section {
-                            VStack(spacing: 10) {
-                                ForEach(purchaseManager.getSubscriptions()) { subscription in
-                                    makeSubscriptionView(subscription: subscription)
-                                }
-                            }
-                            .listRowInsets(.zero)
-                            .listRowBackground(Color.clear)
-                        } header: {
-                            Text("Upgrade Your Subscription")
-                        }
-                    }
-                } else {
-                    Section {
-                        VStack(spacing: 10) {
-                            ForEach(purchaseManager.getSubscriptions()) { subscription in
-                                makeSubscriptionView(subscription: subscription)
-                            }
-                        }
-                        .listRowInsets(.zero)
-                        .listRowBackground(Color.clear)
-                    } header: {
-                        Text("Subscriptions")
-                    } footer: {
-                        Text("If you become a supporter, you are eligible to use alternative app icons.")
-                    }
-                }
-                
-                Section {
-                    ForEach(purchaseManager.getNonSubscriptions()) { nonSubscription in
-                        makeTipView(nonSubscription: nonSubscription)
-                    }
-                    
-                    if let totalSpentForTips = purchaseManager.getTotalSpentForTips() {
-                        Text("You've tipped \(totalSpentForTips) so far.\n❤️ Thanks for your support!")
-                            .frame(maxWidth: .infinity)
-                            .multilineTextAlignment(.center)
-                    } else {
-                        Text("You haven't made a tip.")
-                            .frame(maxWidth: .infinity)
-                            .multilineTextAlignment(.center)
-                    }
-                } header: {
-                    Text("Tips")
-                }
-                
-                Section {
-                } footer: {
-                    Text("Subscription renews automatically, unless turned off in settings at least 24 hours before end of current period. Payment is charged to your Apple ID account.")
-                }
-            }
-            .safeAreaInset(edge: .bottom) {
+        }
+        .if(purchaseManager.state == .data) { view in
+            view.safeAreaInset(edge: .bottom) {
                 VStack(spacing: 0) {
                     if !purchaseManager.getSubscriptions().isEmpty,
                        let subscriptionSelection {
@@ -210,6 +81,122 @@ struct SupporterView: View {
                 .padding(.bottom)
                 .background(.ultraThinMaterial)
                 .overlay(Rectangle().frame(height: 1, alignment: .top).foregroundStyle(.primary.opacity(0.2)), alignment: .top)
+            }
+        }
+        .overlay(content: makeStateView)
+        .scrollContentBackground(purchaseManager.state == .data ? .automatic : .hidden)
+        .background(Color.systemGroupedBackground)
+        .disabled(purchaseManager.state == .loading)
+        .alert(
+            "Purchase Error",
+            isPresented: $showingAlert
+        ) {
+            Button("OK!", role: .cancel) {}
+        } message: {
+            Text(purchaseError?.displayableLocalizedDescription ?? "An error has occurred.")
+        }
+        .onAppear {
+            subscriptionSelection = purchaseManager.meSubscription?.productType.next ?? .supporterMonthly
+        }
+        .onReceive(purchaseManager.$meSubscription) { output in
+            subscriptionSelection = output?.productType.next ?? .supporterMonthly
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .purchase)) { output in
+            if let productId = output.object as? String {
+                analyticsManager.send(event: .purchase(productId: productId))
+            }
+        }
+        .sensoryFeedback(.selection, trigger: purchaseManager.isPurchasing)
+        .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
+    }
+    
+    @ViewBuilder
+    private func makeBody() -> some View {
+        if purchaseManager.state == .data {
+            if let meSubscription = purchaseManager.meSubscription {
+                Section {
+                    GeneralListView(
+                        imageAsset: .systemImage("person"),
+                        title: meSubscription.productType.name,
+                        subtitle: meSubscription.purchaseDate.formatted(date: .abbreviated, time: .shortened),
+                        accessoryImageSystemName: nil
+                    )
+                    
+                    GeneralListView(
+                        imageAsset: .systemImage("calendar"),
+                        title: meSubscription.willRenew ? "Renews" : "Expires",
+                        subtitle: meSubscription.expirationDate.formatted(date: .abbreviated, time: .shortened),
+                        accessoryImageSystemName: nil
+                    )
+                    
+                    Button {
+                        Task {
+                            do {
+                                try await purchaseManager.showManageSubscriptions()
+                            } catch {
+                                purchaseError = error
+                                showingAlert = true
+                            }
+                        }
+                    } label: {
+                        Text("Manage Your Subscriptions")
+                    }
+                } header: {
+                    Text("Your Subscription")
+                } footer: {
+                    Text("You are eligible to use alternative app icons.\n❤️ Thanks for your support!")
+                }
+                
+                if !purchaseManager.getSubscriptions().isEmpty {
+                    Section {
+                        VStack(spacing: 10) {
+                            ForEach(purchaseManager.getSubscriptions()) { subscription in
+                                makeSubscriptionView(subscription: subscription)
+                            }
+                        }
+                        .listRowInsets(.zero)
+                        .listRowBackground(Color.clear)
+                    } header: {
+                        Text("Upgrade Your Subscription")
+                    }
+                }
+            } else {
+                Section {
+                    VStack(spacing: 10) {
+                        ForEach(purchaseManager.getSubscriptions()) { subscription in
+                            makeSubscriptionView(subscription: subscription)
+                        }
+                    }
+                    .listRowInsets(.zero)
+                    .listRowBackground(Color.clear)
+                } header: {
+                    Text("Subscriptions")
+                } footer: {
+                    Text("If you become a supporter, you are eligible to use alternative app icons.")
+                }
+            }
+            
+            Section {
+                ForEach(purchaseManager.getNonSubscriptions()) { nonSubscription in
+                    makeTipView(nonSubscription: nonSubscription)
+                }
+                
+                if let totalSpentForTips = purchaseManager.getTotalSpentForTips() {
+                    Text("You've tipped \(totalSpentForTips) so far.\n❤️ Thanks for your support!")
+                        .frame(maxWidth: .infinity)
+                        .multilineTextAlignment(.center)
+                } else {
+                    Text("You haven't made a tip.")
+                        .frame(maxWidth: .infinity)
+                        .multilineTextAlignment(.center)
+                }
+            } header: {
+                Text("Tips")
+            }
+            
+            Section {
+            } footer: {
+                Text("Subscription renews automatically, unless turned off in settings at least 24 hours before end of current period. Payment is charged to your Apple ID account.")
             }
         }
     }
@@ -282,11 +269,29 @@ struct SupporterView: View {
         .buttonStyle(.plain)
     }
     
-    private func setSubscriptionSelection(productType: PurchaseProductType?) {
-        if let productType {
-            subscriptionSelection = productType.next
-        } else {
-            subscriptionSelection = .supporterMonthly
+    @ViewBuilder
+    private func makeStateView() -> some View {
+        switch purchaseManager.state {
+        case .loading:
+            ProgressView()
+                .controlSize(.large)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+        case .empty:
+            ContentUnavailableView(
+                "No Data",
+                systemImage: "xmark.circle"
+            )
+            
+        case .error(let error):
+            ContentUnavailableView(
+                "Error",
+                systemImage: "exclamationmark.triangle",
+                description: Text(error.displayableLocalizedDescription)
+            )
+            
+        case .data:
+            EmptyView()
         }
     }
 }
