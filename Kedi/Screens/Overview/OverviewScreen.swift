@@ -11,6 +11,7 @@ struct OverviewScreen: View {
     
     @EnvironmentObject var meManager: MeManager
     @EnvironmentObject var purchaseManager: PurchaseManager
+    @EnvironmentObject var userDefaultsManager: UserDefaultsManager
     
     @StateObject private var viewModel = OverviewViewModel()
     
@@ -61,7 +62,7 @@ struct OverviewScreen: View {
     @ViewBuilder
     private func makeBody() -> some View {
         if viewModel.state == .data {
-            if !meManager.isRequestReviewClosed {
+            if !userDefaultsManager.isRequestReviewClosed {
                 RequestReviewView()
                     .background(Color.white)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))

@@ -18,7 +18,7 @@ struct AppIconScreen: View {
     }
     @State private var appIconWidth: CGFloat = .zero
     
-    @State private var showingSupporter = false
+    @State private var showingPaywall = false
     
     init() {
         appIconSelection = .init(rawValue: UserDefaults.standard.appIcon ?? "AppIcon") ?? .default
@@ -57,7 +57,7 @@ struct AppIconScreen: View {
         }
         .navigationTitle("App Icon")
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $showingSupporter) {
+        .sheet(isPresented: $showingPaywall) {
             NavigationStack {
                 PaywallScreen()
             }
@@ -72,7 +72,7 @@ struct AppIconScreen: View {
                     appIconSelection = appIcon
                 }
             } else {
-                showingSupporter.toggle()
+                showingPaywall.toggle()
             }
         } label: {
             let isSelected = appIconSelection == appIcon

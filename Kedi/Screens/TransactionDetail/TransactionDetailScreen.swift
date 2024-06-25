@@ -9,7 +9,13 @@ import SwiftUI
 
 struct TransactionDetailScreen: View {
     
+    @EnvironmentObject var purchaseManager: PurchaseManager
+    
     @StateObject var viewModel: TransactionDetailViewModel
+    
+    @Environment(\.dismiss) private var dismiss
+    
+    var isPresented = false
     
     var body: some View {
         makeBody()
@@ -17,6 +23,12 @@ struct TransactionDetailScreen: View {
             .navigationBarTitleDisplayMode(.inline)
             .background(Color.systemGroupedBackground)
             .toolbar {
+                if isPresented {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Dismiss", role: .cancel) { dismiss() }
+                    }
+                }
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         BrowserUtility.openUrlOutsideApp(urlString: "https://app.revenuecat.com/customers/\(viewModel.projectId)/\(viewModel.subscriberId)")
@@ -54,6 +66,20 @@ struct TransactionDetailScreen: View {
                     } header: {
                         Text("Details")
                     }
+                }
+                
+                if purchaseManager.state == .data,
+                   purchaseManager.meSubscriptionType == .normal {
+                    Section {
+                        BecomeSupporterView(
+                            title: "Become a Supporter!",
+                            subtitle: "Support indie development",
+                            isActive: true
+                        )
+                    }
+                    .listRowInsets(.zero)
+                    .listRowBackground(Color.clear)
+                    .listSectionSpacing(.compact)
                 }
                 
                 if let items = viewModel.entitlementItems {

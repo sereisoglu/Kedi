@@ -13,7 +13,7 @@ struct DeepLink: Identifiable {
     
     static let scheme = "kedi"
     
-    var id: String { url.absoluteString }
+    let id = UUID()
     var url: URL
     var item: Item
     
@@ -35,8 +35,8 @@ extension DeepLink {
     
     enum Item {
         
-        case payday
         case transaction(appId: String, subscriberId: String)
+        case payday
         
         var url: URL? {
             var params: String?
@@ -56,8 +56,8 @@ extension DeepLink {
         
         var host: String {
             switch self {
-            case .payday: "payday"
             case .transaction: "transaction"
+            case .payday: "payday"
             }
         }
         
@@ -74,15 +74,15 @@ extension DeepLink {
             })
             
             switch host {
-            case "payday":
-                self = .payday
-                
             case "transaction":
                 guard let appId = params?["appId"],
                       let subscriberId = params?["subscriberId"] else {
                     return nil
                 }
                 self = .transaction(appId: appId, subscriberId: subscriberId)
+                
+            case "payday":
+                self = .payday
                 
             default:
                 return nil

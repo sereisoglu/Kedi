@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RequestReviewView: View {
     
-    @EnvironmentObject var meManager: MeManager
+    @EnvironmentObject var userDefaultsManager: UserDefaultsManager
     
     var body: some View {
         HStack(alignment: .top) {
@@ -26,7 +26,7 @@ struct RequestReviewView: View {
                         Button(
                             action: {
                                 withAnimation {
-                                    meManager.setRequestReviewClosed(true)
+                                    userDefaultsManager.isRequestReviewClosed = true
                                 }
                             },
                             label: {
@@ -48,7 +48,7 @@ struct RequestReviewView: View {
                 Button(
                     action: {
                         withAnimation {
-                            meManager.setRequestReviewClosed(true)
+                            userDefaultsManager.isRequestReviewClosed = true
                         }
                         BrowserUtility.openAppStoreForReview()
                     },

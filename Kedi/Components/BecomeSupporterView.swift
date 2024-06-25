@@ -9,9 +9,9 @@ import SwiftUI
 
 struct BecomeSupporterView: View {
     
-    @State private var showingSupporter = false
-    
     private let emojiWidth: CGFloat = 80
+    
+    @State private var showingPaywall = false
     
     var title: String
     var subtitle: String
@@ -21,7 +21,7 @@ struct BecomeSupporterView: View {
     var body: some View {
         Button {
 //            action()
-            showingSupporter.toggle()
+            showingPaywall.toggle()
         } label: {
             HStack(spacing: 0) {
                 Text("🚀")
@@ -64,9 +64,9 @@ struct BecomeSupporterView: View {
         }
         .buttonStyle(.plain)
         .padding(.vertical)
-        .sheet(isPresented: $showingSupporter) {
+        .sheet(isPresented: $showingPaywall) {
             NavigationStack {
-                SupporterView()
+                PaywallScreen()
             }
         }
     }
