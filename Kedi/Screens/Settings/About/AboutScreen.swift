@@ -1,5 +1,5 @@
 //
-//  AboutView.swift
+//  AboutScreen.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/14/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AboutView: View {
+struct AboutScreen: View {
     
     var body: some View {
         List {
@@ -83,7 +83,7 @@ struct AboutView: View {
                     GeneralListView(
                         imageAsset: .custom("github"),
                         title: "Twemoji",
-                        subtitle: "It was used when designing the app icon.\nCopyright 2021 Twitter"
+                        subtitle: "It was used when designing the app icon.\nCopyright (c) 2021 Twitter"
                     )
                 }
                 .openUrlInApp()
@@ -92,7 +92,7 @@ struct AboutView: View {
                     GeneralListView(
                         imageAsset: .custom("github"),
                         title: "Alamofire",
-                        subtitle: "Copyright 2014 Alamofire Software Foundation"
+                        subtitle: "Copyright (c) 2014 Alamofire Software Foundation"
                     )
                 }
                 .openUrlInApp()
@@ -101,7 +101,7 @@ struct AboutView: View {
                     GeneralListView(
                         imageAsset: .custom("github"),
                         title: "Cache",
-                        subtitle: "Copyright 2015 Hyper Interaktiv AS"
+                        subtitle: "Copyright (c) 2015 Hyper Interaktiv AS"
                     )
                 }
                 .openUrlInApp()
@@ -110,7 +110,7 @@ struct AboutView: View {
                     GeneralListView(
                         imageAsset: .custom("github"),
                         title: "KeychainSwift",
-                        subtitle: "Copyright 2015 Evgenii Neumerzhitckii"
+                        subtitle: "Copyright (c) 2015 Evgenii Neumerzhitckii"
                     )
                 }
                 .openUrlInApp()
@@ -119,7 +119,7 @@ struct AboutView: View {
                     GeneralListView(
                         imageAsset: .custom("github"),
                         title: "OneSignal-XCFramework",
-                        subtitle: "Copyright 2020 OneSignal"
+                        subtitle: "Copyright (c) 2020 OneSignal"
                     )
                 }
                 .openUrlInApp()
@@ -128,7 +128,7 @@ struct AboutView: View {
                     GeneralListView(
                         imageAsset: .custom("github"),
                         title: "RevenueCat",
-                        subtitle: "Copyright 2017 Jacob Eiting"
+                        subtitle: "Copyright (c) 2017 Jacob Eiting"
                     )
                 }
                 
@@ -149,6 +149,6 @@ struct AboutView: View {
 }
 
 #Preview {
-    AboutView()
+    AboutScreen()
 }
 

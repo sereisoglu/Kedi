@@ -1,5 +1,5 @@
 //
-//  NotificationsView.swift
+//  NotificationsScreen.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 3/24/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NotificationsView: View {
+struct NotificationsScreen: View {
     
     @EnvironmentObject var pushNotificationsManager: PushNotificationsManager
     
@@ -19,16 +19,16 @@ struct NotificationsView: View {
         }
         .navigationTitle("Notifications")
         .navigationDestination(for: NotificationItem.self) { notification in
-            TransactionDetailView(viewModel: .init(appId: notification.appId, subscriberId: notification.subscriberId))
+            TransactionDetailScreen(viewModel: .init(appId: notification.appId, subscriberId: notification.subscriberId))
         }
         .navigationDestination(for: String.self) { screen in
             switch screen {
             case "webhooks":
-                WebhooksView()
+                WebhooksScreen()
             case "allWebhooks":
-                AllWebhooksView()
+                AllWebhooksScreen()
             case "webhooksManualSetup":
-                WebhooksManualSetupView()
+                WebhooksManualSetupScreen()
             default:
                 Text("Unknown destination!")
             }
@@ -112,6 +112,6 @@ struct NotificationsView: View {
 
 #Preview {
     NavigationStack {
-        NotificationsView()
+        NotificationsScreen()
     }
 }

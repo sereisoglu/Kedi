@@ -22,7 +22,7 @@ struct KediApp: App {
     
     var body: some Scene {
         WindowGroup {
-            RootView()
+            RootScreen()
                 .environmentObject(MeManager.shared)
                 .environmentObject(PurchaseManager.shared)
                 .environmentObject(PushNotificationsManager.shared)

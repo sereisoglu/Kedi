@@ -1,5 +1,5 @@
 //
-//  WebhooksView.swift
+//  WebhooksScreen.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 3/31/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WebhooksView: View {
+struct WebhooksScreen: View {
     
     @EnvironmentObject var pushNotificationsManager: PushNotificationsManager
     
@@ -118,5 +118,5 @@ struct WebhooksView: View {
 }
 
 #Preview {
-    WebhooksView()
+    WebhooksScreen()
 }

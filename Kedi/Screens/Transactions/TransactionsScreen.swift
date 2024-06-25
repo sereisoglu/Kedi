@@ -1,5 +1,5 @@
 //
-//  TransactionsView.swift
+//  TransactionsScreen.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/5/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TransactionsView: View {
+struct TransactionsScreen: View {
     
     @StateObject private var viewModel = TransactionsViewModel()
     
@@ -17,7 +17,7 @@ struct TransactionsView: View {
         }
         .navigationTitle("Transactions")
         .navigationDestination(for: TransactionItem.self) { transaction in
-            TransactionDetailView(viewModel: .init(projectId: transaction.projectId, subscriberId: transaction.subscriberId))
+            TransactionDetailScreen(viewModel: .init(projectId: transaction.projectId, subscriberId: transaction.subscriberId))
         }
         .overlay(content: makeStateView)
         .scrollContentBackground(viewModel.state == .data ? .automatic : .hidden)
@@ -107,5 +107,5 @@ struct TransactionsView: View {
 }
 
 #Preview {
-    TransactionsView()
+    TransactionsScreen()
 }

@@ -1,5 +1,5 @@
 //
-//  AppIconView.swift
+//  AppIconScreen.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/13/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AppIconView: View {
+struct AppIconScreen: View {
     
     @EnvironmentObject var purchaseManager: PurchaseManager
     
@@ -59,7 +59,7 @@ struct AppIconView: View {
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showingSupporter) {
             NavigationStack {
-                SupporterView()
+                PaywallScreen()
             }
         }
     }
@@ -111,5 +111,5 @@ struct AppIconView: View {
 }
 
 #Preview {
-    AppIconView()
+    AppIconScreen()
 }

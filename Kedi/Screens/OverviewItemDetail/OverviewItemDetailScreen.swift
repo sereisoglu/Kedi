@@ -1,5 +1,5 @@
 //
-//  OverviewItemDetailView.swift
+//  OverviewItemDetailScreen.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/24/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OverviewItemDetailView: View {
+struct OverviewItemDetailScreen: View {
     
     @EnvironmentObject var superViewModel: OverviewViewModel
     
@@ -113,5 +113,5 @@ struct OverviewItemDetailView: View {
 }
 
 #Preview {
-    OverviewItemDetailView(viewModel: .init(config: .init(type: .mrr, timePeriod: .allTime)))
+    OverviewItemDetailScreen(viewModel: .init(config: .init(type: .mrr, timePeriod: .allTime)))
 }

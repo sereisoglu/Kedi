@@ -1,5 +1,5 @@
 //
-//  SupporterView.swift
+//  PaywallScreen.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/17/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SupporterView: View {
+struct PaywallScreen: View {
     
     @EnvironmentObject var purchaseManager: PurchaseManager
     private let analyticsManager = AnalyticsManager.shared
@@ -296,6 +296,6 @@ struct SupporterView: View {
 }
 
 #Preview {
-    SupporterView()
+    PaywallScreen()
         .environmentObject(PurchaseManager.shared)
 }

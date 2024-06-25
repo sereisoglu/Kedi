@@ -1,5 +1,5 @@
 //
-//  MainView.swift
+//  MainScreen.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/2/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct MainScreen: View {
     
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
@@ -25,12 +25,12 @@ struct MainView: View {
     private func makeView() -> some View {
         #if os(iOS)
         if horizontalSizeClass == .compact {
-            TabBarView()
+            TabBarScreen()
         } else {
-            SidebarView()
+            SidebarScreen()
         }
         #else
-        SidebarView()
+        SidebarScreen()
         #endif
     }
     
@@ -51,5 +51,5 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView()
+    MainScreen()
 }

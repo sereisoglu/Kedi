@@ -1,5 +1,5 @@
 //
-//  PaydayView.swift
+//  PaydayScreen.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/25/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PaydayView: View {
+struct PaydayScreen: View {
     
     @StateObject private var viewModel = PaydayViewModel()
     
@@ -134,6 +134,6 @@ struct PaydayView: View {
 
 #Preview {
     NavigationStack {
-        PaydayView()
+        PaydayScreen()
     }
 }

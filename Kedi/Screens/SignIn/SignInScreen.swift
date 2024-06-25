@@ -1,5 +1,5 @@
 //
-//  SignInView.swift
+//  SignInScreen.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/1/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SignInView: View {
+struct SignInScreen: View {
     
     @StateObject private var viewModel = SignInViewModel()
     
@@ -92,5 +92,5 @@ struct SignInView: View {
 }
 
 #Preview {
-    SignInView()
+    SignInScreen()
 }

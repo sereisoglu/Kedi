@@ -1,5 +1,5 @@
 //
-//  TransactionDetailView.swift
+//  TransactionDetailScreen.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/6/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TransactionDetailView: View {
+struct TransactionDetailScreen: View {
     
     @StateObject var viewModel: TransactionDetailViewModel
     
@@ -103,5 +103,5 @@ struct TransactionDetailView: View {
 }
 
 #Preview {
-    TransactionDetailView(viewModel: .init(projectId: "", subscriberId: ""))
+    TransactionDetailScreen(viewModel: .init(projectId: "", subscriberId: ""))
 }

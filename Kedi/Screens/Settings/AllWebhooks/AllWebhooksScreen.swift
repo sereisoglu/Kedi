@@ -1,5 +1,5 @@
 //
-//  AllWebhooksView.swift
+//  AllWebhooksScreen.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 4/10/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AllWebhooksView: View {
+struct AllWebhooksScreen: View {
     
     @StateObject private var viewModel = AllWebhooksViewModel()
     
@@ -123,5 +123,5 @@ struct AllWebhooksView: View {
 }
 
 #Preview {
-    AllWebhooksView()
+    AllWebhooksScreen()
 }

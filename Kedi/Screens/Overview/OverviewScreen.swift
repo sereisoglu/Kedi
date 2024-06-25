@@ -1,5 +1,5 @@
 //
-//  OverviewView.swift
+//  OverviewScreen.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/2/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OverviewView: View {
+struct OverviewScreen: View {
     
     @EnvironmentObject var meManager: MeManager
     @EnvironmentObject var purchaseManager: PurchaseManager
@@ -36,17 +36,17 @@ struct OverviewView: View {
             }
         }
         .navigationDestination(for: OverviewItem.self) { item in
-            OverviewDetailView(viewModel: .init(item: item))
+            OverviewDetailScreen(viewModel: .init(item: item))
         }
         .sheet(isPresented: $showingAddItem) {
             NavigationStack {
-                OverviewItemDetailView(viewModel: .init(config: nil))
+                OverviewItemDetailScreen(viewModel: .init(config: nil))
                     .environmentObject(viewModel)
             }
         }
         .sheet(item: $contextMenuItem) { item in
             NavigationStack {
-                OverviewItemDetailView(viewModel: .init(config: item.config))
+                OverviewItemDetailScreen(viewModel: .init(config: item.config))
                     .environmentObject(viewModel)
             }
         }
@@ -190,5 +190,5 @@ struct OverviewView: View {
 }
 
 #Preview {
-    OverviewView()
+    OverviewScreen()
 }

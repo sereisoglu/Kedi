@@ -1,5 +1,5 @@
 //
-//  RootView.swift
+//  RootScreen.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/2/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RootView: View {
+struct RootScreen: View {
     
     @EnvironmentObject var meManager: MeManager
     @EnvironmentObject var pushNotificationsManager: PushNotificationsManager
@@ -29,7 +29,7 @@ struct RootView: View {
     private func makeView() -> some View {
         if meManager.isSignedIn {
             if pushNotificationsManager.isPermissionOpened {
-                MainView()
+                MainScreen()
             } else {
                 NavigationStack {
                     NotificationsPermissionScreen()
@@ -38,7 +38,7 @@ struct RootView: View {
         } else {
             if userDefaultsManager.isOnboardingOpened {
                 NavigationStack {
-                    SignInView()
+                    SignInScreen()
                 }
             } else {
                 NavigationStack {
@@ -61,16 +61,16 @@ struct RootView: View {
         switch deepLink.item {
         case .payday:
             NavigationStack {
-                PaydayView(isPresented: true)
+                PaydayScreen(isPresented: true)
             }
         case .transaction(let appId, let subscriberId):
             NavigationStack {
-                TransactionDetailView(viewModel: .init(appId: appId, subscriberId: subscriberId))
+                TransactionDetailScreen(viewModel: .init(appId: appId, subscriberId: subscriberId))
             }
         }
     }
 }
 
 #Preview {
-    RootView()
+    RootScreen()
 }

@@ -1,5 +1,5 @@
 //
-//  SidebarView.swift
+//  SidebarScreen.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/3/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SidebarView: View {
+struct SidebarScreen: View {
     
     @State private var selection: NavigationItem? = {
         (MeManager.shared.me == nil || MeManager.shared.projects == nil) ? .settings : .overview
@@ -23,13 +23,13 @@ struct SidebarView: View {
             NavigationStack {
                 switch selection {
                 case .overview:
-                    OverviewView()
+                    OverviewScreen()
                 case .transactions:
-                    TransactionsView()
+                    TransactionsScreen()
                 case .notifications:
-                    NotificationsView()
+                    NotificationsScreen()
                 case .settings:
-                    SettingsView()
+                    SettingsScreen()
                 case .none:
                     Text("")
                 }
@@ -48,5 +48,5 @@ struct SidebarView: View {
 }
 
 #Preview {
-    SidebarView()
+    SidebarScreen()
 }

@@ -1,5 +1,5 @@
 //
-//  TabBarView.swift
+//  TabBarScreen.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/3/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TabBarView: View {
+struct TabBarScreen: View {
     
     @State private var selection: NavigationItem
     
@@ -18,7 +18,7 @@ struct TabBarView: View {
     var body: some View {
         TabView(selection: $selection) {
             NavigationStack {
-                OverviewView()
+                OverviewScreen()
             }
             .tag(NavigationItem.overview)
             .tabItem {
@@ -26,7 +26,7 @@ struct TabBarView: View {
             }
             
             NavigationStack {
-                TransactionsView()
+                TransactionsScreen()
             }
             .tag(NavigationItem.transactions)
             .tabItem {
@@ -34,7 +34,7 @@ struct TabBarView: View {
             }
             
             NavigationStack {
-                NotificationsView()
+                NotificationsScreen()
             }
             .tag(NavigationItem.notifications)
             .tabItem {
@@ -42,7 +42,7 @@ struct TabBarView: View {
             }
             
             NavigationStack {
-                SettingsView()
+                SettingsScreen()
             }
             .tag(NavigationItem.settings)
             .tabItem {
@@ -61,5 +61,5 @@ struct TabBarView: View {
 }
 
 #Preview {
-    TabBarView()
+    TabBarScreen()
 }

@@ -1,5 +1,5 @@
 //
-//  OverviewDetailView.swift
+//  OverviewDetailScreen.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/19/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 import Charts
 
-struct OverviewDetailView: View {
+struct OverviewDetailScreen: View {
     
     //    @State private var margin: CGFloat = .zero
     
@@ -198,7 +198,7 @@ struct OverviewDetailView: View {
 
 #Preview {
     NavigationStack {
-        OverviewDetailView(viewModel: .init(item: .init(
+        OverviewDetailScreen(viewModel: .init(item: .init(
             config: .init(type: .mrr, timePeriod: .allTime),
             value: .mrr(1234.23),
             valueState: .data,

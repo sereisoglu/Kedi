@@ -1,5 +1,5 @@
 //
-//  SettingsView.swift
+//  SettingsScreen.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/2/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SettingsView: View {
+struct SettingsScreen: View {
     
     @EnvironmentObject var purchaseManager: PurchaseManager
     @EnvironmentObject var pushNotificationsManager: PushNotificationsManager
@@ -24,17 +24,17 @@ struct SettingsView: View {
         .navigationDestination(for: String.self) { screen in
             switch screen {
             case "payday":
-                PaydayView()
+                PaydayScreen()
             case "appIcon":
-                AppIconView()
+                AppIconScreen()
             case "webhooks":
-                WebhooksView()
+                WebhooksScreen()
             case "about":
-                AboutView()
+                AboutScreen()
             case "allWebhooks":
-                AllWebhooksView()
+                AllWebhooksScreen()
             case "webhooksManualSetup":
-                WebhooksManualSetupView()
+                WebhooksManualSetupScreen()
             default:
                 Text("Unknown destination!")
             }
@@ -286,7 +286,7 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView()
+    SettingsScreen()
         .environmentObject(PurchaseManager.shared)
         .environmentObject(PushNotificationsManager.shared)
 }
