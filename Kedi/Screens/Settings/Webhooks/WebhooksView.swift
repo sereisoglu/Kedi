@@ -9,20 +9,22 @@ import SwiftUI
 
 struct WebhooksView: View {
     
-    @StateObject private var viewModel = WebhooksViewModel()
     @EnvironmentObject var pushNotificationsManager: PushNotificationsManager
     
-    @State private var showingResetWebhooksAlert = false
+    @StateObject private var viewModel = WebhooksViewModel()
+    
     @State private var isIdHidden = true
     
+    @State private var showingResetWebhooksAlert = false
+   
     var body: some View {
         List {
-            if !pushNotificationsManager.isNotificationsAllowed {
+            if !pushNotificationsManager.isAllowed {
                 Section {
                     Toggle(
                         "Notifications",
                         systemImage: "bell.badge",
-                        isOn: $pushNotificationsManager.isNotificationsAllowed
+                        isOn: $pushNotificationsManager.isAllowed
                     )
                 } footer: {
                     Text("You need to allow notifications for webhook integration.")

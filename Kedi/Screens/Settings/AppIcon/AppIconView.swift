@@ -9,16 +9,16 @@ import SwiftUI
 
 struct AppIconView: View {
     
+    @EnvironmentObject var purchaseManager: PurchaseManager
+    
     @State private var appIconSelection: AppIcon {
         didSet {
             UserDefaults.standard.appIcon = appIconSelection.rawValue
         }
     }
-    
     @State private var appIconWidth: CGFloat = .zero
-    @State private var showingSupporter = false
     
-    @EnvironmentObject var purchaseManager: PurchaseManager
+    @State private var showingSupporter = false
     
     init() {
         appIconSelection = .init(rawValue: UserDefaults.standard.appIcon ?? "AppIcon") ?? .default

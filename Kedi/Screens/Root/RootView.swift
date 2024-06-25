@@ -9,22 +9,41 @@ import SwiftUI
 
 struct RootView: View {
     
+    @EnvironmentObject var meManager: MeManager
+    @EnvironmentObject var pushNotificationsManager: PushNotificationsManager
+    @EnvironmentObject var userDefaultsManager: UserDefaultsManager
+    
     @State private var showingDeepLink: DeepLink?
     
-    @EnvironmentObject var meManager: MeManager
-    
     var body: some View {
+        makeView()
+            .onOpenURL { url in
+                handleDeepLink(url: url)
+            }
+            .sheet(item: $showingDeepLink) { deepLink in
+                makeView(deepLink: deepLink)
+            }
+    }
+    
+    @ViewBuilder
+    private func makeView() -> some View {
         if meManager.isSignedIn {
-            MainView()
-                .onOpenURL { url in
-                    handleDeepLink(url: url)
+            if pushNotificationsManager.isPermissionOpened {
+                MainView()
+            } else {
+                NavigationStack {
+                    NotificationsPermissionScreen()
                 }
-                .sheet(item: $showingDeepLink) { deepLink in
-                    makeView(deepLink: deepLink)
-                }
+            }
         } else {
-            NavigationStack {
-                SignInView()
+            if userDefaultsManager.isOnboardingOpened {
+                NavigationStack {
+                    SignInView()
+                }
+            } else {
+                NavigationStack {
+                    WelcomeScreen()
+                }
             }
         }
     }

@@ -9,10 +9,11 @@ import SwiftUI
 
 struct OverviewItemDetailView: View {
     
-    @Environment(\.dismiss) private var dismiss
-    
     @EnvironmentObject var superViewModel: OverviewViewModel
+    
     @StateObject var viewModel: OverviewItemDetailViewModel
+    
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         List {

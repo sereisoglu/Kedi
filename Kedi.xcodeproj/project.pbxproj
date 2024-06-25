@@ -33,8 +33,15 @@
 		4A36216C2C2806FE001E9D2D /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A36216B2C2806FE001E9D2D /* CloseButton.swift */; };
 		4A36216E2C281177001E9D2D /* PurchaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A36216D2C281177001E9D2D /* PurchaseError.swift */; };
 		4A3621722C281520001E9D2D /* RequestReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3621712C281520001E9D2D /* RequestReviewView.swift */; };
+		4A3621752C28449F001E9D2D /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3621742C28449F001E9D2D /* WelcomeScreen.swift */; };
+		4A3621772C2844AE001E9D2D /* FeaturesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3621762C2844AE001E9D2D /* FeaturesScreen.swift */; };
+		4A3621792C2844D0001E9D2D /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3621782C2844D0001E9D2D /* FeatureView.swift */; };
+		4A36217B2C285585001E9D2D /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A36217A2C285585001E9D2D /* PageControl.swift */; };
+		4A36217F2C286353001E9D2D /* NotificationsPermissionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A36217E2C286353001E9D2D /* NotificationsPermissionScreen.swift */; };
+		4A3621882C2AE3BC001E9D2D /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A3621872C2AE3BC001E9D2D /* Feature.swift */; };
 		4A41460A2B85EC0800489D9C /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4146092B85EC0800489D9C /* SessionManager.swift */; };
 		4A41460B2B85EC0800489D9C /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4146092B85EC0800489D9C /* SessionManager.swift */; };
+		4A52AD532C2B476F00340171 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A52AD522C2B476F00340171 /* UserDefaultsManager.swift */; };
 		4A85DC532BD7E6B0001A2F4D /* NotificationName+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B56B42BC75ED1004AD736 /* NotificationName+Extension.swift */; };
 		4A85DC592BD82860001A2F4D /* Error+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A85DC582BD82860001A2F4D /* Error+Extension.swift */; };
 		4A85DC5A2BD82860001A2F4D /* Error+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A85DC582BD82860001A2F4D /* Error+Extension.swift */; };
@@ -277,7 +284,14 @@
 		4A36216B2C2806FE001E9D2D /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		4A36216D2C281177001E9D2D /* PurchaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseError.swift; sourceTree = "<group>"; };
 		4A3621712C281520001E9D2D /* RequestReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestReviewView.swift; sourceTree = "<group>"; };
+		4A3621742C28449F001E9D2D /* WelcomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
+		4A3621762C2844AE001E9D2D /* FeaturesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturesScreen.swift; sourceTree = "<group>"; };
+		4A3621782C2844D0001E9D2D /* FeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
+		4A36217A2C285585001E9D2D /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
+		4A36217E2C286353001E9D2D /* NotificationsPermissionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPermissionScreen.swift; sourceTree = "<group>"; };
+		4A3621872C2AE3BC001E9D2D /* Feature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
 		4A4146092B85EC0800489D9C /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		4A52AD522C2B476F00340171 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		4A85DC582BD82860001A2F4D /* Error+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Extension.swift"; sourceTree = "<group>"; };
 		4A8B56972BC6B333004AD736 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		4A8B569A2BC6B362004AD736 /* Image+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+Extension.swift"; sourceTree = "<group>"; };
@@ -515,6 +529,41 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		4A3621732C28448A001E9D2D /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				4A52AD4F2C2B2E7A00340171 /* Welcome */,
+				4A52AD502C2B2E7F00340171 /* Features */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		4A52AD4F2C2B2E7A00340171 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				4A3621742C28449F001E9D2D /* WelcomeScreen.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		4A52AD502C2B2E7F00340171 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				4A3621762C2844AE001E9D2D /* FeaturesScreen.swift */,
+				4A3621782C2844D0001E9D2D /* FeatureView.swift */,
+				4A3621872C2AE3BC001E9D2D /* Feature.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		4A52AD512C2B2E8500340171 /* NotificationsPermission */ = {
+			isa = PBXGroup;
+			children = (
+				4A36217E2C286353001E9D2D /* NotificationsPermissionScreen.swift */,
+			);
+			path = NotificationsPermission;
+			sourceTree = "<group>";
+		};
 		4A8B56962BC6B2F5004AD736 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
@@ -712,7 +761,9 @@
 			children = (
 				4AB7211D2B7378E5001E2C76 /* Shared */,
 				4AB720852B6C56DE001E2C76 /* Root */,
+				4A3621732C28448A001E9D2D /* Onboarding */,
 				4AB7206B2B6BDC27001E2C76 /* SignIn */,
+				4A52AD512C2B2E8500340171 /* NotificationsPermission */,
 				4AB7208D2B6C682C001E2C76 /* Main */,
 				4AB720802B6C4FDA001E2C76 /* Overview */,
 				4AEE72ED2B8A31BC00F51548 /* OverviewItemDetail */,
@@ -845,6 +896,7 @@
 				4A4146092B85EC0800489D9C /* SessionManager.swift */,
 				4ADFB9E22BAE38D800BDAA58 /* PushNotificationsManager.swift */,
 				4A8B56C32BD01CFF004AD736 /* AnalyticsManager.swift */,
+				4A52AD522C2B476F00340171 /* UserDefaultsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -857,6 +909,7 @@
 				4A1DFC852B7E13420094BAA0 /* GeneralListView.swift */,
 				4AEFFCC82BB4E3D000FCA073 /* ImageWithPlaceholder.swift */,
 				4A36216B2C2806FE001E9D2D /* CloseButton.swift */,
+				4A36217A2C285585001E9D2D /* PageControl.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1358,6 +1411,7 @@
 				4A044E472B9082C3000DACBF /* TransactionDetailInsightItem.swift in Sources */,
 				4A1DFC862B7E13430094BAA0 /* GeneralListView.swift in Sources */,
 				4AB720922B6C6893001E2C76 /* SettingsView.swift in Sources */,
+				4A3621792C2844D0001E9D2D /* FeatureView.swift in Sources */,
 				4A36216E2C281177001E9D2D /* PurchaseError.swift in Sources */,
 				4A1DFC9E2B8200BB0094BAA0 /* PurchaseManager.swift in Sources */,
 				4AADB9052BC1971F00EEA8C2 /* RCDeleteWebhookResponse.swift in Sources */,
@@ -1404,11 +1458,13 @@
 				4AB7207D2B6C17A9001E2C76 /* RCErrorResponse.swift in Sources */,
 				4ABCF59F2BA5E03000B43D63 /* Double+Extension.swift in Sources */,
 				4ABCF59D2BA5E00800B43D63 /* Int+Extension.swift in Sources */,
+				4A36217B2C285585001E9D2D /* PageControl.swift in Sources */,
 				4A8B56A02BC6E47F004AD736 /* DeviceUtility.swift in Sources */,
 				4AB721022B722DFF001E2C76 /* TransactionDetailViewModel.swift in Sources */,
 				4ADF0A082B7A3B86002318B2 /* WidgetErrorView.swift in Sources */,
 				4ADF0A052B7A3B3F002318B2 /* WidgetError.swift in Sources */,
 				4A044E4F2B91BE0B000DACBF /* OverviewItemDetailViewModel.swift in Sources */,
+				4A3621882C2AE3BC001E9D2D /* Feature.swift in Sources */,
 				4A1DFC8D2B80A57A0094BAA0 /* CenterAlignedLabelStyle.swift in Sources */,
 				4A41460A2B85EC0800489D9C /* SessionManager.swift in Sources */,
 				4AB721042B722E07001E2C76 /* TransactionDetailView.swift in Sources */,
@@ -1425,6 +1481,7 @@
 				4A8B56C72BD03077004AD736 /* EnvVars.swift in Sources */,
 				4A044E702B96843E000DACBF /* OverviewDetailViewModel.swift in Sources */,
 				4AB720872B6C56E7001E2C76 /* RootView.swift in Sources */,
+				4A3621772C2844AE001E9D2D /* FeaturesScreen.swift in Sources */,
 				4AADB8FF2BBF72BE00EEA8C2 /* RCUpdateWebhookRequest.swift in Sources */,
 				4AEE72E62B8A1EB700F51548 /* OverviewItemConfig.swift in Sources */,
 				4AB721162B72DD8B001E2C76 /* TransactionDetailEntitlementItem.swift in Sources */,
@@ -1432,6 +1489,7 @@
 				4AADB8F62BBE253000EEA8C2 /* WebhooksManualSetupView.swift in Sources */,
 				4AB720F52B70FB84001E2C76 /* TransactionItemView.swift in Sources */,
 				4AADB9112BC2C1BF00EEA8C2 /* WebhookItem.swift in Sources */,
+				4A52AD532C2B476F00340171 /* UserDefaultsManager.swift in Sources */,
 				4A1DFC842B7CD7460094BAA0 /* AboutView.swift in Sources */,
 				4AEE73032B8BC2BD00F51548 /* AppStorePayday.swift in Sources */,
 				4ADF09DB2B761D88002318B2 /* RCTransactionsRequest.swift in Sources */,
@@ -1440,6 +1498,7 @@
 				4AB720742B6BF4A9001E2C76 /* Endpoint.swift in Sources */,
 				4AB720E92B70C8EC001E2C76 /* TransactionsView.swift in Sources */,
 				4AEFFCC12BB19F4E00FCA073 /* RCProjectsResponse.swift in Sources */,
+				4A3621752C28449F001E9D2D /* WelcomeScreen.swift in Sources */,
 				4AADB90F2BC210A200EEA8C2 /* WebhookItemView.swift in Sources */,
 				4AEFFCC92BB4E3D000FCA073 /* ImageWithPlaceholder.swift in Sources */,
 				4AADB8FB2BBF729A00EEA8C2 /* RCWebhooksResponse.swift in Sources */,
@@ -1452,6 +1511,7 @@
 				4ADFB9E52BAEF2AE00BDAA58 /* AppDelegate.swift in Sources */,
 				4AEFFCC42BB1A9A800FCA073 /* Project.swift in Sources */,
 				4A1DFC7B2B7BEDAF0094BAA0 /* View+Extension.swift in Sources */,
+				4A36217F2C286353001E9D2D /* NotificationsPermissionScreen.swift in Sources */,
 				4ADF09D72B761CED002318B2 /* RCChartRequest.swift in Sources */,
 				4AB7210B2B72B8A6001E2C76 /* TransactionDetailHistoryItem.swift in Sources */,
 				4AEE72EA2B8A1F0700F51548 /* UserDefaults+Standard.swift in Sources */,

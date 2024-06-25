@@ -11,6 +11,28 @@ import Foundation
 
 struct DeepLink: Identifiable {
     
+    static let scheme = "kedi"
+    
+    var id: String { url.absoluteString }
+    var url: URL
+    var item: Item
+    
+    init?(url: URL) {
+        guard url.scheme == Self.scheme,
+              let item = Item(url: url) else {
+            return nil
+        }
+        self.url = url
+        self.item = item
+    }
+    
+    static func make(item: Item) -> URL? {
+        item.url
+    }
+}
+
+extension DeepLink {
+    
     enum Item {
         
         case payday
@@ -45,7 +67,7 @@ struct DeepLink: Identifiable {
                 return nil
             }
             
-            let params = components.queryItems?.reduce([String : Any](), { partialResult, queryItem in
+            let params = components.queryItems?.reduce([String: String](), { partialResult, queryItem in
                 var partialResult = partialResult
                 partialResult[queryItem.name] = queryItem.value
                 return partialResult
@@ -56,8 +78,8 @@ struct DeepLink: Identifiable {
                 self = .payday
                 
             case "transaction":
-                guard let appId = params?["appId"] as? String,
-                      let subscriberId = params?["subscriberId"] as? String else {
+                guard let appId = params?["appId"],
+                      let subscriberId = params?["subscriberId"] else {
                     return nil
                 }
                 self = .transaction(appId: appId, subscriberId: subscriberId)
@@ -66,24 +88,5 @@ struct DeepLink: Identifiable {
                 return nil
             }
         }
-    }
-    
-    static let scheme = "kedi"
-    
-    var id: String { url.absoluteString }
-    var url: URL
-    var item: Item
-    
-    init?(url: URL) {
-        guard url.scheme == Self.scheme,
-              let item = Item(url: url) else {
-            return nil
-        }
-        self.url = url
-        self.item = item
-    }
-    
-    static func make(item: Item) -> URL? {
-        item.url
     }
 }

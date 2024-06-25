@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import StoreKit
 
 struct MainView: View {
     
@@ -16,23 +15,22 @@ struct MainView: View {
     @Environment(\.requestReview) var requestReview
     
     var body: some View {
-        #if os(iOS)
-        if horizontalSizeClass == .compact {
-            TabBarView()
-                .onAppear {
-                    requestReviewIfAppropriated()
-                }
-        } else {
-            SidebarView()
-                .onAppear {
-                    requestReviewIfAppropriated()
-                }
-        }
-        #else
-        SidebarView()
+        makeView()
             .onAppear {
                 requestReviewIfAppropriated()
             }
+    }
+    
+    @ViewBuilder
+    private func makeView() -> some View {
+        #if os(iOS)
+        if horizontalSizeClass == .compact {
+            TabBarView()
+        } else {
+            SidebarView()
+        }
+        #else
+        SidebarView()
         #endif
     }
     

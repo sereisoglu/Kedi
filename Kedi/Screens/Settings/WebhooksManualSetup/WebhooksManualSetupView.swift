@@ -9,8 +9,8 @@ import SwiftUI
 
 struct WebhooksManualSetupView: View {
     
-    private let meManager = MeManager.shared
     @EnvironmentObject var pushNotificationsManager: PushNotificationsManager
+    @EnvironmentObject var meManager: MeManager
     
     @State private var isWebhookUrlCopied = false
     
@@ -24,7 +24,7 @@ struct WebhooksManualSetupView: View {
                 Toggle(
                     "Notifications",
                     systemImage: "bell.badge",
-                    isOn: $pushNotificationsManager.isNotificationsAllowed
+                    isOn: $pushNotificationsManager.isAllowed
                 )
             } header: {
                 Text("Step 1 – Enable Notifications")

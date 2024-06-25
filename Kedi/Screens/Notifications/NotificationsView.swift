@@ -9,8 +9,9 @@ import SwiftUI
 
 struct NotificationsView: View {
     
-    @StateObject private var viewModel = NotificationsViewModel()
     @EnvironmentObject var pushNotificationsManager: PushNotificationsManager
+    
+    @StateObject private var viewModel = NotificationsViewModel()
     
     var body: some View {
         List {
@@ -44,12 +45,12 @@ struct NotificationsView: View {
     
     @ViewBuilder
     private func makeBody() -> some View {
-        if !pushNotificationsManager.isNotificationsAllowed {
+        if !pushNotificationsManager.isAllowed {
             Section {
                 Toggle(
                     "Notifications",
                     systemImage: "bell.badge",
-                    isOn: $pushNotificationsManager.isNotificationsAllowed
+                    isOn: $pushNotificationsManager.isAllowed
                 )
             } footer: {
                 Text("You need to allow notifications for webhook integration.")
@@ -81,7 +82,7 @@ struct NotificationsView: View {
     
     @ViewBuilder
     private func makeStateView() -> some View {
-        if pushNotificationsManager.isNotificationsAllowed {
+        if pushNotificationsManager.isAllowed {
             switch viewModel.state {
             case .empty:
                 ContentUnavailableView {

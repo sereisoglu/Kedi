@@ -10,7 +10,6 @@ import SwiftUI
 struct SupporterView: View {
     
     @EnvironmentObject var purchaseManager: PurchaseManager
-    
     private let analyticsManager = AnalyticsManager.shared
     
     @State private var subscriptionSelection: PurchaseProductType?

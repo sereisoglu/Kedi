@@ -26,6 +26,7 @@ struct KediApp: App {
                 .environmentObject(MeManager.shared)
                 .environmentObject(PurchaseManager.shared)
                 .environmentObject(PushNotificationsManager.shared)
+                .environmentObject(UserDefaultsManager.shared)
                 .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
         }
     }

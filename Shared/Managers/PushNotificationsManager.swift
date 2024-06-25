@@ -21,11 +21,16 @@ final class PushNotificationsManager: NSObject, ObservableObject {
     private var isToggleAllowed = false
     
     @Published private(set) var permissionStatus: PermissionStatus = .notPrompted
-    @Published var isNotificationsAllowed: Bool = false {
+    @Published var isAllowed = false {
         didSet {
             if isToggleAllowed {
-                togglePermissionStatus()
+                togglePermissionStatus(completion: nil)
             }
+        }
+    }
+    @Published var isPermissionOpened = false {
+        didSet {
+            UserDefaults.standard.isNotificationsPermissionOpened = isPermissionOpened
         }
     }
     
@@ -33,9 +38,9 @@ final class PushNotificationsManager: NSObject, ObservableObject {
         OneSignal.User.onesignalId
     }
     
-//    var userExternalId: String? {
-//        OneSignal.User.externalId
-//    }
+    //    var userExternalId: String? {
+    //        OneSignal.User.externalId
+    //    }
     
     static let shared = PushNotificationsManager()
     
@@ -47,7 +52,7 @@ final class PushNotificationsManager: NSObject, ObservableObject {
         OneSignal.setConsentRequired(true)
         OneSignal.setConsentGiven(true)
         
-//        OneSignal.Debug.setLogLevel(.LL_VERBOSE)
+        //        OneSignal.Debug.setLogLevel(.LL_VERBOSE)
         
         OneSignal.initialize(EnvVars.oneSignal, withLaunchOptions: launchOptions)
         
@@ -55,7 +60,11 @@ final class PushNotificationsManager: NSObject, ObservableObject {
         OneSignal.Notifications.addClickListener(self)
         
         permissionStatus = getPermissionStatus()
-        setIsNotificationsAllowed()
+        setIsAllowed()
+        isPermissionOpened = (
+            UserDefaults.standard.isNotificationsPermissionOpened ||
+            permissionStatus != .notPrompted
+        )
         
         updateIconBadgeNumber()
     }
@@ -88,16 +97,21 @@ final class PushNotificationsManager: NSObject, ObservableObject {
         }
     }
     
-    private func togglePermissionStatus() {
+    func togglePermissionStatus(completion: ((PermissionStatus) -> Void)?) {
         switch permissionStatus {
         case .notPrompted:
             OneSignal.Notifications.requestPermission { [weak self] accepted in
-                self?.permissionStatus = accepted ? .allowed : .notAllowed
+                guard let self else {
+                    return
+                }
+                self.permissionStatus = accepted ? .allowed : .notAllowed
+                completion?(self.permissionStatus)
             }
             
         case .allowed:
             OneSignal.User.pushSubscription.optOut()
             permissionStatus = .disabled
+            completion?(permissionStatus)
             
         case .notAllowed:
             BrowserUtility.openSettings()
@@ -105,12 +119,13 @@ final class PushNotificationsManager: NSObject, ObservableObject {
         case .disabled:
             OneSignal.User.pushSubscription.optIn()
             permissionStatus = .allowed
+            completion?(permissionStatus)
         }
     }
     
-    private func setIsNotificationsAllowed() {
+    private func setIsAllowed() {
         isToggleAllowed = false
-        isNotificationsAllowed = permissionStatus == .allowed
+        isAllowed = permissionStatus == .allowed
         isToggleAllowed = true
     }
     
@@ -130,7 +145,7 @@ extension PushNotificationsManager: OSNotificationPermissionObserver {
             OneSignal.User.pushSubscription.optIn()
         }
         permissionStatus = permission ? .allowed : .notAllowed
-        setIsNotificationsAllowed()
+        setIsAllowed()
     }
 }
 

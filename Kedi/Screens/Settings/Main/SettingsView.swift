@@ -9,9 +9,10 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @StateObject private var viewModel = SettingsViewModel()
     @EnvironmentObject var purchaseManager: PurchaseManager
     @EnvironmentObject var pushNotificationsManager: PushNotificationsManager
+    
+    @StateObject private var viewModel = SettingsViewModel()
     
     @State private var showingSignOutAlert = false
     
@@ -131,7 +132,7 @@ struct SettingsView: View {
             Toggle(
                 "Notifications",
                 systemImage: "bell.badge",
-                isOn: $pushNotificationsManager.isNotificationsAllowed
+                isOn: $pushNotificationsManager.isAllowed
             )
             
             GeneralListView(
