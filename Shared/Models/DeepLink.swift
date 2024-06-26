@@ -9,7 +9,7 @@ import Foundation
 
 // xcrun simctl openurl booted 'kedi://payday'
 
-struct DeepLink: Identifiable {
+struct DeepLink: Identifiable, Hashable {
     
     static let scheme = "kedi"
     
@@ -33,7 +33,7 @@ struct DeepLink: Identifiable {
 
 extension DeepLink {
     
-    enum Item {
+    enum Item: Hashable {
         
         case transaction(appId: String, subscriberId: String)
         case payday

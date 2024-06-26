@@ -153,11 +153,15 @@ final class TransactionDetailViewModel: ObservableObject {
             
             if refundCount == 0,
                let lastSeenTimestamp = detailData.lastSeen?.format(to: .iso8601WithoutMilliseconds)?.timeIntervalSince1970 {
-                let filteredItems = items.filter { ($0.timestamp ?? 0) > lastSeenTimestamp && [.oneTimePurchase, .renewal, .conversion].contains($0.type.transactionType) }
+                let filteredItems = items.filter { item in
+                    (item.timestamp ?? 0) > lastSeenTimestamp &&
+                    [.oneTimePurchase, .renewal, .conversion].contains(item.type.transactionType)
+                }
                 let spentDollars = filteredItems.reduce(0.0) { partialResult, item in
                     partialResult + (item.priceInUsd ?? 0)
                 }
-                if spentDollars > 0 {
+                if filteredItems.count > 1,
+                   spentDollars > 0 {
                     insightItems?.append(.init(
                         type: .spentDollarsSinceLastSeen,
                         text: "The user spent **\(spentDollars.formatted(.currency(code: "USD")))** after the last seen. (\(filteredItems.count) transaction\(filteredItems.count > 1 ? "s" : ""))"

@@ -64,7 +64,7 @@ struct OverviewScreen: View {
         if viewModel.state == .data {
             if !userDefaultsManager.isRequestReviewClosed {
                 RequestReviewView()
-                    .background(Color.white)
+                    .background(Color.secondarySystemGroupedBackground)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                     .padding(.horizontal)
                     .padding(.bottom)

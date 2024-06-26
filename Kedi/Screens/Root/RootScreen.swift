@@ -61,7 +61,10 @@ struct RootScreen: View {
         switch deepLink.item {
         case .transaction(let appId, let subscriberId):
             NavigationStack {
-                TransactionDetailScreen(viewModel: .init(appId: appId, subscriberId: subscriberId), isPresented: true)
+                TransactionDetailScreen(
+                    viewModel: .init(appId: appId, subscriberId: subscriberId),
+                    isPresented: true
+                )
             }
         case .payday:
             NavigationStack {
