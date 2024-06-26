@@ -53,9 +53,13 @@ struct RootScreen: View {
             print("Invalid deep link:", url.absoluteString)
             return
         }
-        showingDeepLink = nil
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+        if showingDeepLink == nil {
             showingDeepLink = deepLink
+        } else {
+            showingDeepLink = nil
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
+                showingDeepLink = deepLink
+            }
         }
     }
     
