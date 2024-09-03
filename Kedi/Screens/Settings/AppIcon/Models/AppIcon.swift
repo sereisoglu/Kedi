@@ -10,52 +10,58 @@ import UIKit
 enum AppIcon: String, CaseIterable {
     
     case `default` = "AppIcon"
-    case moneyMouthWhiteBlack = "money-mouth-white-black"
-    case moneyMouthBlackWhite = "money-mouth-black-white"
-    case moneyMouthWhiteBrand = "money-mouth-white-brand"
-    case moneyMouthBlackBrand = "money-mouth-black-brand"
-    case screamingDefault = "screaming-default"
-    case screamingWhiteBlack = "screaming-white-black"
-    case screamingBlackWhite = "screaming-black-white"
-    case screamingWhiteBrand = "screaming-white-brand"
-    case screamingBlackBrand = "screaming-black-brand"
+    case defaultWhite = "AppIcon-White"
+    case defaultGray = "AppIcon-Gray"
+    case defaultWhiteBlack = "AppIcon-White-Black"
+    case defaultSixColors = "AppIcon-Six-Colors"
+    case defaultSixColorsWhite = "AppIcon-Six-Colors-White"
+    case screaming = "AppIcon-Screaming"
+    case screamingWhite = "AppIcon-Screaming-White"
+    case screamingGray = "AppIcon-Screaming-Gray"
+    case screamingWhiteBlack = "AppIcon-Screaming-White-Black"
+    case screamingSixColors = "AppIcon-Screaming-Six-Colors"
+    case screamingSixColorsWhite = "AppIcon-Screaming-Six-Colors-White"
     
     var identifier: String? {
         self == .default ? nil : self.rawValue
     }
     
-    var uiImage: UIImage {
-        UIImage(named: rawValue) ?? UIImage()
+    var preview: String {
+        "AppIcon-Previews/\(rawValue)"
     }
     
     var name: String {
         switch self {
         case .default: "Default"
-        case .moneyMouthWhiteBlack: "White / Black"
-        case .moneyMouthBlackWhite: "Black / White"
-        case .moneyMouthWhiteBrand: "White / Brand"
-        case .moneyMouthBlackBrand: "Black / Brand"
-        case .screamingDefault: "Default"
+        case .defaultWhite: "White"
+        case .defaultGray: "Gray"
+        case .defaultWhiteBlack: "White / Black"
+        case .defaultSixColors: "Six Colors"
+        case .defaultSixColorsWhite: "Six Colors White"
+        case .screaming: "Default"
+        case .screamingWhite: "White"
+        case .screamingGray: "Gray"
         case .screamingWhiteBlack: "White / Black"
-        case .screamingBlackWhite: "Black / White"
-        case .screamingWhiteBrand: "White / Brand"
-        case .screamingBlackBrand: "Black / Brand"
+        case .screamingSixColors: "Six Colors"
+        case .screamingSixColorsWhite: "Six Colors White"
         }
     }
     
     var section: String {
         switch self {
-        case .`default`,
-                .moneyMouthWhiteBlack,
-                .moneyMouthBlackWhite,
-                .moneyMouthWhiteBrand,
-                .moneyMouthBlackBrand:
+        case .default,
+                .defaultWhite,
+                .defaultGray,
+                .defaultWhiteBlack,
+                .defaultSixColors,
+                .defaultSixColorsWhite:
             return "Money Mouth"
-        case .screamingDefault,
+        case .screaming,
+                .screamingWhite,
+                .screamingGray,
                 .screamingWhiteBlack,
-                .screamingBlackWhite,
-                .screamingWhiteBrand,
-                .screamingBlackBrand:
+                .screamingSixColors,
+                .screamingSixColorsWhite:
             return "Screaming"
         }
     }

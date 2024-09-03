@@ -15,7 +15,7 @@ struct WelcomeScreen: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            Image(uiImage: AppIcon.default.uiImage)
+            Image(AppIcon.default.preview)
                 .resizable()
                 .frame(width: 64, height: 64)
                 .clipShape(RoundedRectangle(cornerRadius: 64 * (2 / 9), style: .continuous))

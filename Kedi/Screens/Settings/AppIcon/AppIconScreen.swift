@@ -78,7 +78,7 @@ struct AppIconScreen: View {
             let isSelected = appIconSelection == appIcon
             
             VStack(alignment: .center, spacing: 5) {
-                Image(uiImage: appIcon.uiImage)
+                Image(appIcon.preview)
                     .resizable()
                     .aspectRatio(1, contentMode: .fit)
                     .clipShape(RoundedRectangle(cornerRadius: appIconWidth * (2 / 9), style: .continuous))
@@ -100,6 +100,7 @@ struct AppIconScreen: View {
                 Text(appIcon.name)
                     .font(.caption)
                     .foregroundStyle(isSelected ? .white : .primary)
+                    .multilineTextAlignment(.center)
                     .padding(.init(top: 2, leading: 5, bottom: 2, trailing: 5))
                     .background(isSelected ? Color.accentColor : .clear)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
