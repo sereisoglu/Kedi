@@ -22,7 +22,7 @@ enum AppIcon: String, CaseIterable {
     case screamingSixColors = "AppIcon-Screaming-Six-Colors"
     case screamingSixColorsWhite = "AppIcon-Screaming-Six-Colors-White"
     
-    var identifier: String? {
+    var alternateIconName: String? {
         self == .default ? nil : self.rawValue
     }
     
@@ -67,4 +67,13 @@ enum AppIcon: String, CaseIterable {
     }
     
     static let sections = ["Money Mouth", "Screaming"]
+    
+    static func get() -> AppIcon {
+        .init(rawValue: UserDefaults.standard.appIcon ?? "AppIcon") ?? .default
+    }
+    
+    static func set(to appIcon: AppIcon, completion: ((Error?) -> Void)? = nil) {
+        UIApplication.shared.setAlternateIconName(appIcon.alternateIconName, completionHandler: completion)
+        UserDefaults.standard.appIcon = appIcon.alternateIconName
+    }
 }

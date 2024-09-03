@@ -11,18 +11,10 @@ struct AppIconScreen: View {
     
     @EnvironmentObject var purchaseManager: PurchaseManager
     
-    @State private var appIconSelection: AppIcon {
-        didSet {
-            UserDefaults.standard.appIcon = appIconSelection.rawValue
-        }
-    }
+    @State private var appIconSelection = AppIcon.get()
     @State private var appIconWidth: CGFloat = .zero
     
     @State private var showingPaywall = false
-    
-    init() {
-        appIconSelection = .init(rawValue: UserDefaults.standard.appIcon ?? "AppIcon") ?? .default
-    }
     
     var body: some View {
         List {
@@ -68,7 +60,7 @@ struct AppIconScreen: View {
         Button {
             if purchaseManager.meSubscriptionType != .normal {
                 if appIconSelection != appIcon {
-                    UIApplication.shared.setAlternateIconName(appIcon.identifier)
+                    AppIcon.set(to: appIcon)
                     appIconSelection = appIcon
                 }
             } else {
