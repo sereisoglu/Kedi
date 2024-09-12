@@ -16,9 +16,9 @@ struct NotificationSection: Identifiable, Hashable {
 
 struct NotificationItem: Identifiable, Hashable {
     
-    let id: String
-    let appId: String
-    let subscriberId: String
+    var id: String
+    var appId: String
+    var subscriberId: String
     var date: Date?
     
     var type: NotificationType
@@ -76,6 +76,11 @@ struct NotificationItem: Identifiable, Hashable {
             type = .billingIssue
         case "TRANSFER":
             type = .transfer
+            if (data.transferredTo?.count ?? 0) > 1 {
+                subscriberId = data.transferredTo?.first(where: { !$0.contains("RCAnonymousID") }) ?? ""
+            } else {
+                subscriberId = data.transferredTo?.first ?? ""
+            }
         case "TEST":
             type = .test
         case "SUBSCRIPTION_PAUSED":
