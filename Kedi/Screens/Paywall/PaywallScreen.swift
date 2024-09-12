@@ -241,27 +241,27 @@ struct PaywallScreen: View {
         nonSubscription: PurchaseModel
     ) -> some View {
         Label {
-            Text(nonSubscription.productType.name)
-            
-            Spacer()
-            
-            AsyncButton {
-                do {
-                    try await purchaseManager.makePurchase(nonSubscription)
-                } catch {
-                    purchaseError = error
-                    showingAlert = true
+            HStack {
+                Text(nonSubscription.productType.name)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                AsyncButton {
+                    do {
+                        try await purchaseManager.makePurchase(nonSubscription)
+                    } catch {
+                        purchaseError = error
+                        showingAlert = true
+                    }
+                } label: {
+                    Text(nonSubscription.localizedPriceString)
+                        .font(.body.bold())
+                        .foregroundStyle(.white)
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 10)
+                        .background(.accent)
+                        .clipShape(Capsule())
                 }
-            } label: {
-                Text(nonSubscription.localizedPriceString)
-                    .font(.body.bold())
-                    .foregroundStyle(.white)
-                    .padding(.vertical, 5)
-                    .padding(.horizontal, 10)
-                    .background(.accent)
-                    .clipShape(Capsule())
+                .disabled(purchaseManager.isPurchasing)
             }
-            .disabled(purchaseManager.isPurchasing)
         } icon: {
             Text(nonSubscription.productType.emoji)
         }

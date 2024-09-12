@@ -13,7 +13,7 @@ struct AboutScreen: View {
         List {
             Section {
                 VStack {
-                    Image(uiImage: AppIcon.default.uiImage)
+                    Image(AppIcon.default.preview)
                         .resizable()
                         .frame(width: 120, height: 120)
                         .clipShape(RoundedRectangle(cornerRadius: 120 * (2 / 9), style: .continuous))

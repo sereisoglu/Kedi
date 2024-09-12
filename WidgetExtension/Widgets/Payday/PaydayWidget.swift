@@ -16,6 +16,7 @@ struct PaydayWidget: Widget {
         StaticConfiguration(kind: kind, provider: PaydayWidgetProvider()) { entry in
             PaydayWidgetView(entry: entry)
                 .containerBackground(.clear, for: .widget)
+                .widgetAccentable()
         }
         .configurationDisplayName("App Store Payday")
         .description("Find out when you'll get paid from the App Store.")

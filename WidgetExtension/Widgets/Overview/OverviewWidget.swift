@@ -16,6 +16,7 @@ struct OverviewWidget: Widget {
         StaticConfiguration(kind: kind, provider: OverviewWidgetProvider()) { entry in
             OverviewWidgetView(entry: entry)
                 .containerBackground(.clear, for: .widget)
+                .widgetAccentable()
         }
         .configurationDisplayName("Overview")
         .description("Shows an overview of your stats.")

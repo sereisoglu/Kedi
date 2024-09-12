@@ -57,7 +57,8 @@ struct EventNotification {
             if data.isTrialConversion ?? false {
                 type = .conversion
             } else {
-                type = .renewal
+                let diffMs = (data.eventTimestampMs ?? 0) - (data.purchasedAtMs ?? 0)
+                type = diffMs >= 0 ? .renewalLapsed : .renewalExisting
             }
         case "CANCELLATION":
             if data.cancelReason == "CUSTOMER_SUPPORT" {
@@ -116,7 +117,8 @@ enum EventNotificationType {
     
     case initialPurchase
     case oneTimePurchase
-    case renewal
+    case renewalExisting
+    case renewalLapsed
     case trial
     case conversion
     case resubscription
@@ -133,7 +135,8 @@ enum EventNotificationType {
         switch self {
         case .initialPurchase: "🔵"
         case .oneTimePurchase: "🟣"
-        case .renewal: "🟢"
+        case .renewalExisting: "🟢"
+        case .renewalLapsed: "🔵"
         case .trial: "🟠"
         case .conversion: "🔵"
         case .resubscription: "🟢"
@@ -152,7 +155,8 @@ enum EventNotificationType {
         switch self {
         case .initialPurchase: "Initial Purchase"
         case .oneTimePurchase: "One-Time Purchase"
-        case .renewal: "Renewal"
+        case .renewalExisting: "Renewal (Existing)"
+        case .renewalLapsed: "Renewal (Lapsed)"
         case .trial: "Trial"
         case .conversion: "Conversion"
         case .resubscription: "Resubscription"

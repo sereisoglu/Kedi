@@ -16,9 +16,9 @@ struct NotificationSection: Identifiable, Hashable {
 
 struct NotificationItem: Identifiable, Hashable {
     
-    let id: String
-    let appId: String
-    let subscriberId: String
+    var id: String
+    var appId: String
+    var subscriberId: String
     var date: Date?
     
     var type: NotificationType
@@ -53,7 +53,8 @@ struct NotificationItem: Identifiable, Hashable {
             if data.isTrialConversion ?? false {
                 type = .conversion
             } else {
-                type = .renewal
+                let diffMs = (data.eventTimestampMs ?? 0) - (data.purchasedAtMs ?? 0)
+                type = diffMs >= 0 ? .renewalLapsed : .renewalExisting
             }
         case "CANCELLATION":
             if data.cancelReason == "CUSTOMER_SUPPORT" {
@@ -75,6 +76,11 @@ struct NotificationItem: Identifiable, Hashable {
             type = .billingIssue
         case "TRANSFER":
             type = .transfer
+            if (data.transferredTo?.count ?? 0) > 1 {
+                subscriberId = data.transferredTo?.first(where: { !$0.contains("RCAnonymousID") }) ?? ""
+            } else {
+                subscriberId = data.transferredTo?.first ?? ""
+            }
         case "TEST":
             type = .test
         case "SUBSCRIPTION_PAUSED":
@@ -127,7 +133,8 @@ enum NotificationType {
     
     case initialPurchase
     case oneTimePurchase
-    case renewal
+    case renewalExisting
+    case renewalLapsed
     case trial
     case conversion
     case resubscription
@@ -144,7 +151,8 @@ enum NotificationType {
         switch self {
         case .initialPurchase: .blue
         case .oneTimePurchase: .purple
-        case .renewal: .green
+        case .renewalExisting: .green
+        case .renewalLapsed: .blue
         case .trial: .orange
         case .conversion: .blue
         case .resubscription: .green
@@ -163,7 +171,8 @@ enum NotificationType {
         switch self {
         case .initialPurchase: "Initial Purchase"
         case .oneTimePurchase: "One-Time Purchase"
-        case .renewal: "Renewal"
+        case .renewalExisting: "Renewal (Existing)"
+        case .renewalLapsed: "Renewal (Lapsed)"
         case .trial: "Trial"
         case .conversion: "Conversion"
         case .resubscription: "Resubscription"

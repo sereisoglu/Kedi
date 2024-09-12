@@ -16,6 +16,7 @@ struct RevenueGraphWidget: Widget {
         StaticConfiguration(kind: kind, provider: RevenueGraphWidgetProvider()) { entry in
             RevenueGraphWidgetView(entry: entry)
                 .containerBackground(.clear, for: .widget)
+                .widgetAccentable()
         }
         .configurationDisplayName("Revenue Graph")
         .description("Shows an overview of recent transactions.")
