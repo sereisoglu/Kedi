@@ -87,6 +87,7 @@
 		4AADB9172BC59B6100EEA8C2 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEFFCC32BB1A9A800FCA073 /* Project.swift */; };
 		4AADB9182BC59B7600EEA8C2 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADF09E32B763CCE002318B2 /* CacheManager.swift */; };
 		4AADB91A2BC59B8500EEA8C2 /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 4AADB9192BC59B8500EEA8C2 /* Cache */; };
+		4AB6B3BC2CA690C100F6BE9F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4AB6B3BB2CA690C100F6BE9F /* Alamofire */; };
 		4AB6D1D12BAFAF7A00059F66 /* NotificationsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6D1D02BAFAF7A00059F66 /* NotificationsScreen.swift */; };
 		4AB6D1D52BAFAFE400059F66 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB6D1D42BAFAFE400059F66 /* NotificationsViewModel.swift */; };
 		4AB7205C2B6BAC8D001E2C76 /* KediApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7205B2B6BAC8D001E2C76 /* KediApp.swift */; };
@@ -96,7 +97,6 @@
 		4AB7206D2B6BDC36001E2C76 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7206C2B6BDC36001E2C76 /* SignInViewModel.swift */; };
 		4AB720712B6BF497001E2C76 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720702B6BF497001E2C76 /* APIService.swift */; };
 		4AB720742B6BF4A9001E2C76 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720732B6BF4A9001E2C76 /* Endpoint.swift */; };
-		4AB720772B6C1202001E2C76 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4AB720762B6C1202001E2C76 /* Alamofire */; };
 		4AB7207B2B6C17A0001E2C76 /* RCLoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7207A2B6C17A0001E2C76 /* RCLoginResponse.swift */; };
 		4AB7207D2B6C17A9001E2C76 /* RCErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7207C2B6C17A9001E2C76 /* RCErrorResponse.swift */; };
 		4AB7207F2B6C17B3001E2C76 /* RCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7207E2B6C17B3001E2C76 /* RCError.swift */; };
@@ -153,7 +153,6 @@
 		4AB721482B739BAB001E2C76 /* RectangleMarkGraphValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB721412B739AEC001E2C76 /* RectangleMarkGraphValue.swift */; };
 		4AB721492B739C21001E2C76 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720702B6BF497001E2C76 /* APIService.swift */; };
 		4AB7214A2B739C21001E2C76 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720732B6BF4A9001E2C76 /* Endpoint.swift */; };
-		4AB7214C2B739C2D001E2C76 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4AB7214B2B739C2D001E2C76 /* Alamofire */; };
 		4AB7214E2B739C2D001E2C76 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4AB7214D2B739C2D001E2C76 /* KeychainSwift */; };
 		4AB7214F2B739C36001E2C76 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720A12B6C7925001E2C76 /* KeychainManager.swift */; };
 		4AB721532B739C6D001E2C76 /* RCChartResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB720BF2B6E4A62001E2C76 /* RCChartResponse.swift */; };
@@ -443,12 +442,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A1DFC932B8115B80094BAA0 /* RevenueCat in Frameworks */,
+				4AB6B3BC2CA690C100F6BE9F /* Alamofire in Frameworks */,
 				4ADF09E02B763CB7002318B2 /* Cache in Frameworks */,
 				4A1DFC952B8115C30094BAA0 /* StoreKit.framework in Frameworks */,
 				4AB7209F2B6C74FE001E2C76 /* KeychainSwift in Frameworks */,
 				4ADFB9E12BADE31F00BDAA58 /* OneSignalFramework in Frameworks */,
 				4A8B56C22BD01CCE004AD736 /* TelemetryClient in Frameworks */,
-				4AB720772B6C1202001E2C76 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,7 +455,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AB7214C2B739C2D001E2C76 /* Alamofire in Frameworks */,
 				4AB7212C2B738BA0001E2C76 /* SwiftUI.framework in Frameworks */,
 				4AB7214E2B739C2D001E2C76 /* KeychainSwift in Frameworks */,
 				4AB7212A2B738BA0001E2C76 /* WidgetKit.framework in Frameworks */,
@@ -1263,12 +1261,12 @@
 			);
 			name = Kedi;
 			packageProductDependencies = (
-				4AB720762B6C1202001E2C76 /* Alamofire */,
 				4AB7209E2B6C74FE001E2C76 /* KeychainSwift */,
 				4ADF09DF2B763CB7002318B2 /* Cache */,
 				4A1DFC922B8115B80094BAA0 /* RevenueCat */,
 				4ADFB9E02BADE31F00BDAA58 /* OneSignalFramework */,
 				4A8B56C12BD01CCE004AD736 /* TelemetryClient */,
+				4AB6B3BB2CA690C100F6BE9F /* Alamofire */,
 			);
 			productName = Kedi;
 			productReference = 4AB720582B6BAC8D001E2C76 /* Kedi.app */;
@@ -1288,7 +1286,6 @@
 			);
 			name = WidgetExtension;
 			packageProductDependencies = (
-				4AB7214B2B739C2D001E2C76 /* Alamofire */,
 				4AB7214D2B739C2D001E2C76 /* KeychainSwift */,
 				4ADF09E12B763CC2002318B2 /* Cache */,
 			);
@@ -1348,12 +1345,12 @@
 			);
 			mainGroup = 4AB7204F2B6BAC8D001E2C76;
 			packageReferences = (
-				4AB720752B6C1202001E2C76 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				4AB7209D2B6C74FE001E2C76 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				4ADF09DE2B763CB7002318B2 /* XCRemoteSwiftPackageReference "Cache" */,
 				4A1DFC912B8115B80094BAA0 /* XCRemoteSwiftPackageReference "purchases-ios" */,
 				4ADFB9DD2BADE31E00BDAA58 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
 				4A8B56C02BD01CCE004AD736 /* XCRemoteSwiftPackageReference "SwiftClient" */,
+				4AB6B3BA2CA690C100F6BE9F /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 4AB720592B6BAC8D001E2C76 /* Products */;
 			projectDirPath = "";
@@ -2014,12 +2011,12 @@
 				minimumVersion = 1.5.1;
 			};
 		};
-		4AB720752B6C1202001E2C76 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		4AB6B3BA2CA690C100F6BE9F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.8.1;
+				minimumVersion = 5.9.1;
 			};
 		};
 		4AB7209D2B6C74FE001E2C76 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
@@ -2064,20 +2061,15 @@
 			package = 4ADF09DE2B763CB7002318B2 /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;
 		};
-		4AB720762B6C1202001E2C76 /* Alamofire */ = {
+		4AB6B3BB2CA690C100F6BE9F /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 4AB720752B6C1202001E2C76 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			package = 4AB6B3BA2CA690C100F6BE9F /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
 		4AB7209E2B6C74FE001E2C76 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4AB7209D2B6C74FE001E2C76 /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;
-		};
-		4AB7214B2B739C2D001E2C76 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 4AB720752B6C1202001E2C76 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
 		};
 		4AB7214D2B739C2D001E2C76 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;

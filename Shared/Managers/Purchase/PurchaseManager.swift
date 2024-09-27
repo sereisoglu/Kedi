@@ -201,7 +201,7 @@ final class PurchaseManager: NSObject, ObservableObject {
 
 extension PurchaseManager: PurchasesDelegate {
     
-    @MainActor
+//    @MainActor
     func purchases(
         _ purchases: Purchases,
         receivedUpdated customerInfo: CustomerInfo
@@ -210,7 +210,9 @@ extension PurchaseManager: PurchasesDelegate {
         guard !isPurchasing else {
             return
         }
-        process(info: customerInfo)
+        Task {
+            await process(info: customerInfo)
+        }
     }
     
     // itms-services://?action=purchaseIntent&bundleId=com.sereisoglu.kedi&productIdentifier=kedi.supporter.monthly

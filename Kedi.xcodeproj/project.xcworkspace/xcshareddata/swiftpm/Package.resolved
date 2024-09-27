@@ -1,5 +1,5 @@
 {
-  "originHash" : "30024f51caaca88834c54c679b608668daccd91766610147bed39baa2b4f6070",
+  "originHash" : "52641ffa2c040d64c6298a7a1f6416be9b06ea3b12afff0c4da324843a8159db",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/OneSignal/OneSignal-XCFramework.git",
       "state" : {
-        "revision" : "5d76d27efc7a073e9a664a6b3f48fc5df47b6c66",
-        "version" : "5.2.1"
+        "revision" : "72e4fa4c3d83f6c1f7b35955e0793754ea2dd15d",
+        "version" : "5.2.4"
       }
     },
     {
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios.git",
       "state" : {
-        "revision" : "25734da99c46535fb8e4de1c8cac61743c62c4bb",
-        "version" : "4.43.1"
+        "revision" : "7d55b964114a3d4a76791227cdc28577617596db",
+        "version" : "4.43.2"
       }
     },
     {
