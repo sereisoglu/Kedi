@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import TelemetryClient
+import TelemetryDeck
 
 final class AnalyticsManager {
     
@@ -25,30 +25,36 @@ final class AnalyticsManager {
         }
     }
     
+    var userId: String?
+    
     static let shared = AnalyticsManager()
     
     private init() {}
     
     func start() {
-        let configuration = TelemetryManagerConfiguration(appID: EnvVars.telemetryDeck)
-        TelemetryManager.initialize(with: configuration)
+        TelemetryDeck.initialize(config: .init(appID: EnvVars.telemetryDeck))
     }
     
     func signIn(id: String?) {
-        TelemetryManager.updateDefaultUser(to: id)
+        userId = id
+        TelemetryDeck.updateDefaultUserID(to: id)
     }
     
     func signOut() {
-        TelemetryManager.updateDefaultUser(to: nil)
+        userId = nil
+        TelemetryDeck.updateDefaultUserID(to: nil)
     }
     
     func send(event: Event) {
-        let additionalPayload = [
-            "region": Locale.current.region?.identifier.countryName ?? "",
-            "regionCode": Locale.current.region?.identifier ?? "",
-            "languageCode": Locale.current.language.languageCode?.identifier ?? "",
-            "timeZone": TimeZone.current.identifier
-        ]
-        TelemetryManager.send(event.value, with: additionalPayload)
+        TelemetryDeck.signal(
+            event.value,
+            parameters: [
+                "region": Locale.current.region?.identifier.countryName ?? "",
+                "regionCode": Locale.current.region?.identifier ?? "",
+                "languageCode": Locale.current.language.languageCode?.identifier ?? "",
+                "timeZone": TimeZone.current.identifier
+            ],
+            customUserID: userId
+        )
     }
 }
