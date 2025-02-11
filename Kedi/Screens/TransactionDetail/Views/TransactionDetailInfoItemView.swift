@@ -14,8 +14,8 @@ struct TransactionDetailInfoItemView: View {
     var body: some View {
         HStack {
             Text(item.key)
-                .foregroundStyle(.secondary)
                 .font(.callout)
+                .foregroundStyle(.secondary)
                 .layoutPriority(1)
             
             Spacer()

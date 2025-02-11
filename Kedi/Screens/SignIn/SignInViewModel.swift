@@ -11,6 +11,7 @@ import Combine
 final class SignInViewModel: ObservableObject {
     
     enum Field: Hashable {
+        
         case email
         case password
         case code2FA
