@@ -101,8 +101,8 @@ struct RevenueGraphWidgetProvider: TimelineProvider {
             )
             return data?.values?.map {
                 .init(
-                    date: .init(timeIntervalSince1970: $0[safe: 0] ?? 0).startOfDay,
-                    value: $0[safe: 1] ?? 0
+                    date: .init(timeIntervalSince1970: Double($0.cohort ?? 0)).startOfDay,
+                    value: $0.value ?? 0
                 )
             } ?? []
         } catch {

@@ -137,18 +137,18 @@ enum OverviewItemType: String, Codable, CaseIterable {
     
     var chartIndex: Int? {
         switch self {
-        case .mrr: 1
-        case .subscriptions: 1
-        case .trials: 1
-        case .revenue: 1
+        case .mrr: 0
+        case .subscriptions: 0
+        case .trials: 0
+        case .revenue: 0
         case .users: nil
         case .installs: nil
-        case .arr: 1
-        case .proceeds: 1
-        case .newUsers: 1
-        case .churnRate: 3
-        case .subscriptionsLost: 2
-        case .transactions: 2
+        case .arr: 0
+        case .proceeds: 0
+        case .newUsers: 0
+        case .churnRate: 2
+        case .subscriptionsLost: 1
+        case .transactions: 1
         }
     }
     

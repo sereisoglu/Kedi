@@ -13,7 +13,7 @@ struct RCChartResponse: Decodable {
     var segments: [RCChartSegment]?
     var summary: [String: [String: Double]]?
     var incompletePeriods: [[Bool]]?
-    var values: [[Double]]?
+    var values: [RCChartValue]?
     
     enum CodingKeys: String, CodingKey {
         case lastComputedAt = "last_computed_at"
@@ -37,4 +37,12 @@ struct RCChartSegment: Decodable {
         case displayName = "display_name"
         case tabulable
     }
+}
+
+struct RCChartValue: Decodable {
+    
+    var cohort: Int?
+    //    var incomplete: Bool?
+    var measure: Int?
+    var value: Double?
 }

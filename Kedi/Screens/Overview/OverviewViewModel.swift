@@ -108,10 +108,14 @@ final class OverviewViewModel: ObservableObject {
                 )
             )
             
-            let chartValues: [OverviewItemChartValue]? = data?.values?.map { .init(
-                date: .init(timeIntervalSince1970: $0[safe: 0] ?? 0).withoutTime,
-                value: $0[safe: chartIndex] ?? 0
-            ) }
+            let chartValues: [OverviewItemChartValue]? = data?.values?
+                .filter { $0.measure == chartIndex }
+                .map {
+                    .init(
+                        date: .init(timeIntervalSince1970: Double($0.cohort ?? 0)).withoutTime,
+                        value: $0.value ?? 0
+                    )
+                }
             
             if let chartValues {
                 let chart = OverviewItemChart(values: chartValues, updatedAt: data?.lastComputedAt)
