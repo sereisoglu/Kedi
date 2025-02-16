@@ -266,6 +266,62 @@ extension AppStorePayday {
                 "startDate": "2024-12-29",
                 "endDate": "2025-02-01",
                 "paymentDate": "2025-03-06"
+            },
+            {
+                "fiscalYear": 2025,
+                "fiscalMonth": "2025-02",
+                "startDate": "2025-02-02",
+                "endDate": "2025-03-01",
+                "paymentDate": "2025-04-03"
+            },
+            {
+                "fiscalYear": 2025,
+                "fiscalMonth": "2025-03",
+                "startDate": "2025-03-02",
+                "endDate": "2025-03-29",
+                "paymentDate": "2025-05-01"
+            },
+            {
+                "fiscalYear": 2025,
+                "fiscalMonth": "2025-04",
+                "startDate": "2025-03-30",
+                "endDate": "2025-05-03",
+                "paymentDate": "2025-06-05"
+            },
+            {
+                "fiscalYear": 2025,
+                "fiscalMonth": "2025-05",
+                "startDate": "2025-05-04",
+                "endDate": "2025-05-31",
+                "paymentDate": "2025-07-03"
+            },
+            {
+                "fiscalYear": 2025,
+                "fiscalMonth": "2025-06",
+                "startDate": "2025-06-01",
+                "endDate": "2025-06-28",
+                "paymentDate": "2025-07-31"
+            },
+            {
+                "fiscalYear": 2025,
+                "fiscalMonth": "2025-07",
+                "startDate": "2025-06-29",
+                "endDate": "2025-08-02",
+                "paymentDate": "2025-09-04"
+            },
+            {
+                "fiscalYear": 2025,
+                "fiscalMonth": "2025-08",
+                "startDate": "2025-08-03",
+                "endDate": "2025-08-20",
+                "paymentDate": "2025-10-02"
+            },
+            {
+                "fiscalYear": 2025,
+                "fiscalMonth": "2025-09",
+                "startDate": "2025-08-31",
+                "endDate": "2025-09-27",
+                "paymentDate": "2025-10-30"
             }
         ]
         """#
