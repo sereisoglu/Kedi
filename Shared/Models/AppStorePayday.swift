@@ -156,6 +156,90 @@ extension AppStorePayday {
         let string = #"""
         [
             {
+                "fiscalYear": 2024,
+                "fiscalMonth": "2023-10",
+                "startDate": "2023-10-01",
+                "endDate": "2023-11-04",
+                "paymentDate": "2023-12-07"
+            },
+            {
+                "fiscalYear": 2024,
+                "fiscalMonth": "2023-11",
+                "startDate": "2023-11-05",
+                "endDate": "2023-12-02",
+                "paymentDate": "2024-01-04"
+            },
+            {
+                "fiscalYear": 2024,
+                "fiscalMonth": "2023-12",
+                "startDate": "2023-12-03",
+                "endDate": "2023-12-30",
+                "paymentDate": "2024-02-01"
+            },
+            {
+                "fiscalYear": 2024,
+                "fiscalMonth": "2024-01",
+                "startDate": "2023-12-31",
+                "endDate": "2024-02-03",
+                "paymentDate": "2024-03-07"
+            },
+            {
+                "fiscalYear": 2024,
+                "fiscalMonth": "2024-02",
+                "startDate": "2024-02-04",
+                "endDate": "2024-03-02",
+                "paymentDate": "2024-04-04"
+            },
+            {
+                "fiscalYear": 2024,
+                "fiscalMonth": "2024-03",
+                "startDate": "2024-03-03",
+                "endDate": "2024-03-30",
+                "paymentDate": "2024-05-02"
+            },
+            {
+                "fiscalYear": 2024,
+                "fiscalMonth": "2024-04",
+                "startDate": "2024-03-31",
+                "endDate": "2024-05-04",
+                "paymentDate": "2024-06-06"
+            },
+            {
+                "fiscalYear": 2024,
+                "fiscalMonth": "2024-05",
+                "startDate": "2024-05-05",
+                "endDate": "2024-06-01",
+                "paymentDate": "2024-07-04"
+            },
+            {
+                "fiscalYear": 2024,
+                "fiscalMonth": "2024-06",
+                "startDate": "2024-06-02",
+                "endDate": "2024-06-29",
+                "paymentDate": "2024-08-01"
+            },
+            {
+                "fiscalYear": 2024,
+                "fiscalMonth": "2024-07",
+                "startDate": "2024-06-30",
+                "endDate": "2024-08-03",
+                "paymentDate": "2024-09-05"
+            },
+            {
+                "fiscalYear": 2024,
+                "fiscalMonth": "2024-08",
+                "startDate": "2024-08-04",
+                "endDate": "2024-08-31",
+                "paymentDate": "2024-10-03"
+            },
+            {
+                "fiscalYear": 2024,
+                "fiscalMonth": "2024-09",
+                "startDate": "2024-09-01",
+                "endDate": "2024-09-28",
+                "paymentDate": "2024-10-31"
+            },
+            {
                 "fiscalYear": 2025,
                 "fiscalMonth": "2024-10",
                 "startDate": "2024-09-29",

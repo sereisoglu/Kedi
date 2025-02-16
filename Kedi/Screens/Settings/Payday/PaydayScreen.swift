@@ -49,7 +49,7 @@ struct PaydayScreen: View {
                 }
             }
             
-            ForEach(Array(viewModel.paydays.keys.sorted()), id: \.self) { year in
+            ForEach(Array(viewModel.paydays.keys.reversed()), id: \.self) { year in
                 Section {
                     ForEach(viewModel.paydays[year] ?? []) { payday in
                         makeItem(
