@@ -81,7 +81,8 @@ final class WebhooksViewModel: ObservableObject {
                     projectId: projectId,
                     request: .init(
                         name: "Kedi / \(DeviceUtility.modelId) / \(DeviceUtility.id)",
-                        url: "https://api.kediapp.com/webhook?id=\(id)"
+                        url: "https://api.kediapp.com/webhook?id=\(id)",
+                        environment: "production"
                     )
                 )
             )
@@ -100,7 +101,8 @@ final class WebhooksViewModel: ObservableObject {
                     webhookId: webhookId,
                     request: .init(
                         name: "Kedi / \(DeviceUtility.modelId) / \(DeviceUtility.id)",
-                        url: "https://api.kediapp.com/webhook?id=\(id)"
+                        url: "https://api.kediapp.com/webhook?id=\(id)",
+                        environment: "production"
                     )
                 )
             )
