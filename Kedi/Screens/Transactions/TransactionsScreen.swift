@@ -42,7 +42,7 @@ struct TransactionsScreen: View {
                 HStack {
                     Text(section.date.format(to: .EEE_MMM_d_yyyy))
                     Spacer()
-                    Text(section.revenue.formatted(.currency(code: "USD")))
+                    Text(section.revenue.formatted(.currency(code: MeManager.shared.me?.displayCurrency ?? "USD")))
                         .multilineTextAlignment(.trailing)
                 }
             }

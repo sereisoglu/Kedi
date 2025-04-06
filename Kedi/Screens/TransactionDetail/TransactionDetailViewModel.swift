@@ -95,7 +95,7 @@ final class TransactionDetailViewModel: ObservableObject {
             ),
             .init(
                 key: "Total Spent",
-                value: detailData.dollarsSpent?.formatted(.currency(code: "USD")) ?? "n/a"
+                value: detailData.dollarsSpent?.formatted(.currency(code: MeManager.shared.me?.displayCurrency ?? "USD")) ?? "n/a"
             ),
             .init(
                 key: "Last Seen",
@@ -164,7 +164,7 @@ final class TransactionDetailViewModel: ObservableObject {
                    spentDollars > 0 {
                     insightItems?.append(.init(
                         type: .spentDollarsSinceLastSeen,
-                        text: "The user spent **\(spentDollars.formatted(.currency(code: "USD")))** after the last seen. (\(filteredItems.count) transaction\(filteredItems.count > 1 ? "s" : ""))"
+                        text: "The user spent **\(spentDollars.formatted(.currency(code: MeManager.shared.me?.displayCurrency ?? "USD")))** after the last seen. (\(filteredItems.count) transaction\(filteredItems.count > 1 ? "s" : ""))"
                     ))
                 }
             }

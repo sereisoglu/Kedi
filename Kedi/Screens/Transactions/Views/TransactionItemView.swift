@@ -32,7 +32,7 @@ struct TransactionItemView: View {
                 
                 Spacer()
                 
-                Text(transaction.price.formatted(.currency(code: "USD")))
+                Text(transaction.price.formatted(.currency(code: MeManager.shared.me?.displayCurrency ?? "USD")))
                     .font(.system(.body, weight: .semibold))
                     .foregroundStyle(transaction.type.color)
             }
