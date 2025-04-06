@@ -100,11 +100,11 @@ struct SettingsScreen: View {
             )
             SettingsAccountItemView(
                 key: "This month MTR",
-                value: viewModel.me?.billingInfo?.currentMtr?.formatted(.currency(code: "USD").precision(.fractionLength(0))) ?? "n/a"
+                value: viewModel.me?.billingInfo?.currentMtr?.formatted(.currency(code: viewModel.me?.displayCurrency ?? "USD").precision(.fractionLength(0))) ?? "n/a"
             )
             SettingsAccountItemView(
                 key: "Last 30-day MTR",
-                value: viewModel.me?.billingInfo?.trailing30dayMtr?.formatted(.currency(code: "USD").precision(.fractionLength(0))) ?? "n/a"
+                value: viewModel.me?.billingInfo?.trailing30dayMtr?.formatted(.currency(code: viewModel.me?.displayCurrency ?? "USD").precision(.fractionLength(0))) ?? "n/a"
             )
             SettingsAccountItemView(
                 key: "First Transaction Date",
