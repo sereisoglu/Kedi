@@ -45,7 +45,7 @@ enum OverviewItemValue: Hashable, Equatable {
                 .revenue(let double),
                 .arr(let double),
                 .proceeds(let double):
-            return double.formatted(.currency(code: "USD"))
+            return double.formatted(.currency(code: MeManager.shared.me?.displayCurrency ?? "USD"))
         case .subscriptions(let int),
                 .trials(let int),
                 .users(let int),

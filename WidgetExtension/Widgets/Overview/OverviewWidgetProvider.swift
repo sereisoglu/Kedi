@@ -88,18 +88,25 @@ struct OverviewWidgetProvider: TimelineProvider {
     
     private func fetchData() async throws -> [OverviewItem] {
         do {
-            let data = try await apiService.request(
+            async let meRequest = apiService.request(
+                type: RCMeResponse.self,
+                endpoint: .me
+            )
+            
+            async let overviewRequest = try await apiService.request(
                 type: RCOverviewResponse.self,
                 endpoint: .overview(projectIds: nil)
             )
             
+            let (me, overview) = try await (meRequest, overviewRequest)
+            
             return [
-                .init(type: .mrr, value: "\(data?.mrr?.formatted(.currency(code: "USD")) ?? "")"),
-                .init(type: .subscriptions, value: "\(data?.subscriptions?.formatted() ?? "")"),
-                .init(type: .trials, value: "\(data?.trials?.formatted() ?? "")"),
-                .init(type: .revenue, value: "\(data?.revenue?.formatted(.currency(code: "USD")) ?? "")"),
-                .init(type: .users, value: "\(data?.users?.formatted() ?? "")"),
-                .init(type: .installs, value: "\(data?.installs?.formatted() ?? "")")
+                .init(type: .mrr, value: "\(overview?.mrr?.formatted(.currency(code: me?.displayCurrency ?? "USD")) ?? "")"),
+                .init(type: .subscriptions, value: "\(overview?.subscriptions?.formatted() ?? "")"),
+                .init(type: .trials, value: "\(overview?.trials?.formatted() ?? "")"),
+                .init(type: .revenue, value: "\(overview?.revenue?.formatted(.currency(code: me?.displayCurrency ?? "USD")) ?? "")"),
+                .init(type: .users, value: "\(overview?.users?.formatted() ?? "")"),
+                .init(type: .installs, value: "\(overview?.installs?.formatted() ?? "")")
             ]
         } catch {
             throw error

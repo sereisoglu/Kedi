@@ -16,7 +16,8 @@ struct RCMeResponse: Codable {
     var currentPlan: String?
     var billingInfo: RCMeBillingInfo?
     var apps: [RCMeApp]?
-    
+    var displayCurrency: String?
+
     enum CodingKeys: String, CodingKey {
         case distinctId = "distinct_id"
         case email
@@ -25,6 +26,7 @@ struct RCMeResponse: Codable {
         case currentPlan = "current_plan"
         case billingInfo = "billing_info"
         case apps
+        case displayCurrency = "display_currency"
     }
 }
 

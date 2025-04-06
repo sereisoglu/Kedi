@@ -33,7 +33,7 @@ struct NotificationItemView: View {
                 Spacer()
                 
                 if let price = notification.price {
-                    Text(price.formatted(.currency(code: "USD")))
+                    Text(price.formatted(.currency(code: MeManager.shared.me?.displayCurrency ?? "USD")))
                         .font(.system(.body, weight: .semibold))
                         .foregroundStyle(notification.type.color)
                 }
