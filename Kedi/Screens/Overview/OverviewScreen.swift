@@ -9,6 +9,8 @@ import SwiftUI
 
 struct OverviewScreen: View {
     
+    @Namespace private var animation
+    
     @EnvironmentObject var meManager: MeManager
     @EnvironmentObject var purchaseManager: PurchaseManager
     @EnvironmentObject var userDefaultsManager: UserDefaultsManager
@@ -25,6 +27,7 @@ struct OverviewScreen: View {
             makeBody()
         }
         .navigationTitle("Overview")
+        .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
@@ -38,6 +41,7 @@ struct OverviewScreen: View {
         }
         .navigationDestination(for: OverviewItem.self) { item in
             OverviewDetailScreen(viewModel: .init(item: item))
+                .navigationTransitionZoom_iOS18(sourceID: item.id, in: animation)
         }
         .sheet(isPresented: $showingAddItem) {
             NavigationStack {
@@ -133,7 +137,7 @@ struct OverviewScreen: View {
     }
     
     private func makeItem(item: OverviewItem) -> some View {
-        OverviewItemView(item: item)
+        OverviewItemView(item: item, animation: animation)
             .contextMenu {
                 Section(item.chart?.updatedAtFormatted ?? "") {
                     Button {

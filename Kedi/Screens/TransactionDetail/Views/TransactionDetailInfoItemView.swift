@@ -20,13 +20,18 @@ struct TransactionDetailInfoItemView: View {
             
             Spacer()
             
-            Text(item.value)
-                .font(.callout)
-                .foregroundStyle(.primary)
-                .lineLimit(1)
-                .if(item.copyable) { view in
-                    view.textSelection(.enabled)
-                }
+            if item.copyable {
+                Text(item.value)
+                    .font(.callout)
+                    .foregroundStyle(.primary)
+                    .lineLimit(1)
+                    .textSelection(.enabled)
+            } else {
+                Text(item.value)
+                    .font(.callout)
+                    .foregroundStyle(.primary)
+                    .lineLimit(1)
+            }
         }
     }
 }

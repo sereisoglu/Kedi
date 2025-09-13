@@ -95,7 +95,7 @@ struct OverviewWidgetProvider: TimelineProvider {
                 .init(type: .trials, value: "\(data.trials?.formatted() ?? "")"),
                 .init(type: .revenue, value: "\(data.revenue?.formatted(.currency(code: "USD")) ?? "")"),
                 .init(type: .users, value: "\(data.users?.formatted() ?? "")"),
-                .init(type: .installs, value: "\(data.installs?.formatted() ?? "")")
+                .init(type: .newUsers, value: "\(data.newUsers?.formatted() ?? "")")
             ]
         } catch {
             throw error

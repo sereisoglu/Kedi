@@ -21,12 +21,16 @@ struct SettingsAccountItemView: View {
             
             Spacer()
             
-            Text(value)
-                .font(.callout)
-                .foregroundStyle(.primary)
-                .if(copyable) { view in
-                    view.textSelection(.enabled)
-                }
+            if copyable {
+                Text(value)
+                    .font(.callout)
+                    .foregroundStyle(.primary)
+                    .textSelection(.enabled)
+            } else {
+                Text(value)
+                    .font(.callout)
+                    .foregroundStyle(.primary)
+            }
         }
     }
 }

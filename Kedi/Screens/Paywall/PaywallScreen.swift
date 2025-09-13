@@ -30,8 +30,8 @@ struct PaywallScreen: View {
                 }
             }
         }
-        .if(purchaseManager.state == .data) { view in
-            view.safeAreaInset(edge: .bottom) {
+        .safeAreaBar_iOS26(edge: .bottom) {
+            if purchaseManager.state == .data {
                 VStack(spacing: 0) {
                     if !purchaseManager.getSubscriptions().isEmpty,
                        let subscriptionSelection {
@@ -57,8 +57,10 @@ struct PaywallScreen: View {
                         .padding(.horizontal)
                     }
                     
-                    Text("[Restore Purchase](restore-purchase) • [Privacy Policy](https://kediapp.com/privacy-policy) • [Terms & Conditions](https://kediapp.com/terms-and-conditions)")
+                    Text("[Restore Purchase](restore-purchase)  •  [Privacy Policy](https://kediapp.com/privacy-policy)  •  [Terms & Conditions](https://kediapp.com/terms-and-conditions)")
                         .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .tint(.primary)
                         .frame(maxWidth: .infinity)
                         .padding(.top)
                         .environment(\.openURL, OpenURLAction(handler: { url in
@@ -78,8 +80,6 @@ struct PaywallScreen: View {
                         }))
                 }
                 .padding(.bottom)
-                .background(.ultraThinMaterial)
-                .overlay(Rectangle().frame(height: 1, alignment: .top).foregroundStyle(.primary.opacity(0.2)), alignment: .top)
             }
         }
         .overlay(content: makeStateView)
@@ -227,10 +227,8 @@ struct PaywallScreen: View {
             .padding()
             .foregroundStyle(isSelected ? .white : .primary)
             .background(isSelected ? .accent : Color.secondarySystemGroupedBackground)
-            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-            .overlay(
-                isSelected ? nil : RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(Color.primary.opacity(0.2), lineWidth: 2)
-            )
+            .clipShape(RoundedRectangle(cornerRadius: .cornerRadiusRow, style: .continuous))
+            .overlay(isSelected ? nil : RoundedRectangle(cornerRadius: .cornerRadiusRow, style: .continuous).strokeBorder(Color.primary.opacity(0.2), lineWidth: 2))
         }
         .foregroundStyle(.primary)
         .buttonStyle(.plain)

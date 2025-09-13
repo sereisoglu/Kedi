@@ -68,13 +68,7 @@ struct NotificationsPermissionScreen: View {
                         .foregroundStyle(.secondary)
                 }
             }
-            .if(true) { view in
-                if margin > 0 {
-                    view.padding(.horizontal, margin)
-                } else {
-                    view.padding(.horizontal)
-                }
-            }
+            .padding(.horizontal, margin > 0 ? margin : 16)
         }
         .padding(.bottom)
         .frame(maxWidth: .infinity, maxHeight: .infinity)

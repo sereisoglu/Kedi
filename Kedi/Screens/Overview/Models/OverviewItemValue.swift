@@ -14,10 +14,9 @@ enum OverviewItemValue: Hashable, Equatable {
     case trials(Int)
     case revenue(Double)
     case users(Int)
-    case installs(Int)
+    case newUsers(Int)
     case arr(Double)
     case proceeds(Double)
-    case newUsers(Int)
     case churnRate(Double)
     case subscriptionsLost(Int)
     case transactions(Int)
@@ -29,10 +28,9 @@ enum OverviewItemValue: Hashable, Equatable {
         case .trials: .trials
         case .revenue: .revenue
         case .users: .users
-        case .installs: .installs
+        case .newUsers: .newUsers
         case .arr: .arr
         case .proceeds: .proceeds
-        case .newUsers: .newUsers
         case .churnRate: .churnRate
         case .subscriptionsLost: .subscriptionsLost
         case .transactions: .transactions
@@ -49,7 +47,6 @@ enum OverviewItemValue: Hashable, Equatable {
         case .subscriptions(let int),
                 .trials(let int),
                 .users(let int),
-                .installs(let int),
                 .newUsers(let int),
                 .subscriptionsLost(let int),
                 .transactions(let int):
@@ -71,14 +68,12 @@ enum OverviewItemValue: Hashable, Equatable {
             self = .revenue(value)
         case .users:
             self = .users(Int(value))
-        case .installs:
-            self = .installs(Int(value))
+        case .newUsers:
+            self = .newUsers(Int(value))
         case .arr:
             self = .arr(value)
         case .proceeds:
             self = .proceeds(value)
-        case .newUsers:
-            self = .newUsers(Int(value))
         case .churnRate:
             self = .churnRate(value)
         case .subscriptionsLost:
@@ -104,14 +99,12 @@ extension OverviewItemValue {
             return .revenue(data.revenue ?? 0)
         case .users:
             return .users(data.users ?? 0)
-        case .installs:
-            return .installs(data.installs ?? 0)
+        case .newUsers:
+            return .newUsers(data.newUsers ?? 0)
         case .arr:
             return .arr(5234.342)
         case .proceeds:
             return .proceeds(89455.656)
-        case .newUsers:
-            return .newUsers(23433)
         case .churnRate:
             return .churnRate(23)
         case .subscriptionsLost:

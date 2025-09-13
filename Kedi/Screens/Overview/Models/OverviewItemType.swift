@@ -14,10 +14,9 @@ enum OverviewItemType: String, Codable, CaseIterable {
     case trials
     case revenue
     case users
-    case installs
+    case newUsers
     case arr
     case proceeds
-    case newUsers
     case churnRate
     case subscriptionsLost
     case transactions
@@ -29,10 +28,9 @@ enum OverviewItemType: String, Codable, CaseIterable {
         case .trials: "clock"
         case .revenue: "dollarsign.circle"
         case .users: "person.2"
-        case .installs: "iphone"
+        case .newUsers: "person.badge.plus"
         case .arr: "dollarsign.arrow.circlepath"
         case .proceeds: "dollarsign.circle"
-        case .newUsers: "person.2"
         case .churnRate: "person.2.slash"
         case .subscriptionsLost: "person.2.slash"
         case .transactions: "arrow.left.arrow.right.circle"
@@ -46,10 +44,9 @@ enum OverviewItemType: String, Codable, CaseIterable {
         case .trials: "Trials"
         case .revenue: "Revenue"
         case .users: "Users"
-        case .installs: "Installs"
+        case .newUsers: "New Users"
         case .arr: "ARR"
         case .proceeds: "Proceeds"
-        case .newUsers: "New Users"
         case .churnRate: "Churn Rate"
         case .subscriptionsLost: "Subs. Lost"
         case .transactions: "Transactions"
@@ -58,46 +55,19 @@ enum OverviewItemType: String, Codable, CaseIterable {
     
     var availableTimePeriods: [OverviewItemTimePeriod] {
         switch self {
-        case .mrr,
-                .subscriptions,
-                .trials,
-                .arr,
-                .proceeds,
-                .newUsers,
-                .churnRate,
-                .subscriptionsLost,
-                .transactions:
-            [
-                .last7Days,
-                .last30Days,
-                .last90Days,
-                .last12Months,
-//                .lastWeek,
-//                .lastMonth,
-//                .lastYear,
-                .thisWeek,
-                .thisMonth,
-                .thisYear,
-                .allTime
-            ]
-        case .revenue: 
+        case .users:
+            [.last28Days]
+        default:
             [
                 .last7Days,
                 .last28Days,
-                .last30Days,
                 .last90Days,
                 .last12Months,
-//                .lastWeek,
-//                .lastMonth,
-//                .lastYear,
                 .thisWeek,
                 .thisMonth,
                 .thisYear,
                 .allTime
             ]
-        case .users,
-                .installs:
-            [.last28Days]
         }
     }
     
@@ -108,10 +78,9 @@ enum OverviewItemType: String, Codable, CaseIterable {
         case .trials: .live
         case .revenue: .total
         case .users: .total
-        case .installs: .total
+        case .newUsers: .total
         case .arr: .live
         case .proceeds: .total
-        case .newUsers: .last
         case .churnRate: .last
         case .subscriptionsLost: .last
         case .transactions: .total
@@ -125,10 +94,9 @@ enum OverviewItemType: String, Codable, CaseIterable {
         case .trials: .trials
         case .revenue: .revenue
         case .users: nil
-        case .installs: nil
+        case .newUsers: .newUsers
         case .arr: .arr
         case .proceeds: .revenue
-        case .newUsers: .conversionToPaying
         case .churnRate: .churn
         case .subscriptionsLost: .churn
         case .transactions: .revenue
@@ -142,10 +110,9 @@ enum OverviewItemType: String, Codable, CaseIterable {
         case .trials: 0
         case .revenue: 0
         case .users: nil
-        case .installs: nil
+        case .newUsers: 0
         case .arr: 0
         case .proceeds: 0
-        case .newUsers: 0
         case .churnRate: 2
         case .subscriptionsLost: 1
         case .transactions: 1
@@ -159,10 +126,9 @@ enum OverviewItemType: String, Codable, CaseIterable {
         case .trials: nil
         case .revenue: .revenue
         case .users: nil
-        case .installs: nil
+        case .newUsers: nil
         case .arr: nil
         case .proceeds: .proceeds
-        case .newUsers: nil
         case .churnRate: nil
         case .subscriptionsLost: nil
         case .transactions: .revenue

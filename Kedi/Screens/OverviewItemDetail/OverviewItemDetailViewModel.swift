@@ -54,7 +54,7 @@ final class OverviewItemDetailViewModel: ObservableObject {
             configSelection = config
         } else {
             action = .add
-            configSelection = .init(type: .revenue, timePeriod: .last30Days)
+            configSelection = .init(type: .revenue, timePeriod: .allTime)
         }
         setConfigState()
     }

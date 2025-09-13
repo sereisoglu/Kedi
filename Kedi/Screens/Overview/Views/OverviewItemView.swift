@@ -10,17 +10,20 @@ import SwiftUI
 struct OverviewItemView: View {
     
     let item: OverviewItem
+    var animation: Namespace.ID? = nil
     
     var body: some View {
         VStack {
             if #available(iOS 26.0, *) {
                 makeBody()
+                    .matchedTransitionSource_iOS18(id: item.id, in: animation)
                     .aspectRatio(1, contentMode: .fit)
                     .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                     .glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 20, style: .continuous))
                     .contentShape([.contextMenuPreview, .dragPreview], RoundedRectangle(cornerRadius: 20, style: .continuous))
             } else {
                 makeBody()
+                    .matchedTransitionSource_iOS18(id: item.id, in: animation)
                     .aspectRatio(1, contentMode: .fit)
                     .background(Color.secondarySystemGroupedBackground)
                     .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))

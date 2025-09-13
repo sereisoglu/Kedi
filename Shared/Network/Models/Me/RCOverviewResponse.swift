@@ -14,7 +14,7 @@ struct RCOverviewResponse: Decodable {
     var trials: Int?
     var revenue: Double?
     var users: Int?
-    var installs: Int?
+    var newUsers: Int?
     
     enum CodingKeys: CodingKey {
         case metrics
@@ -26,14 +26,14 @@ struct RCOverviewResponse: Decodable {
         trials: Int? = nil,
         revenue: Double? = nil,
         users: Int? = nil,
-        installs: Int? = nil
+        newUsers: Int? = nil
     ) {
         self.mrr = mrr
         self.subscriptions = subscriptions
         self.trials = trials
         self.revenue = revenue
         self.users = users
-        self.installs = installs
+        self.newUsers = newUsers
     }
 
     init(from decoder: any Decoder) throws {
@@ -52,8 +52,8 @@ struct RCOverviewResponse: Decodable {
                 revenue = metric.value
             case .users:
                 users = metric.value?.toInt
-            case .installs:
-                installs = metric.value?.toInt
+            case .newUsers:
+                newUsers = metric.value?.toInt
             case .none:
                 break
             }
@@ -74,7 +74,7 @@ enum RCOverviewMetricType: String {
     case trials = "active_trials"
     case revenue
     case users = "active_users"
-    case installs = "new_customers"
+    case newUsers = "new_customers"
 }
 
 extension RCOverviewResponse {

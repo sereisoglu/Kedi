@@ -29,11 +29,10 @@ extension OverviewItemConfig {
             .init(type: .trials, timePeriod: .allTime),
             .init(type: .revenue, timePeriod: .last28Days),
             .init(type: .users, timePeriod: .last28Days),
-            .init(type: .installs, timePeriod: .last28Days),
+            .init(type: .newUsers, timePeriod: .last28Days),
             .init(type: .arr, timePeriod: .allTime),
             .init(type: .proceeds, timePeriod: .allTime),
-            .init(type: .transactions, timePeriod: .last30Days),
-            .init(type: .newUsers, timePeriod: .allTime),
+            .init(type: .transactions, timePeriod: .last28Days),
             .init(type: .churnRate, timePeriod: .allTime),
             .init(type: .subscriptionsLost, timePeriod: .allTime)
         ]

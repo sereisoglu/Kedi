@@ -75,15 +75,22 @@ struct WebhooksScreen: View {
                     VStack(spacing: 5) {
                         Text("ID is unique for this device. Please do not share it with anyone!")
                         
-                        Text(viewModel.id)
-                            .fontDesign(.monospaced)
-                            .redacted(reason: isIdHidden ? .placeholder : [])
-                            .onTapGesture {
-                                isIdHidden.toggle()
-                            }
-                            .if(!isIdHidden) { view in
-                                view.textSelection(.enabled)
-                            }
+                        if isIdHidden {
+                            Text(viewModel.id)
+                                .fontDesign(.monospaced)
+                                .redacted(reason: isIdHidden ? .placeholder : [])
+                                .onTapGesture {
+                                    isIdHidden.toggle()
+                                }
+                        } else {
+                            Text(viewModel.id)
+                                .fontDesign(.monospaced)
+                                .redacted(reason: isIdHidden ? .placeholder : [])
+                                .onTapGesture {
+                                    isIdHidden.toggle()
+                                }
+                                .textSelection(.enabled)
+                        }
                     }
                     .font(.footnote)
                     .foregroundStyle(.secondary)

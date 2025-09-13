@@ -57,8 +57,8 @@ final class OverviewViewModel: ObservableObject {
             }
         case .users:
             setItem(config: .init(type: .users, timePeriod: .last28Days), value: .users(overviewData?.users ?? 0))
-        case .installs:
-            setItem(config: .init(type: .installs, timePeriod: .last28Days), value: .installs(overviewData?.installs ?? 0))
+        case .newUsers:
+            setItem(config: .init(type: .newUsers, timePeriod: .last28Days), value: .newUsers(overviewData?.newUsers ?? 0))
         default:
             break
         }
@@ -78,7 +78,7 @@ final class OverviewViewModel: ObservableObject {
             setItem(type: .trials, value: .trials(overviewData?.trials ?? 0))
             setItem(config: .init(type: .revenue, timePeriod: .last28Days), value: .revenue(overviewData?.revenue ?? 0))
             setItem(config: .init(type: .users, timePeriod: .last28Days), value: .users(overviewData?.users ?? 0))
-            setItem(config: .init(type: .installs, timePeriod: .last28Days), value: .installs(overviewData?.installs ?? 0))
+            setItem(config: .init(type: .newUsers, timePeriod: .last28Days), value: .newUsers(overviewData?.newUsers ?? 0))
         } catch {
             state = .error(error)
         }
@@ -122,7 +122,7 @@ final class OverviewViewModel: ObservableObject {
                         .subscriptions,
                         .trials,
                         .users,
-                        .installs:
+                        .newUsers:
                     setItem(config: config, chart: chart)
                 case .revenue:
                     if config.timePeriod == .last28Days {
@@ -134,8 +134,6 @@ final class OverviewViewModel: ObservableObject {
                     setItem(config: config, value: .arr(chartValues.last?.value ?? 0), chart: chart)
                 case .proceeds:
                     setItem(config: config, value: .proceeds(data.summary?["total"]?["Proceeds"] ?? 0), chart: chart)
-                case .newUsers:
-                    setItem(config: config, value: .newUsers(Int(chartValues.last?.value ?? 0)), chart: chart)
                 case .churnRate:
                     setItem(config: config, value: .churnRate(chartValues.last?.value ?? 0), chart: chart)
                 case .subscriptionsLost:

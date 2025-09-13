@@ -7,36 +7,66 @@
 
 import SwiftUI
 
+// MARK: - getSize
+
 // https://www.youtube.com/watch?v=H6S5xKgb9k8
 extension View {
     
     func getSize(size: @escaping (CGSize) -> Void) -> some View {
         background(
             GeometryReader { geo in
-                Color.clear
-                    .preference(key: ViewPreferenceKey.self, value: geo.size)
+                Color.clear.preference(key: ViewPreferenceKey.self, value: geo.size)
             }
         )
         .onPreferenceChange(ViewPreferenceKey.self, perform: size)
     }
 }
 
-struct ViewPreferenceKey: PreferenceKey {
+private struct ViewPreferenceKey: PreferenceKey {
     
     static var defaultValue: CGSize = .zero
     static func reduce(value: inout CGSize, nextValue: () -> CGSize) {}
 }
 
-// https://www.avanderlee.com/swiftui/conditional-view-modifier
+// MARK: - iOS 26
+
 extension View {
-    /// Applies the given transform if the given condition evaluates to `true`.
-    /// - Parameters:
-    ///   - condition: The condition to evaluate.
-    ///   - transform: The transform to apply to the source `View`.
-    /// - Returns: Either the original `View` or the modified `View` if the condition is `true`.
-    @ViewBuilder func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
-        if condition {
-            transform(self)
+    
+    @ViewBuilder
+    func safeAreaBar_iOS26<V>(edge: VerticalEdge, @ViewBuilder content: () -> V) -> some View where V : View {
+        if #available(iOS 26, *) {
+            safeAreaBar(edge: edge, spacing: 0, content: content)
+        } else {
+            safeAreaInset(edge: edge, spacing: 0, content: content)
+                .background(.ultraThinMaterial)
+                .overlay(Rectangle().frame(height: 1, alignment: .top).foregroundStyle(.primary.opacity(0.2)), alignment: .top)
+        }
+    }
+}
+
+// MARK: - iOS 18
+
+extension View {
+    
+    @ViewBuilder
+    func matchedTransitionSource_iOS18(
+        id: (some Hashable)?,
+        in namespace: Namespace.ID?
+    ) -> some View {
+        if #available(iOS 18, *), let namespace {
+            matchedTransitionSource(id: id, in: namespace)
+        } else {
+            self
+        }
+    }
+    
+    @ViewBuilder
+    func navigationTransitionZoom_iOS18(
+        sourceID: (some Hashable)?,
+        in namespace: Namespace.ID?
+    ) -> some View {
+        if #available(iOS 18, *), let namespace {
+            navigationTransition(.zoom(sourceID: sourceID, in: namespace))
         } else {
             self
         }

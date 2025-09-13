@@ -33,7 +33,7 @@ enum OverviewItemType: String, CaseIterable, Codable {
     case trials
     case revenue
     case users
-    case installs
+    case newUsers
     
     var icon: String {
         switch self {
@@ -42,7 +42,7 @@ enum OverviewItemType: String, CaseIterable, Codable {
         case .trials: "clock"
         case .revenue: "dollarsign.circle"
         case .users: "person.2"
-        case .installs: "iphone"
+        case .newUsers: "person.badge.plus"
         }
     }
     
@@ -53,7 +53,7 @@ enum OverviewItemType: String, CaseIterable, Codable {
         case .trials: "Trials"
         case .revenue: "Revenue"
         case .users: "Users"
-        case .installs: "Installs"
+        case .newUsers: "New Users"
         }
     }
     
@@ -64,7 +64,7 @@ enum OverviewItemType: String, CaseIterable, Codable {
         case .trials: .orange
         case .revenue: .green
         case .users: .secondary
-        case .installs: .secondary
+        case .newUsers: .secondary
         }
     }
 }
@@ -82,7 +82,7 @@ extension OverviewWidgetEntry {
                 .init(type: .trials, value: "\(data.trials?.formatted() ?? "")"),
                 .init(type: .revenue, value: "\(data.revenue?.formatted(.currency(code: "USD")) ?? "")"),
                 .init(type: .users, value: "\(data.users?.formatted() ?? "")"),
-                .init(type: .installs, value: "\(data.installs?.formatted() ?? "")")
+                .init(type: .newUsers, value: "\(data.newUsers?.formatted() ?? "")")
             ]
         )
     }()

@@ -25,21 +25,22 @@ struct RCChartRequest: Encodable {
 enum RCChartName: String, CaseIterable, Encodable {
     
     case actives
-    case activesMovement = "actives_movement"
+    //    case activesMovement = "actives_movement"
     case arr
     case churn
-    case conversionToPaying = "conversion_to_paying"
-    case initialConversion = "initial_conversion"
-    case ltvPerCustomer = "ltv_per_customer"
-    case ltvPerPayingCustomer = "ltv_per_paying_customer"
+    //    case conversionToPaying = "conversion_to_paying"
+    //    case initialConversion = "initial_conversion"
+    //    case ltvPerCustomer = "ltv_per_customer"
+    //    case ltvPerPayingCustomer = "ltv_per_paying_customer"
     case mrr
     case mrrMovement = "mrr_movement"
     case refundRate = "refund_rate"
     case revenue
-//    case subscriptionRetention = "subscription_retention"
-    case trialConversion = "trial_conversion"
+    //    case subscriptionRetention = "subscription_retention"
+    //    case trialConversion = "trial_conversion"
     case trials
-    case trialsMovement = "trials_movement"
+    //    case trialsMovement = "trials_movement"
+    case newUsers = "customers_new"
 }
 
 enum RCChartResolution: Int, Encodable {
