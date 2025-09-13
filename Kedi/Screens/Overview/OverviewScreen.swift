@@ -32,7 +32,7 @@ struct OverviewScreen: View {
                         showingAddItem = true
                     }
                 } label: {
-                    Image(systemName: "plus.square")
+                    Image(systemName: "plus")
                 }
             }
         }
@@ -68,24 +68,25 @@ struct OverviewScreen: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                     .padding(.horizontal)
                     .padding(.bottom)
-            } else {
-                if purchaseManager.state == .data,
-                   purchaseManager.meSubscription == nil {
-                    VStack(spacing: 0) {
-                        BecomeSupporterView(
-                            title: "Become a Supporter!",
-                            subtitle: "Support indie development",
-                            isActive: true
-                        )
-                        Text("Kedi is a free and [open-source \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://github.com/sereisoglu/Kedi) RevenueCat client. Kedi was build by a solo [developer \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://x.com/sereisoglu). If Kedi has made your life easier and you want to support future development, you can become a supporter!")
-                            .padding(.horizontal)
-                            .font(.footnote.leading(.tight))
-                            .foregroundStyle(.secondary)
-                    }
-                    .padding(.horizontal)
-                    .padding(.bottom)
-                }
             }
+//            else {
+//                if purchaseManager.state == .data,
+//                   purchaseManager.meSubscription == nil {
+//                    VStack(spacing: 0) {
+//                        BecomeSupporterView(
+//                            title: "Become a Supporter!",
+//                            subtitle: "Support indie development",
+//                            isActive: true
+//                        )
+//                        Text("Kedi is a free and [open-source \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://github.com/sereisoglu/Kedi) RevenueCat client. Kedi was build by a solo [developer \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://x.com/sereisoglu). If Kedi has made your life easier and you want to support future development, you can become a supporter!")
+//                            .padding(.horizontal)
+//                            .font(.footnote.leading(.tight))
+//                            .foregroundStyle(.secondary)
+//                    }
+//                    .padding(.horizontal)
+//                    .padding(.bottom)
+//                }
+//            }
             
             LazyVGrid(
                 columns: [.init(.adaptive(minimum: 165), alignment: .top)],

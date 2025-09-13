@@ -55,10 +55,9 @@ final class AllWebhooksViewModel: ObservableObject {
     private func fetchWebhook(projectId: String) async -> [Webhook]? {
         do {
             let webhooks = try await apiService.request(
-                type: RCWebhooksResponse.self,
-                endpoint: .webhooks(projectId: projectId)
-            )
-            return webhooks?.compactMap { webhook in
+                .webhooks(projectId: projectId)
+            ) as RCWebhooksResponse
+            return webhooks.compactMap { webhook in
                 guard let id = webhook.id,
                       let name = webhook.name,
                       let url = webhook.url else {
@@ -73,10 +72,9 @@ final class AllWebhooksViewModel: ObservableObject {
     
     private func deleteWebhook(projectId: String, webhookId: String) async -> Error? {
         do {
-            try await apiService.request(
-                type: RCDeleteWebhookResponse.self,
-                endpoint: .deleteWebhook(projectId: projectId, webhookId: webhookId)
-            )
+            let _ = try await apiService.request(
+                .deleteWebhook(projectId: projectId, webhookId: webhookId)
+            ) as RCDeleteWebhookResponse
             return nil
         } catch {
             return error

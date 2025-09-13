@@ -20,6 +20,22 @@ struct RCOverviewResponse: Decodable {
         case metrics
     }
     
+    init(
+        mrr: Double? = nil,
+        subscriptions: Int? = nil,
+        trials: Int? = nil,
+        revenue: Double? = nil,
+        users: Int? = nil,
+        installs: Int? = nil
+    ) {
+        self.mrr = mrr
+        self.subscriptions = subscriptions
+        self.trials = trials
+        self.revenue = revenue
+        self.users = users
+        self.installs = installs
+    }
+
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let metrics = try container.decodeIfPresent([RCOverviewMetric].self, forKey: .metrics)
@@ -134,6 +150,6 @@ extension RCOverviewResponse {
           ]
         }
         """#
-        return try! JSONDecoder().decode(Self.self, from: .init(string.utf8))
+        return (try? JSONDecoder.default.decode(Self.self, from: .init(string.utf8))) ?? .init()
     }()
 }

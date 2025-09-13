@@ -21,6 +21,14 @@ struct RCTransactionDetailActivityResponse: Decodable {
         case appUserId = "app_user_id"
     }
     
+    init(
+        events: [RCTransactionDetailEvent]? = nil,
+        appUserId: String? = nil
+    ) {
+        self.events = events
+        self.appUserId = appUserId
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let bodyContainer = try container.nestedContainer(keyedBy: SubscriberCodingKeys.self, forKey: .subscriber)
@@ -139,7 +147,7 @@ extension RCTransactionDetailActivityResponse {
             }
         }
         """#
-        return try! JSONDecoder().decode(Self.self, from: .init(string.utf8))
+        return (try? JSONDecoder.default.decode(Self.self, from: .init(string.utf8))) ?? .init()
     }()
 }
 

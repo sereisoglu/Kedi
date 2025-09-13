@@ -1,5 +1,5 @@
 {
-  "originHash" : "958ee00fce7e699cd905036b49cf3890c2ff1adc886f50080d81e046e52dd407",
+  "originHash" : "3bb1e1b2f1d74b66ba23e75ac4e6b5d86ff230de9dd5e610a623007e21938325",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hyperoslo/Cache.git",
       "state" : {
-        "revision" : "ad6abdf2a3a866288a7dad2c4e13379406002a81",
-        "version" : "6.2.0"
+        "revision" : "24e47109e31b2031cb26e25cc1b81b607496066c",
+        "version" : "7.4.0"
       }
     },
     {
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/OneSignal/OneSignal-XCFramework.git",
       "state" : {
-        "revision" : "a7df0fa1cb25ae2920b6ee01fe703fec50639256",
-        "version" : "5.2.10"
+        "revision" : "5482958fa1c2c78b24e5bc002d70fc1154b16c13",
+        "version" : "5.2.14"
       }
     },
     {
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios.git",
       "state" : {
-        "revision" : "2dee6e69c5ecf149a464a141e83f6c6ed2446899",
-        "version" : "4.43.4"
+        "revision" : "06c0e8b9d38e535307776405e1ed13c326f8878c",
+        "version" : "5.39.0"
       }
     },
     {
@@ -51,8 +51,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/TelemetryDeck/SwiftSDK.git",
       "state" : {
-        "revision" : "65bfb4ce809c58deee31b4889ee650b01ed04a88",
-        "version" : "2.8.2"
+        "revision" : "a7fd1eb469589a3c8fd8cc3abe19b092b5d674dc",
+        "version" : "2.9.4"
       }
     }
   ],

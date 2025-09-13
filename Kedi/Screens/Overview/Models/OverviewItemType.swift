@@ -67,7 +67,7 @@ enum OverviewItemType: String, Codable, CaseIterable {
                 .churnRate,
                 .subscriptionsLost,
                 .transactions:
-            return [
+            [
                 .last7Days,
                 .last30Days,
                 .last90Days,
@@ -81,7 +81,7 @@ enum OverviewItemType: String, Codable, CaseIterable {
                 .allTime
             ]
         case .revenue: 
-            return [
+            [
                 .last7Days,
                 .last28Days,
                 .last30Days,
@@ -97,7 +97,7 @@ enum OverviewItemType: String, Codable, CaseIterable {
             ]
         case .users,
                 .installs:
-            return [.last28Days]
+            [.last28Days]
         }
     }
     

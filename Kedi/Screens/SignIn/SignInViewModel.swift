@@ -99,13 +99,12 @@ final class SignInViewModel: ObservableObject {
     private func postSignIn() async throws {
         do {
             let data = try await apiService.request(
-                type: RCLoginResponse.self,
-                endpoint: .login(.init(
+                .login(.init(
                     email: email,
                     password: password,
                     otpCode: is2FARequired ? code2FA : nil
                 ))
-            )
+            ) as RCLoginResponse
             
             let isSignedIn = meManager.signIn(data: data)
             

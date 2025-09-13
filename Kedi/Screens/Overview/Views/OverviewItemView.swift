@@ -13,11 +13,19 @@ struct OverviewItemView: View {
     
     var body: some View {
         VStack {
-            makeBody()
-                .aspectRatio(1, contentMode: .fit)
-                .background(Color.secondarySystemGroupedBackground)
-                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                .contentShape([.contextMenuPreview, .dragPreview], RoundedRectangle(cornerRadius: 20, style: .continuous))
+            if #available(iOS 26.0, *) {
+                makeBody()
+                    .aspectRatio(1, contentMode: .fit)
+                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                    .glassEffect(.regular.interactive(), in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                    .contentShape([.contextMenuPreview, .dragPreview], RoundedRectangle(cornerRadius: 20, style: .continuous))
+            } else {
+                makeBody()
+                    .aspectRatio(1, contentMode: .fit)
+                    .background(Color.secondarySystemGroupedBackground)
+                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                    .contentShape([.contextMenuPreview, .dragPreview], RoundedRectangle(cornerRadius: 20, style: .continuous))
+            }
             
             Text(item.caption ?? " ")
                 .font(.caption)

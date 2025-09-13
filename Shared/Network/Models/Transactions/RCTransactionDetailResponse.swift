@@ -47,6 +47,36 @@ struct RCTransactionDetailResponse: Decodable {
         case live
     }
     
+    init(
+        app: RCTransactionApp? = nil,
+        createdAt: String? = nil,
+        dollarsSpent: Double? = nil,
+        history: [RCSubscriberHistory]? = nil,
+        lastSeen: String? = nil,
+        lastSeenAppVersion: String? = nil,
+        lastSeenCountry: String? = nil,
+        lastSeenLocale: String? = nil,
+        lastSeenPlatform: String? = nil,
+        lastSeenPlatformVersion: String? = nil,
+        lastSeenSDKVersion: String? = nil,
+        subscriberAttributes: [RCSubscriberAttribute]? = nil,
+        subscriptionStatuses: [RCSubscriptionStatus]? = nil
+    ) {
+        self.app = app
+        self.createdAt = createdAt
+        self.dollarsSpent = dollarsSpent
+        self.history = history
+        self.lastSeen = lastSeen
+        self.lastSeenAppVersion = lastSeenAppVersion
+        self.lastSeenCountry = lastSeenCountry
+        self.lastSeenLocale = lastSeenLocale
+        self.lastSeenPlatform = lastSeenPlatform
+        self.lastSeenPlatformVersion = lastSeenPlatformVersion
+        self.lastSeenSDKVersion = lastSeenSDKVersion
+        self.subscriberAttributes = subscriberAttributes
+        self.subscriptionStatuses = subscriptionStatuses
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let subscriberContainer = try container.nestedContainer(keyedBy: SubscriberCodingKeys.self, forKey: .subscriber)
@@ -278,7 +308,7 @@ extension RCTransactionDetailResponse {
             }
         }
         """#
-        return try! JSONDecoder().decode(Self.self, from: .init(string.utf8))
+        return (try? JSONDecoder.default.decode(Self.self, from: .init(string.utf8))) ?? .init()
     }()
 }
 

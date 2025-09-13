@@ -11,7 +11,7 @@ import OneSignalExtension
 
 final class NotificationService: UNNotificationServiceExtension {
     
-    private let cacheManager = CacheManager.shared
+    private let cacheService = CacheService.shared
     
     private var receivedRequest: UNNotificationRequest?
     private var contentHandler: ((UNNotificationContent) -> Void)?
@@ -72,14 +72,14 @@ final class NotificationService: UNNotificationServiceExtension {
     private func makeEventNotification(userInfo: [AnyHashable: Any]?) -> EventNotification? {
         guard let userInfo = bestAttemptContent?.userInfo,
               let dataString = ((userInfo["custom"] as? [String: Any])?["a"] as? [String: Any])?["event"] as? String,
-              let event = try? JSONDecoder().decode(RCEvent.self, from: .init(dataString.utf8)) else {
+              let event = try? JSONDecoder.default.decode(RCEvent.self, from: .init(dataString.utf8)) else {
             return nil
         }
         return .init(data: event)
     }
     
     private func getProject(appId: String) -> Project? {
-        let projects = cacheManager.getWithDecode(key: "projects", type: [Project].self)
+        let projects = cacheService.get("projects") as [Project]?
         return projects?.first(where: { $0.apps?.contains(where: { $0.id == appId }) ?? false })
     }
     

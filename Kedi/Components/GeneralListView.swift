@@ -71,7 +71,6 @@ struct GeneralListView: View {
                     .frame(width: imageWidth, height: imageWidth)
             }
         }
-        .labelStyle(CenterAlignedLabelStyle())
     }
 }
 

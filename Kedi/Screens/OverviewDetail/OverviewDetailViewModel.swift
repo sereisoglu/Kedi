@@ -70,8 +70,7 @@ final class OverviewDetailViewModel: ObservableObject {
         
         do {
             let data = try await apiService.request(
-                type: RCChartResponse.self,
-                endpoint: .charts(
+                .charts(
                     name: chartName,
                     .init(
                         resolution: config.timePeriod.resolution,
@@ -80,9 +79,9 @@ final class OverviewDetailViewModel: ObservableObject {
                         revenueType: type.chartRevenueType
                     )
                 )
-            )
+            ) as RCChartResponse
             
-            let chartValues: [OverviewItemChartValue] = data?.values?
+            let chartValues: [OverviewItemChartValue] = data.values?
                 .filter { $0.measure == chartIndex }
                 .map {
                     .init(
@@ -103,12 +102,12 @@ final class OverviewDetailViewModel: ObservableObject {
                 if config.timePeriod == .last28Days {
                     break
                 } else {
-                    value = .revenue(data?.summary?["total"]?["Revenue"] ?? 0)
+                    value = .revenue(data.summary?["total"]?["Revenue"] ?? 0)
                 }
             case .arr:
                 value = .arr(chartValues.last?.value ?? 0)
             case .proceeds:
-                value = .proceeds(data?.summary?["total"]?["Proceeds"] ?? 0)
+                value = .proceeds(data.summary?["total"]?["Proceeds"] ?? 0)
             case .newUsers:
                 value = .newUsers(Int(chartValues.last?.value ?? 0))
             case .churnRate:
@@ -116,7 +115,7 @@ final class OverviewDetailViewModel: ObservableObject {
             case .subscriptionsLost:
                 value = .subscriptionsLost(Int(chartValues.last?.value ?? 0))
             case .transactions:
-                value = .transactions(Int(data?.summary?["total"]?["Transactions"] ?? 0))
+                value = .transactions(Int(data.summary?["total"]?["Transactions"] ?? 0))
             }
             
             state = chartValues.isEmpty ? .empty : .data

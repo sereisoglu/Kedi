@@ -58,14 +58,12 @@ final class TransactionDetailViewModel: ObservableObject {
     private func fetchDetail() async {
         do {
             async let detailRequest = apiService.request(
-                type: RCTransactionDetailResponse.self,
-                endpoint: .transactionDetail(projectId: projectId, subscriberId: subscriberId)
-            )
+                .transactionDetail(projectId: projectId, subscriberId: subscriberId)
+            ) as RCTransactionDetailResponse
             
             async let activityRequest = apiService.request(
-                type: RCTransactionDetailActivityResponse.self,
-                endpoint: .transactionDetailActivity(projectId: projectId, subscriberId: subscriberId)
-            )
+                .transactionDetailActivity(projectId: projectId, subscriberId: subscriberId)
+            ) as RCTransactionDetailActivityResponse
             
             let (detailData, activityData) = try await (detailRequest, activityRequest)
             

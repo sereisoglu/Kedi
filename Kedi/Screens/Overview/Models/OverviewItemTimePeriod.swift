@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum OverviewItemTimePeriod: String, CaseIterable, Codable {
+enum OverviewItemTimePeriod: String, Identifiable, Codable, CaseIterable {
     
     case last7Days
     case last28Days
@@ -21,6 +21,8 @@ enum OverviewItemTimePeriod: String, CaseIterable, Codable {
     case thisMonth
     case thisYear
     case allTime
+    
+    var id: String { rawValue }
     
     var title: String {
         switch self {

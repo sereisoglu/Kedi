@@ -15,7 +15,7 @@ struct RevenueGraphWidgetProvider: TimelineProvider {
     private let apiService = APIService.shared
     private let authManager = AuthManager.shared
     private let sessionManager = SessionManager.shared
-    private let cacheManager = CacheManager.shared
+    private let cacheService = CacheService.shared
     
     func placeholder(in context: Context) -> Entry {
         .placeholder
@@ -61,8 +61,8 @@ struct RevenueGraphWidgetProvider: TimelineProvider {
         var err: WidgetError?
         do {
             items = try await fetchData()
-            cacheManager.setWithEncode(
-                key: "widgets/revenueGraph",
+            cacheService.set(
+                "widgets/revenueGraph",
                 data: items,
                 expiry: .date(Date().byAdding(.day, value: 1))
             )
@@ -72,10 +72,7 @@ struct RevenueGraphWidgetProvider: TimelineProvider {
                 return
             }
             err = .service(error as? RCError ?? .internal(.error(error)))
-            items = cacheManager.getWithDecode(
-                key: "widgets/revenueGraph",
-                type: [RectangleMarkGraphValue].self
-            ) ?? []
+            items = (cacheService.get("widgets/revenueGraph") as [RectangleMarkGraphValue]?) ?? []
         }
         
         if context.isPreview,
@@ -89,8 +86,7 @@ struct RevenueGraphWidgetProvider: TimelineProvider {
     private func fetchData() async throws -> [RectangleMarkGraphValue] {
         do {
             let data = try await apiService.request(
-                type: RCChartResponse.self,
-                endpoint: .charts(
+                .charts(
                     name: .revenue,
                     .init(
                         resolution: .day,
@@ -98,8 +94,8 @@ struct RevenueGraphWidgetProvider: TimelineProvider {
                         revenueType: .revenue
                     )
                 )
-            )
-            return data?.values?.map {
+            ) as RCChartResponse
+            return data.values?.map {
                 .init(
                     date: .init(timeIntervalSince1970: Double($0.cohort ?? 0)).startOfDay,
                     value: $0.value ?? 0

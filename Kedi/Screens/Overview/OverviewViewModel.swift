@@ -70,9 +70,8 @@ final class OverviewViewModel: ObservableObject {
     private func fetchOverview() async {
         do {
             overviewData = try await apiService.request(
-                type: RCOverviewResponse.self,
-                endpoint: .overview(projectIds: nil)
-            )
+                .overview(projectIds: nil)
+            ) as RCOverviewResponse
             
             setItem(type: .mrr, value: .mrr(overviewData?.mrr ?? 0))
             setItem(type: .subscriptions, value: .subscriptions(overviewData?.subscriptions ?? 0))
@@ -96,8 +95,7 @@ final class OverviewViewModel: ObservableObject {
         
         do {
             let data = try await apiService.request(
-                type: RCChartResponse.self,
-                endpoint: .charts(
+                .charts(
                     name: chartName,
                     .init(
                         resolution: config.timePeriod.resolution,
@@ -106,9 +104,9 @@ final class OverviewViewModel: ObservableObject {
                         revenueType: type.chartRevenueType
                     )
                 )
-            )
+            ) as RCChartResponse
             
-            let chartValues: [OverviewItemChartValue]? = data?.values?
+            let chartValues: [OverviewItemChartValue]? = data.values?
                 .filter { $0.measure == chartIndex }
                 .map {
                     .init(
@@ -118,7 +116,7 @@ final class OverviewViewModel: ObservableObject {
                 }
             
             if let chartValues {
-                let chart = OverviewItemChart(values: chartValues, updatedAt: data?.lastComputedAt)
+                let chart = OverviewItemChart(values: chartValues, updatedAt: data.lastComputedAt)
                 switch type {
                 case .mrr,
                         .subscriptions,
@@ -130,12 +128,12 @@ final class OverviewViewModel: ObservableObject {
                     if config.timePeriod == .last28Days {
                         setItem(config: config, chart: chart)
                     } else {
-                        setItem(config: config, value: .revenue(data?.summary?["total"]?["Revenue"] ?? 0), chart: chart)
+                        setItem(config: config, value: .revenue(data.summary?["total"]?["Revenue"] ?? 0), chart: chart)
                     }
                 case .arr:
                     setItem(config: config, value: .arr(chartValues.last?.value ?? 0), chart: chart)
                 case .proceeds:
-                    setItem(config: config, value: .proceeds(data?.summary?["total"]?["Proceeds"] ?? 0), chart: chart)
+                    setItem(config: config, value: .proceeds(data.summary?["total"]?["Proceeds"] ?? 0), chart: chart)
                 case .newUsers:
                     setItem(config: config, value: .newUsers(Int(chartValues.last?.value ?? 0)), chart: chart)
                 case .churnRate:
@@ -143,7 +141,7 @@ final class OverviewViewModel: ObservableObject {
                 case .subscriptionsLost:
                     setItem(config: config, value: .subscriptionsLost(Int(chartValues.last?.value ?? 0)), chart: chart)
                 case .transactions:
-                    setItem(config: config, value: .transactions(Int(data?.summary?["total"]?["Transactions"] ?? 0)), chart: chart)
+                    setItem(config: config, value: .transactions(Int(data.summary?["total"]?["Transactions"] ?? 0)), chart: chart)
                 }
             } else {
                 items[config]?.set(valueState: .empty)

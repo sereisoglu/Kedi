@@ -59,11 +59,10 @@ final class WebhooksViewModel: ObservableObject {
     private func fetchWebhook(projectId: String) async -> WebhookState {
         do {
             let webhooks = try await apiService.request(
-                type: RCWebhooksResponse.self,
-                endpoint: .webhooks(projectId: projectId)
-            )
+                .webhooks(projectId: projectId)
+            ) as RCWebhooksResponse
             
-            if let webhookId = webhooks?.first(where: { $0.url == "https://api.kediapp.com/webhook?id=\(id)" })?.id {
+            if let webhookId = webhooks.first(where: { $0.url == "https://api.kediapp.com/webhook?id=\(id)" })?.id {
                 return .active(webhookId: webhookId)
             } else {
                 return .inactive
@@ -76,8 +75,7 @@ final class WebhooksViewModel: ObservableObject {
     private func createWebhook(projectId: String) async -> WebhookState {
         do {
             let webhook = try await apiService.request(
-                type: RCCreateWebhookResponse.self,
-                endpoint: .createWebhook(
+                .createWebhook(
                     projectId: projectId,
                     request: .init(
                         name: "Kedi / \(DeviceUtility.modelId) / \(DeviceUtility.id)",
@@ -85,8 +83,8 @@ final class WebhooksViewModel: ObservableObject {
                         environment: "production"
                     )
                 )
-            )
-            return .active(webhookId: webhook?.id ?? "")
+            ) as RCCreateWebhookResponse
+            return .active(webhookId: webhook.id ?? "")
         } catch {
             return .error(error)
         }
@@ -94,9 +92,8 @@ final class WebhooksViewModel: ObservableObject {
     
     private func updateWebhook(projectId: String, webhookId: String) async -> WebhookState {
         do {
-            try await apiService.request(
-                type: RCUpdateWebhookResponse.self,
-                endpoint: .updateWebhook(
+            let _ = try await apiService.request(
+                .updateWebhook(
                     projectId: projectId,
                     webhookId: webhookId,
                     request: .init(
@@ -105,7 +102,7 @@ final class WebhooksViewModel: ObservableObject {
                         environment: "production"
                     )
                 )
-            )
+            ) as RCCreateWebhookResponse
             return .active(webhookId: webhookId)
         } catch {
             return .error(error)
@@ -114,10 +111,9 @@ final class WebhooksViewModel: ObservableObject {
     
     private func deleteWebhook(projectId: String, webhookId: String) async -> WebhookState {
         do {
-            try await apiService.request(
-                type: RCDeleteWebhookResponse.self,
-                endpoint: .deleteWebhook(projectId: projectId, webhookId: webhookId)
-            )
+            let _ = try await apiService.request(
+                .deleteWebhook(projectId: projectId, webhookId: webhookId)
+            ) as RCDeleteWebhookResponse
             return .inactive
         } catch {
             return .error(error)
@@ -173,10 +169,9 @@ final class WebhooksViewModel: ObservableObject {
     @MainActor
     func sendTestNotification(projectId: String, webhookId: String) async {
         do {
-            try await apiService.request(
-                type: RCTestWebhookResponse.self,
-                endpoint: .testWebhook(projectId: projectId, webhookId: webhookId)
-            )
+            let _ = try await apiService.request(
+                .testWebhook(projectId: projectId, webhookId: webhookId)
+            ) as RCTestWebhookResponse
         } catch {
             errorAlert = error
         }

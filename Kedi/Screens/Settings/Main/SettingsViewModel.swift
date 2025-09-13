@@ -43,20 +43,18 @@ final class SettingsViewModel: ObservableObject {
     private func fetchMe() async {
         do {
             async let meRequest = apiService.request(
-                type: RCMeResponse.self,
-                endpoint: .me
-            )
+                .me
+            ) as RCMeResponse
             
             async let projectsRequest = apiService.request(
-                type: RCProjectsResponse.self,
-                endpoint: .projects
-            )
+                .projects
+            ) as RCProjectsResponse
             
             let (me, rcProjects) = try await (meRequest, projectsRequest)
             
-            async let projectDetailRequests = fetchProjectDetails(ids: rcProjects?.compactMap(\.id) ?? [])
+            async let projectDetailRequests = fetchProjectDetails(ids: rcProjects.compactMap(\.id))
             
-            async let imageRequests = fetchImages(urlStrings: rcProjects?.compactMap(\.iconUrl) ?? [])
+            async let imageRequests = fetchImages(urlStrings: rcProjects.compactMap(\.iconUrl))
             
             let (rcProjectDetails, icons) = await (projectDetailRequests, imageRequests)
             
@@ -87,7 +85,7 @@ final class SettingsViewModel: ObservableObject {
             
             self.me = me
             
-            state = me != nil ? .data : .error(RCError.internal(.nilResponse))
+            state = .data
         } catch {
             state = .error(error)
         }
@@ -97,10 +95,8 @@ final class SettingsViewModel: ObservableObject {
         await withTaskGroup(of: RCProjectDetailResponse?.self) { group in
             ids.forEach { id in
                 group.addTask { [weak self] in
-                    try? await self?.apiService.request(
-                        type: RCProjectDetailResponse.self,
-                        endpoint: .projectDetail(id: id)
-                    )
+                    guard let self else { return nil }
+                    return try? await self.apiService.request(.projectDetail(id: id)) as RCProjectDetailResponse
                 }
             }
             
@@ -133,7 +129,7 @@ final class SettingsViewModel: ObservableObject {
     @MainActor
     func signOut() async {
         do {
-            try await apiService.request(type: RCLogoutResponse.self, endpoint: .logout)
+            let _ = try await apiService.request(.logout) as RCLogoutResponse
             meManager.signOut()
         } catch {
             errorAlert = error

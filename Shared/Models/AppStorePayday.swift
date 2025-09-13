@@ -313,7 +313,7 @@ extension AppStorePayday {
                 "fiscalYear": 2025,
                 "fiscalMonth": "2025-08",
                 "startDate": "2025-08-03",
-                "endDate": "2025-08-20",
+                "endDate": "2025-08-31",
                 "paymentDate": "2025-10-02"
             },
             {
@@ -328,6 +328,6 @@ extension AppStorePayday {
         
         // 2024-09: "2024-11-07" -> "2024-10-31"
         
-        return try! JSONDecoder().decode([Self].self, from: .init(string.utf8))
+        return (try? JSONDecoder.default.decode([Self].self, from: .init(string.utf8))) ?? []
     }()
 }

@@ -66,10 +66,9 @@ final class NotificationsViewModel: ObservableObject {
         }
         do {
             let data = try await apiService.request(
-                type: RCLatestEventsResponse.self,
-                endpoint: .latestEvents(projectId: project.id, webhookId: webhookId)
-            )
-            return data?.events?.map { .init(data: $0, project: project) } ?? []
+                .latestEvents(projectId: project.id, webhookId: webhookId)
+            ) as RCLatestEventsResponse
+            return data.events?.map { .init(data: $0, project: project) } ?? []
         } catch {
             return nil
         }

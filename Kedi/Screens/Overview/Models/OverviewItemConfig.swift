@@ -19,7 +19,7 @@ extension OverviewItemConfig {
         guard let data = UserDefaults.shared.overviewConfigs else {
             return nil
         }
-        return try? JSONDecoder().decode([Self].self, from: data)
+        return try? JSONDecoder.default.decode([Self].self, from: data)
     }
     
     static let defaults: [Self] = {
@@ -44,7 +44,7 @@ extension OverviewItemConfig {
     }
     
     static func set(to configs: [Self]?) {
-        UserDefaults.shared.overviewConfigs = try? JSONEncoder().encode(configs)
+        UserDefaults.shared.overviewConfigs = try? JSONEncoder.default.encode(configs)
     }
     
     static func isAvailable(config: Self) -> Bool {

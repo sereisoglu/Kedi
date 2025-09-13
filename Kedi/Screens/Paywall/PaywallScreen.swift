@@ -273,7 +273,7 @@ struct PaywallScreen: View {
         switch purchaseManager.state {
         case .loading:
             ProgressView()
-                .controlSize(.large)
+                .controlSize(.regular)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             
         case .empty:

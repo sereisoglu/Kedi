@@ -15,6 +15,10 @@ struct RCLatestEventsResponse: Decodable {
         case events = "last_events"
     }
     
+    init(events: [RCEvent]? = nil) {
+        self.events = events
+    }
+    
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let eventBodies = try container.decodeIfPresent([RCEventBody].self, forKey: .events)
@@ -552,6 +556,6 @@ extension RCLatestEventsResponse {
             ]
         }
         """#
-        return try! JSONDecoder().decode(Self.self, from: .init(string.utf8))
+        return (try? JSONDecoder.default.decode(Self.self, from: .init(string.utf8))) ?? .init()
     }()
 }

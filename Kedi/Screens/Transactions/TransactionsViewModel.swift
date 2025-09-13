@@ -34,15 +34,14 @@ final class TransactionsViewModel: ObservableObject {
     private func fetchTransactions() async {
         do {
             let data = try await apiService.request(
-                type: RCTransactionsResponse.self,
-                endpoint: .transactions(.init(
+                .transactions(.init(
                     limit: 20,
                     endDate: Date().byAdding(.day, value: 7).format(to: .yyy_MM_dd)
                 ))
-            )
+            ) as RCTransactionsResponse
             
-            transactions = data?.transactions ?? []
-            startFrom = data?.lastPurchaseMs
+            transactions = data.transactions ?? []
+            startFrom = data.lastPurchaseMs
             
             transactionSections = getSections(transactions: transactions)
             
@@ -64,18 +63,17 @@ final class TransactionsViewModel: ObservableObject {
         Task {
             do {
                 let data = try await apiService.request(
-                    type: RCTransactionsResponse.self,
-                    endpoint: .transactions(.init(
+                    .transactions(.init(
                         limit: 100,
                         startFrom: startFrom
                     ))
-                )
+                ) as RCTransactionsResponse
 
-                if data?.transactions?.isEmpty ?? true {
+                if data.transactions?.isEmpty ?? true {
                     paginationState = .done
                 } else {
-                    transactions += data?.transactions ?? []
-                    startFrom = data?.lastPurchaseMs
+                    transactions += data.transactions ?? []
+                    startFrom = data.lastPurchaseMs
 
                     transactionSections = getSections(transactions: transactions)
 

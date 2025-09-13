@@ -259,6 +259,6 @@ extension RCTransactionsResponse {
             ]
         }
         """#
-        return try! JSONDecoder().decode(Self.self, from: .init(string.utf8))
+        return (try? JSONDecoder.default.decode(Self.self, from: .init(string.utf8))) ?? .init()
     }()
 }

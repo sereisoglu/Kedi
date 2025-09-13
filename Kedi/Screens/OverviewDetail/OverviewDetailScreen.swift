@@ -26,6 +26,25 @@ struct OverviewDetailScreen: View {
         makeBody()
             .navigationTitle(item.title)
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Menu {
+                        Picker("Time Period", selection: $viewModel.timePeriodSelection) {
+                            ForEach(item.type.availableTimePeriods) { timePeriod in
+                                Text(timePeriod.title).tag(timePeriod)
+                            }
+                        }
+                        .onChange(of: viewModel.timePeriodSelection) { oldValue, newValue in
+                            if oldValue != newValue {
+                                viewModel.onTimePeriodChange()
+                            }
+                        }
+                    } label: {
+                        //                        Label(viewModel.timePeriodSelection.title, systemImage: "chevron.up.chevron.down")
+                        Text(viewModel.timePeriodSelection.title)
+                    }
+                }
+            }
             .background(Color.systemGroupedBackground)
         //            .getSize { size in
         //                let width = min(size.width, 500)
@@ -41,7 +60,7 @@ struct OverviewDetailScreen: View {
         switch viewModel.state {
         case .loading:
             ProgressView()
-                .controlSize(.large)
+                .controlSize(.regular)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             
         case .empty:
@@ -78,34 +97,8 @@ struct OverviewDetailScreen: View {
                         makeChart()
                     }
                     .frame(height: 200)
-                } header: {
-                    HStack {
-                        Label(item.title, systemImage: item.icon)
-                        
-                        Spacer()
-                        
-                        Menu {
-                            Picker("Time Period", selection: $viewModel.timePeriodSelection) {
-                                ForEach(item.type.availableTimePeriods, id: \.self) { timePeriod in
-                                    Text(timePeriod.title)
-                                        .textCase(nil)
-                                }
-                            }
-                            .onChange(of: viewModel.timePeriodSelection) { oldValue, newValue in
-                                if oldValue != newValue {
-                                    viewModel.onTimePeriodChange()
-                                }
-                            }
-                        } label: {
-                            HStack {
-                                Text(viewModel.timePeriodSelection.title)
-                                Image(systemName: "chevron.up.chevron.down")
-                            }
-                            .font(.footnote)
-                            .textCase(nil)
-                        }
-                    }
                 }
+                .listSectionSpacing(.compact)
                 
                 Section {
                     ForEach(Array(chartValues.reversed().enumerated()), id: \.offset) { index, value in
@@ -122,6 +115,7 @@ struct OverviewDetailScreen: View {
                         }
                     }
                 }
+                .listSectionSpacing(.compact)
             }
         }
     }

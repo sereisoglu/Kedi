@@ -100,7 +100,7 @@ struct AllWebhooksScreen: View {
         switch viewModel.state {
         case .loading:
             ProgressView()
-                .controlSize(.large)
+                .controlSize(.regular)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
         case .empty:

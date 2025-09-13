@@ -15,7 +15,7 @@ struct OverviewWidgetProvider: TimelineProvider {
     private let apiService = APIService.shared
     private let authManager = AuthManager.shared
     private let sessionManager = SessionManager.shared
-    private let cacheManager = CacheManager.shared
+    private let cacheService = CacheService.shared
     
     func placeholder(in context: Context) -> Entry {
         .placeholder
@@ -61,8 +61,8 @@ struct OverviewWidgetProvider: TimelineProvider {
         var err: WidgetError?
         do {
             items = try await fetchData()
-            cacheManager.setWithEncode(
-                key: "widgets/overview",
+            cacheService.set(
+                "widgets/overview",
                 data: items,
                 expiry: .date(Date().byAdding(.day, value: 1))
             )
@@ -72,10 +72,7 @@ struct OverviewWidgetProvider: TimelineProvider {
                 return
             }
             err = .service(error as? RCError ?? .internal(.error(error)))
-            items = cacheManager.getWithDecode(
-                key: "widgets/overview",
-                type: [OverviewItem].self
-            ) ?? []
+            items = (cacheService.get("widgets/overview") as [OverviewItem]?) ?? []
         }
         
         if context.isPreview,
@@ -89,17 +86,16 @@ struct OverviewWidgetProvider: TimelineProvider {
     private func fetchData() async throws -> [OverviewItem] {
         do {
             let data = try await apiService.request(
-                type: RCOverviewResponse.self,
-                endpoint: .overview(projectIds: nil)
-            )
+                .overview(projectIds: nil)
+            ) as RCOverviewResponse
             
             return [
-                .init(type: .mrr, value: "\(data?.mrr?.formatted(.currency(code: "USD")) ?? "")"),
-                .init(type: .subscriptions, value: "\(data?.subscriptions?.formatted() ?? "")"),
-                .init(type: .trials, value: "\(data?.trials?.formatted() ?? "")"),
-                .init(type: .revenue, value: "\(data?.revenue?.formatted(.currency(code: "USD")) ?? "")"),
-                .init(type: .users, value: "\(data?.users?.formatted() ?? "")"),
-                .init(type: .installs, value: "\(data?.installs?.formatted() ?? "")")
+                .init(type: .mrr, value: "\(data.mrr?.formatted(.currency(code: "USD")) ?? "")"),
+                .init(type: .subscriptions, value: "\(data.subscriptions?.formatted() ?? "")"),
+                .init(type: .trials, value: "\(data.trials?.formatted() ?? "")"),
+                .init(type: .revenue, value: "\(data.revenue?.formatted(.currency(code: "USD")) ?? "")"),
+                .init(type: .users, value: "\(data.users?.formatted() ?? "")"),
+                .init(type: .installs, value: "\(data.installs?.formatted() ?? "")")
             ]
         } catch {
             throw error

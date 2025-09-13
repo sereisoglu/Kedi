@@ -56,37 +56,37 @@ extension Endpoint {
     var path: String {
         switch self {
         case .login:
-            return "login"
+            "login"
         case .logout:
-            return "logout"
+            "logout"
         case .me:
-            return "me"
+            "me"
         case .projects:
-            return "me/projects"
+            "me/projects"
         case .projectDetail(let id):
-            return "me/projects/\(id)"
+            "me/projects/\(id)"
         case .overview:
-            return "me/charts_v2/overview"
+            "me/charts_v2/overview"
         case .charts(let name, _):
-            return "me/charts_v2/\(name.rawValue)"
+            "me/charts_v2/\(name.rawValue)"
         case .transactions:
-            return "me/transactions"
+            "me/transactions"
         case .transactionDetail(let projectId, let subscriberId):
-            return "me/apps/\(projectId)/subscribers/\(subscriberId)"
+            "me/apps/\(projectId)/subscribers/\(subscriberId)"
         case .transactionDetailActivity(let projectId, let subscriberId):
-            return "me/apps/\(projectId)/subscribers/\(subscriberId)/activity"
+            "me/apps/\(projectId)/subscribers/\(subscriberId)/activity"
         case .webhooks(let projectId):
-            return "me/projects/\(projectId)/integrations/webhooks"
+            "me/projects/\(projectId)/integrations/webhooks"
         case .createWebhook(let projectId, _):
-            return "me/projects/\(projectId)/integrations/webhooks"
+            "me/projects/\(projectId)/integrations/webhooks"
         case .updateWebhook(let projectId, let webhookId, _):
-            return "me/projects/\(projectId)/integrations/webhooks/\(webhookId)"
+            "me/projects/\(projectId)/integrations/webhooks/\(webhookId)"
         case .deleteWebhook(let projectId, let webhookId):
-            return "me/projects/\(projectId)/integrations/webhooks/\(webhookId)"
+            "me/projects/\(projectId)/integrations/webhooks/\(webhookId)"
         case .testWebhook(let projectId, let webhookId):
-            return "me/projects/\(projectId)/integrations/webhooks/\(webhookId)/test_webhook"
+            "me/projects/\(projectId)/integrations/webhooks/\(webhookId)/test_webhook"
         case .latestEvents(let projectId, let webhookId):
-            return "me/projects/\(projectId)/integrations/webhooks/\(webhookId)/latest_events"
+            "me/projects/\(projectId)/integrations/webhooks/\(webhookId)/latest_events"
         }
     }
     
@@ -96,13 +96,13 @@ extension Endpoint {
                 .logout,
                 .createWebhook,
                 .testWebhook:
-            return .post
+            .post
         case .updateWebhook:
-            return .put
+            .put
         case .deleteWebhook:
-            return .delete
+            .delete
         default:
-            return .get
+            .get
         }
     }
     
@@ -142,14 +142,20 @@ extension Endpoint {
         }
     }
     
+    var printParameters: Parameters? {
+        var params = parameters
+        if params?["password"] != nil { params?["password"] = "•••••••••••••••" }
+        return params
+    }
+    
     var encoding: ParameterEncoding {
         switch self {
         case .login,
                 .createWebhook,
                 .updateWebhook:
-            return JSONEncoding.default
+            JSONEncoding.default
         default:
-            return URLEncoding.default
+            URLEncoding.default
         }
     }
     

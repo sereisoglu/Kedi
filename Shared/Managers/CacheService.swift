@@ -1,5 +1,5 @@
 //
-//  CacheManager.swift
+//  CacheService.swift
 //  Kedi
 //
 //  Created by Saffet Emin Reisoğlu on 2/9/24.
@@ -18,76 +18,73 @@ extension URL {
     }
 }
 
-
-final class CacheManager {
+final class CacheService {
     
     private let storage: Storage<String, Data>? = {
         try? Storage<String, Data>(
             diskConfig: DiskConfig(name: "Floppy", expiry: .seconds(60 * 60 * 24 * 15), directory: .storeUrl(for: "group.com.sereisoglu.kedi", databaseName: "Cache")),
             memoryConfig: MemoryConfig(expiry: .never, countLimit: 1000, totalCostLimit: 1000),
+            fileManager: .default,
             transformer: TransformerFactory.forCodable(ofType: Data.self)
         )
     }()
     
-    
     // FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.bundle.id")
-//    try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("MyPreferences")
+    // try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("MyPreferences")
     
-    static let shared = CacheManager()
-    
+    static let shared = CacheService()
     private init() {}
     
     // MARK: - Get
     
-    func get(key: String) -> Data? {
+    func getData(_ key: String) -> Data? {
         do {
             let entry = try storage?.entry(forKey: key)
             return (entry?.expiry.isExpired ?? true) ? nil : entry?.object
         } catch {
-            //            print("CacheManager: Get Error:", key, error)
+            //            print("CacheService: Get Error:", key, error)
             return nil
         }
     }
     
-    func getWithDecode<T: Codable>(key: String, type: T.Type) -> T? {
+    func get<T: Codable>(_ key: String) -> T? {
+        guard let data = getData(key) else { return nil }
         do {
-            if let data = get(key: key) {
-                let decodedData = try JSONDecoder().decode(T.self, from: data)
-                return decodedData
-            }
+            let decodedData = try JSONDecoder.default.decode(T.self, from: data)
+            return decodedData
         } catch {
-            //            print("CacheManager: Decode Error:", T.self, key, error)
+            //            print("CacheService: Decode Error:", T.self, key, error)
+            return nil
         }
-        return nil
     }
     
     // MARK: - Set
     
-    func set(key: String, data: Data, expiry: Expiry? = nil) {
+    func setData(_ key: String, data: Data, expiry: Expiry? = nil) {
         print("\nCACHE SET:", key, "\n")
         do {
             try storage?.setObject(data, forKey: key, expiry: expiry)
         } catch {
-            //            print("CacheManager: Set Error:", key, error)
+            //            print("CacheService: Set Error:", key, error)
         }
     }
     
-    func setWithEncode<T: Codable>(key: String, data: T, expiry: Expiry? = nil) {
+    func set<T: Codable>(_ key: String, data: T, expiry: Expiry? = nil) {
         do {
-            let encodedData = try JSONEncoder().encode(data)
-            set(key: key, data: encodedData, expiry: expiry)
+            let encodedData = try JSONEncoder.default.encode(data)
+            setData(key, data: encodedData, expiry: expiry)
         } catch {
-            //            print("CacheManager: Encode Error:", T.self, key, error)
+            //            print("CacheService: Encode Error:", T.self, key, error)
         }
     }
     
     // MARK: - Remove
     
-    func remove(key: String) {
+    func remove(_ key: String) {
         do {
             try storage?.removeObject(forKey: key)
         } catch {
-            //            print("CacheManager: Remove Error:", key, error)
+            //            print("CacheService: Remove Error:", key, error)
         }
     }
     
@@ -95,7 +92,7 @@ final class CacheManager {
         do {
             try storage?.removeExpiredObjects()
         } catch {
-            //            print("CacheManager: Remove Expired Error:", error)
+            //            print("CacheService: Remove Expired Error:", error)
         }
     }
     
@@ -103,7 +100,7 @@ final class CacheManager {
         do {
             try storage?.removeAll()
         } catch {
-            //            print("CacheManager: Remove All Error:", error)
+            //            print("CacheService: Remove All Error:", error)
         }
     }
 }

@@ -13,7 +13,7 @@ final class MeManager: ObservableObject {
     private let authManager = AuthManager.shared
     private let keychainManager = KeychainManager.shared
     private let sessionManager = SessionManager.shared
-    private let cacheManager = CacheManager.shared
+    private let cacheService = CacheService.shared
     private let widgetsManager = WidgetsManager.shared
     private let purchaseManager = PurchaseManager.shared
     private let pushNotificationsManager = PushNotificationsManager.shared
@@ -40,8 +40,8 @@ final class MeManager: ObservableObject {
             return
         }
         
-        me = cacheManager.getWithDecode(key: "me", type: RCMeResponse.self)
-        projects = cacheManager.getWithDecode(key: "projects", type: [Project].self)
+        me = cacheService.get("me") as RCMeResponse?
+        projects = cacheService.get("projects") as [Project]?
         
         apiService.setAuthToken(authToken)
         if let id = me?.distinctId {
@@ -110,8 +110,8 @@ final class MeManager: ObservableObject {
         keychainManager.delete(.rcAuthTokenExpiresAt)
         sessionManager.removeCookies()
         apiService.setAuthToken(nil)
-        cacheManager.remove(key: "me")
-        cacheManager.remove(key: "projects")
+        cacheService.remove("me")
+        cacheService.remove("projects")
         widgetsManager.reloadAll()
         Task {
             try? await purchaseManager.signOut()
@@ -140,7 +140,7 @@ final class MeManager: ObservableObject {
     
     func set(me: RCMeResponse?) {
         self.me = me
-        cacheManager.setWithEncode(key: "me", data: me, expiry: .never)
+        cacheService.set("me", data: me, expiry: .never)
     }
     
     func set(projects: [Project]?) {
@@ -148,7 +148,7 @@ final class MeManager: ObservableObject {
             return
         }
         self.projects = projects
-        cacheManager.setWithEncode(key: "projects", data: projects, expiry: .never)
+        cacheService.set("projects", data: projects, expiry: .never)
     }
     
     func getProject(appId: String) -> Project? {

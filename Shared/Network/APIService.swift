@@ -18,72 +18,42 @@ final class APIService {
         Endpoint.AUTH_TOKEN = token
     }
     
-    @discardableResult
-    func request<Success: Decodable>(
-        type: Success.Type,
-        endpoint: Endpoint
-    ) async throws -> Success? {
-        try await withUnsafeThrowingContinuation { continuation in
-            var printParameters = endpoint.parameters ?? Parameters()
-            if printParameters["password"] != nil {
-                printParameters["password"] = "•••••••••••••••"
+    func request<Success: Decodable>(_ endpoint: Endpoint) async throws -> Success {
+        print("\n\(Date.now) \(endpoint.method.rawValue) \(endpoint.urlString)\nparameters: \(endpoint.printParameters ?? [:])\n")
+        
+        let dataRequest = AF.request(
+            endpoint.urlString,
+            method: endpoint.method,
+            parameters: endpoint.parameters,
+            encoding: endpoint.encoding,
+            headers: endpoint.headers
+        )
+        
+        let response = await dataRequest.serializingData().response
+        guard let statusCode = response.response?.statusCode else { throw RCError.internal(.nilResponse) }
+        guard let data = response.data else { throw RCError.internal(.nilData) }
+        
+        switch statusCode {
+        case 200..<300:
+            do {
+                return try JSONDecoder.default.decode(Success.self, from: data)
+            } catch {
+                print("API Request Error:", endpoint.urlString, error)
+                throw RCError.internal(.decoding(error))
             }
-            print("\n\(endpoint.method.rawValue) \(endpoint.urlString)\nparameters: \(printParameters)\n")
             
-            let dataRequest = AF.request(
-                endpoint.urlString,
-                method: endpoint.method,
-                parameters: endpoint.parameters,
-                encoding: endpoint.encoding,
-                headers: endpoint.headers
-            )
-            
-            dataRequest.response { result in
-                if let error = result.error {
-                    print("Request Error:", endpoint.urlString, error)
-                    continuation.resume(throwing: RCError.internal(.error(error)))
-                    return
-                }
-                
-                guard let response = result.response else {
-                    print("Request Error:", endpoint.urlString, "Nil Response")
-                    continuation.resume(throwing: RCError.internal(.nilResponse))
-                    return
-                }
-                
-                switch response.statusCode {
-                case 200 ..< 300:
-                    if let data = result.data {
-                        do {
-                            // print("Request Success:", endpoint.urlString, String(data: data, encoding: .utf8) ?? "")
-                            let decodedData = try JSONDecoder().decode(Success?.self, from: data)
-                            continuation.resume(returning: decodedData)
-                        } catch {
-                            print("Request Error:", endpoint.urlString, error)
-                            continuation.resume(throwing: RCError.internal(.decodeSuccess(Success.self, error)))
-                        }
-                    } else {
-                        print("Request Success:", endpoint.urlString, "nil")
-                        continuation.resume(returning: nil)
-                    }
-                    
-                default:
-                    if let data = result.data {
-                        do {
-                            print("Request Error:", endpoint.urlString, String(decoding: data, as: UTF8.self))
-                            let decodedData = try JSONDecoder().decode(RCErrorResponse.self, from: data)
-                            continuation.resume(throwing: RCError(error: decodedData))
-                            
-                            NotificationCenter.default.post(name: .apiServiceRequestError, object: RCError(error: decodedData))
-                        } catch {
-                            print("Request Error:", endpoint.urlString, error)
-                            continuation.resume(throwing: RCError.internal(.decodeFailure(error)))
-                        }
-                    } else {
-                        print("Request Error:", endpoint.urlString, "Nil Error")
-                        continuation.resume(throwing: RCError.internal(.nilError))
-                    }
-                }
+        default:
+            do {
+                let decodedData = try JSONDecoder.default.decode(RCErrorResponse.self, from: data)
+                NotificationCenter.default.post(
+                    name: .apiServiceRequestError,
+                    object: RCError(error: decodedData)
+                )
+                print("API Request Error:", endpoint.urlString, String(decoding: data, as: UTF8.self))
+                throw RCError(error: decodedData)
+            } catch {
+                print("API Request Error:", endpoint.urlString, error)
+                throw RCError.internal(.decoding(error))
             }
         }
     }
