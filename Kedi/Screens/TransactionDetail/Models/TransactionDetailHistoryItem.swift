@@ -216,7 +216,7 @@ enum TransactionDetailHistoryType: Hashable {
         case .productChange: "Product Change"
         case .transfer(let isFrom, _): isFrom ? "Transferred to Another User" : "Transferred from Another User"
         
-        case .initialPurchase: "Initial Purchase"
+        case .initialPurchase: "New Subscription"
         case .oneTimePurchase: "One-Time Purchase"
         case .renewal: "Renewal"
         case .trial: "Trial"

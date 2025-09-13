@@ -120,7 +120,6 @@ struct PaydayScreen: View {
                         .contentTransition(.numericText())
                 }
                 
-                
                 Text(subtitle)
                     .font(.footnote)
                     .foregroundStyle(.secondary)

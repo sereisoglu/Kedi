@@ -169,7 +169,7 @@ enum NotificationType {
     
     var text: String {
         switch self {
-        case .initialPurchase: "Initial Purchase"
+        case .initialPurchase: "New Subscription"
         case .oneTimePurchase: "One-Time Purchase"
         case .renewalExisting: "Renewal (Existing)"
         case .renewalLapsed: "Renewal (Lapsed)"
