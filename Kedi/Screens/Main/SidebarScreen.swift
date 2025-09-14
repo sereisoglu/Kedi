@@ -42,7 +42,6 @@ struct SidebarScreen: View {
     ) -> some View {
         NavigationLink(value: item) {
             Label(item.title, systemImage: item.icon)
-                .symbolVariant(item == selection ? .fill : .none)
         }
     }
 }

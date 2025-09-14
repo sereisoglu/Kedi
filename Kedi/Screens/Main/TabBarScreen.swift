@@ -55,8 +55,6 @@ struct TabBarScreen: View {
         item: NavigationItem
     ) -> some View {
         Label(item.title, systemImage: item.icon)
-            .symbolVariant(item == selection ? .fill : .none)
-            .environment(\.symbolVariants, .none)
     }
 }
 
