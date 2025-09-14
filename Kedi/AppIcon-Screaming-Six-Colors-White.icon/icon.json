@@ -1,0 +1,38 @@
+{
+  "fill" : "automatic",
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "glass" : false,
+          "image-name" : "screaming 2.svg",
+          "name" : "screaming 2",
+          "opacity-specializations" : [
+            {
+              "appearance" : "tinted",
+              "value" : 0
+            }
+          ]
+        },
+        {
+          "image-name" : "screaming.svg",
+          "name" : "screaming"
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}

@@ -21,7 +21,7 @@ struct PaywallScreen: View {
         List {
             makeBody()
         }
-        .navigationTitle("Supporter")
+        .navigationTitle(purchaseManager.meSubscription == nil ? "Become a Supporter!" : "Supporter")
         .background(Color.systemGroupedBackground)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

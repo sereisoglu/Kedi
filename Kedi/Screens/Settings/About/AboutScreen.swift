@@ -12,7 +12,7 @@ struct AboutScreen: View {
     var body: some View {
         List {
             Section {
-                VStack {
+                VStack(spacing: 0) {
                     Image(AppIcon.default.preview)
                         .resizable()
                         .frame(width: 120, height: 120)
@@ -21,20 +21,23 @@ struct AboutScreen: View {
                             RoundedRectangle(cornerRadius: 120 * (2 / 9), style: .continuous)
                                 .strokeBorder(Color.primary.opacity(0.2), lineWidth: 1)
                         )
+                        .padding(.bottom, 8)
                     
                     Text("Kedi for RevenueCat")
-                        .font(.title)
-                        .fontWeight(.bold)
+                        .font(.title.bold())
+                        .padding(.bottom, 2)
                     
                     Text("A free and [open-source \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://github.com/sereisoglu/Kedi) RevenueCat client")
+                        .multilineTextAlignment(.center)
+                        .padding(.bottom, 2)
                     
                     Text("Version \(Bundle.main.versionNumber ?? "1.0") (\(Bundle.main.buildNumber ?? "1"))")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
-                        .frame(maxWidth: .infinity)
+                        .padding(.bottom, 12)
+                    
+                    Text("Designed and developed by [Saffet Emin Reisoğlu](https://x.com/sereisoglu) in Trabzon, Turkey.")
                         .multilineTextAlignment(.center)
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(Color.clear)
                 }
                 .frame(maxWidth: .infinity)
                 .listRowInsets(.zero)
@@ -45,19 +48,6 @@ struct AboutScreen: View {
                 Text("Kedi is a Turkish word meaning cat.")
             } header: {
                 Text("What does Kedi mean?")
-            }
-            
-            Section {
-                Link(destination: URL(string: "https://x.com/sereisoglu")!) {
-                    GeneralListView(
-                        imageAsset: .custom("x"),
-                        title: "Saffet Emin Reisoğlu",
-                        subtitle: "@sereisoglu",
-                        accessoryImageSystemName: "arrow.up.right"
-                    )
-                }
-            } header: {
-                Text("Designed and developed by")
             }
             
             Section {

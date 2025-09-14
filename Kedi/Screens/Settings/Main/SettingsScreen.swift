@@ -146,14 +146,16 @@ struct SettingsScreen: View {
             Text("Add a webhook with **just one tap** to receive notifications of transactions in your projects ✨")
         }
         
-        Section {
-            GeneralListView(
-                imageAsset: .systemImage("app"),
-                title: "App Icon"
-            )
-            .overlay { NavigationLink(value: "appIcon") { EmptyView() }.opacity(0) }
-        } header: {
-            Text("Customization")
+        if !(ProcessInfo.processInfo.isiOSAppOnMac || ProcessInfo.processInfo.isMacCatalystApp) {
+            Section {
+                GeneralListView(
+                    imageAsset: .systemImage("app"),
+                    title: "App Icon"
+                )
+                .overlay { NavigationLink(value: "appIcon") { EmptyView() }.opacity(0) }
+            } header: {
+                Text("Customization")
+            }
         }
         
         //                Section {

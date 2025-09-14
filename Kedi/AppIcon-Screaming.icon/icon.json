@@ -1,0 +1,32 @@
+{
+  "fill" : {
+    "linear-gradient" : [
+      "display-p3:0.94902,0.32941,0.35686,1.00000",
+      "srgb:0.94902,0.15294,0.18824,1.00000"
+    ]
+  },
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "image-name" : "screaming.svg",
+          "name" : "screaming"
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}
