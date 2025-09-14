@@ -313,7 +313,7 @@ extension AppStorePayday {
                 "fiscalYear": 2025,
                 "fiscalMonth": "2025-08",
                 "startDate": "2025-08-03",
-                "endDate": "2025-08-31",
+                "endDate": "2025-08-30",
                 "paymentDate": "2025-10-02"
             },
             {

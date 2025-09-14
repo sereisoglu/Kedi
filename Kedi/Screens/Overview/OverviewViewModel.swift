@@ -58,7 +58,9 @@ final class OverviewViewModel: ObservableObject {
         case .users:
             setItem(config: .init(type: .users, timePeriod: .last28Days), value: .users(overviewData?.users ?? 0))
         case .newUsers:
-            setItem(config: .init(type: .newUsers, timePeriod: .last28Days), value: .newUsers(overviewData?.newUsers ?? 0))
+            if config.timePeriod == .last28Days {
+                setItem(config: .init(type: .newUsers, timePeriod: .last28Days), value: .newUsers(overviewData?.newUsers ?? 0))
+            }
         default:
             break
         }
@@ -121,14 +123,19 @@ final class OverviewViewModel: ObservableObject {
                 case .mrr,
                         .subscriptions,
                         .trials,
-                        .users,
-                        .newUsers:
+                        .users:
                     setItem(config: config, chart: chart)
                 case .revenue:
                     if config.timePeriod == .last28Days {
                         setItem(config: config, chart: chart)
                     } else {
                         setItem(config: config, value: .revenue(data.summary?["total"]?["Revenue"] ?? 0), chart: chart)
+                    }
+                case .newUsers:
+                    if config.timePeriod == .last28Days {
+                        setItem(config: config, chart: chart)
+                    } else {
+                        setItem(config: config, value: .newUsers(Int(data.summary?["total"]?["New Customers"] ?? 0)), chart: chart)
                     }
                 case .arr:
                     setItem(config: config, value: .arr(chartValues.last?.value ?? 0), chart: chart)
