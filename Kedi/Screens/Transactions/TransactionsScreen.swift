@@ -59,7 +59,7 @@ struct TransactionsScreen: View {
                     .listRowBackground(Color.clear)
                     .onAppear {
                         if viewModel.paginationState == .idle {
-                            withAnimation {
+                            withOptionalAnimation {
                                 viewModel.fetchTransactionsForPagination()
                             }
                         }

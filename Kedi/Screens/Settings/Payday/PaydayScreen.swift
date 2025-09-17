@@ -118,7 +118,7 @@ struct PaydayScreen: View {
                 .frame(width: emojiWidth)
             
             VStack(alignment: .leading) {
-                withAnimation {
+                withOptionalAnimation {
                     Text(date, style: .timer)
                         .monospacedDigit()
                         .contentTransition(.numericText())

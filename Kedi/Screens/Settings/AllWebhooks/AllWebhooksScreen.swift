@@ -79,7 +79,7 @@ struct AllWebhooksScreen: View {
                 }
                 Button("Delete", role: .destructive) {
                     if let webhookToDelete {
-                        withAnimation {
+                        withOptionalAnimation {
                             viewModel.delete(itemId: webhookToDelete.itemId, index: webhookToDelete.index)
                         }
                     }

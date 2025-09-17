@@ -18,7 +18,7 @@ struct OverviewDropDelegate: DropDelegate {
             draggingItem = item
         }
         
-        withAnimation(.bouncy) {
+        withOptionalAnimation(.bouncy) {
             viewModel.moveItem(source: draggingItem!, target: item)
         }
     }
@@ -28,7 +28,7 @@ struct OverviewDropDelegate: DropDelegate {
     }
 
     func performDrop(info: DropInfo) -> Bool {
-        withAnimation(.bouncy) {
+        withOptionalAnimation(.bouncy) {
             draggingItem = nil
         }
         return true

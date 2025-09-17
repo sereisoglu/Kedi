@@ -48,7 +48,7 @@ struct NotificationsPermissionScreen: View {
                 VStack(spacing: 10) {
                     Button {
                         pushNotificationsManager.togglePermissionStatus { _ in
-                            withAnimation {
+                            withOptionalAnimation {
                                 pushNotificationsManager.isPermissionOpened = true
                             }
                         }
@@ -76,7 +76,7 @@ struct NotificationsPermissionScreen: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    withAnimation {
+                    withOptionalAnimation {
                         pushNotificationsManager.isPermissionOpened = true
                     }
                 } label: {

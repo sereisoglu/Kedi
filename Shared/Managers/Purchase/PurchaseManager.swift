@@ -49,9 +49,9 @@ final class PurchaseManager: NSObject, ObservableObject {
                         try await self?.fetchMePurchases()
                     }
                 }
-                await MainActor.run { withAnimation { state = .data } }
+                await MainActor.run { withOptionalAnimation { state = .data } }
             } catch {
-                await MainActor.run { withAnimation { state = .error(error) } }
+                await MainActor.run { withOptionalAnimation { state = .error(error) } }
             }
         }
     }

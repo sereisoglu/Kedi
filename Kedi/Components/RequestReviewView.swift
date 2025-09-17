@@ -25,7 +25,7 @@ struct RequestReviewView: View {
                         Spacer()
                         Button(
                             action: {
-                                withAnimation {
+                                withOptionalAnimation {
                                     userDefaultsManager.isRequestReviewClosed = true
                                 }
                             },
@@ -47,7 +47,7 @@ struct RequestReviewView: View {
                 
                 Button(
                     action: {
-                        withAnimation {
+                        withOptionalAnimation {
                             userDefaultsManager.isRequestReviewClosed = true
                         }
                         BrowserUtility.openAppStoreForReview()

@@ -31,7 +31,7 @@ struct OverviewScreen: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    withAnimation {
+                    withOptionalAnimation {
                         showingAddItem = true
                     }
                 } label: {
@@ -121,7 +121,7 @@ struct OverviewScreen: View {
             ) {
                 Button("Cancel", role: .cancel) {}
                 Button("Yes", role: .destructive) {
-                    withAnimation {
+                    withOptionalAnimation {
                         viewModel.restoreDefaults()
                     }
                 }
@@ -145,7 +145,7 @@ struct OverviewScreen: View {
                     }
                     
                     Button(role: .destructive) {
-                        withAnimation {
+                        withOptionalAnimation {
                             viewModel.removeItem(config: item.config)
                         }
                     } label: {

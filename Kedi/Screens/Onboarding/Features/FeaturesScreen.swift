@@ -72,7 +72,7 @@ struct FeaturesScreen: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    withAnimation {
+                    withOptionalAnimation {
                         userDefaultsManager.isOnboardingOpened = true
                     }
                 } label: {
