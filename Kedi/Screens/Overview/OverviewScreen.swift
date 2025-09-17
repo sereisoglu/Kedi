@@ -29,7 +29,7 @@ struct OverviewScreen: View {
         .navigationTitle("Overview")
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     withAnimation {
                         showingAddItem = true
@@ -58,9 +58,7 @@ struct OverviewScreen: View {
         .overlay(content: makeStateView)
         .scrollContentBackground(viewModel.state == .data ? .automatic : .hidden)
         .background(Color.systemGroupedBackground)
-        .refreshable {
-            await viewModel.refresh()
-        }
+        .refreshableWithoutCancellation { await viewModel.refresh() }
     }
     
     @ViewBuilder

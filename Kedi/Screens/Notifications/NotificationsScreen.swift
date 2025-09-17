@@ -38,9 +38,7 @@ struct NotificationsScreen: View {
         .background(Color.systemGroupedBackground)
         .redacted(reason: viewModel.state == .loading ? .placeholder : [])
         .disabled(viewModel.state == .loading)
-        .refreshable {
-            await viewModel.refresh()
-        }
+        .refreshableWithoutCancellation { await viewModel.refresh() }
     }
     
     @ViewBuilder

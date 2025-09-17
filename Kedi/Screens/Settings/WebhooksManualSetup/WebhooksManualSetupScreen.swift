@@ -75,7 +75,7 @@ struct WebhooksManualSetupScreen: View {
         .navigationTitle("Webhooks Manual Setup")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     BrowserUtility.openUrlInApp(urlString: "https://www.revenuecat.com/docs/integrations/webhooks")
                 } label: {

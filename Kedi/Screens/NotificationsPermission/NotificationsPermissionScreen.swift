@@ -74,7 +74,7 @@ struct NotificationsPermissionScreen: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.systemGroupedBackground)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     withAnimation {
                         pushNotificationsManager.isPermissionOpened = true

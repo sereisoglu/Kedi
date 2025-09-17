@@ -67,12 +67,16 @@ struct PaydayScreen: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             if isPresented {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Dismiss", role: .cancel) { dismiss() }
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(role: .safeClose) {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
                 }
             }
             
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     BrowserUtility.openUrlInApp(urlString: "https://www.revenuecat.com/blog/growth/apple-fiscal-calendar-year-payment-dates")
                 } label: {

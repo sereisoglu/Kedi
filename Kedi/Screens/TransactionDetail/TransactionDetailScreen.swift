@@ -24,12 +24,16 @@ struct TransactionDetailScreen: View {
             .background(Color.systemGroupedBackground)
             .toolbar {
                 if isPresented {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Dismiss", role: .cancel) { dismiss() }
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button(role: .safeClose) {
+                            dismiss()
+                        } label: {
+                            Image(systemName: "xmark")
+                        }
                     }
                 }
                 
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         BrowserUtility.openUrlOutsideApp(urlString: "https://app.revenuecat.com/customers/\(viewModel.projectId)/\(viewModel.subscriberId)")
                     } label: {

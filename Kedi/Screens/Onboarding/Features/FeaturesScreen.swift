@@ -70,7 +70,7 @@ struct FeaturesScreen: View {
         .padding(.bottom)
         .background(Color.systemGroupedBackground)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     withAnimation {
                         userDefaultsManager.isOnboardingOpened = true

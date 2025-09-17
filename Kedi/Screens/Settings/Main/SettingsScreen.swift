@@ -44,9 +44,7 @@ struct SettingsScreen: View {
         .background(Color.systemGroupedBackground)
         .redacted(reason: viewModel.state == .loading ? .placeholder : [])
         .disabled(viewModel.state == .loading)
-        .refreshable {
-            await viewModel.refresh()
-        }
+        .refreshableWithoutCancellation { await viewModel.refresh() }
         .errorAlert(error: $viewModel.errorAlert)
     }
     
@@ -124,8 +122,16 @@ struct SettingsScreen: View {
                 title: "App Store Payday"
             )
             .overlay { NavigationLink(value: "payday") { EmptyView() }.opacity(0) }
+            
+            if !(ProcessInfo.processInfo.isiOSAppOnMac || ProcessInfo.processInfo.isMacCatalystApp) {
+                GeneralListView(
+                    imageAsset: .systemImage("app"),
+                    title: "App Icon"
+                )
+                .overlay { NavigationLink(value: "appIcon") { EmptyView() }.opacity(0) }
+            }
         } header: {
-            Text("Payday")
+            Text("General")
         }
         
         Section {
@@ -144,18 +150,6 @@ struct SettingsScreen: View {
             Text("Notifications")
         } footer: {
             Text("Add a webhook with **just one tap** to receive notifications of transactions in your projects ✨")
-        }
-        
-        if !(ProcessInfo.processInfo.isiOSAppOnMac || ProcessInfo.processInfo.isMacCatalystApp) {
-            Section {
-                GeneralListView(
-                    imageAsset: .systemImage("app"),
-                    title: "App Icon"
-                )
-                .overlay { NavigationLink(value: "appIcon") { EmptyView() }.opacity(0) }
-            } header: {
-                Text("Customization")
-            }
         }
         
         //                Section {

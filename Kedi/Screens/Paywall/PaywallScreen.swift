@@ -24,9 +24,11 @@ struct PaywallScreen: View {
         .navigationTitle(purchaseManager.meSubscription == nil ? "Become a Supporter!" : "Supporter")
         .background(Color.systemGroupedBackground)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                CloseButton {
+            ToolbarItem(placement: .topBarLeading) {
+                Button(role: .safeClose) {
                     dismiss()
+                } label: {
+                    Image(systemName: "xmark")
                 }
             }
         }

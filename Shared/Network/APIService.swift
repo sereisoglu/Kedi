@@ -30,12 +30,19 @@ final class APIService {
         )
         
         let response = await dataRequest.serializingData().response
-        guard let statusCode = response.response?.statusCode else { throw RCError.internal(.nilResponse) }
-        guard let data = response.data else { throw RCError.internal(.nilData) }
+        guard let statusCode = response.response?.statusCode else {
+            print("API Request Error:", endpoint.urlString, "nilResponse")
+            throw RCError.internal(.nilResponse)
+        }
+        guard let data = response.data else {
+            print("API Request Error:", endpoint.urlString, "nilData")
+            throw RCError.internal(.nilData)
+        }
         
         switch statusCode {
-        case 200..<300:
+        case 200 ..< 300:
             do {
+                print("API Request Success:", endpoint.urlString)
                 return try JSONDecoder.default.decode(Success.self, from: data)
             } catch {
                 print("API Request Error:", endpoint.urlString, error)

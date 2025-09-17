@@ -28,6 +28,16 @@ private struct ViewPreferenceKey: PreferenceKey {
     static func reduce(value: inout CGSize, nextValue: () -> CGSize) {}
 }
 
+// MARK: - refreshableWithoutCancellation
+// https://stackoverflow.com/a/76305308/9212388
+
+extension View {
+    
+    nonisolated func refreshableWithoutCancellation(action: @escaping @Sendable () async -> Void) -> some View {
+        refreshable { await Task { await action() }.value }
+    }
+}
+
 // MARK: - iOS 26
 
 extension View {

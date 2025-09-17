@@ -104,7 +104,7 @@ struct WebhooksScreen: View {
         .navigationTitle("Webhooks")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     BrowserUtility.openUrlInApp(urlString: "https://www.revenuecat.com/docs/integrations/webhooks")
                 } label: {
@@ -113,13 +113,9 @@ struct WebhooksScreen: View {
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .webhooksChange)) { _ in
-            Task {
-                await viewModel.refresh()
-            }
+            Task { await viewModel.refresh() }
         }
-        .refreshable {
-            await viewModel.refresh()
-        }
+        .refreshableWithoutCancellation { await viewModel.refresh() }
         .errorAlert(error: $viewModel.errorAlert)
     }
 }
