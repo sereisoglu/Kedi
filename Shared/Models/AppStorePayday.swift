@@ -326,7 +326,7 @@ extension AppStorePayday {
             {
                 "fiscalYear": 2026,
                 "fiscalMonth": "2025-10",
-                "startDate": "2025-09-29",
+                "startDate": "2025-09-28",
                 "endDate": "2025-11-01",
                 "paymentDate": "2025-12-04"
             },
