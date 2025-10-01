@@ -322,6 +322,90 @@ extension AppStorePayday {
                 "startDate": "2025-08-31",
                 "endDate": "2025-09-27",
                 "paymentDate": "2025-10-30"
+            },
+            {
+                "fiscalYear": 2026,
+                "fiscalMonth": "2025-10",
+                "startDate": "2025-09-29",
+                "endDate": "2025-11-01",
+                "paymentDate": "2025-12-04"
+            },
+            {
+                "fiscalYear": 2026,
+                "fiscalMonth": "2025-11",
+                "startDate": "2025-11-02",
+                "endDate": "2025-11-29",
+                "paymentDate": "2026-01-01"
+            },
+            {
+                "fiscalYear": 2026,
+                "fiscalMonth": "2025-12",
+                "startDate": "2025-11-30",
+                "endDate": "2025-12-27",
+                "paymentDate": "2026-01-29"
+            },
+            {
+                "fiscalYear": 2026,
+                "fiscalMonth": "2026-01",
+                "startDate": "2025-12-28",
+                "endDate": "2026-01-31",
+                "paymentDate": "2026-03-05"
+            },
+            {
+                "fiscalYear": 2026,
+                "fiscalMonth": "2026-02",
+                "startDate": "2026-02-01",
+                "endDate": "2026-02-28",
+                "paymentDate": "2026-04-02"
+            },
+            {
+                "fiscalYear": 2026,
+                "fiscalMonth": "2026-03",
+                "startDate": "2026-03-01",
+                "endDate": "2026-03-28",
+                "paymentDate": "2026-04-30"
+            },
+            {
+                "fiscalYear": 2026,
+                "fiscalMonth": "2026-04",
+                "startDate": "2026-03-29",
+                "endDate": "2026-05-02",
+                "paymentDate": "2026-06-04"
+            },
+            {
+                "fiscalYear": 2026,
+                "fiscalMonth": "2026-05",
+                "startDate": "2026-05-03",
+                "endDate": "2026-05-30",
+                "paymentDate": "2026-07-02"
+            },
+            {
+                "fiscalYear": 2026,
+                "fiscalMonth": "2026-06",
+                "startDate": "2026-05-31",
+                "endDate": "2026-06-27",
+                "paymentDate": "2026-07-30"
+            },
+            {
+                "fiscalYear": 2026,
+                "fiscalMonth": "2026-07",
+                "startDate": "2026-06-28",
+                "endDate": "2026-08-01",
+                "paymentDate": "2026-09-03"
+            },
+            {
+                "fiscalYear": 2026,
+                "fiscalMonth": "2026-08",
+                "startDate": "2026-08-02",
+                "endDate": "2026-08-29",
+                "paymentDate": "2026-10-01"
+            },
+            {
+                "fiscalYear": 2026,
+                "fiscalMonth": "2026-09",
+                "startDate": "2026-08-30",
+                "endDate": "2026-09-26",
+                "paymentDate": "2026-10-29"
             }
         ]
         """#
