@@ -59,6 +59,9 @@ final class APIService {
                 print("API Request Error:", endpoint.urlString, String(decoding: data, as: UTF8.self))
                 throw RCError(error: decodedData)
             } catch {
+                if case let rcError as RCError = error {
+                    throw rcError
+                }
                 print("API Request Error:", endpoint.urlString, error)
                 throw RCError.internal(.decoding(error))
             }
