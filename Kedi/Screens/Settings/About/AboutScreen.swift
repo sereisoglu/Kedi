@@ -27,16 +27,15 @@ struct AboutScreen: View {
                         .font(.title.bold())
                         .padding(.bottom, 2)
                     
-                    Text("A free and [open-source \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://github.com/sereisoglu/Kedi) RevenueCat client")
-                        .multilineTextAlignment(.center)
-                        .padding(.bottom, 2)
-                    
                     Text("Version \(Bundle.main.versionNumber ?? "1.0") (\(Bundle.main.buildNumber ?? "1"))")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
-                        .padding(.bottom, 12)
+                        .padding(.bottom, 8)
                     
-                    Text("Designed and developed by [Saffet Emin Reisoğlu](https://x.com/sereisoglu) in Trabzon, Turkey.")
+                    Text("A free and [open-source \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://github.com/sereisoglu/Kedi) RevenueCat client.")
+                        .multilineTextAlignment(.center)
+                    
+                    Text("Designed and developed by [Saffet Emin Reisoğlu \(Text(imageSystemName: "arrow.up.forward").foregroundStyle(.accent))](https://x.com/sereisoglu) in Trabzon, Turkey.")
                         .multilineTextAlignment(.center)
                 }
                 .frame(maxWidth: .infinity)
